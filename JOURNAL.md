@@ -63,3 +63,17 @@ I asked few more questions that helped clarify things like the trace width and h
 
 After a few hours of tweaking I finally got the right design.
 ![alt text](/images/new_grid.png)
+
+# June 25: Rewiring (again...)
+
+After yesterday's fail I decided to take a break and then start the wiring again, I didn't make much progress today but I got both axis done.
+
+# June 29: Finished FPC
+
+FInally after working all day (took a few days off), I finally completed the FPC.
+
+![alt text](/images/fpc.png)
+
+The supposed active area is 170x110mm which I think is pretty good.
+
+Now I'm going to start research on the main board that connects to the FPC. I want it to have bluetooth and a good battery life so I chose the STM32WB55. I'mll be using the Flipper Zero's schematics to wire it up as it uses the same chip.
