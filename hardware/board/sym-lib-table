@@ -8,4 +8,7 @@
   (lib (name "BQ27220YZFR")(type "KiCad")(uri "${KIPRJMOD}/lib/BQ27220YZFR.kicad_sym")(options "")(descr ""))
   (lib (name "COS8054TR")(type "KiCad")(uri "${KIPRJMOD}/lib/COS8054TR.kicad_sym")(options "")(descr ""))
   (lib (name "DMN313DLT-7")(type "KiCad")(uri "${KIPRJMOD}/lib/DMN313DLT-7.kicad_sym")(options "")(descr ""))
+  (lib (name "LM3281YFQR")(type "KiCad")(uri "${KIPRJMOD}/lib/LM3281YFQR.kicad_sym")(options "")(descr ""))
+  (lib (name "DMP1045U-7")(type "KiCad")(uri "${KIPRJMOD}/lib/DMP1045U-7.kicad_sym")(options "")(descr ""))
+  (lib (name "MMDT2907A-7-F")(type "KiCad")(uri "${KIPRJMOD}/lib/MMDT2907A-7-F.kicad_sym")(options "")(descr ""))
 )
