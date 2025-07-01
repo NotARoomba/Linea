@@ -612,6 +612,10 @@
     [
       "f5ca596a-3f37-4a80-af8e-71fb2890766f",
       "Root"
+    ],
+    [
+      "4d9a67ec-38db-4869-aad1-5ad8cddd3e8a",
+      "Signal Chain"
     ]
   ],
   "text_variables": {}
