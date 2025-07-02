@@ -4,6 +4,9 @@
 	(generator_version "9.0")
 	(uuid "f099d9f6-61a7-46eb-8bbc-93da449ddc45")
 	(paper "A4")
+	(title_block
+		(title "Analog Signal Chain")
+	)
 	(lib_symbols
 		(symbol "Device:C"
 			(pin_numbers

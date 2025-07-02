@@ -1,0 +1,77 @@
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 674:Plugin executed on: 'win32'
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 675:Plugin executed with python version: '3.11.5 (main, Jan 27 2025, 07:08:36) [MSC v.1942 64 bit (AMD64)]'
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 676:KiCad build version: 9.0.2
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 677:Plugin version: 4.0.1
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 678:Frame repr: <wx._core.Frame object at 0x0000026D17EF44C0>
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.place_footprints 121:getting a list of all footprints on board
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.place_footprints 156:Footprint J1 on root level
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.place_footprints 156:Footprint J2 on root level
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.place_footprints 156:Footprint J3 on root level
+07-01 19:47:15 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 717:Reference footprint='J114'
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 94:By Sheet GUI initialized
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 103:Ref fp:Footprint(ref='J114', fp=<pcbnew.FOOTPRINT; proxy of <Swig Object of type 'FOOTPRINT *' at 0x0000026D202E1770> >, fp_id='1C2A5452-5B4E-45DB-A84F-F749DDEE934B', sheet_id=['/Y Coil 0/'], filename=['coil.kicad_sch'])
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 104:Levels:['coil.kicad_sch']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 106:Selecting: 1
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 110:Should invoke level_changed()
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 288:Level_changed() invoked
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 291:self.ref_fp.sheet_id[index] = '/Y Coil 0/'
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 292:self.ref_fp.sheet_id = ['/Y Coil 0/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.place_footprints 284:constructing a list of sheets suitable for replication on level:'/Y Coil 0/', file:'coil.kicad_sch'
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.place_footprints 308:suitable sheets are:[['/X Coil 0/'], ['/X Coil 1/'], ['/X Coil 2/'], ['/X Coil 3/'], ['/X Coil 4/'], ['/X Coil 5/'], ['/X Coil 6/'], ['/X Coil 7/'], ['/X Coil 8/'], ['/X Coil 9/'], ['/Y Coil 1/'], ['/Y Coil 2/'], ['/Y Coil 3/'], ['/Y Coil 4/'], ['/Y Coil 5/'], ['/Y Coil 6/'], ['/Y Coil 7/'], ['/Y Coil 8/'], ['/Y Coil 9/'], ['/X Coil 10/'], ['/X Coil 11/'], ['/X Coil 12/'], ['/X Coil 13/'], ['/X Coil 14/'], ['/X Coil 15/'], ['/X Coil 16/'], ['/X Coil 17/'], ['/X Coil 18/'], ['/X Coil 19/'], ['/X Coil 20/'], ['/X Coil 21/'], ['/X Coil 22/'], ['/X Coil 23/'], ['/X Coil 24/'], ['/X Coil 25/'], ['/X Coil 26/'], ['/X Coil 27/'], ['/Y Coil 10/'], ['/Y Coil 11/'], ['/Y Coil 12/'], ['/Y Coil 13/'], ['/Y Coil 14/'], ['/Y Coil 15/'], ['/Y Coil 16/'], ['/Y Coil 17/']]
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 306:self.list_sheetsChoices: [['/X Coil 0/'], ['/X Coil 1/'], ['/X Coil 2/'], ['/X Coil 3/'], ['/X Coil 4/'], ['/X Coil 5/'], ['/X Coil 6/'], ['/X Coil 7/'], ['/X Coil 8/'], ['/X Coil 9/'], ['/Y Coil 1/'], ['/Y Coil 2/'], ['/Y Coil 3/'], ['/Y Coil 4/'], ['/Y Coil 5/'], ['/Y Coil 6/'], ['/Y Coil 7/'], ['/Y Coil 8/'], ['/Y Coil 9/'], ['/X Coil 10/'], ['/X Coil 11/'], ['/X Coil 12/'], ['/X Coil 13/'], ['/X Coil 14/'], ['/X Coil 15/'], ['/X Coil 16/'], ['/X Coil 17/'], ['/X Coil 18/'], ['/X Coil 19/'], ['/X Coil 20/'], ['/X Coil 21/'], ['/X Coil 22/'], ['/X Coil 23/'], ['/X Coil 24/'], ['/X Coil 25/'], ['/X Coil 26/'], ['/X Coil 27/'], ['/Y Coil 10/'], ['/Y Coil 11/'], ['/Y Coil 12/'], ['/Y Coil 13/'], ['/Y Coil 14/'], ['/Y Coil 15/'], ['/Y Coil 16/'], ['/Y Coil 17/']]
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 0/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 12/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 17/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 9/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 2/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 1/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 6/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 15/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 0/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 11/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 7/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 10/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 3/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 4/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 5/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 16/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 13/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 8/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/Y Coil 14/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 19/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 27/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 11/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 17/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 3/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 12/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 16/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 10/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 18/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 14/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 13/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 24/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 6/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 9/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 1/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 23/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 2/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 21/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 22/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 26/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 20/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 7/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 8/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 5/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 4/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 15/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 309:fp.sheet_id: ['/X Coil 25/']
+07-01 19:47:16 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 314:self.ref_list: ['J6', 'J162', 'J182', 'J150', 'J122', 'J118', 'J138', 'J174', 'J158', 'J142', 'J154', 'J126', 'J130', 'J134', 'J178', 'J166', 'J146', 'J170', 'J78', 'J110', 'J186', 'J70', 'J18', 'J50', 'J66', 'J46', 'J74', 'J58', 'J54', 'J98', 'J30', 'J42', 'J10', 'J94', 'J14', 'J86', 'J90', 'J106', 'J82', 'J34', 'J38', 'J26', 'J22', 'J62', 'J102']
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 195:Saving config sheet
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 207:Preparing config for sheet linear
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 227:Saving config file
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 229:Saved the config file
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 746:Sheets selected: [['/Y Coil 1/'], ['/Y Coil 2/'], ['/Y Coil 3/'], ['/Y Coil 4/'], ['/Y Coil 5/'], ['/Y Coil 6/'], ['/Y Coil 7/'], ['/Y Coil 8/'], ['/Y Coil 9/'], ['/Y Coil 10/'], ['/Y Coil 11/'], ['/Y Coil 12/'], ['/Y Coil 13/'], ['/Y Coil 14/'], ['/Y Coil 15/'], ['/Y Coil 16/'], ['/Y Coil 17/']]
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 755:Footprints to place: ['J114', 'J118', 'J122', 'J126', 'J130', 'J134', 'J138', 'J142', 'J146', 'J150', 'J154', 'J158', 'J162', 'J166', 'J170', 'J174', 'J178', 'J182']
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.place_footprints 396:Starting placing with linear layout
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 800:Placing complete
+07-01 19:47:37 com_github_MitjaNemec_PlaceFootprints.action_place_footprints 801:Sorted_footprints: ['J114', 'J118', 'J122', 'J126', 'J130', 'J134', 'J138', 'J142', 'J146', 'J150', 'J154', 'J158', 'J162', 'J166', 'J170', 'J174', 'J178', 'J182']

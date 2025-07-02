@@ -1,0 +1,20 @@
+07-01 19:46:14 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 196:Plugin executed on: 'win32'
+07-01 19:46:14 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 197:Plugin executed with python version: '3.11.5 (main, Jan 27 2025, 07:08:36) [MSC v.1942 64 bit (AMD64)]'
+07-01 19:46:14 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 198:KiCad build version: 9.0.2
+07-01 19:46:14 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 199:Plugin version: 4.0.0
+07-01 19:46:14 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 200:Frame repr: <wx._core.Frame object at 0x0000026D17EF44C0>
+07-01 19:46:14 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 218:Anchor footprint reference is 'J114'
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 227:Save layout chosen
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.save_restore_layout 453:Working on C:\Users\Nathan\Documents\GitHub\Linea\hardware\touchpad\touchpad-backups\touchpad_before.kicad_pcb
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.save_restore_layout 176:getting a list of all footprints on board
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.save_restore_layout 458:Saving the current board temporary in order to leave current layout intact
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.save_restore_layout 464:Saving board as tempfile: C:\Users\Nathan\AppData\Local\Temp\temp_board_file_for_save.kicad_pcb
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.save_restore_layout 469:Loaded temp boardfile: C:\Users\Nathan\AppData\Local\Temp\temp_board_file_for_save.kicad_pcb
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.save_restore_layout 470:Get project schematics and layout data
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.save_restore_layout 176:getting a list of all footprints on board
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 99:populating the levels with ['coil.kicad_sch']
+07-01 19:46:15 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 100:populating the levels with ['/Y Coil 0/']
+07-01 19:46:20 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 108:Clearing highlight
+07-01 19:46:20 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 115:levels_selection -1
+07-01 19:46:20 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 116:levels available ['/Y Coil 0/']
+07-01 19:46:21 com_github_MitjaNemec_SaveRestoreLayout.action_save_restore_layout 248:User failed to select hierarchy level to save

@@ -76,4 +76,18 @@ FInally after working all day (took a few days off), I finally completed the FPC
 
 The supposed active area is 170x110mm which I think is pretty good.
 
-Now I'm going to start research on the main board that connects to the FPC. I want it to have bluetooth and a good battery life so I chose the STM32WB55. I'mll be using the Flipper Zero's schematics to wire it up as it uses the same chip.
+Now I'm going to start research on the main board that connects to the FPC. I want it to have bluetooth and a good battery life so I chose the STM32WB55. I'll be using the Flipper Zero's schematics to wire it up as it uses the same chip.
+
+# June 30: Main Board Schematic
+
+After researching and compiling schematics, I started work on creating the schematic for the board that will handle the connection from the touchpad and also bluetooth. I took inspiration from the connections for power and battery from the FLipper Zero docs and also the analog circuits from Patchouli's repository.
+
+# July 1: Main Board PCB
+
+After finishing the schematic, I decided to take a break and plan what I had to do next in order of importance.
+
+- Double triple check schematic
+- Create main board PCB
+- Fix FPC board to have 0.2mm trace spacing
+- Create case in Fusion360
+- (Optionally create pencil)
