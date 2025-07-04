@@ -36,9 +36,6 @@ def run_easyeda2kicad_from_file(input_file, output_dir="./lib/linea", python_pat
 
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Usage: python run_easyeda2kicad.py <input_file.txt> [output_dir]")
-    else:
-        input_path = sys.argv[1]
+        input_path = sys.argv[1] if len(sys.argv) > 2 else "lcsc.txt"
         output_path = sys.argv[2] if len(sys.argv) > 2 else "./lib/linea"
-        run_easyeda2kicad_from_file(input_path, output_path)
+        run_easyeda2kicad_from_file(input_path, output_path, os.name == "nt" and "C:\Program Files/Python313/python.exe" or None)
