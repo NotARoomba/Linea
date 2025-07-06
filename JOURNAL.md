@@ -82,6 +82,8 @@ Now I'm going to start research on the main board that connects to the FPC. I wa
 
 After researching and compiling schematics, I started work on creating the schematic for the board that will handle the connection from the touchpad and also bluetooth. I took inspiration from the connections for power and battery from the FLipper Zero docs and also the analog circuits from Patchouli's repository.
 
+![alt text](images/schematic.png)
+
 # July 1: Main Board PCB
 
 After finishing the schematic, I decided to take a break and plan what I had to do next in order of importance.
@@ -91,3 +93,11 @@ After finishing the schematic, I decided to take a break and plan what I had to 
 - Fix FPC board to have 0.2mm trace spacing
 - Create case in Fusion360
 - (Optionally create pencil)
+
+# July 3: Fix FPC Board
+
+My OCD wouldn't let me move on until I'd fixed the board so I redid the coils and added everything again.
+
+# July 5-: Main Board PCB (finally)
+
+I started work on making the PCB and after watching a fe tutorials on analog signals and pcb design (thanks Phil's Lab) i felt confident in starting to design the PCB.
