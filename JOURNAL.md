@@ -102,7 +102,7 @@ My OCD wouldn't let me move on until I'd fixed the board so I redid the coils an
 
 I started work on making the PCB and after watching a fe tutorials on analog signals and pcb design (thanks Phil's Lab) i felt confident in starting to design the PCB.
 
-I started by grouping all the components together based on th schematic and also taking refrence from the other designs in Patchouli (dont have many pictures as I was locked in). I then started wiringagain taking inspiration from the schmatics using wider traces for power and ground and thn smaller traces for the data lines and analog crcuits. I also split the schematic into 2 ground planes. One for analog ground and another for the digital ground.
+I started by grouping all the components together based on the schematic and also taking refrence from the other designs in Patchouli (dont have many pictures as I was locked in). I then started wiringagain taking inspiration from the schmatics using wider traces for power and ground and thn smaller traces for the data lines and analog crcuits. I also split the schematic into 2 ground planes. One for analog ground and another for the digital ground.
 
 ![alt text](images/analog_ground.jpg)
 (was already done placing the components)
@@ -120,7 +120,7 @@ but I have a 4-layer stackup so I worked on allowing a clear path for the RF tra
 
 # July 11-12: Bluetooth Trail
 
-after watching a few tutorials and looking at the datasheets for th STM32, I added the recommended low pass filter (also from STM).
+after watching a few tutorials and looking at the datasheets for the STM32, I added the recommended low pass filter (also from STM).
 
 I looked through the datasheets for the chip and found that I needed to ground EVERYTHING. So I then cleared up the buttons and moved them out of the way to create this monstrocity.
 
@@ -136,7 +136,7 @@ After a bit of designing I ended up with this.
 
 ![alt text](images/case_bottom.png)
 
-I added a 'hook" so that th lid can snap onto the case.
+I added a 'hook" so that the lid can snap onto the case.
 
 ![alt text](images/side_hook.png)
 
@@ -156,6 +156,6 @@ After adding the other battery and testing the USB-C port, I finished the case d
 
 # July 13: JLCPCB Quote
 
-I added all the designators and LCSC part numbers to the properties of each part and got a subtotal of ~207$ for th main board and ~48$ for the FPC
+I added all the designators and LCSC part numbers to the properties of each part and got a subtotal of ~207$ for the main board and ~48$ for the FPC
 
 ![alt text](/assets/prices.png)
