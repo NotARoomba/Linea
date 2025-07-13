@@ -68,10 +68,15 @@ Designed in KiCad. Notable points:
 
 The PCB has 2 components, the FPC coil grid and the main board.
 
+### FPC
+
 <img src="assets/fpc.png" alt="FPC board" width="500"/>
 
-<img src="assets/final_pcb.png" alt="CAD model" width="500"/>
+### Main Board
+
 <img src="assets/schematic.png" alt="CAD model" width="500"/>
+<img src="assets/final_pcb.png" alt="CAD model" width="500"/>
+<img src="assets/3d_pcb.png" alt="CAD model" width="500"/>
 <img src="assets/prices.png" alt="CAD model" width="500"/>
 
 ## BOM
@@ -81,9 +86,10 @@ The PCB has 2 components, the FPC coil grid and the main board.
 | FPC Board    | 48.67       | JLCPCB                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Main Board   | 207.14      | JLCPCB                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | Test Pen     | 22.91       | [Online Marketplace](https://articulo.mercadolibre.com.co/MCO-568567056-lapiz-repuesto-tabla-digitalizadora-xp-pen-p03-no-wacom-_JM?searchVariation=176600496495#is_advertising=true&searchVariation=176600496495&backend_model=search-backend&position=8&search_layout=stack&type=pad&tracking_id=9f203117-ca3d-40ac-bdf1-dadf37d1ff62&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=8&ad_click_id=YjFjZWVmY2UtZGUwNi00Y2Y4LTk2NDktMmQ1NjNhZGUyMzNj) |
-| **Subtotal** | 278.72      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| LiPo 1200mAh | 12.00       | [Online Marketplace](https://articulo.mercadolibre.com.co/MCO-897219547-bateria-37v-1200mah-litio-lipo-35-x-6cm-ancho-05cm-_JM#polycard_client=search-nordic&position=31&search_layout=stack&type=item&tracking_id=64c5a1d6-adab-4203-b581-c1839af5c176&wid=MCO897219547&sid=search)                                                                                                                                                                            |
+| **Subtotal** | 290.72      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | **Shipping** | 30.00       | Estimated                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| **Total**    | 308.72      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| **Total**    | 320.72      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ## Credits
 
