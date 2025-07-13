@@ -153,3 +153,9 @@ After adding the other battery and testing the USB-C port, I finished the case d
 ![alt text](/assets/final_cad.png)
 
 ![alt text](/assets/final_cad_top.png)
+
+# July 13: JLCPCB Quote
+
+I added all the designators and LCSC part numbers to the properties of each part and got a subtotal of ~207$ for th main board and ~48$ for the FPC
+
+![alt text](/assets/prices.png)
