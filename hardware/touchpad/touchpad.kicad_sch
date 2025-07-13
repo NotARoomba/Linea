@@ -1344,24 +1344,16 @@
 		(uuid "7a96ced0-b384-45e3-b176-8bf1fac99044")
 	)
 	(no_connect
-		(at 170.18 57.15)
-		(uuid "80897b55-0499-4c22-bf68-7d412b79aa3c")
+		(at 50.8 96.52)
+		(uuid "7ddf4d27-0c8a-4774-bdf5-d9c305857ca1")
 	)
 	(no_connect
 		(at 55.88 63.5)
 		(uuid "88ef8d84-ef52-4ea3-9abc-42b98b40ba10")
 	)
 	(no_connect
-		(at 40.64 110.49)
-		(uuid "a597de69-2f60-4ef8-b29f-8b008b5d3f6d")
-	)
-	(no_connect
 		(at 45.72 115.57)
 		(uuid "ae7805f0-9154-4f43-ab66-89ae34cda11b")
-	)
-	(no_connect
-		(at 50.8 22.86)
-		(uuid "b542eab6-3865-4ef3-8d95-a1f11b0859a3")
 	)
 	(no_connect
 		(at 175.26 64.77)
@@ -1376,6 +1368,10 @@
 		(uuid "c53bd39b-305a-4d84-b261-fa29835b7e74")
 	)
 	(no_connect
+		(at 40.64 184.15)
+		(uuid "c5753254-fee4-4c2c-90cb-bb593867c88c")
+	)
+	(no_connect
 		(at 55.88 48.26)
 		(uuid "c6a8ef64-f40a-4b23-8ff9-d9afada808bc")
 	)
@@ -1386,6 +1382,10 @@
 	(no_connect
 		(at 55.88 40.64)
 		(uuid "d7be148e-579a-4588-b87a-a5f57a3252e8")
+	)
+	(no_connect
+		(at 170.18 130.81)
+		(uuid "d9bd5198-aaf2-42c2-ac8d-6493264c3271")
 	)
 	(no_connect
 		(at 55.88 30.48)
@@ -4487,16 +4487,16 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic_MountingPin:Conn_01x26_MountingPin")
-		(at 40.64 148.59 180)
+		(at 40.64 146.05 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "20cddde1-21aa-4efa-9b47-ee48ea3bac4a")
 		(property "Reference" "J2"
-			(at 40.64 185.42 0)
+			(at 40.64 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4504,7 +4504,7 @@
 			)
 		)
 		(property "Value" "Conn_01x26_MountingPin"
-			(at 40.64 182.88 0)
+			(at 40.64 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4512,7 +4512,7 @@
 			)
 		)
 		(property "Footprint" "FPC:Hirose_FH12-26S-0.5SH(55)-FPC_1"
-			(at 40.64 148.59 0)
+			(at 40.64 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4521,7 +4521,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 40.64 148.59 0)
+			(at 40.64 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4530,7 +4530,7 @@
 			)
 		)
 		(property "Description" "Generic connectable mounting pin connector, single row, 01x26, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 40.64 148.59 0)
+			(at 40.64 146.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4630,7 +4630,8 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic_MountingPin:Conn_01x26_MountingPin")
-		(at 50.8 60.96 180)
+		(at 50.8 58.42 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -4638,7 +4639,7 @@
 		(dnp no)
 		(uuid "2679ac14-0c50-483c-b9a4-eac83a929a69")
 		(property "Reference" "J3"
-			(at 50.8 97.79 0)
+			(at 50.8 21.59 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4646,7 +4647,7 @@
 			)
 		)
 		(property "Value" "Conn_01x26_MountingPin"
-			(at 50.8 95.25 0)
+			(at 50.8 24.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4654,7 +4655,7 @@
 			)
 		)
 		(property "Footprint" "FPC:Hirose_FH12-26S-0.5SH(55)-FPC_1"
-			(at 50.8 60.96 0)
+			(at 50.8 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4663,7 +4664,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 50.8 60.96 0)
+			(at 50.8 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4672,7 +4673,7 @@
 			)
 		)
 		(property "Description" "Generic connectable mounting pin connector, single row, 01x26, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 50.8 60.96 0)
+			(at 50.8 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4772,16 +4773,16 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic_MountingPin:Conn_01x26_MountingPin")
-		(at 170.18 95.25 180)
+		(at 170.18 92.71 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "32d8a46c-5f88-4f09-bd82-7857fee93ccd")
 		(property "Reference" "J1"
-			(at 170.18 132.08 0)
+			(at 170.18 55.88 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4789,7 +4790,7 @@
 			)
 		)
 		(property "Value" "Conn_01x26_MountingPin"
-			(at 170.18 129.54 0)
+			(at 170.18 58.42 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4797,7 +4798,7 @@
 			)
 		)
 		(property "Footprint" "FPC:Hirose_FH12-26S-0.5SH(55)-FPC_1"
-			(at 170.18 95.25 0)
+			(at 170.18 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4806,7 +4807,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 170.18 95.25 0)
+			(at 170.18 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4815,7 +4816,7 @@
 			)
 		)
 		(property "Description" "Generic connectable mounting pin connector, single row, 01x26, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 170.18 95.25 0)
+			(at 170.18 92.71 0)
 			(effects
 				(font
 					(size 1.27 1.27)
