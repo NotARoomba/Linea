@@ -22,7 +22,7 @@ As the original tablet neded a wired connection I decided that this would be a f
 
 After looking through the repository on GitLab and opeing up the schematics for the tablet (more specifically the coil grid) I was greeted with this:
 
-![alt text](images/original_flex.png)
+![alt text](/assets/original_flex.png)
 (look at all those coils)
 
 While I could copy it, I wanted a tablet under 200mm and also to be able to understand it. So I looked through some [patents](https://patents.google.com/patent/US4634973A) that were referenced in the YouTube video and found that that the coils could be made up of any number of turns, in this case 3 turns (better pen detection).
@@ -82,7 +82,7 @@ Now I'm going to start research on the main board that connects to the FPC. I wa
 
 After researching and compiling schematics, I started work on creating the schematic for the board that will handle the connection from the touchpad and also bluetooth. I took inspiration from the connections for power and battery from the Flipper Zero docs and also the analog circuits from Patchouli's repository.
 
-![alt text](images/schematic.png)
+![alt text](/assets/schematic.png)
 
 # July 1: Main Board PCB
 
@@ -104,17 +104,17 @@ I started work on making the PCB and after watching a fe tutorials on analog sig
 
 I started by grouping all the components together based on the schematic and also taking refrence from the other designs in Patchouli (dont have many pictures as I was locked in). I then started wiringagain taking inspiration from the schmatics using wider traces for power and ground and thn smaller traces for the data lines and analog crcuits. I also split the schematic into 2 ground planes. One for analog ground and another for the digital ground.
 
-![alt text](images/analog_ground.jpg)
+![alt text](/assets/analog_ground.jpg)
 (was already done placing the components)
 
 After wiring a bit I finished the design (almost) but I had forgot on important part, the Blutooth chip.
 
-![alt text](images/finished_wiring.png)
+![alt text](/assets/finished_wiring.png)
 (finished wireup)
 
 It was gonna be tricky because the rf pin is on the top of the chip.
 
-![alt text](images/i_hate_rf_and_blutooth_please_help.png)
+![alt text](/assets/i_hate_rf_and_blutooth_please_help.png)
 
 but I have a 4-layer stackup so I worked on allowing a clear path for the RF trail...
 
@@ -134,11 +134,11 @@ I wanted a simple 3D printed case so I opened up Fusion360 and started work.
 
 After a bit of designing I ended up with this.
 
-![alt text](images/case_bottom.png)
+![alt text](/assets/case_bottom.png)
 
 I added a 'hook" so that the lid can snap onto the case.
 
-![alt text](images/side_hook.png)
+![alt text](/assets/side_hook.png)
 
 But then after adding the components I as left with the top FPC connector a bit misaligned...
 
