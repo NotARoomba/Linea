@@ -6,7 +6,12 @@
   <br>
 </h1>
 
-<h4 align="center">Project files for a custom EMR tablet from scratch.</h4>
+<h4 align="center">
+Project files for a custom EMR tablet from scratch.
+
+Inspired by [Project Patchouli](https://gitlab.com/yukidama/patchouli).
+
+</h4>
 
 <div align="center">
 
@@ -81,6 +86,10 @@ The PCB has 2 components, the FPC coil grid and the main board.
 | **Total**    | 308.72      |                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 ## Credits
+
+- [Project Patchouli](https://gitlab.com/yukidama/patchouli)
+- [Flipper Zero](https://docs.flipper.net/development/hardware)
+- Check `/references` for more information
 
 This project uses:
 
