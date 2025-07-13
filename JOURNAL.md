@@ -80,7 +80,7 @@ Now I'm going to start research on the main board that connects to the FPC. I wa
 
 # June 30: Main Board Schematic
 
-After researching and compiling schematics, I started work on creating the schematic for the board that will handle the connection from the touchpad and also bluetooth. I took inspiration from the connections for power and battery from the Flipper Zero docs and also the analog circuits from Patchouli's repository.
+After researching and compiling schematics, I started work on creating the schematic for the board that will handle the connection from the touchpad and also bluetooth. I took inspiration from the connections for power and battery from the Flipper Zero docs and also the analog circuits from [Patchouli's repository](https://gitlab.com/yukidama/patchouli).
 
 ![alt text](/assets/schematic.png)
 
