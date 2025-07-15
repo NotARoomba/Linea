@@ -16110,6 +16110,16 @@
 	)
 	(wire
 		(pts
+			(xy 251.46 151.13) (xy 251.46 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "97d85f6d-d808-4a1e-a49b-5f1b39580576")
+	)
+	(wire
+		(pts
 			(xy 162.56 66.04) (xy 166.37 66.04)
 		)
 		(stroke
@@ -21834,7 +21844,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 251.46 156.21 0)
+		(at 251.46 158.75 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -21842,7 +21852,7 @@
 		(dnp no)
 		(uuid "119b34ad-a50f-43bf-a021-cc72c3fc47c1")
 		(property "Reference" "#PWR028"
-			(at 251.46 162.56 0)
+			(at 251.46 165.1 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21851,7 +21861,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 251.46 159.766 0)
+			(at 251.46 162.306 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21859,7 +21869,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 251.46 156.21 0)
+			(at 251.46 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21868,7 +21878,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 251.46 156.21 0)
+			(at 251.46 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -21877,7 +21887,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 251.46 156.21 0)
+			(at 251.46 158.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31555,7 +31565,7 @@
 	)
 	(symbol
 		(lib_id "Device:R")
-		(at 251.46 152.4 180)
+		(at 251.46 154.94 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -31563,15 +31573,6 @@
 		(dnp no)
 		(uuid "ae121f34-7e3d-41c4-a0d6-c194ee5e76d5")
 		(property "Reference" "R10"
-			(at 252.984 151.13 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10K"
 			(at 252.984 153.67 0)
 			(effects
 				(font
@@ -31580,8 +31581,17 @@
 				(justify right)
 			)
 		)
+		(property "Value" "10K"
+			(at 252.984 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
 		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 253.238 152.4 90)
+			(at 253.238 154.94 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31590,7 +31600,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 251.46 152.4 0)
+			(at 251.46 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -31599,7 +31609,7 @@
 			)
 		)
 		(property "Description" "Resistor"
-			(at 251.46 152.4 0)
+			(at 251.46 154.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
