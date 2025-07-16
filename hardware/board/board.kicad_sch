@@ -11505,12 +11505,6 @@
 		(uuid "13b8c8ff-31ed-4167-9a9a-0d92418f276c")
 	)
 	(junction
-		(at 85.09 78.74)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "15bd3a74-90ff-4ab3-9c26-1bef45fd40fa")
-	)
-	(junction
 		(at 118.11 228.6)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -11599,12 +11593,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "3172594c-6857-4c36-9710-894490f0f97f")
-	)
-	(junction
-		(at 71.12 80.01)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "33737ebe-c816-4342-b269-a7af4a8768e0")
 	)
 	(junction
 		(at 388.62 182.88)
@@ -12189,12 +12177,6 @@
 		(uuid "e5fe51df-d54d-4b6e-893f-21c7d43b8436")
 	)
 	(junction
-		(at 73.66 81.28)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "e82ed9b8-8f11-4637-8cc9-c176b653e50d")
-	)
-	(junction
 		(at 500.38 92.71)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -12223,12 +12205,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f08b6dff-aaed-4846-ab43-d9ea4b499bde")
-	)
-	(junction
-		(at 83.82 81.28)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f0d58e32-d4a1-4107-ab69-c686639e8bb4")
 	)
 	(junction
 		(at 85.09 312.42)
@@ -13550,16 +13526,6 @@
 	)
 	(wire
 		(pts
-			(xy 77.47 78.74) (xy 77.47 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2d520d49-2bfe-499d-8f30-21277ad0da67")
-	)
-	(wire
-		(pts
 			(xy 68.58 306.07) (xy 39.37 306.07)
 		)
 		(stroke
@@ -13607,16 +13573,6 @@
 			(type default)
 		)
 		(uuid "2e51d875-65ec-42f9-b060-a52ff6559009")
-	)
-	(wire
-		(pts
-			(xy 73.66 81.28) (xy 83.82 81.28)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2ec7ef5d-0587-47b2-afb0-43d6f1958611")
 	)
 	(wire
 		(pts
@@ -15870,16 +15826,6 @@
 	)
 	(wire
 		(pts
-			(xy 71.12 80.01) (xy 77.47 80.01)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8de4a784-487f-4adf-9673-297479d0e1dc")
-	)
-	(wire
-		(pts
 			(xy 132.08 43.18) (xy 132.08 34.29)
 		)
 		(stroke
@@ -17077,16 +17023,6 @@
 			(type default)
 		)
 		(uuid "baa64579-92f2-4652-9876-31b8c8825dcb")
-	)
-	(wire
-		(pts
-			(xy 77.47 78.74) (xy 85.09 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bb10bb81-0df4-4c3b-899a-792fac21d56c")
 	)
 	(wire
 		(pts
