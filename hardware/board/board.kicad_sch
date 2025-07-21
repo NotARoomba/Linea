@@ -10229,6 +10229,113 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "linea:WW25WR010FTL"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "R"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "WW25WR010FTL"
+				(at 0 -5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "linea:R2512"
+				(at 0 -7.62 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "https://lcsc.com/product-detail/Ultra-Low-Resistors-SMD_0-01R-R010-1_C171418.html"
+				(at 0 -10.16 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "LCSC Part" "C171418"
+				(at 0 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "WW25WR010FTL_0_1"
+				(rectangle
+					(start -2.54 1.02)
+					(end 2.54 -1.02)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin unspecified line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin unspecified line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "linea:XL7EL89CKI-111YLC-32M"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -11895,6 +12002,12 @@
 		(uuid "865868aa-c83b-482f-8de6-0a6ee66b7fe2")
 	)
 	(junction
+		(at 149.86 228.6)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "86b9c3d5-f64c-4df1-816c-acc1c1c60492")
+	)
+	(junction
 		(at 195.58 182.88)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -11983,12 +12096,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "a9a5e71a-bbc8-4706-8077-657065718e7a")
-	)
-	(junction
-		(at 149.86 228.6)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ab62d170-ccf8-4e48-94f5-6fc56a00fdf2")
 	)
 	(junction
 		(at 83.82 280.67)
@@ -14856,6 +14963,16 @@
 	)
 	(wire
 		(pts
+			(xy 149.86 190.5) (xy 149.86 228.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "642b950f-37d9-419a-85c2-08b2a3c16fe8")
+	)
+	(wire
+		(pts
 			(xy 171.45 30.48) (xy 179.07 30.48)
 		)
 		(stroke
@@ -15213,16 +15330,6 @@
 			(type default)
 		)
 		(uuid "72809d17-c54d-480d-a773-be39cbeabe72")
-	)
-	(wire
-		(pts
-			(xy 158.75 228.6) (xy 160.02 228.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "739a2109-13f6-4671-8729-e3a3f2e7c873")
 	)
 	(wire
 		(pts
@@ -16846,16 +16953,6 @@
 	)
 	(wire
 		(pts
-			(xy 149.86 190.5) (xy 149.86 228.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3177e38-84ca-4178-aaa0-a0a1c6308023")
-	)
-	(wire
-		(pts
 			(xy 73.66 68.58) (xy 73.66 81.28)
 		)
 		(stroke
@@ -18283,16 +18380,6 @@
 			(type default)
 		)
 		(uuid "ef1dc341-3097-4c3d-9cff-a48d3abde84e")
-	)
-	(wire
-		(pts
-			(xy 151.13 228.6) (xy 149.86 228.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ef884781-68a2-4e9e-b2f7-64f790fe3468")
 	)
 	(wire
 		(pts
@@ -22462,6 +22549,83 @@
 			(project "board"
 				(path "/f5ca596a-3f37-4a80-af8e-71fb2890766f"
 					(reference "C74")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "linea:WW25WR010FTL")
+		(at 154.94 228.6 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1ca895f8-2fd0-4c2f-9d1f-7c0ed0b6dac7")
+		(property "Reference" "R42"
+			(at 154.94 222.25 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "WW25WR010FTL"
+			(at 154.94 224.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "linea:R2512"
+			(at 154.94 236.22 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://lcsc.com/product-detail/Ultra-Low-Resistors-SMD_0-01R-R010-1_C171418.html"
+			(at 154.94 238.76 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 154.94 228.6 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC Part" "C171418"
+			(at 154.94 241.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "09b64f59-cc5d-4716-a331-e656832aee78")
+		)
+		(pin "2"
+			(uuid "02761f09-e824-40df-a737-e589cb829ca6")
+		)
+		(instances
+			(project ""
+				(path "/f5ca596a-3f37-4a80-af8e-71fb2890766f"
+					(reference "R42")
 					(unit 1)
 				)
 			)
@@ -32798,75 +32962,6 @@
 			(project ""
 				(path "/f5ca596a-3f37-4a80-af8e-71fb2890766f"
 					(reference "R43")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 154.94 228.6 270)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c6d1f6f2-8980-43a8-90f1-e46bc9132f65")
-		(property "Reference" "R42"
-			(at 156.718 226.568 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Value" "10m"
-			(at 156.972 230.886 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 154.94 226.822 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 154.94 228.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor"
-			(at 154.94 228.6 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "50497d5f-dda8-43fe-9965-58e77b446af1")
-		)
-		(pin "1"
-			(uuid "52fb0e8d-b407-45c7-89e2-11c9f36082f8")
-		)
-		(instances
-			(project "board"
-				(path "/f5ca596a-3f37-4a80-af8e-71fb2890766f"
-					(reference "R42")
 					(unit 1)
 				)
 			)

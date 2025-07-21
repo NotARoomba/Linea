@@ -48,7 +48,7 @@
         "silk_text_thickness": 0.125,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.2
+          "min_clearance": 0.0
         }
       },
       "diff_pair_dimensions": [
@@ -550,7 +550,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "../../production/",
+      "plot": "../../production/board",
       "pos_files": "../../production/",
       "specctra_dsn": "",
       "step": "board_low.step",
