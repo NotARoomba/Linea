@@ -135,6 +135,19 @@ extern TIM_HandleTypeDef htim1;
 extern float gfreq;
 
 void patchouli_TIM_init(){
+    // Reconfigure PA1 (REDUCE) and PA2 (INHIBIT) as GPIO outputs, driven low
+    GPIO_InitTypeDef gpio = {0};
+    gpio.Pin = GPIO_PIN_1 | GPIO_PIN_2;
+    gpio.Mode = GPIO_MODE_OUTPUT_PP;
+    gpio.Pull = GPIO_NOPULL;
+    gpio.Speed = GPIO_SPEED_FREQ_LOW;
+    HAL_GPIO_Init(GPIOA, &gpio);
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1 | GPIO_PIN_2, GPIO_PIN_RESET);  // REDUCE=low, INHIBIT=low (Q1 off)
+
+    // Configure TIM1 for charge pump (~250 kHz, 50% duty)
+    htim1.Instance->ARR  = 255;
+    htim1.Instance->CCR1 = 128;
+    htim1.Instance->CCR3 = 128;
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
     HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_3);
     HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
@@ -173,8 +186,7 @@ uint16_t _patchouli_adc_multisample(){
             HAL_ADC_Start(&hadc1);
             HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
             sample[i] = HAL_ADC_GetValue(&hadc1);
-            CDC_Transmit_FS(sample[i], 2);
-            CDC_Transmit_FS("\n", 1);
+            { char buf[8]; sprintf(buf, "%u\n", sample[i]); CDC_Transmit_FS((uint8_t*)buf, strlen(buf)); }
         }
         value = patchouli_median(sample, PATCHOULI_ADC_NSAMPLE);
     }
@@ -277,13 +289,13 @@ void patchouli_comms_init(){
 #include "usb_device.h"
 bool patchouli_transmit(patchouli_report_t* report){
     // through cdc
-    CDC_Transmit_FS("Transmit\n", 9);
+    CDC_Transmit_FS((uint8_t*)"Transmit\n", 9);
     int16_t p = report->tip;
     int16_t x = report->xpos;
     int16_t y = report->ypos;
     char txbuf[32];
     sprintf(txbuf, "%d\t%d\t%d\n", x, y, p);
-    CDC_Transmit_FS(txbuf, strlen(txbuf));
+    CDC_Transmit_FS((uint8_t*)txbuf, strlen(txbuf));
     return true;
 }
 #endif /* PATCHOULI_PCB_GLIDER_ADDON_V1 */

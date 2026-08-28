@@ -1,0 +1,947 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32wbxx_hal_uart_ex.c"
+  16              		.text
+  17              		.section	.text.UARTEx_Wakeup_AddressConfig,"ax",%progbits
+  18              		.align	1
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  23              	UARTEx_Wakeup_AddressConfig:
+  24              		@ args = 0, pretend = 0, frame = 8
+  25              		@ frame_needed = 0, uses_anonymous_args = 0
+  26              		@ link register save eliminated.
+  27 0000 82B0     		sub	sp, sp, #8
+  28 0002 02AB     		add	r3, sp, #8
+  29 0004 03E90600 		stmdb	r3, {r1, r2}
+  30 0008 0268     		ldr	r2, [r0]
+  31 000a 5368     		ldr	r3, [r2, #4]
+  32 000c 23F01003 		bic	r3, r3, #16
+  33 0010 BDF80410 		ldrh	r1, [sp, #4]
+  34 0014 0B43     		orrs	r3, r3, r1
+  35 0016 5360     		str	r3, [r2, #4]
+  36 0018 0268     		ldr	r2, [r0]
+  37 001a 5368     		ldr	r3, [r2, #4]
+  38 001c 23F07F43 		bic	r3, r3, #-16777216
+  39 0020 9DF80610 		ldrb	r1, [sp, #6]	@ zero_extendqisi2
+  40 0024 43EA0163 		orr	r3, r3, r1, lsl #24
+  41 0028 5360     		str	r3, [r2, #4]
+  42 002a 02B0     		add	sp, sp, #8
+  43              		@ sp needed
+  44 002c 7047     		bx	lr
+  46              		.section	.text.UARTEx_SetNbDataToProcess,"ax",%progbits
+  47              		.align	1
+  48              		.syntax unified
+  49              		.thumb
+  50              		.thumb_func
+  52              	UARTEx_SetNbDataToProcess:
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 0, uses_anonymous_args = 0
+  55 0000 436E     		ldr	r3, [r0, #100]
+  56 0002 2BB9     		cbnz	r3, .L4
+  57 0004 0123     		movs	r3, #1
+  58 0006 A0F86A30 		strh	r3, [r0, #106]	@ movhi
+  59 000a A0F86830 		strh	r3, [r0, #104]	@ movhi
+  60 000e 7047     		bx	lr
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 2
+
+
+  61              	.L4:
+  62 0010 00B5     		push	{lr}
+  63 0012 0368     		ldr	r3, [r0]
+  64 0014 9A68     		ldr	r2, [r3, #8]
+  65 0016 C2F34262 		ubfx	r2, r2, #25, #3
+  66 001a 9968     		ldr	r1, [r3, #8]
+  67 001c 490F     		lsrs	r1, r1, #29
+  68 001e DFF82CE0 		ldr	lr, .L9
+  69 0022 1EF80130 		ldrb	r3, [lr, r1]	@ zero_extendqisi2
+  70 0026 DB00     		lsls	r3, r3, #3
+  71 0028 DFF824C0 		ldr	ip, .L9+4
+  72 002c 1CF80110 		ldrb	r1, [ip, r1]	@ zero_extendqisi2
+  73 0030 93FBF1F3 		sdiv	r3, r3, r1
+  74 0034 A0F86A30 		strh	r3, [r0, #106]	@ movhi
+  75 0038 1EF80230 		ldrb	r3, [lr, r2]	@ zero_extendqisi2
+  76 003c DB00     		lsls	r3, r3, #3
+  77 003e 1CF80220 		ldrb	r2, [ip, r2]	@ zero_extendqisi2
+  78 0042 93FBF2F3 		sdiv	r3, r3, r2
+  79 0046 A0F86830 		strh	r3, [r0, #104]	@ movhi
+  80 004a 00BD     		pop	{pc}
+  81              	.L10:
+  82              		.align	2
+  83              	.L9:
+  84 004c 00000000 		.word	numerator.1
+  85 0050 00000000 		.word	denominator.0
+  87              		.section	.text.HAL_RS485Ex_Init,"ax",%progbits
+  88              		.align	1
+  89              		.global	HAL_RS485Ex_Init
+  90              		.syntax unified
+  91              		.thumb
+  92              		.thumb_func
+  94              	HAL_RS485Ex_Init:
+  95              		@ args = 0, pretend = 0, frame = 0
+  96              		@ frame_needed = 0, uses_anonymous_args = 0
+  97 0000 0028     		cmp	r0, #0
+  98 0002 47D0     		beq	.L16
+  99 0004 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 100 0006 0D46     		mov	r5, r1
+ 101 0008 1646     		mov	r6, r2
+ 102 000a 1F46     		mov	r7, r3
+ 103 000c 0446     		mov	r4, r0
+ 104 000e D0F88830 		ldr	r3, [r0, #136]
+ 105 0012 5BB3     		cbz	r3, .L21
+ 106              	.L13:
+ 107 0014 2423     		movs	r3, #36
+ 108 0016 C4F88830 		str	r3, [r4, #136]
+ 109 001a 2268     		ldr	r2, [r4]
+ 110 001c 1368     		ldr	r3, [r2]
+ 111 001e 23F00103 		bic	r3, r3, #1
+ 112 0022 1360     		str	r3, [r2]
+ 113 0024 A36A     		ldr	r3, [r4, #40]
+ 114 0026 8BBB     		cbnz	r3, .L22
+ 115              	.L15:
+ 116 0028 2046     		mov	r0, r4
+ 117 002a FFF7FEFF 		bl	UART_SetConfig
+ 118 002e 0128     		cmp	r0, #1
+ 119 0030 1BD0     		beq	.L12
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 3
+
+
+ 120 0032 2268     		ldr	r2, [r4]
+ 121 0034 9368     		ldr	r3, [r2, #8]
+ 122 0036 43F48043 		orr	r3, r3, #16384
+ 123 003a 9360     		str	r3, [r2, #8]
+ 124 003c 2268     		ldr	r2, [r4]
+ 125 003e 9368     		ldr	r3, [r2, #8]
+ 126 0040 23F40043 		bic	r3, r3, #32768
+ 127 0044 2B43     		orrs	r3, r3, r5
+ 128 0046 9360     		str	r3, [r2, #8]
+ 129 0048 3B04     		lsls	r3, r7, #16
+ 130 004a 43EA4652 		orr	r2, r3, r6, lsl #21
+ 131 004e 2168     		ldr	r1, [r4]
+ 132 0050 0B68     		ldr	r3, [r1]
+ 133 0052 6FF31943 		bfc	r3, #16, #10
+ 134 0056 1343     		orrs	r3, r3, r2
+ 135 0058 0B60     		str	r3, [r1]
+ 136 005a 2268     		ldr	r2, [r4]
+ 137 005c 1368     		ldr	r3, [r2]
+ 138 005e 43F00103 		orr	r3, r3, #1
+ 139 0062 1360     		str	r3, [r2]
+ 140 0064 2046     		mov	r0, r4
+ 141 0066 FFF7FEFF 		bl	UART_CheckIdleState
+ 142              	.L12:
+ 143 006a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 144              	.L21:
+ 145 006c 80F88430 		strb	r3, [r0, #132]
+ 146 0070 FFF7FEFF 		bl	UART_InitCallbacksToDefault
+ 147 0074 D4F8C430 		ldr	r3, [r4, #196]
+ 148 0078 23B1     		cbz	r3, .L23
+ 149              	.L14:
+ 150 007a D4F8C430 		ldr	r3, [r4, #196]
+ 151 007e 2046     		mov	r0, r4
+ 152 0080 9847     		blx	r3
+ 153 0082 C7E7     		b	.L13
+ 154              	.L23:
+ 155 0084 044B     		ldr	r3, .L24
+ 156 0086 C4F8C430 		str	r3, [r4, #196]
+ 157 008a F6E7     		b	.L14
+ 158              	.L22:
+ 159 008c 2046     		mov	r0, r4
+ 160 008e FFF7FEFF 		bl	UART_AdvFeatureConfig
+ 161 0092 C9E7     		b	.L15
+ 162              	.L16:
+ 163 0094 0120     		movs	r0, #1
+ 164 0096 7047     		bx	lr
+ 165              	.L25:
+ 166              		.align	2
+ 167              	.L24:
+ 168 0098 00000000 		.word	HAL_UART_MspInit
+ 170              		.section	.text.HAL_UARTEx_WakeupCallback,"ax",%progbits
+ 171              		.align	1
+ 172              		.weak	HAL_UARTEx_WakeupCallback
+ 173              		.syntax unified
+ 174              		.thumb
+ 175              		.thumb_func
+ 177              	HAL_UARTEx_WakeupCallback:
+ 178              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 4
+
+
+ 179              		@ frame_needed = 0, uses_anonymous_args = 0
+ 180              		@ link register save eliminated.
+ 181 0000 7047     		bx	lr
+ 183              		.section	.text.HAL_UARTEx_RxFifoFullCallback,"ax",%progbits
+ 184              		.align	1
+ 185              		.weak	HAL_UARTEx_RxFifoFullCallback
+ 186              		.syntax unified
+ 187              		.thumb
+ 188              		.thumb_func
+ 190              	HAL_UARTEx_RxFifoFullCallback:
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 193              		@ link register save eliminated.
+ 194 0000 7047     		bx	lr
+ 196              		.section	.text.HAL_UARTEx_TxFifoEmptyCallback,"ax",%progbits
+ 197              		.align	1
+ 198              		.weak	HAL_UARTEx_TxFifoEmptyCallback
+ 199              		.syntax unified
+ 200              		.thumb
+ 201              		.thumb_func
+ 203              	HAL_UARTEx_TxFifoEmptyCallback:
+ 204              		@ args = 0, pretend = 0, frame = 0
+ 205              		@ frame_needed = 0, uses_anonymous_args = 0
+ 206              		@ link register save eliminated.
+ 207 0000 7047     		bx	lr
+ 209              		.section	.text.HAL_MultiProcessorEx_AddressLength_Set,"ax",%progbits
+ 210              		.align	1
+ 211              		.global	HAL_MultiProcessorEx_AddressLength_Set
+ 212              		.syntax unified
+ 213              		.thumb
+ 214              		.thumb_func
+ 216              	HAL_MultiProcessorEx_AddressLength_Set:
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219 0000 C0B1     		cbz	r0, .L31
+ 220 0002 08B5     		push	{r3, lr}
+ 221 0004 0346     		mov	r3, r0
+ 222 0006 2422     		movs	r2, #36
+ 223 0008 C0F88820 		str	r2, [r0, #136]
+ 224 000c 0068     		ldr	r0, [r0]
+ 225 000e 0268     		ldr	r2, [r0]
+ 226 0010 22F00102 		bic	r2, r2, #1
+ 227 0014 0260     		str	r2, [r0]
+ 228 0016 1868     		ldr	r0, [r3]
+ 229 0018 4268     		ldr	r2, [r0, #4]
+ 230 001a 22F01002 		bic	r2, r2, #16
+ 231 001e 1143     		orrs	r1, r1, r2
+ 232 0020 4160     		str	r1, [r0, #4]
+ 233 0022 1968     		ldr	r1, [r3]
+ 234 0024 0A68     		ldr	r2, [r1]
+ 235 0026 42F00102 		orr	r2, r2, #1
+ 236 002a 0A60     		str	r2, [r1]
+ 237 002c 1846     		mov	r0, r3
+ 238 002e FFF7FEFF 		bl	UART_CheckIdleState
+ 239 0032 08BD     		pop	{r3, pc}
+ 240              	.L31:
+ 241 0034 0120     		movs	r0, #1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 5
+
+
+ 242 0036 7047     		bx	lr
+ 244              		.section	.text.HAL_UARTEx_StopModeWakeUpSourceConfig,"ax",%progbits
+ 245              		.align	1
+ 246              		.global	HAL_UARTEx_StopModeWakeUpSourceConfig
+ 247              		.syntax unified
+ 248              		.thumb
+ 249              		.thumb_func
+ 251              	HAL_UARTEx_StopModeWakeUpSourceConfig:
+ 252              		@ args = 0, pretend = 0, frame = 8
+ 253              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254 0000 10B5     		push	{r4, lr}
+ 255 0002 84B0     		sub	sp, sp, #16
+ 256 0004 04AB     		add	r3, sp, #16
+ 257 0006 03E90600 		stmdb	r3, {r1, r2}
+ 258 000a 90F88430 		ldrb	r3, [r0, #132]	@ zero_extendqisi2
+ 259 000e 012B     		cmp	r3, #1
+ 260 0010 35D0     		beq	.L40
+ 261 0012 0446     		mov	r4, r0
+ 262 0014 0123     		movs	r3, #1
+ 263 0016 80F88430 		strb	r3, [r0, #132]
+ 264 001a 2423     		movs	r3, #36
+ 265 001c C0F88830 		str	r3, [r0, #136]
+ 266 0020 0268     		ldr	r2, [r0]
+ 267 0022 1368     		ldr	r3, [r2]
+ 268 0024 23F00103 		bic	r3, r3, #1
+ 269 0028 1360     		str	r3, [r2]
+ 270 002a 0168     		ldr	r1, [r0]
+ 271 002c 8B68     		ldr	r3, [r1, #8]
+ 272 002e 23F44013 		bic	r3, r3, #3145728
+ 273 0032 029A     		ldr	r2, [sp, #8]
+ 274 0034 1343     		orrs	r3, r3, r2
+ 275 0036 8B60     		str	r3, [r1, #8]
+ 276 0038 CAB1     		cbz	r2, .L43
+ 277              	.L38:
+ 278 003a 2268     		ldr	r2, [r4]
+ 279 003c 1368     		ldr	r3, [r2]
+ 280 003e 43F00103 		orr	r3, r3, #1
+ 281 0042 1360     		str	r3, [r2]
+ 282 0044 FFF7FEFF 		bl	HAL_GetTick
+ 283 0048 0346     		mov	r3, r0
+ 284 004a 6FF07E42 		mvn	r2, #-33554432
+ 285 004e 0092     		str	r2, [sp]
+ 286 0050 0022     		movs	r2, #0
+ 287 0052 4FF48001 		mov	r1, #4194304
+ 288 0056 2046     		mov	r0, r4
+ 289 0058 FFF7FEFF 		bl	UART_WaitOnFlagUntilTimeout
+ 290 005c 68B9     		cbnz	r0, .L41
+ 291 005e 2023     		movs	r3, #32
+ 292 0060 C4F88830 		str	r3, [r4, #136]
+ 293              	.L39:
+ 294 0064 0023     		movs	r3, #0
+ 295 0066 84F88430 		strb	r3, [r4, #132]
+ 296              	.L37:
+ 297 006a 04B0     		add	sp, sp, #16
+ 298              		@ sp needed
+ 299 006c 10BD     		pop	{r4, pc}
+ 300              	.L43:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 6
+
+
+ 301 006e 04AB     		add	r3, sp, #16
+ 302 0070 13E90600 		ldmdb	r3, {r1, r2}
+ 303 0074 FFF7FEFF 		bl	UARTEx_Wakeup_AddressConfig
+ 304 0078 DFE7     		b	.L38
+ 305              	.L41:
+ 306 007a 0320     		movs	r0, #3
+ 307 007c F2E7     		b	.L39
+ 308              	.L40:
+ 309 007e 0220     		movs	r0, #2
+ 310 0080 F3E7     		b	.L37
+ 312              		.section	.text.HAL_UARTEx_EnableStopMode,"ax",%progbits
+ 313              		.align	1
+ 314              		.global	HAL_UARTEx_EnableStopMode
+ 315              		.syntax unified
+ 316              		.thumb
+ 317              		.thumb_func
+ 319              	HAL_UARTEx_EnableStopMode:
+ 320              		@ args = 0, pretend = 0, frame = 0
+ 321              		@ frame_needed = 0, uses_anonymous_args = 0
+ 322              		@ link register save eliminated.
+ 323 0000 90F88430 		ldrb	r3, [r0, #132]	@ zero_extendqisi2
+ 324 0004 012B     		cmp	r3, #1
+ 325 0006 0FD0     		beq	.L47
+ 326 0008 0123     		movs	r3, #1
+ 327 000a 80F88430 		strb	r3, [r0, #132]
+ 328              	.L46:
+ 329 000e 0268     		ldr	r2, [r0]
+ 330              		.syntax unified
+ 331              	@ 1155 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 332 0010 52E8003F 		ldrex r3, [r2]
+ 333              	@ 0 "" 2
+ 334              		.thumb
+ 335              		.syntax unified
+ 336 0014 43F00203 		orr	r3, r3, #2
+ 337              		.syntax unified
+ 338              	@ 1206 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 339 0018 42E80031 		strex r1, r3, [r2]
+ 340              	@ 0 "" 2
+ 341              		.thumb
+ 342              		.syntax unified
+ 343 001c 0029     		cmp	r1, #0
+ 344 001e F6D1     		bne	.L46
+ 345 0020 80F88410 		strb	r1, [r0, #132]
+ 346 0024 0846     		mov	r0, r1
+ 347 0026 7047     		bx	lr
+ 348              	.L47:
+ 349 0028 0220     		movs	r0, #2
+ 350 002a 7047     		bx	lr
+ 352              		.section	.text.HAL_UARTEx_DisableStopMode,"ax",%progbits
+ 353              		.align	1
+ 354              		.global	HAL_UARTEx_DisableStopMode
+ 355              		.syntax unified
+ 356              		.thumb
+ 357              		.thumb_func
+ 359              	HAL_UARTEx_DisableStopMode:
+ 360              		@ args = 0, pretend = 0, frame = 0
+ 361              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 7
+
+
+ 362              		@ link register save eliminated.
+ 363 0000 90F88430 		ldrb	r3, [r0, #132]	@ zero_extendqisi2
+ 364 0004 012B     		cmp	r3, #1
+ 365 0006 0FD0     		beq	.L51
+ 366 0008 0123     		movs	r3, #1
+ 367 000a 80F88430 		strb	r3, [r0, #132]
+ 368              	.L50:
+ 369 000e 0268     		ldr	r2, [r0]
+ 370              		.syntax unified
+ 371              	@ 1155 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 372 0010 52E8003F 		ldrex r3, [r2]
+ 373              	@ 0 "" 2
+ 374              		.thumb
+ 375              		.syntax unified
+ 376 0014 23F00203 		bic	r3, r3, #2
+ 377              		.syntax unified
+ 378              	@ 1206 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 379 0018 42E80031 		strex r1, r3, [r2]
+ 380              	@ 0 "" 2
+ 381              		.thumb
+ 382              		.syntax unified
+ 383 001c 0029     		cmp	r1, #0
+ 384 001e F6D1     		bne	.L50
+ 385 0020 80F88410 		strb	r1, [r0, #132]
+ 386 0024 0846     		mov	r0, r1
+ 387 0026 7047     		bx	lr
+ 388              	.L51:
+ 389 0028 0220     		movs	r0, #2
+ 390 002a 7047     		bx	lr
+ 392              		.section	.text.HAL_UARTEx_EnableFifoMode,"ax",%progbits
+ 393              		.align	1
+ 394              		.global	HAL_UARTEx_EnableFifoMode
+ 395              		.syntax unified
+ 396              		.thumb
+ 397              		.thumb_func
+ 399              	HAL_UARTEx_EnableFifoMode:
+ 400              		@ args = 0, pretend = 0, frame = 0
+ 401              		@ frame_needed = 0, uses_anonymous_args = 0
+ 402 0000 90F88430 		ldrb	r3, [r0, #132]	@ zero_extendqisi2
+ 403 0004 012B     		cmp	r3, #1
+ 404 0006 1DD0     		beq	.L54
+ 405 0008 10B5     		push	{r4, lr}
+ 406 000a 0446     		mov	r4, r0
+ 407 000c 0123     		movs	r3, #1
+ 408 000e 80F88430 		strb	r3, [r0, #132]
+ 409 0012 2423     		movs	r3, #36
+ 410 0014 C0F88830 		str	r3, [r0, #136]
+ 411 0018 0268     		ldr	r2, [r0]
+ 412 001a 1368     		ldr	r3, [r2]
+ 413 001c 1168     		ldr	r1, [r2]
+ 414 001e 21F00101 		bic	r1, r1, #1
+ 415 0022 1160     		str	r1, [r2]
+ 416 0024 43F00053 		orr	r3, r3, #536870912
+ 417 0028 4FF00052 		mov	r2, #536870912
+ 418 002c 4266     		str	r2, [r0, #100]
+ 419 002e 0268     		ldr	r2, [r0]
+ 420 0030 1360     		str	r3, [r2]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 8
+
+
+ 421 0032 FFF7FEFF 		bl	UARTEx_SetNbDataToProcess
+ 422 0036 2023     		movs	r3, #32
+ 423 0038 C4F88830 		str	r3, [r4, #136]
+ 424 003c 0020     		movs	r0, #0
+ 425 003e 84F88400 		strb	r0, [r4, #132]
+ 426 0042 10BD     		pop	{r4, pc}
+ 427              	.L54:
+ 428 0044 0220     		movs	r0, #2
+ 429 0046 7047     		bx	lr
+ 431              		.section	.text.HAL_UARTEx_DisableFifoMode,"ax",%progbits
+ 432              		.align	1
+ 433              		.global	HAL_UARTEx_DisableFifoMode
+ 434              		.syntax unified
+ 435              		.thumb
+ 436              		.thumb_func
+ 438              	HAL_UARTEx_DisableFifoMode:
+ 439              		@ args = 0, pretend = 0, frame = 0
+ 440              		@ frame_needed = 0, uses_anonymous_args = 0
+ 441              		@ link register save eliminated.
+ 442 0000 90F88430 		ldrb	r3, [r0, #132]	@ zero_extendqisi2
+ 443 0004 012B     		cmp	r3, #1
+ 444 0006 18D0     		beq	.L61
+ 445 0008 0123     		movs	r3, #1
+ 446 000a 80F88430 		strb	r3, [r0, #132]
+ 447 000e 2423     		movs	r3, #36
+ 448 0010 C0F88830 		str	r3, [r0, #136]
+ 449 0014 0368     		ldr	r3, [r0]
+ 450 0016 1A68     		ldr	r2, [r3]
+ 451 0018 1968     		ldr	r1, [r3]
+ 452 001a 21F00101 		bic	r1, r1, #1
+ 453 001e 1960     		str	r1, [r3]
+ 454 0020 22F00052 		bic	r2, r2, #536870912
+ 455 0024 0023     		movs	r3, #0
+ 456 0026 4366     		str	r3, [r0, #100]
+ 457 0028 0168     		ldr	r1, [r0]
+ 458 002a 0A60     		str	r2, [r1]
+ 459 002c 2022     		movs	r2, #32
+ 460 002e C0F88820 		str	r2, [r0, #136]
+ 461 0032 80F88430 		strb	r3, [r0, #132]
+ 462 0036 1846     		mov	r0, r3
+ 463 0038 7047     		bx	lr
+ 464              	.L61:
+ 465 003a 0220     		movs	r0, #2
+ 466 003c 7047     		bx	lr
+ 468              		.section	.text.HAL_UARTEx_SetTxFifoThreshold,"ax",%progbits
+ 469              		.align	1
+ 470              		.global	HAL_UARTEx_SetTxFifoThreshold
+ 471              		.syntax unified
+ 472              		.thumb
+ 473              		.thumb_func
+ 475              	HAL_UARTEx_SetTxFifoThreshold:
+ 476              		@ args = 0, pretend = 0, frame = 0
+ 477              		@ frame_needed = 0, uses_anonymous_args = 0
+ 478 0000 38B5     		push	{r3, r4, r5, lr}
+ 479 0002 90F88430 		ldrb	r3, [r0, #132]	@ zero_extendqisi2
+ 480 0006 012B     		cmp	r3, #1
+ 481 0008 1DD0     		beq	.L64
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 9
+
+
+ 482 000a 0446     		mov	r4, r0
+ 483 000c 0123     		movs	r3, #1
+ 484 000e 80F88430 		strb	r3, [r0, #132]
+ 485 0012 2423     		movs	r3, #36
+ 486 0014 C0F88830 		str	r3, [r0, #136]
+ 487 0018 0368     		ldr	r3, [r0]
+ 488 001a 1D68     		ldr	r5, [r3]
+ 489 001c 1A68     		ldr	r2, [r3]
+ 490 001e 22F00102 		bic	r2, r2, #1
+ 491 0022 1A60     		str	r2, [r3]
+ 492 0024 0268     		ldr	r2, [r0]
+ 493 0026 9368     		ldr	r3, [r2, #8]
+ 494 0028 23F06043 		bic	r3, r3, #-536870912
+ 495 002c 1943     		orrs	r1, r1, r3
+ 496 002e 9160     		str	r1, [r2, #8]
+ 497 0030 FFF7FEFF 		bl	UARTEx_SetNbDataToProcess
+ 498 0034 2368     		ldr	r3, [r4]
+ 499 0036 1D60     		str	r5, [r3]
+ 500 0038 2023     		movs	r3, #32
+ 501 003a C4F88830 		str	r3, [r4, #136]
+ 502 003e 0020     		movs	r0, #0
+ 503 0040 84F88400 		strb	r0, [r4, #132]
+ 504              	.L63:
+ 505 0044 38BD     		pop	{r3, r4, r5, pc}
+ 506              	.L64:
+ 507 0046 0220     		movs	r0, #2
+ 508 0048 FCE7     		b	.L63
+ 510              		.section	.text.HAL_UARTEx_SetRxFifoThreshold,"ax",%progbits
+ 511              		.align	1
+ 512              		.global	HAL_UARTEx_SetRxFifoThreshold
+ 513              		.syntax unified
+ 514              		.thumb
+ 515              		.thumb_func
+ 517              	HAL_UARTEx_SetRxFifoThreshold:
+ 518              		@ args = 0, pretend = 0, frame = 0
+ 519              		@ frame_needed = 0, uses_anonymous_args = 0
+ 520 0000 38B5     		push	{r3, r4, r5, lr}
+ 521 0002 90F88430 		ldrb	r3, [r0, #132]	@ zero_extendqisi2
+ 522 0006 012B     		cmp	r3, #1
+ 523 0008 1DD0     		beq	.L68
+ 524 000a 0446     		mov	r4, r0
+ 525 000c 0123     		movs	r3, #1
+ 526 000e 80F88430 		strb	r3, [r0, #132]
+ 527 0012 2423     		movs	r3, #36
+ 528 0014 C0F88830 		str	r3, [r0, #136]
+ 529 0018 0368     		ldr	r3, [r0]
+ 530 001a 1D68     		ldr	r5, [r3]
+ 531 001c 1A68     		ldr	r2, [r3]
+ 532 001e 22F00102 		bic	r2, r2, #1
+ 533 0022 1A60     		str	r2, [r3]
+ 534 0024 0268     		ldr	r2, [r0]
+ 535 0026 9368     		ldr	r3, [r2, #8]
+ 536 0028 23F06063 		bic	r3, r3, #234881024
+ 537 002c 1943     		orrs	r1, r1, r3
+ 538 002e 9160     		str	r1, [r2, #8]
+ 539 0030 FFF7FEFF 		bl	UARTEx_SetNbDataToProcess
+ 540 0034 2368     		ldr	r3, [r4]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 10
+
+
+ 541 0036 1D60     		str	r5, [r3]
+ 542 0038 2023     		movs	r3, #32
+ 543 003a C4F88830 		str	r3, [r4, #136]
+ 544 003e 0020     		movs	r0, #0
+ 545 0040 84F88400 		strb	r0, [r4, #132]
+ 546              	.L67:
+ 547 0044 38BD     		pop	{r3, r4, r5, pc}
+ 548              	.L68:
+ 549 0046 0220     		movs	r0, #2
+ 550 0048 FCE7     		b	.L67
+ 552              		.section	.text.HAL_UARTEx_ReceiveToIdle,"ax",%progbits
+ 553              		.align	1
+ 554              		.global	HAL_UARTEx_ReceiveToIdle
+ 555              		.syntax unified
+ 556              		.thumb
+ 557              		.thumb_func
+ 559              	HAL_UARTEx_ReceiveToIdle:
+ 560              		@ args = 4, pretend = 0, frame = 8
+ 561              		@ frame_needed = 0, uses_anonymous_args = 0
+ 562 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+ 563 0004 82B0     		sub	sp, sp, #8
+ 564 0006 1D46     		mov	r5, r3
+ 565 0008 0A9E     		ldr	r6, [sp, #40]
+ 566 000a D0F88C30 		ldr	r3, [r0, #140]
+ 567 000e 202B     		cmp	r3, #32
+ 568 0010 40F0A780 		bne	.L88
+ 569 0014 0446     		mov	r4, r0
+ 570 0016 0F46     		mov	r7, r1
+ 571 0018 0029     		cmp	r1, #0
+ 572 001a 00F0A680 		beq	.L89
+ 573 001e 0192     		str	r2, [sp, #4]
+ 574 0020 0AB9     		cbnz	r2, .L94
+ 575 0022 0120     		movs	r0, #1
+ 576 0024 9EE0     		b	.L71
+ 577              	.L94:
+ 578 0026 0023     		movs	r3, #0
+ 579 0028 C0F89030 		str	r3, [r0, #144]
+ 580 002c 2222     		movs	r2, #34
+ 581 002e C0F88C20 		str	r2, [r0, #140]
+ 582 0032 0122     		movs	r2, #1
+ 583 0034 C266     		str	r2, [r0, #108]
+ 584 0036 0367     		str	r3, [r0, #112]
+ 585 0038 FFF7FEFF 		bl	HAL_GetTick
+ 586 003c 8146     		mov	r9, r0
+ 587 003e 019B     		ldr	r3, [sp, #4]
+ 588 0040 A4F85C30 		strh	r3, [r4, #92]	@ movhi
+ 589 0044 A4F85E30 		strh	r3, [r4, #94]	@ movhi
+ 590 0048 A368     		ldr	r3, [r4, #8]
+ 591 004a B3F5805F 		cmp	r3, #4096
+ 592 004e 06D0     		beq	.L95
+ 593 0050 A3B9     		cbnz	r3, .L75
+ 594 0052 2269     		ldr	r2, [r4, #16]
+ 595 0054 72B9     		cbnz	r2, .L76
+ 596 0056 FF22     		movs	r2, #255
+ 597 0058 A4F86020 		strh	r2, [r4, #96]	@ movhi
+ 598 005c 14E0     		b	.L74
+ 599              	.L95:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 11
+
+
+ 600 005e 2269     		ldr	r2, [r4, #16]
+ 601 0060 22B9     		cbnz	r2, .L73
+ 602 0062 40F2FF12 		movw	r2, #511
+ 603 0066 A4F86020 		strh	r2, [r4, #96]	@ movhi
+ 604 006a 0DE0     		b	.L74
+ 605              	.L73:
+ 606 006c FF22     		movs	r2, #255
+ 607 006e A4F86020 		strh	r2, [r4, #96]	@ movhi
+ 608 0072 09E0     		b	.L74
+ 609              	.L76:
+ 610 0074 7F22     		movs	r2, #127
+ 611 0076 A4F86020 		strh	r2, [r4, #96]	@ movhi
+ 612 007a 05E0     		b	.L74
+ 613              	.L75:
+ 614 007c B3F1805F 		cmp	r3, #268435456
+ 615 0080 0DD0     		beq	.L96
+ 616 0082 0022     		movs	r2, #0
+ 617 0084 A4F86020 		strh	r2, [r4, #96]	@ movhi
+ 618              	.L74:
+ 619 0088 B4F86020 		ldrh	r2, [r4, #96]
+ 620 008c 9046     		mov	r8, r2
+ 621 008e B3F5805F 		cmp	r3, #4096
+ 622 0092 0ED0     		beq	.L97
+ 623 0094 0023     		movs	r3, #0
+ 624 0096 9A46     		mov	r10, r3
+ 625              	.L79:
+ 626 0098 0023     		movs	r3, #0
+ 627 009a 2B80     		strh	r3, [r5]	@ movhi
+ 628 009c 2CE0     		b	.L80
+ 629              	.L96:
+ 630 009e 2269     		ldr	r2, [r4, #16]
+ 631 00a0 1AB9     		cbnz	r2, .L78
+ 632 00a2 7F22     		movs	r2, #127
+ 633 00a4 A4F86020 		strh	r2, [r4, #96]	@ movhi
+ 634 00a8 EEE7     		b	.L74
+ 635              	.L78:
+ 636 00aa 3F22     		movs	r2, #63
+ 637 00ac A4F86020 		strh	r2, [r4, #96]	@ movhi
+ 638 00b0 EAE7     		b	.L74
+ 639              	.L97:
+ 640 00b2 2369     		ldr	r3, [r4, #16]
+ 641 00b4 13B1     		cbz	r3, .L92
+ 642 00b6 0023     		movs	r3, #0
+ 643 00b8 9A46     		mov	r10, r3
+ 644 00ba EDE7     		b	.L79
+ 645              	.L92:
+ 646 00bc BA46     		mov	r10, r7
+ 647 00be 1F46     		mov	r7, r3
+ 648 00c0 EAE7     		b	.L79
+ 649              	.L100:
+ 650 00c2 0223     		movs	r3, #2
+ 651 00c4 2367     		str	r3, [r4, #112]
+ 652 00c6 2023     		movs	r3, #32
+ 653 00c8 C4F88C30 		str	r3, [r4, #140]
+ 654 00cc 0020     		movs	r0, #0
+ 655 00ce 49E0     		b	.L71
+ 656              	.L101:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 12
+
+
+ 657 00d0 5B6A     		ldr	r3, [r3, #36]
+ 658 00d2 4246     		mov	r2, r8
+ 659 00d4 1340     		ands	r3, r3, r2
+ 660 00d6 5246     		mov	r2, r10
+ 661 00d8 22F8023B 		strh	r3, [r2], #2	@ movhi
+ 662 00dc 9246     		mov	r10, r2
+ 663              	.L84:
+ 664 00de 2B88     		ldrh	r3, [r5]
+ 665 00e0 0133     		adds	r3, r3, #1
+ 666 00e2 2B80     		strh	r3, [r5]	@ movhi
+ 667 00e4 B4F85E30 		ldrh	r3, [r4, #94]
+ 668 00e8 9BB2     		uxth	r3, r3
+ 669 00ea 013B     		subs	r3, r3, #1
+ 670 00ec 9BB2     		uxth	r3, r3
+ 671 00ee A4F85E30 		strh	r3, [r4, #94]	@ movhi
+ 672              	.L82:
+ 673 00f2 B6F1FF3F 		cmp	r6, #-1
+ 674 00f6 1BD1     		bne	.L98
+ 675              	.L80:
+ 676 00f8 B4F85E20 		ldrh	r2, [r4, #94]
+ 677 00fc 92B2     		uxth	r2, r2
+ 678 00fe 22B3     		cbz	r2, .L99
+ 679 0100 2368     		ldr	r3, [r4]
+ 680 0102 DA69     		ldr	r2, [r3, #28]
+ 681 0104 12F0100F 		tst	r2, #16
+ 682 0108 04D0     		beq	.L81
+ 683 010a 1022     		movs	r2, #16
+ 684 010c 1A62     		str	r2, [r3, #32]
+ 685 010e 2B88     		ldrh	r3, [r5]
+ 686 0110 002B     		cmp	r3, #0
+ 687 0112 D6D1     		bne	.L100
+ 688              	.L81:
+ 689 0114 2368     		ldr	r3, [r4]
+ 690 0116 DA69     		ldr	r2, [r3, #28]
+ 691 0118 12F0200F 		tst	r2, #32
+ 692 011c E9D0     		beq	.L82
+ 693 011e 002F     		cmp	r7, #0
+ 694 0120 D6D0     		beq	.L101
+ 695 0122 5A6A     		ldr	r2, [r3, #36]
+ 696 0124 5FFA88F3 		uxtb	r3, r8
+ 697 0128 1340     		ands	r3, r3, r2
+ 698 012a 07F8013B 		strb	r3, [r7], #1
+ 699 012e D6E7     		b	.L84
+ 700              	.L98:
+ 701 0130 FFF7FEFF 		bl	HAL_GetTick
+ 702 0134 4B46     		mov	r3, r9
+ 703 0136 C01A     		subs	r0, r0, r3
+ 704 0138 B042     		cmp	r0, r6
+ 705 013a 01D8     		bhi	.L86
+ 706 013c 002E     		cmp	r6, #0
+ 707 013e DBD1     		bne	.L80
+ 708              	.L86:
+ 709 0140 2023     		movs	r3, #32
+ 710 0142 C4F88C30 		str	r3, [r4, #140]
+ 711 0146 0320     		movs	r0, #3
+ 712 0148 0CE0     		b	.L71
+ 713              	.L99:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 13
+
+
+ 714 014a B4F85C30 		ldrh	r3, [r4, #92]
+ 715 014e B4F85E20 		ldrh	r2, [r4, #94]
+ 716 0152 92B2     		uxth	r2, r2
+ 717 0154 9B1A     		subs	r3, r3, r2
+ 718 0156 2B80     		strh	r3, [r5]	@ movhi
+ 719 0158 2023     		movs	r3, #32
+ 720 015a C4F88C30 		str	r3, [r4, #140]
+ 721 015e 0020     		movs	r0, #0
+ 722 0160 00E0     		b	.L71
+ 723              	.L88:
+ 724 0162 0220     		movs	r0, #2
+ 725              	.L71:
+ 726 0164 02B0     		add	sp, sp, #8
+ 727              		@ sp needed
+ 728 0166 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+ 729              	.L89:
+ 730 016a 0120     		movs	r0, #1
+ 731 016c FAE7     		b	.L71
+ 733              		.section	.text.HAL_UARTEx_ReceiveToIdle_IT,"ax",%progbits
+ 734              		.align	1
+ 735              		.global	HAL_UARTEx_ReceiveToIdle_IT
+ 736              		.syntax unified
+ 737              		.thumb
+ 738              		.thumb_func
+ 740              	HAL_UARTEx_ReceiveToIdle_IT:
+ 741              		@ args = 0, pretend = 0, frame = 0
+ 742              		@ frame_needed = 0, uses_anonymous_args = 0
+ 743 0000 D0F88C30 		ldr	r3, [r0, #140]
+ 744 0004 202B     		cmp	r3, #32
+ 745 0006 1ED1     		bne	.L106
+ 746 0008 10B5     		push	{r4, lr}
+ 747 000a 0446     		mov	r4, r0
+ 748 000c E9B1     		cbz	r1, .L107
+ 749 000e 0AB9     		cbnz	r2, .L114
+ 750 0010 0120     		movs	r0, #1
+ 751              	.L103:
+ 752 0012 10BD     		pop	{r4, pc}
+ 753              	.L114:
+ 754 0014 0123     		movs	r3, #1
+ 755 0016 C366     		str	r3, [r0, #108]
+ 756 0018 0023     		movs	r3, #0
+ 757 001a 0367     		str	r3, [r0, #112]
+ 758 001c FFF7FEFF 		bl	UART_Start_Receive_IT
+ 759 0020 E36E     		ldr	r3, [r4, #108]
+ 760 0022 012B     		cmp	r3, #1
+ 761 0024 01D0     		beq	.L115
+ 762 0026 0120     		movs	r0, #1
+ 763 0028 F3E7     		b	.L103
+ 764              	.L115:
+ 765 002a 2368     		ldr	r3, [r4]
+ 766 002c 1022     		movs	r2, #16
+ 767 002e 1A62     		str	r2, [r3, #32]
+ 768              	.L105:
+ 769 0030 2268     		ldr	r2, [r4]
+ 770              		.syntax unified
+ 771              	@ 1155 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 772 0032 52E8003F 		ldrex r3, [r2]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 14
+
+
+ 773              	@ 0 "" 2
+ 774              		.thumb
+ 775              		.syntax unified
+ 776 0036 43F01003 		orr	r3, r3, #16
+ 777              		.syntax unified
+ 778              	@ 1206 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 779 003a 42E80031 		strex r1, r3, [r2]
+ 780              	@ 0 "" 2
+ 781              		.thumb
+ 782              		.syntax unified
+ 783 003e 0029     		cmp	r1, #0
+ 784 0040 F6D1     		bne	.L105
+ 785 0042 0846     		mov	r0, r1
+ 786 0044 E5E7     		b	.L103
+ 787              	.L106:
+ 788 0046 0220     		movs	r0, #2
+ 789 0048 7047     		bx	lr
+ 790              	.L107:
+ 791 004a 0120     		movs	r0, #1
+ 792 004c E1E7     		b	.L103
+ 794              		.section	.text.HAL_UARTEx_ReceiveToIdle_DMA,"ax",%progbits
+ 795              		.align	1
+ 796              		.global	HAL_UARTEx_ReceiveToIdle_DMA
+ 797              		.syntax unified
+ 798              		.thumb
+ 799              		.thumb_func
+ 801              	HAL_UARTEx_ReceiveToIdle_DMA:
+ 802              		@ args = 0, pretend = 0, frame = 0
+ 803              		@ frame_needed = 0, uses_anonymous_args = 0
+ 804 0000 D0F88C30 		ldr	r3, [r0, #140]
+ 805 0004 202B     		cmp	r3, #32
+ 806 0006 1FD1     		bne	.L120
+ 807 0008 10B5     		push	{r4, lr}
+ 808 000a 0446     		mov	r4, r0
+ 809 000c F1B1     		cbz	r1, .L121
+ 810 000e 0AB9     		cbnz	r2, .L128
+ 811 0010 0120     		movs	r0, #1
+ 812              	.L117:
+ 813 0012 10BD     		pop	{r4, pc}
+ 814              	.L128:
+ 815 0014 0123     		movs	r3, #1
+ 816 0016 C366     		str	r3, [r0, #108]
+ 817 0018 0023     		movs	r3, #0
+ 818 001a 0367     		str	r3, [r0, #112]
+ 819 001c FFF7FEFF 		bl	UART_Start_Receive_DMA
+ 820 0020 0028     		cmp	r0, #0
+ 821 0022 F6D1     		bne	.L117
+ 822 0024 E36E     		ldr	r3, [r4, #108]
+ 823 0026 012B     		cmp	r3, #1
+ 824 0028 01D0     		beq	.L129
+ 825 002a 0120     		movs	r0, #1
+ 826 002c F1E7     		b	.L117
+ 827              	.L129:
+ 828 002e 2368     		ldr	r3, [r4]
+ 829 0030 1022     		movs	r2, #16
+ 830 0032 1A62     		str	r2, [r3, #32]
+ 831              	.L119:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 15
+
+
+ 832 0034 2268     		ldr	r2, [r4]
+ 833              		.syntax unified
+ 834              	@ 1155 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 835 0036 52E8003F 		ldrex r3, [r2]
+ 836              	@ 0 "" 2
+ 837              		.thumb
+ 838              		.syntax unified
+ 839 003a 43F01003 		orr	r3, r3, #16
+ 840              		.syntax unified
+ 841              	@ 1206 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 842 003e 42E80031 		strex r1, r3, [r2]
+ 843              	@ 0 "" 2
+ 844              		.thumb
+ 845              		.syntax unified
+ 846 0042 0029     		cmp	r1, #0
+ 847 0044 F6D1     		bne	.L119
+ 848 0046 E4E7     		b	.L117
+ 849              	.L120:
+ 850 0048 0220     		movs	r0, #2
+ 851 004a 7047     		bx	lr
+ 852              	.L121:
+ 853 004c 0120     		movs	r0, #1
+ 854 004e E0E7     		b	.L117
+ 856              		.section	.text.HAL_UARTEx_GetRxEventType,"ax",%progbits
+ 857              		.align	1
+ 858              		.global	HAL_UARTEx_GetRxEventType
+ 859              		.syntax unified
+ 860              		.thumb
+ 861              		.thumb_func
+ 863              	HAL_UARTEx_GetRxEventType:
+ 864              		@ args = 0, pretend = 0, frame = 0
+ 865              		@ frame_needed = 0, uses_anonymous_args = 0
+ 866              		@ link register save eliminated.
+ 867 0000 006F     		ldr	r0, [r0, #112]
+ 868 0002 7047     		bx	lr
+ 870              		.section	.rodata.denominator.0,"a"
+ 871              		.align	2
+ 874              	denominator.0:
+ 875 0000 08040204 		.ascii	"\010\004\002\004\010\001\001\001"
+ 875      08010101 
+ 876              		.section	.rodata.numerator.1,"a"
+ 877              		.align	2
+ 880              	numerator.1:
+ 881 0000 01010103 		.ascii	"\001\001\001\003\007\001\000\000"
+ 881      07010000 
+ 882              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s 			page 16
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32wbxx_hal_uart_ex.c
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:18     .text.UARTEx_Wakeup_AddressConfig:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:23     .text.UARTEx_Wakeup_AddressConfig:00000000 UARTEx_Wakeup_AddressConfig
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:47     .text.UARTEx_SetNbDataToProcess:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:52     .text.UARTEx_SetNbDataToProcess:00000000 UARTEx_SetNbDataToProcess
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:84     .text.UARTEx_SetNbDataToProcess:0000004c $d
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:880    .rodata.numerator.1:00000000 numerator.1
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:874    .rodata.denominator.0:00000000 denominator.0
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:88     .text.HAL_RS485Ex_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:94     .text.HAL_RS485Ex_Init:00000000 HAL_RS485Ex_Init
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:168    .text.HAL_RS485Ex_Init:00000098 $d
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:171    .text.HAL_UARTEx_WakeupCallback:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:177    .text.HAL_UARTEx_WakeupCallback:00000000 HAL_UARTEx_WakeupCallback
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:184    .text.HAL_UARTEx_RxFifoFullCallback:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:190    .text.HAL_UARTEx_RxFifoFullCallback:00000000 HAL_UARTEx_RxFifoFullCallback
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:197    .text.HAL_UARTEx_TxFifoEmptyCallback:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:203    .text.HAL_UARTEx_TxFifoEmptyCallback:00000000 HAL_UARTEx_TxFifoEmptyCallback
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:210    .text.HAL_MultiProcessorEx_AddressLength_Set:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:216    .text.HAL_MultiProcessorEx_AddressLength_Set:00000000 HAL_MultiProcessorEx_AddressLength_Set
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:245    .text.HAL_UARTEx_StopModeWakeUpSourceConfig:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:251    .text.HAL_UARTEx_StopModeWakeUpSourceConfig:00000000 HAL_UARTEx_StopModeWakeUpSourceConfig
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:313    .text.HAL_UARTEx_EnableStopMode:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:319    .text.HAL_UARTEx_EnableStopMode:00000000 HAL_UARTEx_EnableStopMode
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:353    .text.HAL_UARTEx_DisableStopMode:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:359    .text.HAL_UARTEx_DisableStopMode:00000000 HAL_UARTEx_DisableStopMode
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:393    .text.HAL_UARTEx_EnableFifoMode:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:399    .text.HAL_UARTEx_EnableFifoMode:00000000 HAL_UARTEx_EnableFifoMode
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:432    .text.HAL_UARTEx_DisableFifoMode:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:438    .text.HAL_UARTEx_DisableFifoMode:00000000 HAL_UARTEx_DisableFifoMode
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:469    .text.HAL_UARTEx_SetTxFifoThreshold:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:475    .text.HAL_UARTEx_SetTxFifoThreshold:00000000 HAL_UARTEx_SetTxFifoThreshold
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:511    .text.HAL_UARTEx_SetRxFifoThreshold:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:517    .text.HAL_UARTEx_SetRxFifoThreshold:00000000 HAL_UARTEx_SetRxFifoThreshold
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:553    .text.HAL_UARTEx_ReceiveToIdle:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:559    .text.HAL_UARTEx_ReceiveToIdle:00000000 HAL_UARTEx_ReceiveToIdle
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:734    .text.HAL_UARTEx_ReceiveToIdle_IT:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:740    .text.HAL_UARTEx_ReceiveToIdle_IT:00000000 HAL_UARTEx_ReceiveToIdle_IT
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:795    .text.HAL_UARTEx_ReceiveToIdle_DMA:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:801    .text.HAL_UARTEx_ReceiveToIdle_DMA:00000000 HAL_UARTEx_ReceiveToIdle_DMA
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:857    .text.HAL_UARTEx_GetRxEventType:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:863    .text.HAL_UARTEx_GetRxEventType:00000000 HAL_UARTEx_GetRxEventType
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:871    .rodata.denominator.0:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccjR1MDk.s:877    .rodata.numerator.1:00000000 $d
+
+UNDEFINED SYMBOLS
+UART_SetConfig
+UART_CheckIdleState
+UART_InitCallbacksToDefault
+UART_AdvFeatureConfig
+HAL_UART_MspInit
+HAL_GetTick
+UART_WaitOnFlagUntilTimeout
+UART_Start_Receive_IT
+UART_Start_Receive_DMA

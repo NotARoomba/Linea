@@ -1,0 +1,92 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD8kKOs.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"arm_mat_mult_f32.c"
+  16              		.text
+  17              		.section	.text.arm_mat_mult_f32,"ax",%progbits
+  18              		.align	1
+  19              		.global	arm_mat_mult_f32
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	arm_mat_mult_f32:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  28 0004 0346     		mov	r3, r0
+  29 0006 8846     		mov	r8, r1
+  30 0008 D0F804C0 		ldr	ip, [r0, #4]
+  31 000c 4D68     		ldr	r5, [r1, #4]
+  32 000e D2F80490 		ldr	r9, [r2, #4]
+  33 0012 4888     		ldrh	r0, [r1, #2]
+  34 0014 B3F802E0 		ldrh	lr, [r3, #2]
+  35 0018 1F88     		ldrh	r7, [r3]
+  36 001a 0026     		movs	r6, #0
+  37 001c 1FE0     		b	.L5
+  38              	.L3:
+  39 001e F3EC017A 		vldmia.32	r3!, {s15}
+  40 0022 D2ED006A 		vldr.32	s13, [r2]
+  41 0026 67EEA67A 		vmul.f32	s15, s15, s13
+  42 002a 37EE277A 		vadd.f32	s14, s14, s15
+  43 002e 02EB8002 		add	r2, r2, r0, lsl #2
+  44 0032 0139     		subs	r1, r1, #1
+  45              	.L2:
+  46 0034 0029     		cmp	r1, #0
+  47 0036 F2D1     		bne	.L3
+  48 0038 5346     		mov	r3, r10
+  49 003a A3EC017A 		vstmia.32	r3!, {s14}
+  50 003e 013C     		subs	r4, r4, #1
+  51 0040 021B     		subs	r2, r0, r4
+  52 0042 05EB8202 		add	r2, r5, r2, lsl #2
+  53 0046 2CB1     		cbz	r4, .L8
+  54 0048 9A46     		mov	r10, r3
+  55              	.L4:
+  56 004a 7146     		mov	r1, lr
+  57 004c 6346     		mov	r3, ip
+  58 004e 9FED087A 		vldr.32	s14, .L10
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD8kKOs.s 			page 2
+
+
+  59 0052 EFE7     		b	.L2
+  60              	.L8:
+  61 0054 0644     		add	r6, r6, r0
+  62 0056 0CEB8E0C 		add	ip, ip, lr, lsl #2
+  63 005a 013F     		subs	r7, r7, #1
+  64 005c 05D0     		beq	.L9
+  65              	.L5:
+  66 005e 09EB860A 		add	r10, r9, r6, lsl #2
+  67 0062 D8F80420 		ldr	r2, [r8, #4]
+  68 0066 0446     		mov	r4, r0
+  69 0068 EFE7     		b	.L4
+  70              	.L9:
+  71 006a 2046     		mov	r0, r4
+  72 006c BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+  73              	.L11:
+  74              		.align	2
+  75              	.L10:
+  76 0070 00000000 		.word	0
+  78              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD8kKOs.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_mat_mult_f32.c
+C:\Users\Nathan\AppData\Local\Temp\ccD8kKOs.s:18     .text.arm_mat_mult_f32:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD8kKOs.s:24     .text.arm_mat_mult_f32:00000000 arm_mat_mult_f32
+C:\Users\Nathan\AppData\Local\Temp\ccD8kKOs.s:76     .text.arm_mat_mult_f32:00000070 $d
+
+NO UNDEFINED SYMBOLS

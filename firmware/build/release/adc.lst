@@ -1,0 +1,216 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"adc.c"
+  16              		.text
+  17              		.section	.text.MX_ADC1_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	MX_ADC1_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	MX_ADC1_Init:
+  25              		@ args = 0, pretend = 0, frame = 24
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 00B5     		push	{lr}
+  28 0002 87B0     		sub	sp, sp, #28
+  29 0004 0023     		movs	r3, #0
+  30 0006 0093     		str	r3, [sp]
+  31 0008 0193     		str	r3, [sp, #4]
+  32 000a 0293     		str	r3, [sp, #8]
+  33 000c 0393     		str	r3, [sp, #12]
+  34 000e 0493     		str	r3, [sp, #16]
+  35 0010 0593     		str	r3, [sp, #20]
+  36 0012 1848     		ldr	r0, .L7
+  37 0014 184A     		ldr	r2, .L7+4
+  38 0016 0260     		str	r2, [r0]
+  39 0018 4360     		str	r3, [r0, #4]
+  40 001a 8360     		str	r3, [r0, #8]
+  41 001c C360     		str	r3, [r0, #12]
+  42 001e 0361     		str	r3, [r0, #16]
+  43 0020 0422     		movs	r2, #4
+  44 0022 4261     		str	r2, [r0, #20]
+  45 0024 0376     		strb	r3, [r0, #24]
+  46 0026 4376     		strb	r3, [r0, #25]
+  47 0028 0122     		movs	r2, #1
+  48 002a C261     		str	r2, [r0, #28]
+  49 002c 80F82030 		strb	r3, [r0, #32]
+  50 0030 8362     		str	r3, [r0, #40]
+  51 0032 C362     		str	r3, [r0, #44]
+  52 0034 80F83030 		strb	r3, [r0, #48]
+  53 0038 4363     		str	r3, [r0, #52]
+  54 003a 80F83830 		strb	r3, [r0, #56]
+  55 003e FFF7FEFF 		bl	HAL_ADC_Init
+  56 0042 88B9     		cbnz	r0, .L5
+  57              	.L2:
+  58 0044 0D4B     		ldr	r3, .L7+8
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s 			page 2
+
+
+  59 0046 0093     		str	r3, [sp]
+  60 0048 0623     		movs	r3, #6
+  61 004a 0193     		str	r3, [sp, #4]
+  62 004c 0423     		movs	r3, #4
+  63 004e 0293     		str	r3, [sp, #8]
+  64 0050 7F22     		movs	r2, #127
+  65 0052 0392     		str	r2, [sp, #12]
+  66 0054 0493     		str	r3, [sp, #16]
+  67 0056 0023     		movs	r3, #0
+  68 0058 0593     		str	r3, [sp, #20]
+  69 005a 6946     		mov	r1, sp
+  70 005c 0548     		ldr	r0, .L7
+  71 005e FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+  72 0062 20B9     		cbnz	r0, .L6
+  73              	.L1:
+  74 0064 07B0     		add	sp, sp, #28
+  75              		@ sp needed
+  76 0066 00BD     		pop	{pc}
+  77              	.L5:
+  78 0068 FFF7FEFF 		bl	Error_Handler
+  79 006c EAE7     		b	.L2
+  80              	.L6:
+  81 006e FFF7FEFF 		bl	Error_Handler
+  82 0072 F7E7     		b	.L1
+  83              	.L8:
+  84              		.align	2
+  85              	.L7:
+  86 0074 00000000 		.word	hadc1
+  87 0078 00000450 		.word	1342439424
+  88 007c 0800900C 		.word	210763784
+  90              		.section	.text.HAL_ADC_MspInit,"ax",%progbits
+  91              		.align	1
+  92              		.global	HAL_ADC_MspInit
+  93              		.syntax unified
+  94              		.thumb
+  95              		.thumb_func
+  97              	HAL_ADC_MspInit:
+  98              		@ args = 0, pretend = 0, frame = 32
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100 0000 00B5     		push	{lr}
+ 101 0002 89B0     		sub	sp, sp, #36
+ 102 0004 0023     		movs	r3, #0
+ 103 0006 0393     		str	r3, [sp, #12]
+ 104 0008 0493     		str	r3, [sp, #16]
+ 105 000a 0593     		str	r3, [sp, #20]
+ 106 000c 0693     		str	r3, [sp, #24]
+ 107 000e 0793     		str	r3, [sp, #28]
+ 108 0010 0268     		ldr	r2, [r0]
+ 109 0012 114B     		ldr	r3, .L13
+ 110 0014 9A42     		cmp	r2, r3
+ 111 0016 01D0     		beq	.L12
+ 112              	.L9:
+ 113 0018 09B0     		add	sp, sp, #36
+ 114              		@ sp needed
+ 115 001a 00BD     		pop	{pc}
+ 116              	.L12:
+ 117 001c 4FF0B043 		mov	r3, #1476395008
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s 			page 3
+
+
+ 118 0020 DA6C     		ldr	r2, [r3, #76]
+ 119 0022 42F40052 		orr	r2, r2, #8192
+ 120 0026 DA64     		str	r2, [r3, #76]
+ 121 0028 DA6C     		ldr	r2, [r3, #76]
+ 122 002a 02F40052 		and	r2, r2, #8192
+ 123 002e 0292     		str	r2, [sp, #8]
+ 124 0030 029A     		ldr	r2, [sp, #8]
+ 125 0032 DA6C     		ldr	r2, [r3, #76]
+ 126 0034 42F00402 		orr	r2, r2, #4
+ 127 0038 DA64     		str	r2, [r3, #76]
+ 128 003a DB6C     		ldr	r3, [r3, #76]
+ 129 003c 03F00403 		and	r3, r3, #4
+ 130 0040 0193     		str	r3, [sp, #4]
+ 131 0042 019B     		ldr	r3, [sp, #4]
+ 132 0044 0423     		movs	r3, #4
+ 133 0046 0393     		str	r3, [sp, #12]
+ 134 0048 0323     		movs	r3, #3
+ 135 004a 0493     		str	r3, [sp, #16]
+ 136 004c 03A9     		add	r1, sp, #12
+ 137 004e 0348     		ldr	r0, .L13+4
+ 138 0050 FFF7FEFF 		bl	HAL_GPIO_Init
+ 139 0054 E0E7     		b	.L9
+ 140              	.L14:
+ 141 0056 00BF     		.align	2
+ 142              	.L13:
+ 143 0058 00000450 		.word	1342439424
+ 144 005c 00080048 		.word	1207961600
+ 146              		.section	.text.HAL_ADC_MspDeInit,"ax",%progbits
+ 147              		.align	1
+ 148              		.global	HAL_ADC_MspDeInit
+ 149              		.syntax unified
+ 150              		.thumb
+ 151              		.thumb_func
+ 153              	HAL_ADC_MspDeInit:
+ 154              		@ args = 0, pretend = 0, frame = 0
+ 155              		@ frame_needed = 0, uses_anonymous_args = 0
+ 156 0000 08B5     		push	{r3, lr}
+ 157 0002 0268     		ldr	r2, [r0]
+ 158 0004 074B     		ldr	r3, .L19
+ 159 0006 9A42     		cmp	r2, r3
+ 160 0008 00D0     		beq	.L18
+ 161              	.L15:
+ 162 000a 08BD     		pop	{r3, pc}
+ 163              	.L18:
+ 164 000c 4FF0B042 		mov	r2, #1476395008
+ 165 0010 D36C     		ldr	r3, [r2, #76]
+ 166 0012 23F40053 		bic	r3, r3, #8192
+ 167 0016 D364     		str	r3, [r2, #76]
+ 168 0018 0421     		movs	r1, #4
+ 169 001a 0348     		ldr	r0, .L19+4
+ 170 001c FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 171 0020 F3E7     		b	.L15
+ 172              	.L20:
+ 173 0022 00BF     		.align	2
+ 174              	.L19:
+ 175 0024 00000450 		.word	1342439424
+ 176 0028 00080048 		.word	1207961600
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s 			page 4
+
+
+ 178              		.global	hadc1
+ 179              		.section	.bss.hadc1,"aw",%nobits
+ 180              		.align	2
+ 183              	hadc1:
+ 184 0000 00000000 		.space	100
+ 184      00000000 
+ 184      00000000 
+ 184      00000000 
+ 184      00000000 
+ 185              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 adc.c
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:18     .text.MX_ADC1_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:24     .text.MX_ADC1_Init:00000000 MX_ADC1_Init
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:86     .text.MX_ADC1_Init:00000074 $d
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:183    .bss.hadc1:00000000 hadc1
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:91     .text.HAL_ADC_MspInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:97     .text.HAL_ADC_MspInit:00000000 HAL_ADC_MspInit
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:143    .text.HAL_ADC_MspInit:00000058 $d
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:147    .text.HAL_ADC_MspDeInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:153    .text.HAL_ADC_MspDeInit:00000000 HAL_ADC_MspDeInit
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:175    .text.HAL_ADC_MspDeInit:00000024 $d
+C:\Users\Nathan\AppData\Local\Temp\ccpPfSTD.s:180    .bss.hadc1:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_ADC_Init
+HAL_ADC_ConfigChannel
+Error_Handler
+HAL_GPIO_Init
+HAL_GPIO_DeInit

@@ -117,6 +117,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_ADC1_Init();
+  HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
   MX_I2C1_Init();
   MX_TIM1_Init();
   MX_TIM16_Init();
@@ -142,16 +143,38 @@ int main(void)
   // CDC_Transmit_FS(buf, strlen(buf));
   // CDC_Transmit_FS(" MHz", 7);
   htim16.Instance->RCR=50;
-	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	GPIO_InitStruct.Pin  = GPIO_PIN_6;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  // CDC_Transmit_FS("Glider Addon Build\n", 20);
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  // PB6 (EXCITER) is TIM16_CH1N — don't reconfigure as GPIO or PWM stops
   CDC_Transmit_FS("Glider Addon Build2\n", 20);
   HAL_Delay(1000);
   CDC_Transmit_FS("Glider Addon Build3\n", 20);
 
+  // ADC debug: test internal VREFINT and external PC2
+  {
+    ADC_ChannelConfTypeDef sConf = {0};
+
+    // First: read internal VREFINT
+    sConf.Channel = ADC_CHANNEL_VREFINT;
+    sConf.Rank = ADC_REGULAR_RANK_1;
+    sConf.SamplingTime = ADC_SAMPLETIME_247CYCLES_5;
+    sConf.SingleDiff = ADC_SINGLE_ENDED;
+    sConf.OffsetNumber = ADC_OFFSET_NONE;
+    HAL_ADC_ConfigChannel(&hadc1, &sConf);
+    HAL_ADC_Start(&hadc1);
+    HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+    uint16_t vref = HAL_ADC_GetValue(&hadc1);
+
+    // Then: read PC2 (channel 3)
+    sConf.Channel = ADC_CHANNEL_3;
+    HAL_ADC_ConfigChannel(&hadc1, &sConf);
+    HAL_ADC_Start(&hadc1);
+    HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY);
+    uint16_t ch3 = HAL_ADC_GetValue(&hadc1);
+
+    char dbg[64];
+    sprintf(dbg, "VREF: %u  CH3: %u\n", vref, ch3);
+    CDC_Transmit_FS((uint8_t*)dbg, strlen(dbg));
+    HAL_Delay(500);
+  }
 
   /* USER CODE END 2 */
 

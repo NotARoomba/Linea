@@ -35,7 +35,7 @@
         "STM32WB55xx",
         "USE_HAL_DRIVER"
       ],
-      "compilerPath": "C:\\PROGRAM FILES (X86)\\ARM GNU TOOLCHAIN ARM-NONE-EABI\\13.3 REL1\\BIN\\arm-none-eabi-gcc.EXE"
+      "compilerPath": "c:\\Users\\Nathan\\AppData\\Roaming\\Code\\User\\globalStorage\\bmd.stm32-for-vscode\\@xpack-dev-tools\\arm-none-eabi-gcc\\15.2.1-1.1.1\\.content\\bin\\arm-none-eabi-gcc.EXE"
     }
   ],
   "version": 4

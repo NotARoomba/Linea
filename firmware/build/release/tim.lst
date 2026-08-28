@@ -1,0 +1,527 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"tim.c"
+  16              		.text
+  17              		.section	.text.HAL_TIM_Base_MspInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_TIM_Base_MspInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_TIM_Base_MspInit:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 00B5     		push	{lr}
+  28 0002 83B0     		sub	sp, sp, #12
+  29 0004 0368     		ldr	r3, [r0]
+  30 0006 184A     		ldr	r2, .L7
+  31 0008 9342     		cmp	r3, r2
+  32 000a 04D0     		beq	.L5
+  33 000c 174A     		ldr	r2, .L7+4
+  34 000e 9342     		cmp	r3, r2
+  35 0010 15D0     		beq	.L6
+  36              	.L1:
+  37 0012 03B0     		add	sp, sp, #12
+  38              		@ sp needed
+  39 0014 00BD     		pop	{pc}
+  40              	.L5:
+  41 0016 4FF0B043 		mov	r3, #1476395008
+  42 001a 1A6E     		ldr	r2, [r3, #96]
+  43 001c 42F40062 		orr	r2, r2, #2048
+  44 0020 1A66     		str	r2, [r3, #96]
+  45 0022 1B6E     		ldr	r3, [r3, #96]
+  46 0024 03F40063 		and	r3, r3, #2048
+  47 0028 0093     		str	r3, [sp]
+  48 002a 009B     		ldr	r3, [sp]
+  49 002c 0022     		movs	r2, #0
+  50 002e 1146     		mov	r1, r2
+  51 0030 1920     		movs	r0, #25
+  52 0032 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  53 0036 1920     		movs	r0, #25
+  54 0038 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  55 003c E9E7     		b	.L1
+  56              	.L6:
+  57 003e 4FF0B043 		mov	r3, #1476395008
+  58 0042 1A6E     		ldr	r2, [r3, #96]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 2
+
+
+  59 0044 42F40032 		orr	r2, r2, #131072
+  60 0048 1A66     		str	r2, [r3, #96]
+  61 004a 1B6E     		ldr	r3, [r3, #96]
+  62 004c 03F40033 		and	r3, r3, #131072
+  63 0050 0193     		str	r3, [sp, #4]
+  64 0052 019B     		ldr	r3, [sp, #4]
+  65 0054 0022     		movs	r2, #0
+  66 0056 1146     		mov	r1, r2
+  67 0058 1920     		movs	r0, #25
+  68 005a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  69 005e 1920     		movs	r0, #25
+  70 0060 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  71 0064 D5E7     		b	.L1
+  72              	.L8:
+  73 0066 00BF     		.align	2
+  74              	.L7:
+  75 0068 002C0140 		.word	1073818624
+  76 006c 00440140 		.word	1073824768
+  78              		.section	.text.HAL_TIM_MspPostInit,"ax",%progbits
+  79              		.align	1
+  80              		.global	HAL_TIM_MspPostInit
+  81              		.syntax unified
+  82              		.thumb
+  83              		.thumb_func
+  85              	HAL_TIM_MspPostInit:
+  86              		@ args = 0, pretend = 0, frame = 32
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88 0000 30B5     		push	{r4, r5, lr}
+  89 0002 89B0     		sub	sp, sp, #36
+  90 0004 0023     		movs	r3, #0
+  91 0006 0393     		str	r3, [sp, #12]
+  92 0008 0493     		str	r3, [sp, #16]
+  93 000a 0593     		str	r3, [sp, #20]
+  94 000c 0693     		str	r3, [sp, #24]
+  95 000e 0793     		str	r3, [sp, #28]
+  96 0010 0368     		ldr	r3, [r0]
+  97 0012 274A     		ldr	r2, .L15
+  98 0014 9342     		cmp	r3, r2
+  99 0016 04D0     		beq	.L13
+ 100 0018 264A     		ldr	r2, .L15+4
+ 101 001a 9342     		cmp	r3, r2
+ 102 001c 2FD0     		beq	.L14
+ 103              	.L9:
+ 104 001e 09B0     		add	sp, sp, #36
+ 105              		@ sp needed
+ 106 0020 30BD     		pop	{r4, r5, pc}
+ 107              	.L13:
+ 108 0022 4FF0B043 		mov	r3, #1476395008
+ 109 0026 DA6C     		ldr	r2, [r3, #76]
+ 110 0028 42F00102 		orr	r2, r2, #1
+ 111 002c DA64     		str	r2, [r3, #76]
+ 112 002e DA6C     		ldr	r2, [r3, #76]
+ 113 0030 02F00102 		and	r2, r2, #1
+ 114 0034 0192     		str	r2, [sp, #4]
+ 115 0036 019A     		ldr	r2, [sp, #4]
+ 116 0038 DA6C     		ldr	r2, [r3, #76]
+ 117 003a 42F00202 		orr	r2, r2, #2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 3
+
+
+ 118 003e DA64     		str	r2, [r3, #76]
+ 119 0040 DB6C     		ldr	r3, [r3, #76]
+ 120 0042 03F00203 		and	r3, r3, #2
+ 121 0046 0093     		str	r3, [sp]
+ 122 0048 009B     		ldr	r3, [sp]
+ 123 004a 4FF4B063 		mov	r3, #1408
+ 124 004e 0393     		str	r3, [sp, #12]
+ 125 0050 0225     		movs	r5, #2
+ 126 0052 0495     		str	r5, [sp, #16]
+ 127 0054 0124     		movs	r4, #1
+ 128 0056 0694     		str	r4, [sp, #24]
+ 129 0058 0794     		str	r4, [sp, #28]
+ 130 005a 03A9     		add	r1, sp, #12
+ 131 005c 4FF09040 		mov	r0, #1207959552
+ 132 0060 FFF7FEFF 		bl	HAL_GPIO_Init
+ 133 0064 4FF40043 		mov	r3, #32768
+ 134 0068 0393     		str	r3, [sp, #12]
+ 135 006a 0495     		str	r5, [sp, #16]
+ 136 006c 0023     		movs	r3, #0
+ 137 006e 0593     		str	r3, [sp, #20]
+ 138 0070 0694     		str	r4, [sp, #24]
+ 139 0072 0794     		str	r4, [sp, #28]
+ 140 0074 03A9     		add	r1, sp, #12
+ 141 0076 1048     		ldr	r0, .L15+8
+ 142 0078 FFF7FEFF 		bl	HAL_GPIO_Init
+ 143 007c CFE7     		b	.L9
+ 144              	.L14:
+ 145 007e 4FF0B043 		mov	r3, #1476395008
+ 146 0082 DA6C     		ldr	r2, [r3, #76]
+ 147 0084 42F00202 		orr	r2, r2, #2
+ 148 0088 DA64     		str	r2, [r3, #76]
+ 149 008a DB6C     		ldr	r3, [r3, #76]
+ 150 008c 03F00203 		and	r3, r3, #2
+ 151 0090 0293     		str	r3, [sp, #8]
+ 152 0092 029B     		ldr	r3, [sp, #8]
+ 153 0094 4023     		movs	r3, #64
+ 154 0096 0393     		str	r3, [sp, #12]
+ 155 0098 0223     		movs	r3, #2
+ 156 009a 0493     		str	r3, [sp, #16]
+ 157 009c 0323     		movs	r3, #3
+ 158 009e 0693     		str	r3, [sp, #24]
+ 159 00a0 0E23     		movs	r3, #14
+ 160 00a2 0793     		str	r3, [sp, #28]
+ 161 00a4 03A9     		add	r1, sp, #12
+ 162 00a6 0448     		ldr	r0, .L15+8
+ 163 00a8 FFF7FEFF 		bl	HAL_GPIO_Init
+ 164 00ac B7E7     		b	.L9
+ 165              	.L16:
+ 166 00ae 00BF     		.align	2
+ 167              	.L15:
+ 168 00b0 002C0140 		.word	1073818624
+ 169 00b4 00440140 		.word	1073824768
+ 170 00b8 00040048 		.word	1207960576
+ 172              		.section	.text.MX_TIM1_Init,"ax",%progbits
+ 173              		.align	1
+ 174              		.global	MX_TIM1_Init
+ 175              		.syntax unified
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 4
+
+
+ 176              		.thumb
+ 177              		.thumb_func
+ 179              	MX_TIM1_Init:
+ 180              		@ args = 0, pretend = 0, frame = 112
+ 181              		@ frame_needed = 0, uses_anonymous_args = 0
+ 182 0000 10B5     		push	{r4, lr}
+ 183 0002 9CB0     		sub	sp, sp, #112
+ 184 0004 0024     		movs	r4, #0
+ 185 0006 1894     		str	r4, [sp, #96]
+ 186 0008 1994     		str	r4, [sp, #100]
+ 187 000a 1A94     		str	r4, [sp, #104]
+ 188 000c 1B94     		str	r4, [sp, #108]
+ 189 000e 1594     		str	r4, [sp, #84]
+ 190 0010 1694     		str	r4, [sp, #88]
+ 191 0012 1794     		str	r4, [sp, #92]
+ 192 0014 0E94     		str	r4, [sp, #56]
+ 193 0016 0F94     		str	r4, [sp, #60]
+ 194 0018 1094     		str	r4, [sp, #64]
+ 195 001a 1194     		str	r4, [sp, #68]
+ 196 001c 1294     		str	r4, [sp, #72]
+ 197 001e 1394     		str	r4, [sp, #76]
+ 198 0020 1494     		str	r4, [sp, #80]
+ 199 0022 3422     		movs	r2, #52
+ 200 0024 2146     		mov	r1, r4
+ 201 0026 01A8     		add	r0, sp, #4
+ 202 0028 FFF7FEFF 		bl	memset
+ 203 002c 3648     		ldr	r0, .L33
+ 204 002e 374B     		ldr	r3, .L33+4
+ 205 0030 0360     		str	r3, [r0]
+ 206 0032 4460     		str	r4, [r0, #4]
+ 207 0034 8460     		str	r4, [r0, #8]
+ 208 0036 4FF6FF73 		movw	r3, #65535
+ 209 003a C360     		str	r3, [r0, #12]
+ 210 003c 0461     		str	r4, [r0, #16]
+ 211 003e 4461     		str	r4, [r0, #20]
+ 212 0040 8461     		str	r4, [r0, #24]
+ 213 0042 FFF7FEFF 		bl	HAL_TIM_Base_Init
+ 214 0046 0028     		cmp	r0, #0
+ 215 0048 48D1     		bne	.L26
+ 216              	.L18:
+ 217 004a 4FF48053 		mov	r3, #4096
+ 218 004e 1893     		str	r3, [sp, #96]
+ 219 0050 18A9     		add	r1, sp, #96
+ 220 0052 2D48     		ldr	r0, .L33
+ 221 0054 FFF7FEFF 		bl	HAL_TIM_ConfigClockSource
+ 222 0058 0028     		cmp	r0, #0
+ 223 005a 42D1     		bne	.L27
+ 224              	.L19:
+ 225 005c 2A48     		ldr	r0, .L33
+ 226 005e FFF7FEFF 		bl	HAL_TIM_PWM_Init
+ 227 0062 0028     		cmp	r0, #0
+ 228 0064 40D1     		bne	.L28
+ 229              	.L20:
+ 230 0066 0023     		movs	r3, #0
+ 231 0068 1593     		str	r3, [sp, #84]
+ 232 006a 1693     		str	r3, [sp, #88]
+ 233 006c 1793     		str	r3, [sp, #92]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 5
+
+
+ 234 006e 15A9     		add	r1, sp, #84
+ 235 0070 2548     		ldr	r0, .L33
+ 236 0072 FFF7FEFF 		bl	HAL_TIMEx_MasterConfigSynchronization
+ 237 0076 0028     		cmp	r0, #0
+ 238 0078 39D1     		bne	.L29
+ 239              	.L21:
+ 240 007a 6023     		movs	r3, #96
+ 241 007c 0E93     		str	r3, [sp, #56]
+ 242 007e 0022     		movs	r2, #0
+ 243 0080 0F92     		str	r2, [sp, #60]
+ 244 0082 1092     		str	r2, [sp, #64]
+ 245 0084 1192     		str	r2, [sp, #68]
+ 246 0086 1292     		str	r2, [sp, #72]
+ 247 0088 1392     		str	r2, [sp, #76]
+ 248 008a 1492     		str	r2, [sp, #80]
+ 249 008c 0EA9     		add	r1, sp, #56
+ 250 008e 1E48     		ldr	r0, .L33
+ 251 0090 FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ 252 0094 0028     		cmp	r0, #0
+ 253 0096 2DD1     		bne	.L30
+ 254              	.L22:
+ 255 0098 0822     		movs	r2, #8
+ 256 009a 0EA9     		add	r1, sp, #56
+ 257 009c 1A48     		ldr	r0, .L33
+ 258 009e FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ 259 00a2 50BB     		cbnz	r0, .L31
+ 260              	.L23:
+ 261 00a4 0023     		movs	r3, #0
+ 262 00a6 0193     		str	r3, [sp, #4]
+ 263 00a8 0293     		str	r3, [sp, #8]
+ 264 00aa 0393     		str	r3, [sp, #12]
+ 265 00ac 0493     		str	r3, [sp, #16]
+ 266 00ae 0593     		str	r3, [sp, #20]
+ 267 00b0 4FF40052 		mov	r2, #8192
+ 268 00b4 0692     		str	r2, [sp, #24]
+ 269 00b6 0793     		str	r3, [sp, #28]
+ 270 00b8 0893     		str	r3, [sp, #32]
+ 271 00ba 0993     		str	r3, [sp, #36]
+ 272 00bc 4FF00072 		mov	r2, #33554432
+ 273 00c0 0A92     		str	r2, [sp, #40]
+ 274 00c2 0B93     		str	r3, [sp, #44]
+ 275 00c4 0C93     		str	r3, [sp, #48]
+ 276 00c6 0D93     		str	r3, [sp, #52]
+ 277 00c8 01A9     		add	r1, sp, #4
+ 278 00ca 0F48     		ldr	r0, .L33
+ 279 00cc FFF7FEFF 		bl	HAL_TIMEx_ConfigBreakDeadTime
+ 280 00d0 B0B9     		cbnz	r0, .L32
+ 281              	.L24:
+ 282 00d2 0D48     		ldr	r0, .L33
+ 283 00d4 FFF7FEFF 		bl	HAL_TIM_MspPostInit
+ 284 00d8 1CB0     		add	sp, sp, #112
+ 285              		@ sp needed
+ 286 00da 10BD     		pop	{r4, pc}
+ 287              	.L26:
+ 288 00dc FFF7FEFF 		bl	Error_Handler
+ 289 00e0 B3E7     		b	.L18
+ 290              	.L27:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 6
+
+
+ 291 00e2 FFF7FEFF 		bl	Error_Handler
+ 292 00e6 B9E7     		b	.L19
+ 293              	.L28:
+ 294 00e8 FFF7FEFF 		bl	Error_Handler
+ 295 00ec BBE7     		b	.L20
+ 296              	.L29:
+ 297 00ee FFF7FEFF 		bl	Error_Handler
+ 298 00f2 C2E7     		b	.L21
+ 299              	.L30:
+ 300 00f4 FFF7FEFF 		bl	Error_Handler
+ 301 00f8 CEE7     		b	.L22
+ 302              	.L31:
+ 303 00fa FFF7FEFF 		bl	Error_Handler
+ 304 00fe D1E7     		b	.L23
+ 305              	.L32:
+ 306 0100 FFF7FEFF 		bl	Error_Handler
+ 307 0104 E5E7     		b	.L24
+ 308              	.L34:
+ 309 0106 00BF     		.align	2
+ 310              	.L33:
+ 311 0108 00000000 		.word	htim1
+ 312 010c 002C0140 		.word	1073818624
+ 314              		.section	.text.MX_TIM16_Init,"ax",%progbits
+ 315              		.align	1
+ 316              		.global	MX_TIM16_Init
+ 317              		.syntax unified
+ 318              		.thumb
+ 319              		.thumb_func
+ 321              	MX_TIM16_Init:
+ 322              		@ args = 0, pretend = 0, frame = 80
+ 323              		@ frame_needed = 0, uses_anonymous_args = 0
+ 324 0000 10B5     		push	{r4, lr}
+ 325 0002 94B0     		sub	sp, sp, #80
+ 326 0004 0024     		movs	r4, #0
+ 327 0006 0D94     		str	r4, [sp, #52]
+ 328 0008 0E94     		str	r4, [sp, #56]
+ 329 000a 0F94     		str	r4, [sp, #60]
+ 330 000c 1094     		str	r4, [sp, #64]
+ 331 000e 1194     		str	r4, [sp, #68]
+ 332 0010 1294     		str	r4, [sp, #72]
+ 333 0012 1394     		str	r4, [sp, #76]
+ 334 0014 3422     		movs	r2, #52
+ 335 0016 2146     		mov	r1, r4
+ 336 0018 6846     		mov	r0, sp
+ 337 001a FFF7FEFF 		bl	memset
+ 338 001e 2548     		ldr	r0, .L47
+ 339 0020 254B     		ldr	r3, .L47+4
+ 340 0022 0360     		str	r3, [r0]
+ 341 0024 4460     		str	r4, [r0, #4]
+ 342 0026 8460     		str	r4, [r0, #8]
+ 343 0028 4FF6FF73 		movw	r3, #65535
+ 344 002c C360     		str	r3, [r0, #12]
+ 345 002e 0461     		str	r4, [r0, #16]
+ 346 0030 4461     		str	r4, [r0, #20]
+ 347 0032 8461     		str	r4, [r0, #24]
+ 348 0034 FFF7FEFF 		bl	HAL_TIM_Base_Init
+ 349 0038 0028     		cmp	r0, #0
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 7
+
+
+ 350 003a 2BD1     		bne	.L42
+ 351              	.L36:
+ 352 003c 1D48     		ldr	r0, .L47
+ 353 003e FFF7FEFF 		bl	HAL_TIM_PWM_Init
+ 354 0042 50BB     		cbnz	r0, .L43
+ 355              	.L37:
+ 356 0044 0821     		movs	r1, #8
+ 357 0046 1B48     		ldr	r0, .L47
+ 358 0048 FFF7FEFF 		bl	HAL_TIM_OnePulse_Init
+ 359 004c 40BB     		cbnz	r0, .L44
+ 360              	.L38:
+ 361 004e 6023     		movs	r3, #96
+ 362 0050 0D93     		str	r3, [sp, #52]
+ 363 0052 0022     		movs	r2, #0
+ 364 0054 0E92     		str	r2, [sp, #56]
+ 365 0056 0F92     		str	r2, [sp, #60]
+ 366 0058 1092     		str	r2, [sp, #64]
+ 367 005a 1192     		str	r2, [sp, #68]
+ 368 005c 1292     		str	r2, [sp, #72]
+ 369 005e 1392     		str	r2, [sp, #76]
+ 370 0060 0DA9     		add	r1, sp, #52
+ 371 0062 1448     		ldr	r0, .L47
+ 372 0064 FFF7FEFF 		bl	HAL_TIM_PWM_ConfigChannel
+ 373 0068 E8B9     		cbnz	r0, .L45
+ 374              	.L39:
+ 375 006a 0023     		movs	r3, #0
+ 376 006c 0093     		str	r3, [sp]
+ 377 006e 0193     		str	r3, [sp, #4]
+ 378 0070 0293     		str	r3, [sp, #8]
+ 379 0072 0393     		str	r3, [sp, #12]
+ 380 0074 0493     		str	r3, [sp, #16]
+ 381 0076 4FF40052 		mov	r2, #8192
+ 382 007a 0592     		str	r2, [sp, #20]
+ 383 007c 0693     		str	r3, [sp, #24]
+ 384 007e 0C93     		str	r3, [sp, #48]
+ 385 0080 6946     		mov	r1, sp
+ 386 0082 0C48     		ldr	r0, .L47
+ 387 0084 FFF7FEFF 		bl	HAL_TIMEx_ConfigBreakDeadTime
+ 388 0088 80B9     		cbnz	r0, .L46
+ 389              	.L40:
+ 390 008a 0A48     		ldr	r0, .L47
+ 391 008c FFF7FEFF 		bl	HAL_TIM_MspPostInit
+ 392 0090 14B0     		add	sp, sp, #80
+ 393              		@ sp needed
+ 394 0092 10BD     		pop	{r4, pc}
+ 395              	.L42:
+ 396 0094 FFF7FEFF 		bl	Error_Handler
+ 397 0098 D0E7     		b	.L36
+ 398              	.L43:
+ 399 009a FFF7FEFF 		bl	Error_Handler
+ 400 009e D1E7     		b	.L37
+ 401              	.L44:
+ 402 00a0 FFF7FEFF 		bl	Error_Handler
+ 403 00a4 D3E7     		b	.L38
+ 404              	.L45:
+ 405 00a6 FFF7FEFF 		bl	Error_Handler
+ 406 00aa DEE7     		b	.L39
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 8
+
+
+ 407              	.L46:
+ 408 00ac FFF7FEFF 		bl	Error_Handler
+ 409 00b0 EBE7     		b	.L40
+ 410              	.L48:
+ 411 00b2 00BF     		.align	2
+ 412              	.L47:
+ 413 00b4 00000000 		.word	htim16
+ 414 00b8 00440140 		.word	1073824768
+ 416              		.section	.text.HAL_TIM_Base_MspDeInit,"ax",%progbits
+ 417              		.align	1
+ 418              		.global	HAL_TIM_Base_MspDeInit
+ 419              		.syntax unified
+ 420              		.thumb
+ 421              		.thumb_func
+ 423              	HAL_TIM_Base_MspDeInit:
+ 424              		@ args = 0, pretend = 0, frame = 0
+ 425              		@ frame_needed = 0, uses_anonymous_args = 0
+ 426              		@ link register save eliminated.
+ 427 0000 0368     		ldr	r3, [r0]
+ 428 0002 0A4A     		ldr	r2, .L54
+ 429 0004 9342     		cmp	r3, r2
+ 430 0006 03D0     		beq	.L52
+ 431 0008 094A     		ldr	r2, .L54+4
+ 432 000a 9342     		cmp	r3, r2
+ 433 000c 07D0     		beq	.L53
+ 434              	.L49:
+ 435 000e 7047     		bx	lr
+ 436              	.L52:
+ 437 0010 4FF0B042 		mov	r2, #1476395008
+ 438 0014 136E     		ldr	r3, [r2, #96]
+ 439 0016 23F40063 		bic	r3, r3, #2048
+ 440 001a 1366     		str	r3, [r2, #96]
+ 441 001c 7047     		bx	lr
+ 442              	.L53:
+ 443 001e 4FF0B042 		mov	r2, #1476395008
+ 444 0022 136E     		ldr	r3, [r2, #96]
+ 445 0024 23F40033 		bic	r3, r3, #131072
+ 446 0028 1366     		str	r3, [r2, #96]
+ 447 002a F0E7     		b	.L49
+ 448              	.L55:
+ 449              		.align	2
+ 450              	.L54:
+ 451 002c 002C0140 		.word	1073818624
+ 452 0030 00440140 		.word	1073824768
+ 454              		.global	htim16
+ 455              		.section	.bss.htim16,"aw",%nobits
+ 456              		.align	2
+ 459              	htim16:
+ 460 0000 00000000 		.space	76
+ 460      00000000 
+ 460      00000000 
+ 460      00000000 
+ 460      00000000 
+ 461              		.global	htim1
+ 462              		.section	.bss.htim1,"aw",%nobits
+ 463              		.align	2
+ 466              	htim1:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 9
+
+
+ 467 0000 00000000 		.space	76
+ 467      00000000 
+ 467      00000000 
+ 467      00000000 
+ 467      00000000 
+ 468              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tim.c
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:18     .text.HAL_TIM_Base_MspInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:24     .text.HAL_TIM_Base_MspInit:00000000 HAL_TIM_Base_MspInit
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:75     .text.HAL_TIM_Base_MspInit:00000068 $d
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:79     .text.HAL_TIM_MspPostInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:85     .text.HAL_TIM_MspPostInit:00000000 HAL_TIM_MspPostInit
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:168    .text.HAL_TIM_MspPostInit:000000b0 $d
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:173    .text.MX_TIM1_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:179    .text.MX_TIM1_Init:00000000 MX_TIM1_Init
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:311    .text.MX_TIM1_Init:00000108 $d
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:466    .bss.htim1:00000000 htim1
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:315    .text.MX_TIM16_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:321    .text.MX_TIM16_Init:00000000 MX_TIM16_Init
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:413    .text.MX_TIM16_Init:000000b4 $d
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:459    .bss.htim16:00000000 htim16
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:417    .text.HAL_TIM_Base_MspDeInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:423    .text.HAL_TIM_Base_MspDeInit:00000000 HAL_TIM_Base_MspDeInit
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:451    .text.HAL_TIM_Base_MspDeInit:0000002c $d
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:456    .bss.htim16:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccVSSmU1.s:463    .bss.htim1:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_GPIO_Init
+memset
+HAL_TIM_Base_Init
+HAL_TIM_ConfigClockSource
+HAL_TIM_PWM_Init
+HAL_TIMEx_MasterConfigSynchronization
+HAL_TIM_PWM_ConfigChannel
+HAL_TIMEx_ConfigBreakDeadTime
+Error_Handler
+HAL_TIM_OnePulse_Init

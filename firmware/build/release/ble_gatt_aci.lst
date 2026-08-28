@@ -1,0 +1,2847 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ble_gatt_aci.c"
+  16              		.text
+  17              		.section	.text.aci_gatt_init,"ax",%progbits
+  18              		.align	1
+  19              		.global	aci_gatt_init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	aci_gatt_init:
+  25              		@ args = 0, pretend = 0, frame = 32
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 30B5     		push	{r4, r5, lr}
+  28 0002 89B0     		sub	sp, sp, #36
+  29 0004 0024     		movs	r4, #0
+  30 0006 8DF80740 		strb	r4, [sp, #7]
+  31 000a 02AD     		add	r5, sp, #8
+  32 000c 1822     		movs	r2, #24
+  33 000e 2146     		mov	r1, r4
+  34 0010 2846     		mov	r0, r5
+  35 0012 FFF7FEFF 		bl	Osal_MemSet
+  36 0016 3F23     		movs	r3, #63
+  37 0018 ADF80830 		strh	r3, [sp, #8]	@ movhi
+  38 001c 40F20113 		movw	r3, #257
+  39 0020 ADF80A30 		strh	r3, [sp, #10]	@ movhi
+  40 0024 0DF10703 		add	r3, sp, #7
+  41 0028 0693     		str	r3, [sp, #24]
+  42 002a 0123     		movs	r3, #1
+  43 002c 0793     		str	r3, [sp, #28]
+  44 002e 2146     		mov	r1, r4
+  45 0030 2846     		mov	r0, r5
+  46 0032 FFF7FEFF 		bl	hci_send_req
+  47 0036 A042     		cmp	r0, r4
+  48 0038 03DB     		blt	.L3
+  49 003a 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+  50              	.L2:
+  51 003e 09B0     		add	sp, sp, #36
+  52              		@ sp needed
+  53 0040 30BD     		pop	{r4, r5, pc}
+  54              	.L3:
+  55 0042 FF20     		movs	r0, #255
+  56 0044 FBE7     		b	.L2
+  58              		.section	.text.aci_gatt_add_service,"ax",%progbits
+  59              		.align	1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 2
+
+
+  60              		.global	aci_gatt_add_service
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  65              	aci_gatt_add_service:
+  66              		@ args = 4, pretend = 0, frame = 288
+  67              		@ frame_needed = 0, uses_anonymous_args = 0
+  68 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+  69 0004 C9B0     		sub	sp, sp, #292
+  70 0006 0446     		mov	r4, r0
+  71 0008 0F46     		mov	r7, r1
+  72 000a 9046     		mov	r8, r2
+  73 000c 9946     		mov	r9, r3
+  74 000e 0128     		cmp	r0, #1
+  75 0010 13D0     		beq	.L9
+  76 0012 0228     		cmp	r0, #2
+  77 0014 0FD0     		beq	.L15
+  78 0016 0125     		movs	r5, #1
+  79              	.L6:
+  80 0018 02AE     		add	r6, sp, #8
+  81 001a 3544     		add	r5, r5, r6
+  82 001c 0322     		movs	r2, #3
+  83 001e 0021     		movs	r1, #0
+  84 0020 01A8     		add	r0, sp, #4
+  85 0022 FFF7FEFF 		bl	Osal_MemSet
+  86 0026 8DF80840 		strb	r4, [sp, #8]
+  87 002a 012C     		cmp	r4, #1
+  88 002c 07D0     		beq	.L11
+  89 002e 022C     		cmp	r4, #2
+  90 0030 36D1     		bne	.L12
+  91 0032 1024     		movs	r4, #16
+  92 0034 04E0     		b	.L7
+  93              	.L15:
+  94 0036 1125     		movs	r5, #17
+  95 0038 EEE7     		b	.L6
+  96              	.L9:
+  97 003a 0325     		movs	r5, #3
+  98 003c ECE7     		b	.L6
+  99              	.L11:
+ 100 003e 0224     		movs	r4, #2
+ 101              	.L7:
+ 102 0040 2246     		mov	r2, r4
+ 103 0042 3946     		mov	r1, r7
+ 104 0044 0DF10900 		add	r0, sp, #9
+ 105 0048 FFF7FEFF 		bl	Osal_MemCpy
+ 106 004c 85F80080 		strb	r8, [r5]
+ 107 0050 85F80190 		strb	r9, [r5, #1]
+ 108 0054 0334     		adds	r4, r4, #3
+ 109 0056 42AD     		add	r5, sp, #264
+ 110 0058 1822     		movs	r2, #24
+ 111 005a 0021     		movs	r1, #0
+ 112 005c 2846     		mov	r0, r5
+ 113 005e FFF7FEFF 		bl	Osal_MemSet
+ 114 0062 3F23     		movs	r3, #63
+ 115 0064 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 116 0068 4FF48173 		mov	r3, #258
+ 117 006c ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 3
+
+
+ 118 0070 02AB     		add	r3, sp, #8
+ 119 0072 4493     		str	r3, [sp, #272]
+ 120 0074 4594     		str	r4, [sp, #276]
+ 121 0076 01AB     		add	r3, sp, #4
+ 122 0078 4693     		str	r3, [sp, #280]
+ 123 007a 0323     		movs	r3, #3
+ 124 007c 4793     		str	r3, [sp, #284]
+ 125 007e 0021     		movs	r1, #0
+ 126 0080 2846     		mov	r0, r5
+ 127 0082 FFF7FEFF 		bl	hci_send_req
+ 128 0086 0028     		cmp	r0, #0
+ 129 0088 0CDB     		blt	.L13
+ 130 008a 01AB     		add	r3, sp, #4
+ 131 008c 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
+ 132 0090 18B9     		cbnz	r0, .L8
+ 133 0092 B3F80120 		ldrh	r2, [r3, #1]	@ unaligned
+ 134 0096 509B     		ldr	r3, [sp, #320]
+ 135 0098 1A80     		strh	r2, [r3]	@ movhi
+ 136              	.L8:
+ 137 009a 49B0     		add	sp, sp, #292
+ 138              		@ sp needed
+ 139 009c BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 140              	.L12:
+ 141 00a0 9720     		movs	r0, #151
+ 142 00a2 FAE7     		b	.L8
+ 143              	.L13:
+ 144 00a4 FF20     		movs	r0, #255
+ 145 00a6 F8E7     		b	.L8
+ 147              		.section	.text.aci_gatt_include_service,"ax",%progbits
+ 148              		.align	1
+ 149              		.global	aci_gatt_include_service
+ 150              		.syntax unified
+ 151              		.thumb
+ 152              		.thumb_func
+ 154              	aci_gatt_include_service:
+ 155              		@ args = 8, pretend = 0, frame = 288
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 158 0004 C9B0     		sub	sp, sp, #292
+ 159 0006 0746     		mov	r7, r0
+ 160 0008 8846     		mov	r8, r1
+ 161 000a 9146     		mov	r9, r2
+ 162 000c 1E46     		mov	r6, r3
+ 163 000e 0322     		movs	r2, #3
+ 164 0010 0021     		movs	r1, #0
+ 165 0012 01A8     		add	r0, sp, #4
+ 166 0014 FFF7FEFF 		bl	Osal_MemSet
+ 167 0018 022E     		cmp	r6, #2
+ 168 001a 34D0     		beq	.L22
+ 169 001c 0225     		movs	r5, #2
+ 170              	.L17:
+ 171 001e 02AC     		add	r4, sp, #8
+ 172 0020 ADF80870 		strh	r7, [sp, #8]	@ movhi
+ 173 0024 ADF80A80 		strh	r8, [sp, #10]	@ movhi
+ 174 0028 ADF80C90 		strh	r9, [sp, #12]	@ movhi
+ 175 002c 8DF80E60 		strb	r6, [sp, #14]
+ 176 0030 2A46     		mov	r2, r5
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 4
+
+
+ 177 0032 5099     		ldr	r1, [sp, #320]
+ 178 0034 0DF10F00 		add	r0, sp, #15
+ 179 0038 FFF7FEFF 		bl	Osal_MemCpy
+ 180 003c 0735     		adds	r5, r5, #7
+ 181 003e 42AE     		add	r6, sp, #264
+ 182 0040 1822     		movs	r2, #24
+ 183 0042 0021     		movs	r1, #0
+ 184 0044 3046     		mov	r0, r6
+ 185 0046 FFF7FEFF 		bl	Osal_MemSet
+ 186 004a 3F23     		movs	r3, #63
+ 187 004c ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 188 0050 40F20313 		movw	r3, #259
+ 189 0054 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 190 0058 4494     		str	r4, [sp, #272]
+ 191 005a 4595     		str	r5, [sp, #276]
+ 192 005c 01AB     		add	r3, sp, #4
+ 193 005e 4693     		str	r3, [sp, #280]
+ 194 0060 0323     		movs	r3, #3
+ 195 0062 4793     		str	r3, [sp, #284]
+ 196 0064 0021     		movs	r1, #0
+ 197 0066 3046     		mov	r0, r6
+ 198 0068 FFF7FEFF 		bl	hci_send_req
+ 199 006c 0028     		cmp	r0, #0
+ 200 006e 0CDB     		blt	.L20
+ 201 0070 01AB     		add	r3, sp, #4
+ 202 0072 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
+ 203 0076 18B9     		cbnz	r0, .L18
+ 204 0078 B3F80120 		ldrh	r2, [r3, #1]	@ unaligned
+ 205 007c 519B     		ldr	r3, [sp, #324]
+ 206 007e 1A80     		strh	r2, [r3]	@ movhi
+ 207              	.L18:
+ 208 0080 49B0     		add	sp, sp, #292
+ 209              		@ sp needed
+ 210 0082 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 211              	.L22:
+ 212 0086 1025     		movs	r5, #16
+ 213 0088 C9E7     		b	.L17
+ 214              	.L20:
+ 215 008a FF20     		movs	r0, #255
+ 216 008c F8E7     		b	.L18
+ 218              		.section	.text.aci_gatt_add_char,"ax",%progbits
+ 219              		.align	1
+ 220              		.global	aci_gatt_add_char
+ 221              		.syntax unified
+ 222              		.thumb
+ 223              		.thumb_func
+ 225              	aci_gatt_add_char:
+ 226              		@ args = 24, pretend = 0, frame = 288
+ 227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 228 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 229 0004 C9B0     		sub	sp, sp, #292
+ 230 0006 0746     		mov	r7, r0
+ 231 0008 0C46     		mov	r4, r1
+ 232 000a 9046     		mov	r8, r2
+ 233 000c 9946     		mov	r9, r3
+ 234 000e 0129     		cmp	r1, #1
+ 235 0010 15D0     		beq	.L27
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 5
+
+
+ 236 0012 0229     		cmp	r1, #2
+ 237 0014 11D0     		beq	.L33
+ 238 0016 0325     		movs	r5, #3
+ 239              	.L24:
+ 240 0018 02AE     		add	r6, sp, #8
+ 241 001a 3544     		add	r5, r5, r6
+ 242 001c 0322     		movs	r2, #3
+ 243 001e 0021     		movs	r1, #0
+ 244 0020 01A8     		add	r0, sp, #4
+ 245 0022 FFF7FEFF 		bl	Osal_MemSet
+ 246 0026 ADF80870 		strh	r7, [sp, #8]	@ movhi
+ 247 002a 8DF80A40 		strb	r4, [sp, #10]
+ 248 002e 012C     		cmp	r4, #1
+ 249 0030 07D0     		beq	.L29
+ 250 0032 022C     		cmp	r4, #2
+ 251 0034 43D1     		bne	.L30
+ 252 0036 1024     		movs	r4, #16
+ 253 0038 04E0     		b	.L25
+ 254              	.L33:
+ 255 003a 1325     		movs	r5, #19
+ 256 003c ECE7     		b	.L24
+ 257              	.L27:
+ 258 003e 0525     		movs	r5, #5
+ 259 0040 EAE7     		b	.L24
+ 260              	.L29:
+ 261 0042 0224     		movs	r4, #2
+ 262              	.L25:
+ 263 0044 2246     		mov	r2, r4
+ 264 0046 4146     		mov	r1, r8
+ 265 0048 0DF10B00 		add	r0, sp, #11
+ 266 004c FFF7FEFF 		bl	Osal_MemCpy
+ 267 0050 4B46     		mov	r3, r9
+ 268 0052 2B80     		strh	r3, [r5]	@ unaligned
+ 269 0054 9DF84031 		ldrb	r3, [sp, #320]	@ zero_extendqisi2
+ 270 0058 AB70     		strb	r3, [r5, #2]
+ 271 005a 9DF84431 		ldrb	r3, [sp, #324]	@ zero_extendqisi2
+ 272 005e EB70     		strb	r3, [r5, #3]
+ 273 0060 9DF84831 		ldrb	r3, [sp, #328]	@ zero_extendqisi2
+ 274 0064 2B71     		strb	r3, [r5, #4]
+ 275 0066 9DF84C31 		ldrb	r3, [sp, #332]	@ zero_extendqisi2
+ 276 006a 6B71     		strb	r3, [r5, #5]
+ 277 006c 9DF85031 		ldrb	r3, [sp, #336]	@ zero_extendqisi2
+ 278 0070 AB71     		strb	r3, [r5, #6]
+ 279 0072 0A34     		adds	r4, r4, #10
+ 280 0074 42AD     		add	r5, sp, #264
+ 281 0076 1822     		movs	r2, #24
+ 282 0078 0021     		movs	r1, #0
+ 283 007a 2846     		mov	r0, r5
+ 284 007c FFF7FEFF 		bl	Osal_MemSet
+ 285 0080 3F23     		movs	r3, #63
+ 286 0082 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 287 0086 4FF48273 		mov	r3, #260
+ 288 008a ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 289 008e 02AB     		add	r3, sp, #8
+ 290 0090 4493     		str	r3, [sp, #272]
+ 291 0092 4594     		str	r4, [sp, #276]
+ 292 0094 01AB     		add	r3, sp, #4
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 6
+
+
+ 293 0096 4693     		str	r3, [sp, #280]
+ 294 0098 0323     		movs	r3, #3
+ 295 009a 4793     		str	r3, [sp, #284]
+ 296 009c 0021     		movs	r1, #0
+ 297 009e 2846     		mov	r0, r5
+ 298 00a0 FFF7FEFF 		bl	hci_send_req
+ 299 00a4 0028     		cmp	r0, #0
+ 300 00a6 0CDB     		blt	.L31
+ 301 00a8 01AB     		add	r3, sp, #4
+ 302 00aa 9DF80400 		ldrb	r0, [sp, #4]	@ zero_extendqisi2
+ 303 00ae 18B9     		cbnz	r0, .L26
+ 304 00b0 B3F80120 		ldrh	r2, [r3, #1]	@ unaligned
+ 305 00b4 559B     		ldr	r3, [sp, #340]
+ 306 00b6 1A80     		strh	r2, [r3]	@ movhi
+ 307              	.L26:
+ 308 00b8 49B0     		add	sp, sp, #292
+ 309              		@ sp needed
+ 310 00ba BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 311              	.L30:
+ 312 00be 9720     		movs	r0, #151
+ 313 00c0 FAE7     		b	.L26
+ 314              	.L31:
+ 315 00c2 FF20     		movs	r0, #255
+ 316 00c4 F8E7     		b	.L26
+ 318              		.section	.text.aci_gatt_add_char_desc,"ax",%progbits
+ 319              		.align	1
+ 320              		.global	aci_gatt_add_char_desc
+ 321              		.syntax unified
+ 322              		.thumb
+ 323              		.thumb_func
+ 325              	aci_gatt_add_char_desc:
+ 326              		@ args = 36, pretend = 0, frame = 296
+ 327              		@ frame_needed = 0, uses_anonymous_args = 0
+ 328 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 329 0004 CBB0     		sub	sp, sp, #300
+ 330 0006 8246     		mov	r10, r0
+ 331 0008 8B46     		mov	fp, r1
+ 332 000a 1446     		mov	r4, r2
+ 333 000c 0193     		str	r3, [sp, #4]
+ 334 000e 9DF85451 		ldrb	r5, [sp, #340]	@ zero_extendqisi2
+ 335 0012 012A     		cmp	r2, #1
+ 336 0014 1FD0     		beq	.L39
+ 337 0016 022A     		cmp	r2, #2
+ 338 0018 18D0     		beq	.L46
+ 339 001a 0DF11509 		add	r9, sp, #21
+ 340              	.L36:
+ 341 001e 022C     		cmp	r4, #2
+ 342 0020 17D0     		beq	.L47
+ 343 0022 0727     		movs	r7, #7
+ 344              	.L35:
+ 345 0024 2F44     		add	r7, r7, r5
+ 346 0026 04AE     		add	r6, sp, #16
+ 347 0028 06EB0708 		add	r8, r6, r7
+ 348 002c 0322     		movs	r2, #3
+ 349 002e 0021     		movs	r1, #0
+ 350 0030 03A8     		add	r0, sp, #12
+ 351 0032 FFF7FEFF 		bl	Osal_MemSet
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 7
+
+
+ 352 0036 A6F800A0 		strh	r10, [r6]	@ movhi
+ 353 003a A6F802B0 		strh	fp, [r6, #2]	@ movhi
+ 354 003e 3471     		strb	r4, [r6, #4]
+ 355 0040 012C     		cmp	r4, #1
+ 356 0042 0CD0     		beq	.L42
+ 357 0044 022C     		cmp	r4, #2
+ 358 0046 58D1     		bne	.L43
+ 359 0048 1024     		movs	r4, #16
+ 360 004a 09E0     		b	.L37
+ 361              	.L46:
+ 362 004c 0DF12509 		add	r9, sp, #37
+ 363 0050 E5E7     		b	.L36
+ 364              	.L47:
+ 365 0052 1727     		movs	r7, #23
+ 366 0054 E6E7     		b	.L35
+ 367              	.L39:
+ 368 0056 0DF11709 		add	r9, sp, #23
+ 369 005a 0927     		movs	r7, #9
+ 370 005c E2E7     		b	.L35
+ 371              	.L42:
+ 372 005e 0224     		movs	r4, #2
+ 373              	.L37:
+ 374 0060 2246     		mov	r2, r4
+ 375 0062 0199     		ldr	r1, [sp, #4]
+ 376 0064 0DF11500 		add	r0, sp, #21
+ 377 0068 FFF7FEFF 		bl	Osal_MemCpy
+ 378 006c 9DF85031 		ldrb	r3, [sp, #336]	@ zero_extendqisi2
+ 379 0070 89F80030 		strb	r3, [r9]
+ 380 0074 89F80150 		strb	r5, [r9, #1]
+ 381 0078 0734     		adds	r4, r4, #7
+ 382 007a 2A46     		mov	r2, r5
+ 383 007c 5699     		ldr	r1, [sp, #344]
+ 384 007e 09F10200 		add	r0, r9, #2
+ 385 0082 FFF7FEFF 		bl	Osal_MemCpy
+ 386 0086 2544     		add	r5, r5, r4
+ 387 0088 9DF85C31 		ldrb	r3, [sp, #348]	@ zero_extendqisi2
+ 388 008c F355     		strb	r3, [r6, r7]
+ 389 008e 9DF86031 		ldrb	r3, [sp, #352]	@ zero_extendqisi2
+ 390 0092 88F80130 		strb	r3, [r8, #1]
+ 391 0096 9DF86431 		ldrb	r3, [sp, #356]	@ zero_extendqisi2
+ 392 009a 88F80230 		strb	r3, [r8, #2]
+ 393 009e 9DF86831 		ldrb	r3, [sp, #360]	@ zero_extendqisi2
+ 394 00a2 88F80330 		strb	r3, [r8, #3]
+ 395 00a6 9DF86C31 		ldrb	r3, [sp, #364]	@ zero_extendqisi2
+ 396 00aa 88F80430 		strb	r3, [r8, #4]
+ 397 00ae 0535     		adds	r5, r5, #5
+ 398 00b0 44AC     		add	r4, sp, #272
+ 399 00b2 1822     		movs	r2, #24
+ 400 00b4 0021     		movs	r1, #0
+ 401 00b6 2046     		mov	r0, r4
+ 402 00b8 FFF7FEFF 		bl	Osal_MemSet
+ 403 00bc 3F23     		movs	r3, #63
+ 404 00be ADF81031 		strh	r3, [sp, #272]	@ movhi
+ 405 00c2 40F20513 		movw	r3, #261
+ 406 00c6 ADF81231 		strh	r3, [sp, #274]	@ movhi
+ 407 00ca 04AB     		add	r3, sp, #16
+ 408 00cc 4693     		str	r3, [sp, #280]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 8
+
+
+ 409 00ce 4795     		str	r5, [sp, #284]
+ 410 00d0 03AB     		add	r3, sp, #12
+ 411 00d2 4893     		str	r3, [sp, #288]
+ 412 00d4 0323     		movs	r3, #3
+ 413 00d6 4993     		str	r3, [sp, #292]
+ 414 00d8 0021     		movs	r1, #0
+ 415 00da 2046     		mov	r0, r4
+ 416 00dc FFF7FEFF 		bl	hci_send_req
+ 417 00e0 0028     		cmp	r0, #0
+ 418 00e2 0CDB     		blt	.L44
+ 419 00e4 03AB     		add	r3, sp, #12
+ 420 00e6 9DF80C00 		ldrb	r0, [sp, #12]	@ zero_extendqisi2
+ 421 00ea 18B9     		cbnz	r0, .L38
+ 422 00ec B3F80120 		ldrh	r2, [r3, #1]	@ unaligned
+ 423 00f0 5C9B     		ldr	r3, [sp, #368]
+ 424 00f2 1A80     		strh	r2, [r3]	@ movhi
+ 425              	.L38:
+ 426 00f4 4BB0     		add	sp, sp, #300
+ 427              		@ sp needed
+ 428 00f6 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 429              	.L43:
+ 430 00fa 9720     		movs	r0, #151
+ 431 00fc FAE7     		b	.L38
+ 432              	.L44:
+ 433 00fe FF20     		movs	r0, #255
+ 434 0100 F8E7     		b	.L38
+ 436              		.section	.text.aci_gatt_update_char_value,"ax",%progbits
+ 437              		.align	1
+ 438              		.global	aci_gatt_update_char_value
+ 439              		.syntax unified
+ 440              		.thumb
+ 441              		.thumb_func
+ 443              	aci_gatt_update_char_value:
+ 444              		@ args = 4, pretend = 0, frame = 288
+ 445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 446 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 447 0004 C8B0     		sub	sp, sp, #288
+ 448 0006 1C46     		mov	r4, r3
+ 449 0008 0DF10708 		add	r8, sp, #7
+ 450 000c 0026     		movs	r6, #0
+ 451 000e 8DF80760 		strb	r6, [sp, #7]
+ 452 0012 02AD     		add	r5, sp, #8
+ 453 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 454 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 455 001c 8DF80C20 		strb	r2, [sp, #12]
+ 456 0020 8DF80D30 		strb	r3, [sp, #13]
+ 457 0024 1A46     		mov	r2, r3
+ 458 0026 4E99     		ldr	r1, [sp, #312]
+ 459 0028 0DF10E00 		add	r0, sp, #14
+ 460 002c FFF7FEFF 		bl	Osal_MemCpy
+ 461 0030 0634     		adds	r4, r4, #6
+ 462 0032 42AF     		add	r7, sp, #264
+ 463 0034 1822     		movs	r2, #24
+ 464 0036 3146     		mov	r1, r6
+ 465 0038 3846     		mov	r0, r7
+ 466 003a FFF7FEFF 		bl	Osal_MemSet
+ 467 003e 3F23     		movs	r3, #63
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 9
+
+
+ 468 0040 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 469 0044 4FF48373 		mov	r3, #262
+ 470 0048 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 471 004c 4495     		str	r5, [sp, #272]
+ 472 004e 4594     		str	r4, [sp, #276]
+ 473 0050 CDF81881 		str	r8, [sp, #280]
+ 474 0054 0123     		movs	r3, #1
+ 475 0056 4793     		str	r3, [sp, #284]
+ 476 0058 3146     		mov	r1, r6
+ 477 005a 3846     		mov	r0, r7
+ 478 005c FFF7FEFF 		bl	hci_send_req
+ 479 0060 B042     		cmp	r0, r6
+ 480 0062 04DB     		blt	.L50
+ 481 0064 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 482              	.L49:
+ 483 0068 48B0     		add	sp, sp, #288
+ 484              		@ sp needed
+ 485 006a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 486              	.L50:
+ 487 006e FF20     		movs	r0, #255
+ 488 0070 FAE7     		b	.L49
+ 490              		.section	.text.aci_gatt_del_char,"ax",%progbits
+ 491              		.align	1
+ 492              		.global	aci_gatt_del_char
+ 493              		.syntax unified
+ 494              		.thumb
+ 495              		.thumb_func
+ 497              	aci_gatt_del_char:
+ 498              		@ args = 0, pretend = 0, frame = 288
+ 499              		@ frame_needed = 0, uses_anonymous_args = 0
+ 500 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 501 0002 C9B0     		sub	sp, sp, #292
+ 502 0004 0DF10707 		add	r7, sp, #7
+ 503 0008 0024     		movs	r4, #0
+ 504 000a 8DF80740 		strb	r4, [sp, #7]
+ 505 000e 02AD     		add	r5, sp, #8
+ 506 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 507 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 508 0018 42AE     		add	r6, sp, #264
+ 509 001a 1822     		movs	r2, #24
+ 510 001c 2146     		mov	r1, r4
+ 511 001e 3046     		mov	r0, r6
+ 512 0020 FFF7FEFF 		bl	Osal_MemSet
+ 513 0024 3F23     		movs	r3, #63
+ 514 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 515 002a 40F20713 		movw	r3, #263
+ 516 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 517 0032 4495     		str	r5, [sp, #272]
+ 518 0034 0423     		movs	r3, #4
+ 519 0036 4593     		str	r3, [sp, #276]
+ 520 0038 4697     		str	r7, [sp, #280]
+ 521 003a 0123     		movs	r3, #1
+ 522 003c 4793     		str	r3, [sp, #284]
+ 523 003e 2146     		mov	r1, r4
+ 524 0040 3046     		mov	r0, r6
+ 525 0042 FFF7FEFF 		bl	hci_send_req
+ 526 0046 A042     		cmp	r0, r4
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 10
+
+
+ 527 0048 02DB     		blt	.L54
+ 528 004a 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 529              	.L53:
+ 530 004c 49B0     		add	sp, sp, #292
+ 531              		@ sp needed
+ 532 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 533              	.L54:
+ 534 0050 FF20     		movs	r0, #255
+ 535 0052 FBE7     		b	.L53
+ 537              		.section	.text.aci_gatt_del_service,"ax",%progbits
+ 538              		.align	1
+ 539              		.global	aci_gatt_del_service
+ 540              		.syntax unified
+ 541              		.thumb
+ 542              		.thumb_func
+ 544              	aci_gatt_del_service:
+ 545              		@ args = 0, pretend = 0, frame = 288
+ 546              		@ frame_needed = 0, uses_anonymous_args = 0
+ 547 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 548 0002 C9B0     		sub	sp, sp, #292
+ 549 0004 0DF10706 		add	r6, sp, #7
+ 550 0008 0024     		movs	r4, #0
+ 551 000a 8DF80740 		strb	r4, [sp, #7]
+ 552 000e 02AF     		add	r7, sp, #8
+ 553 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 554 0014 42AD     		add	r5, sp, #264
+ 555 0016 1822     		movs	r2, #24
+ 556 0018 2146     		mov	r1, r4
+ 557 001a 2846     		mov	r0, r5
+ 558 001c FFF7FEFF 		bl	Osal_MemSet
+ 559 0020 3F23     		movs	r3, #63
+ 560 0022 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 561 0026 4FF48473 		mov	r3, #264
+ 562 002a ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 563 002e 4497     		str	r7, [sp, #272]
+ 564 0030 0223     		movs	r3, #2
+ 565 0032 4593     		str	r3, [sp, #276]
+ 566 0034 4696     		str	r6, [sp, #280]
+ 567 0036 0123     		movs	r3, #1
+ 568 0038 4793     		str	r3, [sp, #284]
+ 569 003a 2146     		mov	r1, r4
+ 570 003c 2846     		mov	r0, r5
+ 571 003e FFF7FEFF 		bl	hci_send_req
+ 572 0042 A042     		cmp	r0, r4
+ 573 0044 02DB     		blt	.L58
+ 574 0046 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 575              	.L57:
+ 576 0048 49B0     		add	sp, sp, #292
+ 577              		@ sp needed
+ 578 004a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 579              	.L58:
+ 580 004c FF20     		movs	r0, #255
+ 581 004e FBE7     		b	.L57
+ 583              		.section	.text.aci_gatt_del_include_service,"ax",%progbits
+ 584              		.align	1
+ 585              		.global	aci_gatt_del_include_service
+ 586              		.syntax unified
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 11
+
+
+ 587              		.thumb
+ 588              		.thumb_func
+ 590              	aci_gatt_del_include_service:
+ 591              		@ args = 0, pretend = 0, frame = 288
+ 592              		@ frame_needed = 0, uses_anonymous_args = 0
+ 593 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 594 0002 C9B0     		sub	sp, sp, #292
+ 595 0004 0DF10707 		add	r7, sp, #7
+ 596 0008 0024     		movs	r4, #0
+ 597 000a 8DF80740 		strb	r4, [sp, #7]
+ 598 000e 02AD     		add	r5, sp, #8
+ 599 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 600 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 601 0018 42AE     		add	r6, sp, #264
+ 602 001a 1822     		movs	r2, #24
+ 603 001c 2146     		mov	r1, r4
+ 604 001e 3046     		mov	r0, r6
+ 605 0020 FFF7FEFF 		bl	Osal_MemSet
+ 606 0024 3F23     		movs	r3, #63
+ 607 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 608 002a 40F20913 		movw	r3, #265
+ 609 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 610 0032 4495     		str	r5, [sp, #272]
+ 611 0034 0423     		movs	r3, #4
+ 612 0036 4593     		str	r3, [sp, #276]
+ 613 0038 4697     		str	r7, [sp, #280]
+ 614 003a 0123     		movs	r3, #1
+ 615 003c 4793     		str	r3, [sp, #284]
+ 616 003e 2146     		mov	r1, r4
+ 617 0040 3046     		mov	r0, r6
+ 618 0042 FFF7FEFF 		bl	hci_send_req
+ 619 0046 A042     		cmp	r0, r4
+ 620 0048 02DB     		blt	.L62
+ 621 004a 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 622              	.L61:
+ 623 004c 49B0     		add	sp, sp, #292
+ 624              		@ sp needed
+ 625 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 626              	.L62:
+ 627 0050 FF20     		movs	r0, #255
+ 628 0052 FBE7     		b	.L61
+ 630              		.section	.text.aci_gatt_set_event_mask,"ax",%progbits
+ 631              		.align	1
+ 632              		.global	aci_gatt_set_event_mask
+ 633              		.syntax unified
+ 634              		.thumb
+ 635              		.thumb_func
+ 637              	aci_gatt_set_event_mask:
+ 638              		@ args = 0, pretend = 0, frame = 288
+ 639              		@ frame_needed = 0, uses_anonymous_args = 0
+ 640 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 641 0002 C9B0     		sub	sp, sp, #292
+ 642 0004 0DF10706 		add	r6, sp, #7
+ 643 0008 0024     		movs	r4, #0
+ 644 000a 8DF80740 		strb	r4, [sp, #7]
+ 645 000e 02AF     		add	r7, sp, #8
+ 646 0010 0290     		str	r0, [sp, #8]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 12
+
+
+ 647 0012 42AD     		add	r5, sp, #264
+ 648 0014 1822     		movs	r2, #24
+ 649 0016 2146     		mov	r1, r4
+ 650 0018 2846     		mov	r0, r5
+ 651 001a FFF7FEFF 		bl	Osal_MemSet
+ 652 001e 3F23     		movs	r3, #63
+ 653 0020 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 654 0024 4FF48573 		mov	r3, #266
+ 655 0028 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 656 002c 4497     		str	r7, [sp, #272]
+ 657 002e 0423     		movs	r3, #4
+ 658 0030 4593     		str	r3, [sp, #276]
+ 659 0032 4696     		str	r6, [sp, #280]
+ 660 0034 0123     		movs	r3, #1
+ 661 0036 4793     		str	r3, [sp, #284]
+ 662 0038 2146     		mov	r1, r4
+ 663 003a 2846     		mov	r0, r5
+ 664 003c FFF7FEFF 		bl	hci_send_req
+ 665 0040 A042     		cmp	r0, r4
+ 666 0042 02DB     		blt	.L66
+ 667 0044 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 668              	.L65:
+ 669 0046 49B0     		add	sp, sp, #292
+ 670              		@ sp needed
+ 671 0048 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 672              	.L66:
+ 673 004a FF20     		movs	r0, #255
+ 674 004c FBE7     		b	.L65
+ 676              		.section	.text.aci_gatt_exchange_config,"ax",%progbits
+ 677              		.align	1
+ 678              		.global	aci_gatt_exchange_config
+ 679              		.syntax unified
+ 680              		.thumb
+ 681              		.thumb_func
+ 683              	aci_gatt_exchange_config:
+ 684              		@ args = 0, pretend = 0, frame = 288
+ 685              		@ frame_needed = 0, uses_anonymous_args = 0
+ 686 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 687 0002 C9B0     		sub	sp, sp, #292
+ 688 0004 0DF10706 		add	r6, sp, #7
+ 689 0008 0024     		movs	r4, #0
+ 690 000a 8DF80740 		strb	r4, [sp, #7]
+ 691 000e 02AF     		add	r7, sp, #8
+ 692 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 693 0014 42AD     		add	r5, sp, #264
+ 694 0016 1822     		movs	r2, #24
+ 695 0018 2146     		mov	r1, r4
+ 696 001a 2846     		mov	r0, r5
+ 697 001c FFF7FEFF 		bl	Osal_MemSet
+ 698 0020 3F23     		movs	r3, #63
+ 699 0022 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 700 0026 40F20B13 		movw	r3, #267
+ 701 002a ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 702 002e 0F23     		movs	r3, #15
+ 703 0030 4393     		str	r3, [sp, #268]
+ 704 0032 4497     		str	r7, [sp, #272]
+ 705 0034 0223     		movs	r3, #2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 13
+
+
+ 706 0036 4593     		str	r3, [sp, #276]
+ 707 0038 4696     		str	r6, [sp, #280]
+ 708 003a 0123     		movs	r3, #1
+ 709 003c 4793     		str	r3, [sp, #284]
+ 710 003e 2146     		mov	r1, r4
+ 711 0040 2846     		mov	r0, r5
+ 712 0042 FFF7FEFF 		bl	hci_send_req
+ 713 0046 A042     		cmp	r0, r4
+ 714 0048 02DB     		blt	.L70
+ 715 004a 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 716              	.L69:
+ 717 004c 49B0     		add	sp, sp, #292
+ 718              		@ sp needed
+ 719 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 720              	.L70:
+ 721 0050 FF20     		movs	r0, #255
+ 722 0052 FBE7     		b	.L69
+ 724              		.section	.text.aci_att_find_info_req,"ax",%progbits
+ 725              		.align	1
+ 726              		.global	aci_att_find_info_req
+ 727              		.syntax unified
+ 728              		.thumb
+ 729              		.thumb_func
+ 731              	aci_att_find_info_req:
+ 732              		@ args = 0, pretend = 0, frame = 288
+ 733              		@ frame_needed = 0, uses_anonymous_args = 0
+ 734 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 735 0002 C9B0     		sub	sp, sp, #292
+ 736 0004 0DF10707 		add	r7, sp, #7
+ 737 0008 0025     		movs	r5, #0
+ 738 000a 8DF80750 		strb	r5, [sp, #7]
+ 739 000e 02AC     		add	r4, sp, #8
+ 740 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 741 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 742 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 743 001c 42AE     		add	r6, sp, #264
+ 744 001e 1822     		movs	r2, #24
+ 745 0020 2946     		mov	r1, r5
+ 746 0022 3046     		mov	r0, r6
+ 747 0024 FFF7FEFF 		bl	Osal_MemSet
+ 748 0028 3F23     		movs	r3, #63
+ 749 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 750 002e 4FF48673 		mov	r3, #268
+ 751 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 752 0036 0F23     		movs	r3, #15
+ 753 0038 4393     		str	r3, [sp, #268]
+ 754 003a 4494     		str	r4, [sp, #272]
+ 755 003c 0623     		movs	r3, #6
+ 756 003e 4593     		str	r3, [sp, #276]
+ 757 0040 4697     		str	r7, [sp, #280]
+ 758 0042 0123     		movs	r3, #1
+ 759 0044 4793     		str	r3, [sp, #284]
+ 760 0046 2946     		mov	r1, r5
+ 761 0048 3046     		mov	r0, r6
+ 762 004a FFF7FEFF 		bl	hci_send_req
+ 763 004e A842     		cmp	r0, r5
+ 764 0050 02DB     		blt	.L74
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 14
+
+
+ 765 0052 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 766              	.L73:
+ 767 0054 49B0     		add	sp, sp, #292
+ 768              		@ sp needed
+ 769 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 770              	.L74:
+ 771 0058 FF20     		movs	r0, #255
+ 772 005a FBE7     		b	.L73
+ 774              		.section	.text.aci_att_find_by_type_value_req,"ax",%progbits
+ 775              		.align	1
+ 776              		.global	aci_att_find_by_type_value_req
+ 777              		.syntax unified
+ 778              		.thumb
+ 779              		.thumb_func
+ 781              	aci_att_find_by_type_value_req:
+ 782              		@ args = 8, pretend = 0, frame = 288
+ 783              		@ frame_needed = 0, uses_anonymous_args = 0
+ 784 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 785 0004 C8B0     		sub	sp, sp, #288
+ 786 0006 9DF83851 		ldrb	r5, [sp, #312]	@ zero_extendqisi2
+ 787 000a 0DF10708 		add	r8, sp, #7
+ 788 000e 0026     		movs	r6, #0
+ 789 0010 8DF80760 		strb	r6, [sp, #7]
+ 790 0014 02AC     		add	r4, sp, #8
+ 791 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 792 001a ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 793 001e ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 794 0022 ADF80E30 		strh	r3, [sp, #14]	@ movhi
+ 795 0026 8DF81050 		strb	r5, [sp, #16]
+ 796 002a 2A46     		mov	r2, r5
+ 797 002c 4F99     		ldr	r1, [sp, #316]
+ 798 002e 0DF11100 		add	r0, sp, #17
+ 799 0032 FFF7FEFF 		bl	Osal_MemCpy
+ 800 0036 0935     		adds	r5, r5, #9
+ 801 0038 42AF     		add	r7, sp, #264
+ 802 003a 1822     		movs	r2, #24
+ 803 003c 3146     		mov	r1, r6
+ 804 003e 3846     		mov	r0, r7
+ 805 0040 FFF7FEFF 		bl	Osal_MemSet
+ 806 0044 3F23     		movs	r3, #63
+ 807 0046 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 808 004a 40F20D13 		movw	r3, #269
+ 809 004e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 810 0052 0F23     		movs	r3, #15
+ 811 0054 4393     		str	r3, [sp, #268]
+ 812 0056 4494     		str	r4, [sp, #272]
+ 813 0058 4595     		str	r5, [sp, #276]
+ 814 005a CDF81881 		str	r8, [sp, #280]
+ 815 005e 0123     		movs	r3, #1
+ 816 0060 4793     		str	r3, [sp, #284]
+ 817 0062 3146     		mov	r1, r6
+ 818 0064 3846     		mov	r0, r7
+ 819 0066 FFF7FEFF 		bl	hci_send_req
+ 820 006a B042     		cmp	r0, r6
+ 821 006c 04DB     		blt	.L78
+ 822 006e 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 823              	.L77:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 15
+
+
+ 824 0072 48B0     		add	sp, sp, #288
+ 825              		@ sp needed
+ 826 0074 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 827              	.L78:
+ 828 0078 FF20     		movs	r0, #255
+ 829 007a FAE7     		b	.L77
+ 831              		.section	.text.aci_att_read_by_type_req,"ax",%progbits
+ 832              		.align	1
+ 833              		.global	aci_att_read_by_type_req
+ 834              		.syntax unified
+ 835              		.thumb
+ 836              		.thumb_func
+ 838              	aci_att_read_by_type_req:
+ 839              		@ args = 4, pretend = 0, frame = 288
+ 840              		@ frame_needed = 0, uses_anonymous_args = 0
+ 841 0000 70B5     		push	{r4, r5, r6, lr}
+ 842 0002 C8B0     		sub	sp, sp, #288
+ 843 0004 0025     		movs	r5, #0
+ 844 0006 8DF80750 		strb	r5, [sp, #7]
+ 845 000a 022B     		cmp	r3, #2
+ 846 000c 30D0     		beq	.L86
+ 847 000e 0225     		movs	r5, #2
+ 848              	.L81:
+ 849 0010 02AC     		add	r4, sp, #8
+ 850 0012 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 851 0016 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 852 001a ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 853 001e 8DF80E30 		strb	r3, [sp, #14]
+ 854 0022 2A46     		mov	r2, r5
+ 855 0024 4C99     		ldr	r1, [sp, #304]
+ 856 0026 0DF10F00 		add	r0, sp, #15
+ 857 002a FFF7FEFF 		bl	Osal_MemCpy
+ 858 002e 0735     		adds	r5, r5, #7
+ 859 0030 42AE     		add	r6, sp, #264
+ 860 0032 1822     		movs	r2, #24
+ 861 0034 0021     		movs	r1, #0
+ 862 0036 3046     		mov	r0, r6
+ 863 0038 FFF7FEFF 		bl	Osal_MemSet
+ 864 003c 3F23     		movs	r3, #63
+ 865 003e ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 866 0042 4FF48773 		mov	r3, #270
+ 867 0046 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 868 004a 0F23     		movs	r3, #15
+ 869 004c 4393     		str	r3, [sp, #268]
+ 870 004e 4494     		str	r4, [sp, #272]
+ 871 0050 4595     		str	r5, [sp, #276]
+ 872 0052 0DF10703 		add	r3, sp, #7
+ 873 0056 4693     		str	r3, [sp, #280]
+ 874 0058 0123     		movs	r3, #1
+ 875 005a 4793     		str	r3, [sp, #284]
+ 876 005c 0021     		movs	r1, #0
+ 877 005e 3046     		mov	r0, r6
+ 878 0060 FFF7FEFF 		bl	hci_send_req
+ 879 0064 0028     		cmp	r0, #0
+ 880 0066 05DB     		blt	.L84
+ 881 0068 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 882              	.L82:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 16
+
+
+ 883 006c 48B0     		add	sp, sp, #288
+ 884              		@ sp needed
+ 885 006e 70BD     		pop	{r4, r5, r6, pc}
+ 886              	.L86:
+ 887 0070 1025     		movs	r5, #16
+ 888 0072 CDE7     		b	.L81
+ 889              	.L84:
+ 890 0074 FF20     		movs	r0, #255
+ 891 0076 F9E7     		b	.L82
+ 893              		.section	.text.aci_att_read_by_group_type_req,"ax",%progbits
+ 894              		.align	1
+ 895              		.global	aci_att_read_by_group_type_req
+ 896              		.syntax unified
+ 897              		.thumb
+ 898              		.thumb_func
+ 900              	aci_att_read_by_group_type_req:
+ 901              		@ args = 4, pretend = 0, frame = 288
+ 902              		@ frame_needed = 0, uses_anonymous_args = 0
+ 903 0000 70B5     		push	{r4, r5, r6, lr}
+ 904 0002 C8B0     		sub	sp, sp, #288
+ 905 0004 0025     		movs	r5, #0
+ 906 0006 8DF80750 		strb	r5, [sp, #7]
+ 907 000a 022B     		cmp	r3, #2
+ 908 000c 30D0     		beq	.L93
+ 909 000e 0225     		movs	r5, #2
+ 910              	.L88:
+ 911 0010 02AC     		add	r4, sp, #8
+ 912 0012 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 913 0016 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 914 001a ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 915 001e 8DF80E30 		strb	r3, [sp, #14]
+ 916 0022 2A46     		mov	r2, r5
+ 917 0024 4C99     		ldr	r1, [sp, #304]
+ 918 0026 0DF10F00 		add	r0, sp, #15
+ 919 002a FFF7FEFF 		bl	Osal_MemCpy
+ 920 002e 0735     		adds	r5, r5, #7
+ 921 0030 42AE     		add	r6, sp, #264
+ 922 0032 1822     		movs	r2, #24
+ 923 0034 0021     		movs	r1, #0
+ 924 0036 3046     		mov	r0, r6
+ 925 0038 FFF7FEFF 		bl	Osal_MemSet
+ 926 003c 3F23     		movs	r3, #63
+ 927 003e ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 928 0042 40F20F13 		movw	r3, #271
+ 929 0046 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 930 004a 0F23     		movs	r3, #15
+ 931 004c 4393     		str	r3, [sp, #268]
+ 932 004e 4494     		str	r4, [sp, #272]
+ 933 0050 4595     		str	r5, [sp, #276]
+ 934 0052 0DF10703 		add	r3, sp, #7
+ 935 0056 4693     		str	r3, [sp, #280]
+ 936 0058 0123     		movs	r3, #1
+ 937 005a 4793     		str	r3, [sp, #284]
+ 938 005c 0021     		movs	r1, #0
+ 939 005e 3046     		mov	r0, r6
+ 940 0060 FFF7FEFF 		bl	hci_send_req
+ 941 0064 0028     		cmp	r0, #0
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 17
+
+
+ 942 0066 05DB     		blt	.L91
+ 943 0068 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 944              	.L89:
+ 945 006c 48B0     		add	sp, sp, #288
+ 946              		@ sp needed
+ 947 006e 70BD     		pop	{r4, r5, r6, pc}
+ 948              	.L93:
+ 949 0070 1025     		movs	r5, #16
+ 950 0072 CDE7     		b	.L88
+ 951              	.L91:
+ 952 0074 FF20     		movs	r0, #255
+ 953 0076 F9E7     		b	.L89
+ 955              		.section	.text.aci_att_prepare_write_req,"ax",%progbits
+ 956              		.align	1
+ 957              		.global	aci_att_prepare_write_req
+ 958              		.syntax unified
+ 959              		.thumb
+ 960              		.thumb_func
+ 962              	aci_att_prepare_write_req:
+ 963              		@ args = 4, pretend = 0, frame = 288
+ 964              		@ frame_needed = 0, uses_anonymous_args = 0
+ 965 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 966 0004 C8B0     		sub	sp, sp, #288
+ 967 0006 1C46     		mov	r4, r3
+ 968 0008 0DF10708 		add	r8, sp, #7
+ 969 000c 0026     		movs	r6, #0
+ 970 000e 8DF80760 		strb	r6, [sp, #7]
+ 971 0012 02AD     		add	r5, sp, #8
+ 972 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 973 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 974 001c ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 975 0020 8DF80E30 		strb	r3, [sp, #14]
+ 976 0024 1A46     		mov	r2, r3
+ 977 0026 4E99     		ldr	r1, [sp, #312]
+ 978 0028 0DF10F00 		add	r0, sp, #15
+ 979 002c FFF7FEFF 		bl	Osal_MemCpy
+ 980 0030 0734     		adds	r4, r4, #7
+ 981 0032 42AF     		add	r7, sp, #264
+ 982 0034 1822     		movs	r2, #24
+ 983 0036 3146     		mov	r1, r6
+ 984 0038 3846     		mov	r0, r7
+ 985 003a FFF7FEFF 		bl	Osal_MemSet
+ 986 003e 3F23     		movs	r3, #63
+ 987 0040 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 988 0044 4FF48873 		mov	r3, #272
+ 989 0048 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 990 004c 0F23     		movs	r3, #15
+ 991 004e 4393     		str	r3, [sp, #268]
+ 992 0050 4495     		str	r5, [sp, #272]
+ 993 0052 4594     		str	r4, [sp, #276]
+ 994 0054 CDF81881 		str	r8, [sp, #280]
+ 995 0058 0123     		movs	r3, #1
+ 996 005a 4793     		str	r3, [sp, #284]
+ 997 005c 3146     		mov	r1, r6
+ 998 005e 3846     		mov	r0, r7
+ 999 0060 FFF7FEFF 		bl	hci_send_req
+ 1000 0064 B042     		cmp	r0, r6
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 18
+
+
+ 1001 0066 04DB     		blt	.L96
+ 1002 0068 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 1003              	.L95:
+ 1004 006c 48B0     		add	sp, sp, #288
+ 1005              		@ sp needed
+ 1006 006e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1007              	.L96:
+ 1008 0072 FF20     		movs	r0, #255
+ 1009 0074 FAE7     		b	.L95
+ 1011              		.section	.text.aci_att_execute_write_req,"ax",%progbits
+ 1012              		.align	1
+ 1013              		.global	aci_att_execute_write_req
+ 1014              		.syntax unified
+ 1015              		.thumb
+ 1016              		.thumb_func
+ 1018              	aci_att_execute_write_req:
+ 1019              		@ args = 0, pretend = 0, frame = 288
+ 1020              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1021 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1022 0002 C9B0     		sub	sp, sp, #292
+ 1023 0004 0DF10707 		add	r7, sp, #7
+ 1024 0008 0024     		movs	r4, #0
+ 1025 000a 8DF80740 		strb	r4, [sp, #7]
+ 1026 000e 02AD     		add	r5, sp, #8
+ 1027 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1028 0014 8DF80A10 		strb	r1, [sp, #10]
+ 1029 0018 42AE     		add	r6, sp, #264
+ 1030 001a 1822     		movs	r2, #24
+ 1031 001c 2146     		mov	r1, r4
+ 1032 001e 3046     		mov	r0, r6
+ 1033 0020 FFF7FEFF 		bl	Osal_MemSet
+ 1034 0024 3F23     		movs	r3, #63
+ 1035 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1036 002a 40F21113 		movw	r3, #273
+ 1037 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1038 0032 0F23     		movs	r3, #15
+ 1039 0034 4393     		str	r3, [sp, #268]
+ 1040 0036 4495     		str	r5, [sp, #272]
+ 1041 0038 0323     		movs	r3, #3
+ 1042 003a 4593     		str	r3, [sp, #276]
+ 1043 003c 4697     		str	r7, [sp, #280]
+ 1044 003e 0123     		movs	r3, #1
+ 1045 0040 4793     		str	r3, [sp, #284]
+ 1046 0042 2146     		mov	r1, r4
+ 1047 0044 3046     		mov	r0, r6
+ 1048 0046 FFF7FEFF 		bl	hci_send_req
+ 1049 004a A042     		cmp	r0, r4
+ 1050 004c 02DB     		blt	.L100
+ 1051 004e 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 1052              	.L99:
+ 1053 0050 49B0     		add	sp, sp, #292
+ 1054              		@ sp needed
+ 1055 0052 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1056              	.L100:
+ 1057 0054 FF20     		movs	r0, #255
+ 1058 0056 FBE7     		b	.L99
+ 1060              		.section	.text.aci_gatt_disc_all_primary_services,"ax",%progbits
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 19
+
+
+ 1061              		.align	1
+ 1062              		.global	aci_gatt_disc_all_primary_services
+ 1063              		.syntax unified
+ 1064              		.thumb
+ 1065              		.thumb_func
+ 1067              	aci_gatt_disc_all_primary_services:
+ 1068              		@ args = 0, pretend = 0, frame = 288
+ 1069              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1070 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1071 0002 C9B0     		sub	sp, sp, #292
+ 1072 0004 0DF10706 		add	r6, sp, #7
+ 1073 0008 0024     		movs	r4, #0
+ 1074 000a 8DF80740 		strb	r4, [sp, #7]
+ 1075 000e 02AF     		add	r7, sp, #8
+ 1076 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1077 0014 42AD     		add	r5, sp, #264
+ 1078 0016 1822     		movs	r2, #24
+ 1079 0018 2146     		mov	r1, r4
+ 1080 001a 2846     		mov	r0, r5
+ 1081 001c FFF7FEFF 		bl	Osal_MemSet
+ 1082 0020 3F23     		movs	r3, #63
+ 1083 0022 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1084 0026 4FF48973 		mov	r3, #274
+ 1085 002a ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1086 002e 0F23     		movs	r3, #15
+ 1087 0030 4393     		str	r3, [sp, #268]
+ 1088 0032 4497     		str	r7, [sp, #272]
+ 1089 0034 0223     		movs	r3, #2
+ 1090 0036 4593     		str	r3, [sp, #276]
+ 1091 0038 4696     		str	r6, [sp, #280]
+ 1092 003a 0123     		movs	r3, #1
+ 1093 003c 4793     		str	r3, [sp, #284]
+ 1094 003e 2146     		mov	r1, r4
+ 1095 0040 2846     		mov	r0, r5
+ 1096 0042 FFF7FEFF 		bl	hci_send_req
+ 1097 0046 A042     		cmp	r0, r4
+ 1098 0048 02DB     		blt	.L104
+ 1099 004a 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 1100              	.L103:
+ 1101 004c 49B0     		add	sp, sp, #292
+ 1102              		@ sp needed
+ 1103 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1104              	.L104:
+ 1105 0050 FF20     		movs	r0, #255
+ 1106 0052 FBE7     		b	.L103
+ 1108              		.section	.text.aci_gatt_disc_primary_service_by_uuid,"ax",%progbits
+ 1109              		.align	1
+ 1110              		.global	aci_gatt_disc_primary_service_by_uuid
+ 1111              		.syntax unified
+ 1112              		.thumb
+ 1113              		.thumb_func
+ 1115              	aci_gatt_disc_primary_service_by_uuid:
+ 1116              		@ args = 0, pretend = 0, frame = 288
+ 1117              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1118 0000 70B5     		push	{r4, r5, r6, lr}
+ 1119 0002 C8B0     		sub	sp, sp, #288
+ 1120 0004 0B46     		mov	r3, r1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 20
+
+
+ 1121 0006 1146     		mov	r1, r2
+ 1122 0008 0024     		movs	r4, #0
+ 1123 000a 8DF80740 		strb	r4, [sp, #7]
+ 1124 000e 022B     		cmp	r3, #2
+ 1125 0010 2BD0     		beq	.L112
+ 1126 0012 0224     		movs	r4, #2
+ 1127              	.L107:
+ 1128 0014 02AD     		add	r5, sp, #8
+ 1129 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1130 001a 8DF80A30 		strb	r3, [sp, #10]
+ 1131 001e 2246     		mov	r2, r4
+ 1132 0020 0DF10B00 		add	r0, sp, #11
+ 1133 0024 FFF7FEFF 		bl	Osal_MemCpy
+ 1134 0028 0334     		adds	r4, r4, #3
+ 1135 002a 42AE     		add	r6, sp, #264
+ 1136 002c 1822     		movs	r2, #24
+ 1137 002e 0021     		movs	r1, #0
+ 1138 0030 3046     		mov	r0, r6
+ 1139 0032 FFF7FEFF 		bl	Osal_MemSet
+ 1140 0036 3F23     		movs	r3, #63
+ 1141 0038 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1142 003c 40F21313 		movw	r3, #275
+ 1143 0040 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1144 0044 0F23     		movs	r3, #15
+ 1145 0046 4393     		str	r3, [sp, #268]
+ 1146 0048 4495     		str	r5, [sp, #272]
+ 1147 004a 4594     		str	r4, [sp, #276]
+ 1148 004c 0DF10703 		add	r3, sp, #7
+ 1149 0050 4693     		str	r3, [sp, #280]
+ 1150 0052 0123     		movs	r3, #1
+ 1151 0054 4793     		str	r3, [sp, #284]
+ 1152 0056 0021     		movs	r1, #0
+ 1153 0058 3046     		mov	r0, r6
+ 1154 005a FFF7FEFF 		bl	hci_send_req
+ 1155 005e 0028     		cmp	r0, #0
+ 1156 0060 05DB     		blt	.L110
+ 1157 0062 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 1158              	.L108:
+ 1159 0066 48B0     		add	sp, sp, #288
+ 1160              		@ sp needed
+ 1161 0068 70BD     		pop	{r4, r5, r6, pc}
+ 1162              	.L112:
+ 1163 006a 1024     		movs	r4, #16
+ 1164 006c D2E7     		b	.L107
+ 1165              	.L110:
+ 1166 006e FF20     		movs	r0, #255
+ 1167 0070 F9E7     		b	.L108
+ 1169              		.section	.text.aci_gatt_find_included_services,"ax",%progbits
+ 1170              		.align	1
+ 1171              		.global	aci_gatt_find_included_services
+ 1172              		.syntax unified
+ 1173              		.thumb
+ 1174              		.thumb_func
+ 1176              	aci_gatt_find_included_services:
+ 1177              		@ args = 0, pretend = 0, frame = 288
+ 1178              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1179 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 21
+
+
+ 1180 0002 C9B0     		sub	sp, sp, #292
+ 1181 0004 0DF10707 		add	r7, sp, #7
+ 1182 0008 0025     		movs	r5, #0
+ 1183 000a 8DF80750 		strb	r5, [sp, #7]
+ 1184 000e 02AC     		add	r4, sp, #8
+ 1185 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1186 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1187 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1188 001c 42AE     		add	r6, sp, #264
+ 1189 001e 1822     		movs	r2, #24
+ 1190 0020 2946     		mov	r1, r5
+ 1191 0022 3046     		mov	r0, r6
+ 1192 0024 FFF7FEFF 		bl	Osal_MemSet
+ 1193 0028 3F23     		movs	r3, #63
+ 1194 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1195 002e 4FF48A73 		mov	r3, #276
+ 1196 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1197 0036 0F23     		movs	r3, #15
+ 1198 0038 4393     		str	r3, [sp, #268]
+ 1199 003a 4494     		str	r4, [sp, #272]
+ 1200 003c 0623     		movs	r3, #6
+ 1201 003e 4593     		str	r3, [sp, #276]
+ 1202 0040 4697     		str	r7, [sp, #280]
+ 1203 0042 0123     		movs	r3, #1
+ 1204 0044 4793     		str	r3, [sp, #284]
+ 1205 0046 2946     		mov	r1, r5
+ 1206 0048 3046     		mov	r0, r6
+ 1207 004a FFF7FEFF 		bl	hci_send_req
+ 1208 004e A842     		cmp	r0, r5
+ 1209 0050 02DB     		blt	.L115
+ 1210 0052 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 1211              	.L114:
+ 1212 0054 49B0     		add	sp, sp, #292
+ 1213              		@ sp needed
+ 1214 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1215              	.L115:
+ 1216 0058 FF20     		movs	r0, #255
+ 1217 005a FBE7     		b	.L114
+ 1219              		.section	.text.aci_gatt_disc_all_char_of_service,"ax",%progbits
+ 1220              		.align	1
+ 1221              		.global	aci_gatt_disc_all_char_of_service
+ 1222              		.syntax unified
+ 1223              		.thumb
+ 1224              		.thumb_func
+ 1226              	aci_gatt_disc_all_char_of_service:
+ 1227              		@ args = 0, pretend = 0, frame = 288
+ 1228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1229 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1230 0002 C9B0     		sub	sp, sp, #292
+ 1231 0004 0DF10707 		add	r7, sp, #7
+ 1232 0008 0025     		movs	r5, #0
+ 1233 000a 8DF80750 		strb	r5, [sp, #7]
+ 1234 000e 02AC     		add	r4, sp, #8
+ 1235 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1236 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1237 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1238 001c 42AE     		add	r6, sp, #264
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 22
+
+
+ 1239 001e 1822     		movs	r2, #24
+ 1240 0020 2946     		mov	r1, r5
+ 1241 0022 3046     		mov	r0, r6
+ 1242 0024 FFF7FEFF 		bl	Osal_MemSet
+ 1243 0028 3F23     		movs	r3, #63
+ 1244 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1245 002e 40F21513 		movw	r3, #277
+ 1246 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1247 0036 0F23     		movs	r3, #15
+ 1248 0038 4393     		str	r3, [sp, #268]
+ 1249 003a 4494     		str	r4, [sp, #272]
+ 1250 003c 0623     		movs	r3, #6
+ 1251 003e 4593     		str	r3, [sp, #276]
+ 1252 0040 4697     		str	r7, [sp, #280]
+ 1253 0042 0123     		movs	r3, #1
+ 1254 0044 4793     		str	r3, [sp, #284]
+ 1255 0046 2946     		mov	r1, r5
+ 1256 0048 3046     		mov	r0, r6
+ 1257 004a FFF7FEFF 		bl	hci_send_req
+ 1258 004e A842     		cmp	r0, r5
+ 1259 0050 02DB     		blt	.L119
+ 1260 0052 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 1261              	.L118:
+ 1262 0054 49B0     		add	sp, sp, #292
+ 1263              		@ sp needed
+ 1264 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1265              	.L119:
+ 1266 0058 FF20     		movs	r0, #255
+ 1267 005a FBE7     		b	.L118
+ 1269              		.section	.text.aci_gatt_disc_char_by_uuid,"ax",%progbits
+ 1270              		.align	1
+ 1271              		.global	aci_gatt_disc_char_by_uuid
+ 1272              		.syntax unified
+ 1273              		.thumb
+ 1274              		.thumb_func
+ 1276              	aci_gatt_disc_char_by_uuid:
+ 1277              		@ args = 4, pretend = 0, frame = 288
+ 1278              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1279 0000 70B5     		push	{r4, r5, r6, lr}
+ 1280 0002 C8B0     		sub	sp, sp, #288
+ 1281 0004 0025     		movs	r5, #0
+ 1282 0006 8DF80750 		strb	r5, [sp, #7]
+ 1283 000a 022B     		cmp	r3, #2
+ 1284 000c 30D0     		beq	.L127
+ 1285 000e 0225     		movs	r5, #2
+ 1286              	.L122:
+ 1287 0010 02AC     		add	r4, sp, #8
+ 1288 0012 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1289 0016 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1290 001a ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1291 001e 8DF80E30 		strb	r3, [sp, #14]
+ 1292 0022 2A46     		mov	r2, r5
+ 1293 0024 4C99     		ldr	r1, [sp, #304]
+ 1294 0026 0DF10F00 		add	r0, sp, #15
+ 1295 002a FFF7FEFF 		bl	Osal_MemCpy
+ 1296 002e 0735     		adds	r5, r5, #7
+ 1297 0030 42AE     		add	r6, sp, #264
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 23
+
+
+ 1298 0032 1822     		movs	r2, #24
+ 1299 0034 0021     		movs	r1, #0
+ 1300 0036 3046     		mov	r0, r6
+ 1301 0038 FFF7FEFF 		bl	Osal_MemSet
+ 1302 003c 3F23     		movs	r3, #63
+ 1303 003e ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1304 0042 4FF48B73 		mov	r3, #278
+ 1305 0046 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1306 004a 0F23     		movs	r3, #15
+ 1307 004c 4393     		str	r3, [sp, #268]
+ 1308 004e 4494     		str	r4, [sp, #272]
+ 1309 0050 4595     		str	r5, [sp, #276]
+ 1310 0052 0DF10703 		add	r3, sp, #7
+ 1311 0056 4693     		str	r3, [sp, #280]
+ 1312 0058 0123     		movs	r3, #1
+ 1313 005a 4793     		str	r3, [sp, #284]
+ 1314 005c 0021     		movs	r1, #0
+ 1315 005e 3046     		mov	r0, r6
+ 1316 0060 FFF7FEFF 		bl	hci_send_req
+ 1317 0064 0028     		cmp	r0, #0
+ 1318 0066 05DB     		blt	.L125
+ 1319 0068 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 1320              	.L123:
+ 1321 006c 48B0     		add	sp, sp, #288
+ 1322              		@ sp needed
+ 1323 006e 70BD     		pop	{r4, r5, r6, pc}
+ 1324              	.L127:
+ 1325 0070 1025     		movs	r5, #16
+ 1326 0072 CDE7     		b	.L122
+ 1327              	.L125:
+ 1328 0074 FF20     		movs	r0, #255
+ 1329 0076 F9E7     		b	.L123
+ 1331              		.section	.text.aci_gatt_disc_all_char_desc,"ax",%progbits
+ 1332              		.align	1
+ 1333              		.global	aci_gatt_disc_all_char_desc
+ 1334              		.syntax unified
+ 1335              		.thumb
+ 1336              		.thumb_func
+ 1338              	aci_gatt_disc_all_char_desc:
+ 1339              		@ args = 0, pretend = 0, frame = 288
+ 1340              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1341 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1342 0002 C9B0     		sub	sp, sp, #292
+ 1343 0004 0DF10707 		add	r7, sp, #7
+ 1344 0008 0025     		movs	r5, #0
+ 1345 000a 8DF80750 		strb	r5, [sp, #7]
+ 1346 000e 02AC     		add	r4, sp, #8
+ 1347 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1348 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1349 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1350 001c 42AE     		add	r6, sp, #264
+ 1351 001e 1822     		movs	r2, #24
+ 1352 0020 2946     		mov	r1, r5
+ 1353 0022 3046     		mov	r0, r6
+ 1354 0024 FFF7FEFF 		bl	Osal_MemSet
+ 1355 0028 3F23     		movs	r3, #63
+ 1356 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 24
+
+
+ 1357 002e 40F21713 		movw	r3, #279
+ 1358 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1359 0036 0F23     		movs	r3, #15
+ 1360 0038 4393     		str	r3, [sp, #268]
+ 1361 003a 4494     		str	r4, [sp, #272]
+ 1362 003c 0623     		movs	r3, #6
+ 1363 003e 4593     		str	r3, [sp, #276]
+ 1364 0040 4697     		str	r7, [sp, #280]
+ 1365 0042 0123     		movs	r3, #1
+ 1366 0044 4793     		str	r3, [sp, #284]
+ 1367 0046 2946     		mov	r1, r5
+ 1368 0048 3046     		mov	r0, r6
+ 1369 004a FFF7FEFF 		bl	hci_send_req
+ 1370 004e A842     		cmp	r0, r5
+ 1371 0050 02DB     		blt	.L130
+ 1372 0052 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 1373              	.L129:
+ 1374 0054 49B0     		add	sp, sp, #292
+ 1375              		@ sp needed
+ 1376 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1377              	.L130:
+ 1378 0058 FF20     		movs	r0, #255
+ 1379 005a FBE7     		b	.L129
+ 1381              		.section	.text.aci_gatt_read_char_value,"ax",%progbits
+ 1382              		.align	1
+ 1383              		.global	aci_gatt_read_char_value
+ 1384              		.syntax unified
+ 1385              		.thumb
+ 1386              		.thumb_func
+ 1388              	aci_gatt_read_char_value:
+ 1389              		@ args = 0, pretend = 0, frame = 288
+ 1390              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1391 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1392 0002 C9B0     		sub	sp, sp, #292
+ 1393 0004 0DF10707 		add	r7, sp, #7
+ 1394 0008 0024     		movs	r4, #0
+ 1395 000a 8DF80740 		strb	r4, [sp, #7]
+ 1396 000e 02AD     		add	r5, sp, #8
+ 1397 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1398 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1399 0018 42AE     		add	r6, sp, #264
+ 1400 001a 1822     		movs	r2, #24
+ 1401 001c 2146     		mov	r1, r4
+ 1402 001e 3046     		mov	r0, r6
+ 1403 0020 FFF7FEFF 		bl	Osal_MemSet
+ 1404 0024 3F23     		movs	r3, #63
+ 1405 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1406 002a 4FF48C73 		mov	r3, #280
+ 1407 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1408 0032 0F23     		movs	r3, #15
+ 1409 0034 4393     		str	r3, [sp, #268]
+ 1410 0036 4495     		str	r5, [sp, #272]
+ 1411 0038 0423     		movs	r3, #4
+ 1412 003a 4593     		str	r3, [sp, #276]
+ 1413 003c 4697     		str	r7, [sp, #280]
+ 1414 003e 0123     		movs	r3, #1
+ 1415 0040 4793     		str	r3, [sp, #284]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 25
+
+
+ 1416 0042 2146     		mov	r1, r4
+ 1417 0044 3046     		mov	r0, r6
+ 1418 0046 FFF7FEFF 		bl	hci_send_req
+ 1419 004a A042     		cmp	r0, r4
+ 1420 004c 02DB     		blt	.L134
+ 1421 004e 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 1422              	.L133:
+ 1423 0050 49B0     		add	sp, sp, #292
+ 1424              		@ sp needed
+ 1425 0052 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1426              	.L134:
+ 1427 0054 FF20     		movs	r0, #255
+ 1428 0056 FBE7     		b	.L133
+ 1430              		.section	.text.aci_gatt_read_using_char_uuid,"ax",%progbits
+ 1431              		.align	1
+ 1432              		.global	aci_gatt_read_using_char_uuid
+ 1433              		.syntax unified
+ 1434              		.thumb
+ 1435              		.thumb_func
+ 1437              	aci_gatt_read_using_char_uuid:
+ 1438              		@ args = 4, pretend = 0, frame = 288
+ 1439              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1440 0000 70B5     		push	{r4, r5, r6, lr}
+ 1441 0002 C8B0     		sub	sp, sp, #288
+ 1442 0004 0025     		movs	r5, #0
+ 1443 0006 8DF80750 		strb	r5, [sp, #7]
+ 1444 000a 022B     		cmp	r3, #2
+ 1445 000c 30D0     		beq	.L142
+ 1446 000e 0225     		movs	r5, #2
+ 1447              	.L137:
+ 1448 0010 02AC     		add	r4, sp, #8
+ 1449 0012 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1450 0016 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1451 001a ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1452 001e 8DF80E30 		strb	r3, [sp, #14]
+ 1453 0022 2A46     		mov	r2, r5
+ 1454 0024 4C99     		ldr	r1, [sp, #304]
+ 1455 0026 0DF10F00 		add	r0, sp, #15
+ 1456 002a FFF7FEFF 		bl	Osal_MemCpy
+ 1457 002e 0735     		adds	r5, r5, #7
+ 1458 0030 42AE     		add	r6, sp, #264
+ 1459 0032 1822     		movs	r2, #24
+ 1460 0034 0021     		movs	r1, #0
+ 1461 0036 3046     		mov	r0, r6
+ 1462 0038 FFF7FEFF 		bl	Osal_MemSet
+ 1463 003c 3F23     		movs	r3, #63
+ 1464 003e ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1465 0042 40F21913 		movw	r3, #281
+ 1466 0046 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1467 004a 0F23     		movs	r3, #15
+ 1468 004c 4393     		str	r3, [sp, #268]
+ 1469 004e 4494     		str	r4, [sp, #272]
+ 1470 0050 4595     		str	r5, [sp, #276]
+ 1471 0052 0DF10703 		add	r3, sp, #7
+ 1472 0056 4693     		str	r3, [sp, #280]
+ 1473 0058 0123     		movs	r3, #1
+ 1474 005a 4793     		str	r3, [sp, #284]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 26
+
+
+ 1475 005c 0021     		movs	r1, #0
+ 1476 005e 3046     		mov	r0, r6
+ 1477 0060 FFF7FEFF 		bl	hci_send_req
+ 1478 0064 0028     		cmp	r0, #0
+ 1479 0066 05DB     		blt	.L140
+ 1480 0068 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 1481              	.L138:
+ 1482 006c 48B0     		add	sp, sp, #288
+ 1483              		@ sp needed
+ 1484 006e 70BD     		pop	{r4, r5, r6, pc}
+ 1485              	.L142:
+ 1486 0070 1025     		movs	r5, #16
+ 1487 0072 CDE7     		b	.L137
+ 1488              	.L140:
+ 1489 0074 FF20     		movs	r0, #255
+ 1490 0076 F9E7     		b	.L138
+ 1492              		.section	.text.aci_gatt_read_long_char_value,"ax",%progbits
+ 1493              		.align	1
+ 1494              		.global	aci_gatt_read_long_char_value
+ 1495              		.syntax unified
+ 1496              		.thumb
+ 1497              		.thumb_func
+ 1499              	aci_gatt_read_long_char_value:
+ 1500              		@ args = 0, pretend = 0, frame = 288
+ 1501              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1502 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1503 0002 C9B0     		sub	sp, sp, #292
+ 1504 0004 0DF10707 		add	r7, sp, #7
+ 1505 0008 0025     		movs	r5, #0
+ 1506 000a 8DF80750 		strb	r5, [sp, #7]
+ 1507 000e 02AC     		add	r4, sp, #8
+ 1508 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1509 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1510 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1511 001c 42AE     		add	r6, sp, #264
+ 1512 001e 1822     		movs	r2, #24
+ 1513 0020 2946     		mov	r1, r5
+ 1514 0022 3046     		mov	r0, r6
+ 1515 0024 FFF7FEFF 		bl	Osal_MemSet
+ 1516 0028 3F23     		movs	r3, #63
+ 1517 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1518 002e 4FF48D73 		mov	r3, #282
+ 1519 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1520 0036 0F23     		movs	r3, #15
+ 1521 0038 4393     		str	r3, [sp, #268]
+ 1522 003a 4494     		str	r4, [sp, #272]
+ 1523 003c 0623     		movs	r3, #6
+ 1524 003e 4593     		str	r3, [sp, #276]
+ 1525 0040 4697     		str	r7, [sp, #280]
+ 1526 0042 0123     		movs	r3, #1
+ 1527 0044 4793     		str	r3, [sp, #284]
+ 1528 0046 2946     		mov	r1, r5
+ 1529 0048 3046     		mov	r0, r6
+ 1530 004a FFF7FEFF 		bl	hci_send_req
+ 1531 004e A842     		cmp	r0, r5
+ 1532 0050 02DB     		blt	.L145
+ 1533 0052 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 27
+
+
+ 1534              	.L144:
+ 1535 0054 49B0     		add	sp, sp, #292
+ 1536              		@ sp needed
+ 1537 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1538              	.L145:
+ 1539 0058 FF20     		movs	r0, #255
+ 1540 005a FBE7     		b	.L144
+ 1542              		.section	.text.aci_gatt_read_multiple_char_value,"ax",%progbits
+ 1543              		.align	1
+ 1544              		.global	aci_gatt_read_multiple_char_value
+ 1545              		.syntax unified
+ 1546              		.thumb
+ 1547              		.thumb_func
+ 1549              	aci_gatt_read_multiple_char_value:
+ 1550              		@ args = 0, pretend = 0, frame = 288
+ 1551              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1552 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1553 0004 C8B0     		sub	sp, sp, #288
+ 1554 0006 0C46     		mov	r4, r1
+ 1555 0008 1146     		mov	r1, r2
+ 1556 000a 0DF10708 		add	r8, sp, #7
+ 1557 000e 0025     		movs	r5, #0
+ 1558 0010 8DF80750 		strb	r5, [sp, #7]
+ 1559 0014 02AE     		add	r6, sp, #8
+ 1560 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1561 001a 8DF80A40 		strb	r4, [sp, #10]
+ 1562 001e 6400     		lsls	r4, r4, #1
+ 1563 0020 2246     		mov	r2, r4
+ 1564 0022 0DF10B00 		add	r0, sp, #11
+ 1565 0026 FFF7FEFF 		bl	Osal_MemCpy
+ 1566 002a 0334     		adds	r4, r4, #3
+ 1567 002c 42AF     		add	r7, sp, #264
+ 1568 002e 1822     		movs	r2, #24
+ 1569 0030 2946     		mov	r1, r5
+ 1570 0032 3846     		mov	r0, r7
+ 1571 0034 FFF7FEFF 		bl	Osal_MemSet
+ 1572 0038 3F23     		movs	r3, #63
+ 1573 003a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1574 003e 40F21B13 		movw	r3, #283
+ 1575 0042 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1576 0046 0F23     		movs	r3, #15
+ 1577 0048 4393     		str	r3, [sp, #268]
+ 1578 004a 4496     		str	r6, [sp, #272]
+ 1579 004c 4594     		str	r4, [sp, #276]
+ 1580 004e CDF81881 		str	r8, [sp, #280]
+ 1581 0052 0123     		movs	r3, #1
+ 1582 0054 4793     		str	r3, [sp, #284]
+ 1583 0056 2946     		mov	r1, r5
+ 1584 0058 3846     		mov	r0, r7
+ 1585 005a FFF7FEFF 		bl	hci_send_req
+ 1586 005e A842     		cmp	r0, r5
+ 1587 0060 04DB     		blt	.L149
+ 1588 0062 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 1589              	.L148:
+ 1590 0066 48B0     		add	sp, sp, #288
+ 1591              		@ sp needed
+ 1592 0068 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 28
+
+
+ 1593              	.L149:
+ 1594 006c FF20     		movs	r0, #255
+ 1595 006e FAE7     		b	.L148
+ 1597              		.section	.text.aci_gatt_write_char_value,"ax",%progbits
+ 1598              		.align	1
+ 1599              		.global	aci_gatt_write_char_value
+ 1600              		.syntax unified
+ 1601              		.thumb
+ 1602              		.thumb_func
+ 1604              	aci_gatt_write_char_value:
+ 1605              		@ args = 0, pretend = 0, frame = 288
+ 1606              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1607 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1608 0004 C8B0     		sub	sp, sp, #288
+ 1609 0006 1446     		mov	r4, r2
+ 1610 0008 0DF10708 		add	r8, sp, #7
+ 1611 000c 0026     		movs	r6, #0
+ 1612 000e 8DF80760 		strb	r6, [sp, #7]
+ 1613 0012 02AD     		add	r5, sp, #8
+ 1614 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1615 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1616 001c 8DF80C20 		strb	r2, [sp, #12]
+ 1617 0020 1946     		mov	r1, r3
+ 1618 0022 0DF10D00 		add	r0, sp, #13
+ 1619 0026 FFF7FEFF 		bl	Osal_MemCpy
+ 1620 002a 0534     		adds	r4, r4, #5
+ 1621 002c 42AF     		add	r7, sp, #264
+ 1622 002e 1822     		movs	r2, #24
+ 1623 0030 3146     		mov	r1, r6
+ 1624 0032 3846     		mov	r0, r7
+ 1625 0034 FFF7FEFF 		bl	Osal_MemSet
+ 1626 0038 3F23     		movs	r3, #63
+ 1627 003a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1628 003e 4FF48E73 		mov	r3, #284
+ 1629 0042 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1630 0046 0F23     		movs	r3, #15
+ 1631 0048 4393     		str	r3, [sp, #268]
+ 1632 004a 4495     		str	r5, [sp, #272]
+ 1633 004c 4594     		str	r4, [sp, #276]
+ 1634 004e CDF81881 		str	r8, [sp, #280]
+ 1635 0052 0123     		movs	r3, #1
+ 1636 0054 4793     		str	r3, [sp, #284]
+ 1637 0056 3146     		mov	r1, r6
+ 1638 0058 3846     		mov	r0, r7
+ 1639 005a FFF7FEFF 		bl	hci_send_req
+ 1640 005e B042     		cmp	r0, r6
+ 1641 0060 04DB     		blt	.L153
+ 1642 0062 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 1643              	.L152:
+ 1644 0066 48B0     		add	sp, sp, #288
+ 1645              		@ sp needed
+ 1646 0068 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1647              	.L153:
+ 1648 006c FF20     		movs	r0, #255
+ 1649 006e FAE7     		b	.L152
+ 1651              		.section	.text.aci_gatt_write_long_char_value,"ax",%progbits
+ 1652              		.align	1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 29
+
+
+ 1653              		.global	aci_gatt_write_long_char_value
+ 1654              		.syntax unified
+ 1655              		.thumb
+ 1656              		.thumb_func
+ 1658              	aci_gatt_write_long_char_value:
+ 1659              		@ args = 4, pretend = 0, frame = 288
+ 1660              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1661 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1662 0004 C8B0     		sub	sp, sp, #288
+ 1663 0006 1C46     		mov	r4, r3
+ 1664 0008 0DF10708 		add	r8, sp, #7
+ 1665 000c 0026     		movs	r6, #0
+ 1666 000e 8DF80760 		strb	r6, [sp, #7]
+ 1667 0012 02AD     		add	r5, sp, #8
+ 1668 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1669 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1670 001c ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1671 0020 8DF80E30 		strb	r3, [sp, #14]
+ 1672 0024 1A46     		mov	r2, r3
+ 1673 0026 4E99     		ldr	r1, [sp, #312]
+ 1674 0028 0DF10F00 		add	r0, sp, #15
+ 1675 002c FFF7FEFF 		bl	Osal_MemCpy
+ 1676 0030 0734     		adds	r4, r4, #7
+ 1677 0032 42AF     		add	r7, sp, #264
+ 1678 0034 1822     		movs	r2, #24
+ 1679 0036 3146     		mov	r1, r6
+ 1680 0038 3846     		mov	r0, r7
+ 1681 003a FFF7FEFF 		bl	Osal_MemSet
+ 1682 003e 3F23     		movs	r3, #63
+ 1683 0040 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1684 0044 40F21D13 		movw	r3, #285
+ 1685 0048 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1686 004c 0F23     		movs	r3, #15
+ 1687 004e 4393     		str	r3, [sp, #268]
+ 1688 0050 4495     		str	r5, [sp, #272]
+ 1689 0052 4594     		str	r4, [sp, #276]
+ 1690 0054 CDF81881 		str	r8, [sp, #280]
+ 1691 0058 0123     		movs	r3, #1
+ 1692 005a 4793     		str	r3, [sp, #284]
+ 1693 005c 3146     		mov	r1, r6
+ 1694 005e 3846     		mov	r0, r7
+ 1695 0060 FFF7FEFF 		bl	hci_send_req
+ 1696 0064 B042     		cmp	r0, r6
+ 1697 0066 04DB     		blt	.L157
+ 1698 0068 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 1699              	.L156:
+ 1700 006c 48B0     		add	sp, sp, #288
+ 1701              		@ sp needed
+ 1702 006e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1703              	.L157:
+ 1704 0072 FF20     		movs	r0, #255
+ 1705 0074 FAE7     		b	.L156
+ 1707              		.section	.text.aci_gatt_write_char_reliable,"ax",%progbits
+ 1708              		.align	1
+ 1709              		.global	aci_gatt_write_char_reliable
+ 1710              		.syntax unified
+ 1711              		.thumb
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 30
+
+
+ 1712              		.thumb_func
+ 1714              	aci_gatt_write_char_reliable:
+ 1715              		@ args = 4, pretend = 0, frame = 288
+ 1716              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1717 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1718 0004 C8B0     		sub	sp, sp, #288
+ 1719 0006 1C46     		mov	r4, r3
+ 1720 0008 0DF10708 		add	r8, sp, #7
+ 1721 000c 0026     		movs	r6, #0
+ 1722 000e 8DF80760 		strb	r6, [sp, #7]
+ 1723 0012 02AD     		add	r5, sp, #8
+ 1724 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1725 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1726 001c ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1727 0020 8DF80E30 		strb	r3, [sp, #14]
+ 1728 0024 1A46     		mov	r2, r3
+ 1729 0026 4E99     		ldr	r1, [sp, #312]
+ 1730 0028 0DF10F00 		add	r0, sp, #15
+ 1731 002c FFF7FEFF 		bl	Osal_MemCpy
+ 1732 0030 0734     		adds	r4, r4, #7
+ 1733 0032 42AF     		add	r7, sp, #264
+ 1734 0034 1822     		movs	r2, #24
+ 1735 0036 3146     		mov	r1, r6
+ 1736 0038 3846     		mov	r0, r7
+ 1737 003a FFF7FEFF 		bl	Osal_MemSet
+ 1738 003e 3F23     		movs	r3, #63
+ 1739 0040 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1740 0044 4FF48F73 		mov	r3, #286
+ 1741 0048 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1742 004c 0F23     		movs	r3, #15
+ 1743 004e 4393     		str	r3, [sp, #268]
+ 1744 0050 4495     		str	r5, [sp, #272]
+ 1745 0052 4594     		str	r4, [sp, #276]
+ 1746 0054 CDF81881 		str	r8, [sp, #280]
+ 1747 0058 0123     		movs	r3, #1
+ 1748 005a 4793     		str	r3, [sp, #284]
+ 1749 005c 3146     		mov	r1, r6
+ 1750 005e 3846     		mov	r0, r7
+ 1751 0060 FFF7FEFF 		bl	hci_send_req
+ 1752 0064 B042     		cmp	r0, r6
+ 1753 0066 04DB     		blt	.L161
+ 1754 0068 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 1755              	.L160:
+ 1756 006c 48B0     		add	sp, sp, #288
+ 1757              		@ sp needed
+ 1758 006e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1759              	.L161:
+ 1760 0072 FF20     		movs	r0, #255
+ 1761 0074 FAE7     		b	.L160
+ 1763              		.section	.text.aci_gatt_write_long_char_desc,"ax",%progbits
+ 1764              		.align	1
+ 1765              		.global	aci_gatt_write_long_char_desc
+ 1766              		.syntax unified
+ 1767              		.thumb
+ 1768              		.thumb_func
+ 1770              	aci_gatt_write_long_char_desc:
+ 1771              		@ args = 4, pretend = 0, frame = 288
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 31
+
+
+ 1772              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1773 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1774 0004 C8B0     		sub	sp, sp, #288
+ 1775 0006 1C46     		mov	r4, r3
+ 1776 0008 0DF10708 		add	r8, sp, #7
+ 1777 000c 0026     		movs	r6, #0
+ 1778 000e 8DF80760 		strb	r6, [sp, #7]
+ 1779 0012 02AD     		add	r5, sp, #8
+ 1780 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1781 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1782 001c ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1783 0020 8DF80E30 		strb	r3, [sp, #14]
+ 1784 0024 1A46     		mov	r2, r3
+ 1785 0026 4E99     		ldr	r1, [sp, #312]
+ 1786 0028 0DF10F00 		add	r0, sp, #15
+ 1787 002c FFF7FEFF 		bl	Osal_MemCpy
+ 1788 0030 0734     		adds	r4, r4, #7
+ 1789 0032 42AF     		add	r7, sp, #264
+ 1790 0034 1822     		movs	r2, #24
+ 1791 0036 3146     		mov	r1, r6
+ 1792 0038 3846     		mov	r0, r7
+ 1793 003a FFF7FEFF 		bl	Osal_MemSet
+ 1794 003e 3F23     		movs	r3, #63
+ 1795 0040 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1796 0044 40F21F13 		movw	r3, #287
+ 1797 0048 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1798 004c 0F23     		movs	r3, #15
+ 1799 004e 4393     		str	r3, [sp, #268]
+ 1800 0050 4495     		str	r5, [sp, #272]
+ 1801 0052 4594     		str	r4, [sp, #276]
+ 1802 0054 CDF81881 		str	r8, [sp, #280]
+ 1803 0058 0123     		movs	r3, #1
+ 1804 005a 4793     		str	r3, [sp, #284]
+ 1805 005c 3146     		mov	r1, r6
+ 1806 005e 3846     		mov	r0, r7
+ 1807 0060 FFF7FEFF 		bl	hci_send_req
+ 1808 0064 B042     		cmp	r0, r6
+ 1809 0066 04DB     		blt	.L165
+ 1810 0068 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 1811              	.L164:
+ 1812 006c 48B0     		add	sp, sp, #288
+ 1813              		@ sp needed
+ 1814 006e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1815              	.L165:
+ 1816 0072 FF20     		movs	r0, #255
+ 1817 0074 FAE7     		b	.L164
+ 1819              		.section	.text.aci_gatt_read_long_char_desc,"ax",%progbits
+ 1820              		.align	1
+ 1821              		.global	aci_gatt_read_long_char_desc
+ 1822              		.syntax unified
+ 1823              		.thumb
+ 1824              		.thumb_func
+ 1826              	aci_gatt_read_long_char_desc:
+ 1827              		@ args = 0, pretend = 0, frame = 288
+ 1828              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1829 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1830 0002 C9B0     		sub	sp, sp, #292
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 32
+
+
+ 1831 0004 0DF10707 		add	r7, sp, #7
+ 1832 0008 0025     		movs	r5, #0
+ 1833 000a 8DF80750 		strb	r5, [sp, #7]
+ 1834 000e 02AC     		add	r4, sp, #8
+ 1835 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1836 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1837 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 1838 001c 42AE     		add	r6, sp, #264
+ 1839 001e 1822     		movs	r2, #24
+ 1840 0020 2946     		mov	r1, r5
+ 1841 0022 3046     		mov	r0, r6
+ 1842 0024 FFF7FEFF 		bl	Osal_MemSet
+ 1843 0028 3F23     		movs	r3, #63
+ 1844 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1845 002e 4FF49073 		mov	r3, #288
+ 1846 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1847 0036 0F23     		movs	r3, #15
+ 1848 0038 4393     		str	r3, [sp, #268]
+ 1849 003a 4494     		str	r4, [sp, #272]
+ 1850 003c 0623     		movs	r3, #6
+ 1851 003e 4593     		str	r3, [sp, #276]
+ 1852 0040 4697     		str	r7, [sp, #280]
+ 1853 0042 0123     		movs	r3, #1
+ 1854 0044 4793     		str	r3, [sp, #284]
+ 1855 0046 2946     		mov	r1, r5
+ 1856 0048 3046     		mov	r0, r6
+ 1857 004a FFF7FEFF 		bl	hci_send_req
+ 1858 004e A842     		cmp	r0, r5
+ 1859 0050 02DB     		blt	.L169
+ 1860 0052 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 1861              	.L168:
+ 1862 0054 49B0     		add	sp, sp, #292
+ 1863              		@ sp needed
+ 1864 0056 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1865              	.L169:
+ 1866 0058 FF20     		movs	r0, #255
+ 1867 005a FBE7     		b	.L168
+ 1869              		.section	.text.aci_gatt_write_char_desc,"ax",%progbits
+ 1870              		.align	1
+ 1871              		.global	aci_gatt_write_char_desc
+ 1872              		.syntax unified
+ 1873              		.thumb
+ 1874              		.thumb_func
+ 1876              	aci_gatt_write_char_desc:
+ 1877              		@ args = 0, pretend = 0, frame = 288
+ 1878              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1879 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1880 0004 C8B0     		sub	sp, sp, #288
+ 1881 0006 1446     		mov	r4, r2
+ 1882 0008 0DF10708 		add	r8, sp, #7
+ 1883 000c 0026     		movs	r6, #0
+ 1884 000e 8DF80760 		strb	r6, [sp, #7]
+ 1885 0012 02AD     		add	r5, sp, #8
+ 1886 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1887 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1888 001c 8DF80C20 		strb	r2, [sp, #12]
+ 1889 0020 1946     		mov	r1, r3
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 33
+
+
+ 1890 0022 0DF10D00 		add	r0, sp, #13
+ 1891 0026 FFF7FEFF 		bl	Osal_MemCpy
+ 1892 002a 0534     		adds	r4, r4, #5
+ 1893 002c 42AF     		add	r7, sp, #264
+ 1894 002e 1822     		movs	r2, #24
+ 1895 0030 3146     		mov	r1, r6
+ 1896 0032 3846     		mov	r0, r7
+ 1897 0034 FFF7FEFF 		bl	Osal_MemSet
+ 1898 0038 3F23     		movs	r3, #63
+ 1899 003a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1900 003e 40F22113 		movw	r3, #289
+ 1901 0042 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1902 0046 0F23     		movs	r3, #15
+ 1903 0048 4393     		str	r3, [sp, #268]
+ 1904 004a 4495     		str	r5, [sp, #272]
+ 1905 004c 4594     		str	r4, [sp, #276]
+ 1906 004e CDF81881 		str	r8, [sp, #280]
+ 1907 0052 0123     		movs	r3, #1
+ 1908 0054 4793     		str	r3, [sp, #284]
+ 1909 0056 3146     		mov	r1, r6
+ 1910 0058 3846     		mov	r0, r7
+ 1911 005a FFF7FEFF 		bl	hci_send_req
+ 1912 005e B042     		cmp	r0, r6
+ 1913 0060 04DB     		blt	.L173
+ 1914 0062 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 1915              	.L172:
+ 1916 0066 48B0     		add	sp, sp, #288
+ 1917              		@ sp needed
+ 1918 0068 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 1919              	.L173:
+ 1920 006c FF20     		movs	r0, #255
+ 1921 006e FAE7     		b	.L172
+ 1923              		.section	.text.aci_gatt_read_char_desc,"ax",%progbits
+ 1924              		.align	1
+ 1925              		.global	aci_gatt_read_char_desc
+ 1926              		.syntax unified
+ 1927              		.thumb
+ 1928              		.thumb_func
+ 1930              	aci_gatt_read_char_desc:
+ 1931              		@ args = 0, pretend = 0, frame = 288
+ 1932              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1933 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 1934 0002 C9B0     		sub	sp, sp, #292
+ 1935 0004 0DF10707 		add	r7, sp, #7
+ 1936 0008 0024     		movs	r4, #0
+ 1937 000a 8DF80740 		strb	r4, [sp, #7]
+ 1938 000e 02AD     		add	r5, sp, #8
+ 1939 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1940 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1941 0018 42AE     		add	r6, sp, #264
+ 1942 001a 1822     		movs	r2, #24
+ 1943 001c 2146     		mov	r1, r4
+ 1944 001e 3046     		mov	r0, r6
+ 1945 0020 FFF7FEFF 		bl	Osal_MemSet
+ 1946 0024 3F23     		movs	r3, #63
+ 1947 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 1948 002a 4FF49173 		mov	r3, #290
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 34
+
+
+ 1949 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 1950 0032 0F23     		movs	r3, #15
+ 1951 0034 4393     		str	r3, [sp, #268]
+ 1952 0036 4495     		str	r5, [sp, #272]
+ 1953 0038 0423     		movs	r3, #4
+ 1954 003a 4593     		str	r3, [sp, #276]
+ 1955 003c 4697     		str	r7, [sp, #280]
+ 1956 003e 0123     		movs	r3, #1
+ 1957 0040 4793     		str	r3, [sp, #284]
+ 1958 0042 2146     		mov	r1, r4
+ 1959 0044 3046     		mov	r0, r6
+ 1960 0046 FFF7FEFF 		bl	hci_send_req
+ 1961 004a A042     		cmp	r0, r4
+ 1962 004c 02DB     		blt	.L177
+ 1963 004e 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 1964              	.L176:
+ 1965 0050 49B0     		add	sp, sp, #292
+ 1966              		@ sp needed
+ 1967 0052 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 1968              	.L177:
+ 1969 0054 FF20     		movs	r0, #255
+ 1970 0056 FBE7     		b	.L176
+ 1972              		.section	.text.aci_gatt_write_without_resp,"ax",%progbits
+ 1973              		.align	1
+ 1974              		.global	aci_gatt_write_without_resp
+ 1975              		.syntax unified
+ 1976              		.thumb
+ 1977              		.thumb_func
+ 1979              	aci_gatt_write_without_resp:
+ 1980              		@ args = 0, pretend = 0, frame = 288
+ 1981              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1982 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 1983 0004 C8B0     		sub	sp, sp, #288
+ 1984 0006 1446     		mov	r4, r2
+ 1985 0008 0DF10708 		add	r8, sp, #7
+ 1986 000c 0026     		movs	r6, #0
+ 1987 000e 8DF80760 		strb	r6, [sp, #7]
+ 1988 0012 02AD     		add	r5, sp, #8
+ 1989 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 1990 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 1991 001c 8DF80C20 		strb	r2, [sp, #12]
+ 1992 0020 1946     		mov	r1, r3
+ 1993 0022 0DF10D00 		add	r0, sp, #13
+ 1994 0026 FFF7FEFF 		bl	Osal_MemCpy
+ 1995 002a 0534     		adds	r4, r4, #5
+ 1996 002c 42AF     		add	r7, sp, #264
+ 1997 002e 1822     		movs	r2, #24
+ 1998 0030 3146     		mov	r1, r6
+ 1999 0032 3846     		mov	r0, r7
+ 2000 0034 FFF7FEFF 		bl	Osal_MemSet
+ 2001 0038 3F23     		movs	r3, #63
+ 2002 003a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2003 003e 40F22313 		movw	r3, #291
+ 2004 0042 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2005 0046 4495     		str	r5, [sp, #272]
+ 2006 0048 4594     		str	r4, [sp, #276]
+ 2007 004a CDF81881 		str	r8, [sp, #280]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 35
+
+
+ 2008 004e 0123     		movs	r3, #1
+ 2009 0050 4793     		str	r3, [sp, #284]
+ 2010 0052 3146     		mov	r1, r6
+ 2011 0054 3846     		mov	r0, r7
+ 2012 0056 FFF7FEFF 		bl	hci_send_req
+ 2013 005a B042     		cmp	r0, r6
+ 2014 005c 04DB     		blt	.L181
+ 2015 005e 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 2016              	.L180:
+ 2017 0062 48B0     		add	sp, sp, #288
+ 2018              		@ sp needed
+ 2019 0064 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2020              	.L181:
+ 2021 0068 FF20     		movs	r0, #255
+ 2022 006a FAE7     		b	.L180
+ 2024              		.section	.text.aci_gatt_signed_write_without_resp,"ax",%progbits
+ 2025              		.align	1
+ 2026              		.global	aci_gatt_signed_write_without_resp
+ 2027              		.syntax unified
+ 2028              		.thumb
+ 2029              		.thumb_func
+ 2031              	aci_gatt_signed_write_without_resp:
+ 2032              		@ args = 0, pretend = 0, frame = 288
+ 2033              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2034 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 2035 0004 C8B0     		sub	sp, sp, #288
+ 2036 0006 1446     		mov	r4, r2
+ 2037 0008 0DF10708 		add	r8, sp, #7
+ 2038 000c 0026     		movs	r6, #0
+ 2039 000e 8DF80760 		strb	r6, [sp, #7]
+ 2040 0012 02AD     		add	r5, sp, #8
+ 2041 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2042 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 2043 001c 8DF80C20 		strb	r2, [sp, #12]
+ 2044 0020 1946     		mov	r1, r3
+ 2045 0022 0DF10D00 		add	r0, sp, #13
+ 2046 0026 FFF7FEFF 		bl	Osal_MemCpy
+ 2047 002a 0534     		adds	r4, r4, #5
+ 2048 002c 42AF     		add	r7, sp, #264
+ 2049 002e 1822     		movs	r2, #24
+ 2050 0030 3146     		mov	r1, r6
+ 2051 0032 3846     		mov	r0, r7
+ 2052 0034 FFF7FEFF 		bl	Osal_MemSet
+ 2053 0038 3F23     		movs	r3, #63
+ 2054 003a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2055 003e 4FF49273 		mov	r3, #292
+ 2056 0042 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2057 0046 4495     		str	r5, [sp, #272]
+ 2058 0048 4594     		str	r4, [sp, #276]
+ 2059 004a CDF81881 		str	r8, [sp, #280]
+ 2060 004e 0123     		movs	r3, #1
+ 2061 0050 4793     		str	r3, [sp, #284]
+ 2062 0052 3146     		mov	r1, r6
+ 2063 0054 3846     		mov	r0, r7
+ 2064 0056 FFF7FEFF 		bl	hci_send_req
+ 2065 005a B042     		cmp	r0, r6
+ 2066 005c 04DB     		blt	.L185
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 36
+
+
+ 2067 005e 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 2068              	.L184:
+ 2069 0062 48B0     		add	sp, sp, #288
+ 2070              		@ sp needed
+ 2071 0064 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2072              	.L185:
+ 2073 0068 FF20     		movs	r0, #255
+ 2074 006a FAE7     		b	.L184
+ 2076              		.section	.text.aci_gatt_confirm_indication,"ax",%progbits
+ 2077              		.align	1
+ 2078              		.global	aci_gatt_confirm_indication
+ 2079              		.syntax unified
+ 2080              		.thumb
+ 2081              		.thumb_func
+ 2083              	aci_gatt_confirm_indication:
+ 2084              		@ args = 0, pretend = 0, frame = 288
+ 2085              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2086 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 2087 0002 C9B0     		sub	sp, sp, #292
+ 2088 0004 0DF10706 		add	r6, sp, #7
+ 2089 0008 0024     		movs	r4, #0
+ 2090 000a 8DF80740 		strb	r4, [sp, #7]
+ 2091 000e 02AF     		add	r7, sp, #8
+ 2092 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2093 0014 42AD     		add	r5, sp, #264
+ 2094 0016 1822     		movs	r2, #24
+ 2095 0018 2146     		mov	r1, r4
+ 2096 001a 2846     		mov	r0, r5
+ 2097 001c FFF7FEFF 		bl	Osal_MemSet
+ 2098 0020 3F23     		movs	r3, #63
+ 2099 0022 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2100 0026 40F22513 		movw	r3, #293
+ 2101 002a ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2102 002e 4497     		str	r7, [sp, #272]
+ 2103 0030 0223     		movs	r3, #2
+ 2104 0032 4593     		str	r3, [sp, #276]
+ 2105 0034 4696     		str	r6, [sp, #280]
+ 2106 0036 0123     		movs	r3, #1
+ 2107 0038 4793     		str	r3, [sp, #284]
+ 2108 003a 2146     		mov	r1, r4
+ 2109 003c 2846     		mov	r0, r5
+ 2110 003e FFF7FEFF 		bl	hci_send_req
+ 2111 0042 A042     		cmp	r0, r4
+ 2112 0044 02DB     		blt	.L189
+ 2113 0046 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 2114              	.L188:
+ 2115 0048 49B0     		add	sp, sp, #292
+ 2116              		@ sp needed
+ 2117 004a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 2118              	.L189:
+ 2119 004c FF20     		movs	r0, #255
+ 2120 004e FBE7     		b	.L188
+ 2122              		.section	.text.aci_gatt_write_resp,"ax",%progbits
+ 2123              		.align	1
+ 2124              		.global	aci_gatt_write_resp
+ 2125              		.syntax unified
+ 2126              		.thumb
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 37
+
+
+ 2127              		.thumb_func
+ 2129              	aci_gatt_write_resp:
+ 2130              		@ args = 8, pretend = 0, frame = 288
+ 2131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2132 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 2133 0004 C8B0     		sub	sp, sp, #288
+ 2134 0006 9DF83851 		ldrb	r5, [sp, #312]	@ zero_extendqisi2
+ 2135 000a 0DF10708 		add	r8, sp, #7
+ 2136 000e 0026     		movs	r6, #0
+ 2137 0010 8DF80760 		strb	r6, [sp, #7]
+ 2138 0014 02AC     		add	r4, sp, #8
+ 2139 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2140 001a ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 2141 001e 8DF80C20 		strb	r2, [sp, #12]
+ 2142 0022 8DF80D30 		strb	r3, [sp, #13]
+ 2143 0026 8DF80E50 		strb	r5, [sp, #14]
+ 2144 002a 2A46     		mov	r2, r5
+ 2145 002c 4F99     		ldr	r1, [sp, #316]
+ 2146 002e 0DF10F00 		add	r0, sp, #15
+ 2147 0032 FFF7FEFF 		bl	Osal_MemCpy
+ 2148 0036 0735     		adds	r5, r5, #7
+ 2149 0038 42AF     		add	r7, sp, #264
+ 2150 003a 1822     		movs	r2, #24
+ 2151 003c 3146     		mov	r1, r6
+ 2152 003e 3846     		mov	r0, r7
+ 2153 0040 FFF7FEFF 		bl	Osal_MemSet
+ 2154 0044 3F23     		movs	r3, #63
+ 2155 0046 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2156 004a 4FF49373 		mov	r3, #294
+ 2157 004e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2158 0052 4494     		str	r4, [sp, #272]
+ 2159 0054 4595     		str	r5, [sp, #276]
+ 2160 0056 CDF81881 		str	r8, [sp, #280]
+ 2161 005a 0123     		movs	r3, #1
+ 2162 005c 4793     		str	r3, [sp, #284]
+ 2163 005e 3146     		mov	r1, r6
+ 2164 0060 3846     		mov	r0, r7
+ 2165 0062 FFF7FEFF 		bl	hci_send_req
+ 2166 0066 B042     		cmp	r0, r6
+ 2167 0068 04DB     		blt	.L193
+ 2168 006a 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 2169              	.L192:
+ 2170 006e 48B0     		add	sp, sp, #288
+ 2171              		@ sp needed
+ 2172 0070 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2173              	.L193:
+ 2174 0074 FF20     		movs	r0, #255
+ 2175 0076 FAE7     		b	.L192
+ 2177              		.section	.text.aci_gatt_allow_read,"ax",%progbits
+ 2178              		.align	1
+ 2179              		.global	aci_gatt_allow_read
+ 2180              		.syntax unified
+ 2181              		.thumb
+ 2182              		.thumb_func
+ 2184              	aci_gatt_allow_read:
+ 2185              		@ args = 0, pretend = 0, frame = 288
+ 2186              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 38
+
+
+ 2187 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 2188 0002 C9B0     		sub	sp, sp, #292
+ 2189 0004 0DF10706 		add	r6, sp, #7
+ 2190 0008 0024     		movs	r4, #0
+ 2191 000a 8DF80740 		strb	r4, [sp, #7]
+ 2192 000e 02AF     		add	r7, sp, #8
+ 2193 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2194 0014 42AD     		add	r5, sp, #264
+ 2195 0016 1822     		movs	r2, #24
+ 2196 0018 2146     		mov	r1, r4
+ 2197 001a 2846     		mov	r0, r5
+ 2198 001c FFF7FEFF 		bl	Osal_MemSet
+ 2199 0020 3F23     		movs	r3, #63
+ 2200 0022 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2201 0026 40F22713 		movw	r3, #295
+ 2202 002a ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2203 002e 4497     		str	r7, [sp, #272]
+ 2204 0030 0223     		movs	r3, #2
+ 2205 0032 4593     		str	r3, [sp, #276]
+ 2206 0034 4696     		str	r6, [sp, #280]
+ 2207 0036 0123     		movs	r3, #1
+ 2208 0038 4793     		str	r3, [sp, #284]
+ 2209 003a 2146     		mov	r1, r4
+ 2210 003c 2846     		mov	r0, r5
+ 2211 003e FFF7FEFF 		bl	hci_send_req
+ 2212 0042 A042     		cmp	r0, r4
+ 2213 0044 02DB     		blt	.L197
+ 2214 0046 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 2215              	.L196:
+ 2216 0048 49B0     		add	sp, sp, #292
+ 2217              		@ sp needed
+ 2218 004a F0BD     		pop	{r4, r5, r6, r7, pc}
+ 2219              	.L197:
+ 2220 004c FF20     		movs	r0, #255
+ 2221 004e FBE7     		b	.L196
+ 2223              		.section	.text.aci_gatt_set_security_permission,"ax",%progbits
+ 2224              		.align	1
+ 2225              		.global	aci_gatt_set_security_permission
+ 2226              		.syntax unified
+ 2227              		.thumb
+ 2228              		.thumb_func
+ 2230              	aci_gatt_set_security_permission:
+ 2231              		@ args = 0, pretend = 0, frame = 288
+ 2232              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2233 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 2234 0002 C9B0     		sub	sp, sp, #292
+ 2235 0004 0DF10707 		add	r7, sp, #7
+ 2236 0008 0025     		movs	r5, #0
+ 2237 000a 8DF80750 		strb	r5, [sp, #7]
+ 2238 000e 02AC     		add	r4, sp, #8
+ 2239 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2240 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 2241 0018 8DF80C20 		strb	r2, [sp, #12]
+ 2242 001c 42AE     		add	r6, sp, #264
+ 2243 001e 1822     		movs	r2, #24
+ 2244 0020 2946     		mov	r1, r5
+ 2245 0022 3046     		mov	r0, r6
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 39
+
+
+ 2246 0024 FFF7FEFF 		bl	Osal_MemSet
+ 2247 0028 3F23     		movs	r3, #63
+ 2248 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2249 002e 4FF49473 		mov	r3, #296
+ 2250 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2251 0036 4494     		str	r4, [sp, #272]
+ 2252 0038 0523     		movs	r3, #5
+ 2253 003a 4593     		str	r3, [sp, #276]
+ 2254 003c 4697     		str	r7, [sp, #280]
+ 2255 003e 0123     		movs	r3, #1
+ 2256 0040 4793     		str	r3, [sp, #284]
+ 2257 0042 2946     		mov	r1, r5
+ 2258 0044 3046     		mov	r0, r6
+ 2259 0046 FFF7FEFF 		bl	hci_send_req
+ 2260 004a A842     		cmp	r0, r5
+ 2261 004c 02DB     		blt	.L201
+ 2262 004e 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 2263              	.L200:
+ 2264 0050 49B0     		add	sp, sp, #292
+ 2265              		@ sp needed
+ 2266 0052 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 2267              	.L201:
+ 2268 0054 FF20     		movs	r0, #255
+ 2269 0056 FBE7     		b	.L200
+ 2271              		.section	.text.aci_gatt_set_desc_value,"ax",%progbits
+ 2272              		.align	1
+ 2273              		.global	aci_gatt_set_desc_value
+ 2274              		.syntax unified
+ 2275              		.thumb
+ 2276              		.thumb_func
+ 2278              	aci_gatt_set_desc_value:
+ 2279              		@ args = 8, pretend = 0, frame = 288
+ 2280              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2281 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 2282 0004 C8B0     		sub	sp, sp, #288
+ 2283 0006 9DF83851 		ldrb	r5, [sp, #312]	@ zero_extendqisi2
+ 2284 000a 0DF10708 		add	r8, sp, #7
+ 2285 000e 0026     		movs	r6, #0
+ 2286 0010 8DF80760 		strb	r6, [sp, #7]
+ 2287 0014 02AC     		add	r4, sp, #8
+ 2288 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2289 001a ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 2290 001e ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 2291 0022 ADF80E30 		strh	r3, [sp, #14]	@ movhi
+ 2292 0026 8DF81050 		strb	r5, [sp, #16]
+ 2293 002a 2A46     		mov	r2, r5
+ 2294 002c 4F99     		ldr	r1, [sp, #316]
+ 2295 002e 0DF11100 		add	r0, sp, #17
+ 2296 0032 FFF7FEFF 		bl	Osal_MemCpy
+ 2297 0036 0935     		adds	r5, r5, #9
+ 2298 0038 42AF     		add	r7, sp, #264
+ 2299 003a 1822     		movs	r2, #24
+ 2300 003c 3146     		mov	r1, r6
+ 2301 003e 3846     		mov	r0, r7
+ 2302 0040 FFF7FEFF 		bl	Osal_MemSet
+ 2303 0044 3F23     		movs	r3, #63
+ 2304 0046 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 40
+
+
+ 2305 004a 40F22913 		movw	r3, #297
+ 2306 004e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2307 0052 4494     		str	r4, [sp, #272]
+ 2308 0054 4595     		str	r5, [sp, #276]
+ 2309 0056 CDF81881 		str	r8, [sp, #280]
+ 2310 005a 0123     		movs	r3, #1
+ 2311 005c 4793     		str	r3, [sp, #284]
+ 2312 005e 3146     		mov	r1, r6
+ 2313 0060 3846     		mov	r0, r7
+ 2314 0062 FFF7FEFF 		bl	hci_send_req
+ 2315 0066 B042     		cmp	r0, r6
+ 2316 0068 04DB     		blt	.L205
+ 2317 006a 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 2318              	.L204:
+ 2319 006e 48B0     		add	sp, sp, #288
+ 2320              		@ sp needed
+ 2321 0070 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2322              	.L205:
+ 2323 0074 FF20     		movs	r0, #255
+ 2324 0076 FAE7     		b	.L204
+ 2326              		.section	.text.aci_gatt_read_handle_value,"ax",%progbits
+ 2327              		.align	1
+ 2328              		.global	aci_gatt_read_handle_value
+ 2329              		.syntax unified
+ 2330              		.thumb
+ 2331              		.thumb_func
+ 2333              	aci_gatt_read_handle_value:
+ 2334              		@ args = 8, pretend = 0, frame = 536
+ 2335              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2336 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 2337 0004 ADF5077D 		sub	sp, sp, #540
+ 2338 0008 8046     		mov	r8, r0
+ 2339 000a 0F46     		mov	r7, r1
+ 2340 000c 1546     		mov	r5, r2
+ 2341 000e 9946     		mov	r9, r3
+ 2342 0010 01AE     		add	r6, sp, #4
+ 2343 0012 FC22     		movs	r2, #252
+ 2344 0014 0021     		movs	r1, #0
+ 2345 0016 3046     		mov	r0, r6
+ 2346 0018 FFF7FEFF 		bl	Osal_MemSet
+ 2347 001c 40AC     		add	r4, sp, #256
+ 2348 001e ADF80081 		strh	r8, [sp, #256]	@ movhi
+ 2349 0022 ADF80271 		strh	r7, [sp, #258]	@ movhi
+ 2350 0026 ADF80451 		strh	r5, [sp, #260]	@ movhi
+ 2351 002a 80AD     		add	r5, sp, #512
+ 2352 002c 1822     		movs	r2, #24
+ 2353 002e 0021     		movs	r1, #0
+ 2354 0030 2846     		mov	r0, r5
+ 2355 0032 FFF7FEFF 		bl	Osal_MemSet
+ 2356 0036 3F23     		movs	r3, #63
+ 2357 0038 ADF80032 		strh	r3, [sp, #512]	@ movhi
+ 2358 003c 4FF49573 		mov	r3, #298
+ 2359 0040 ADF80232 		strh	r3, [sp, #514]	@ movhi
+ 2360 0044 8294     		str	r4, [sp, #520]
+ 2361 0046 0623     		movs	r3, #6
+ 2362 0048 8393     		str	r3, [sp, #524]
+ 2363 004a 8496     		str	r6, [sp, #528]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 41
+
+
+ 2364 004c FC23     		movs	r3, #252
+ 2365 004e 8593     		str	r3, [sp, #532]
+ 2366 0050 0021     		movs	r1, #0
+ 2367 0052 2846     		mov	r0, r5
+ 2368 0054 FFF7FEFF 		bl	hci_send_req
+ 2369 0058 0028     		cmp	r0, #0
+ 2370 005a 15DB     		blt	.L209
+ 2371 005c 3478     		ldrb	r4, [r6]	@ zero_extendqisi2
+ 2372 005e 24B1     		cbz	r4, .L211
+ 2373              	.L208:
+ 2374 0060 2046     		mov	r0, r4
+ 2375 0062 0DF5077D 		add	sp, sp, #540
+ 2376              		@ sp needed
+ 2377 0066 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 2378              	.L211:
+ 2379 006a B6F80120 		ldrh	r2, [r6, #1]	@ unaligned
+ 2380 006e A9F80020 		strh	r2, [r9]	@ movhi
+ 2381 0072 B6F80320 		ldrh	r2, [r6, #3]	@ unaligned
+ 2382 0076 8E9B     		ldr	r3, [sp, #568]
+ 2383 0078 1A80     		strh	r2, [r3]	@ movhi
+ 2384 007a 92B2     		uxth	r2, r2
+ 2385 007c 0DF10901 		add	r1, sp, #9
+ 2386 0080 8F98     		ldr	r0, [sp, #572]
+ 2387 0082 FFF7FEFF 		bl	Osal_MemCpy
+ 2388 0086 EBE7     		b	.L208
+ 2389              	.L209:
+ 2390 0088 FF24     		movs	r4, #255
+ 2391 008a E9E7     		b	.L208
+ 2393              		.section	.text.aci_gatt_update_char_value_ext,"ax",%progbits
+ 2394              		.align	1
+ 2395              		.global	aci_gatt_update_char_value_ext
+ 2396              		.syntax unified
+ 2397              		.thumb
+ 2398              		.thumb_func
+ 2400              	aci_gatt_update_char_value_ext:
+ 2401              		@ args = 16, pretend = 0, frame = 288
+ 2402              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2403 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 2404 0004 C8B0     		sub	sp, sp, #288
+ 2405 0006 9DF84051 		ldrb	r5, [sp, #320]	@ zero_extendqisi2
+ 2406 000a 0DF10708 		add	r8, sp, #7
+ 2407 000e 0026     		movs	r6, #0
+ 2408 0010 8DF80760 		strb	r6, [sp, #7]
+ 2409 0014 02AC     		add	r4, sp, #8
+ 2410 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2411 001a ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 2412 001e ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 2413 0022 8DF80E30 		strb	r3, [sp, #14]
+ 2414 0026 BDF83831 		ldrh	r3, [sp, #312]
+ 2415 002a ADF80F30 		strh	r3, [sp, #15]	@ unaligned
+ 2416 002e BDF83C31 		ldrh	r3, [sp, #316]
+ 2417 0032 ADF81130 		strh	r3, [sp, #17]	@ unaligned
+ 2418 0036 8DF81350 		strb	r5, [sp, #19]
+ 2419 003a 2A46     		mov	r2, r5
+ 2420 003c 5199     		ldr	r1, [sp, #324]
+ 2421 003e 05A8     		add	r0, sp, #20
+ 2422 0040 FFF7FEFF 		bl	Osal_MemCpy
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 42
+
+
+ 2423 0044 0C35     		adds	r5, r5, #12
+ 2424 0046 42AF     		add	r7, sp, #264
+ 2425 0048 1822     		movs	r2, #24
+ 2426 004a 3146     		mov	r1, r6
+ 2427 004c 3846     		mov	r0, r7
+ 2428 004e FFF7FEFF 		bl	Osal_MemSet
+ 2429 0052 3F23     		movs	r3, #63
+ 2430 0054 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2431 0058 4FF49673 		mov	r3, #300
+ 2432 005c ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2433 0060 4494     		str	r4, [sp, #272]
+ 2434 0062 4595     		str	r5, [sp, #276]
+ 2435 0064 CDF81881 		str	r8, [sp, #280]
+ 2436 0068 0123     		movs	r3, #1
+ 2437 006a 4793     		str	r3, [sp, #284]
+ 2438 006c 3146     		mov	r1, r6
+ 2439 006e 3846     		mov	r0, r7
+ 2440 0070 FFF7FEFF 		bl	hci_send_req
+ 2441 0074 B042     		cmp	r0, r6
+ 2442 0076 04DB     		blt	.L214
+ 2443 0078 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 2444              	.L213:
+ 2445 007c 48B0     		add	sp, sp, #288
+ 2446              		@ sp needed
+ 2447 007e BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2448              	.L214:
+ 2449 0082 FF20     		movs	r0, #255
+ 2450 0084 FAE7     		b	.L213
+ 2452              		.section	.text.aci_gatt_deny_read,"ax",%progbits
+ 2453              		.align	1
+ 2454              		.global	aci_gatt_deny_read
+ 2455              		.syntax unified
+ 2456              		.thumb
+ 2457              		.thumb_func
+ 2459              	aci_gatt_deny_read:
+ 2460              		@ args = 0, pretend = 0, frame = 288
+ 2461              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2462 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 2463 0002 C9B0     		sub	sp, sp, #292
+ 2464 0004 0DF10707 		add	r7, sp, #7
+ 2465 0008 0024     		movs	r4, #0
+ 2466 000a 8DF80740 		strb	r4, [sp, #7]
+ 2467 000e 02AD     		add	r5, sp, #8
+ 2468 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2469 0014 8DF80A10 		strb	r1, [sp, #10]
+ 2470 0018 42AE     		add	r6, sp, #264
+ 2471 001a 1822     		movs	r2, #24
+ 2472 001c 2146     		mov	r1, r4
+ 2473 001e 3046     		mov	r0, r6
+ 2474 0020 FFF7FEFF 		bl	Osal_MemSet
+ 2475 0024 3F23     		movs	r3, #63
+ 2476 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2477 002a 40F22D13 		movw	r3, #301
+ 2478 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2479 0032 4495     		str	r5, [sp, #272]
+ 2480 0034 0323     		movs	r3, #3
+ 2481 0036 4593     		str	r3, [sp, #276]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 43
+
+
+ 2482 0038 4697     		str	r7, [sp, #280]
+ 2483 003a 0123     		movs	r3, #1
+ 2484 003c 4793     		str	r3, [sp, #284]
+ 2485 003e 2146     		mov	r1, r4
+ 2486 0040 3046     		mov	r0, r6
+ 2487 0042 FFF7FEFF 		bl	hci_send_req
+ 2488 0046 A042     		cmp	r0, r4
+ 2489 0048 02DB     		blt	.L218
+ 2490 004a 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 2491              	.L217:
+ 2492 004c 49B0     		add	sp, sp, #292
+ 2493              		@ sp needed
+ 2494 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 2495              	.L218:
+ 2496 0050 FF20     		movs	r0, #255
+ 2497 0052 FBE7     		b	.L217
+ 2499              		.section	.text.aci_gatt_set_access_permission,"ax",%progbits
+ 2500              		.align	1
+ 2501              		.global	aci_gatt_set_access_permission
+ 2502              		.syntax unified
+ 2503              		.thumb
+ 2504              		.thumb_func
+ 2506              	aci_gatt_set_access_permission:
+ 2507              		@ args = 0, pretend = 0, frame = 288
+ 2508              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2509 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 2510 0002 C9B0     		sub	sp, sp, #292
+ 2511 0004 0DF10707 		add	r7, sp, #7
+ 2512 0008 0025     		movs	r5, #0
+ 2513 000a 8DF80750 		strb	r5, [sp, #7]
+ 2514 000e 02AC     		add	r4, sp, #8
+ 2515 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2516 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 2517 0018 8DF80C20 		strb	r2, [sp, #12]
+ 2518 001c 42AE     		add	r6, sp, #264
+ 2519 001e 1822     		movs	r2, #24
+ 2520 0020 2946     		mov	r1, r5
+ 2521 0022 3046     		mov	r0, r6
+ 2522 0024 FFF7FEFF 		bl	Osal_MemSet
+ 2523 0028 3F23     		movs	r3, #63
+ 2524 002a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2525 002e 4FF49773 		mov	r3, #302
+ 2526 0032 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2527 0036 4494     		str	r4, [sp, #272]
+ 2528 0038 0523     		movs	r3, #5
+ 2529 003a 4593     		str	r3, [sp, #276]
+ 2530 003c 4697     		str	r7, [sp, #280]
+ 2531 003e 0123     		movs	r3, #1
+ 2532 0040 4793     		str	r3, [sp, #284]
+ 2533 0042 2946     		mov	r1, r5
+ 2534 0044 3046     		mov	r0, r6
+ 2535 0046 FFF7FEFF 		bl	hci_send_req
+ 2536 004a A842     		cmp	r0, r5
+ 2537 004c 02DB     		blt	.L222
+ 2538 004e 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 2539              	.L221:
+ 2540 0050 49B0     		add	sp, sp, #292
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 44
+
+
+ 2541              		@ sp needed
+ 2542 0052 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 2543              	.L222:
+ 2544 0054 FF20     		movs	r0, #255
+ 2545 0056 FBE7     		b	.L221
+ 2547              		.section	.text.aci_gatt_store_db,"ax",%progbits
+ 2548              		.align	1
+ 2549              		.global	aci_gatt_store_db
+ 2550              		.syntax unified
+ 2551              		.thumb
+ 2552              		.thumb_func
+ 2554              	aci_gatt_store_db:
+ 2555              		@ args = 0, pretend = 0, frame = 32
+ 2556              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2557 0000 30B5     		push	{r4, r5, lr}
+ 2558 0002 89B0     		sub	sp, sp, #36
+ 2559 0004 0024     		movs	r4, #0
+ 2560 0006 8DF80740 		strb	r4, [sp, #7]
+ 2561 000a 02AD     		add	r5, sp, #8
+ 2562 000c 1822     		movs	r2, #24
+ 2563 000e 2146     		mov	r1, r4
+ 2564 0010 2846     		mov	r0, r5
+ 2565 0012 FFF7FEFF 		bl	Osal_MemSet
+ 2566 0016 3F23     		movs	r3, #63
+ 2567 0018 ADF80830 		strh	r3, [sp, #8]	@ movhi
+ 2568 001c 4FF49873 		mov	r3, #304
+ 2569 0020 ADF80A30 		strh	r3, [sp, #10]	@ movhi
+ 2570 0024 0DF10703 		add	r3, sp, #7
+ 2571 0028 0693     		str	r3, [sp, #24]
+ 2572 002a 0123     		movs	r3, #1
+ 2573 002c 0793     		str	r3, [sp, #28]
+ 2574 002e 2146     		mov	r1, r4
+ 2575 0030 2846     		mov	r0, r5
+ 2576 0032 FFF7FEFF 		bl	hci_send_req
+ 2577 0036 A042     		cmp	r0, r4
+ 2578 0038 03DB     		blt	.L226
+ 2579 003a 9DF80700 		ldrb	r0, [sp, #7]	@ zero_extendqisi2
+ 2580              	.L225:
+ 2581 003e 09B0     		add	sp, sp, #36
+ 2582              		@ sp needed
+ 2583 0040 30BD     		pop	{r4, r5, pc}
+ 2584              	.L226:
+ 2585 0042 FF20     		movs	r0, #255
+ 2586 0044 FBE7     		b	.L225
+ 2588              		.section	.text.aci_gatt_send_mult_notification,"ax",%progbits
+ 2589              		.align	1
+ 2590              		.global	aci_gatt_send_mult_notification
+ 2591              		.syntax unified
+ 2592              		.thumb
+ 2593              		.thumb_func
+ 2595              	aci_gatt_send_mult_notification:
+ 2596              		@ args = 0, pretend = 0, frame = 288
+ 2597              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2598 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 2599 0004 C8B0     		sub	sp, sp, #288
+ 2600 0006 0C46     		mov	r4, r1
+ 2601 0008 1146     		mov	r1, r2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 45
+
+
+ 2602 000a 0DF10708 		add	r8, sp, #7
+ 2603 000e 0025     		movs	r5, #0
+ 2604 0010 8DF80750 		strb	r5, [sp, #7]
+ 2605 0014 02AE     		add	r6, sp, #8
+ 2606 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2607 001a 8DF80A40 		strb	r4, [sp, #10]
+ 2608 001e 6400     		lsls	r4, r4, #1
+ 2609 0020 2246     		mov	r2, r4
+ 2610 0022 0DF10B00 		add	r0, sp, #11
+ 2611 0026 FFF7FEFF 		bl	Osal_MemCpy
+ 2612 002a 0334     		adds	r4, r4, #3
+ 2613 002c 42AF     		add	r7, sp, #264
+ 2614 002e 1822     		movs	r2, #24
+ 2615 0030 2946     		mov	r1, r5
+ 2616 0032 3846     		mov	r0, r7
+ 2617 0034 FFF7FEFF 		bl	Osal_MemSet
+ 2618 0038 3F23     		movs	r3, #63
+ 2619 003a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2620 003e 40F23113 		movw	r3, #305
+ 2621 0042 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2622 0046 4496     		str	r6, [sp, #272]
+ 2623 0048 4594     		str	r4, [sp, #276]
+ 2624 004a CDF81881 		str	r8, [sp, #280]
+ 2625 004e 0123     		movs	r3, #1
+ 2626 0050 4793     		str	r3, [sp, #284]
+ 2627 0052 2946     		mov	r1, r5
+ 2628 0054 3846     		mov	r0, r7
+ 2629 0056 FFF7FEFF 		bl	hci_send_req
+ 2630 005a A842     		cmp	r0, r5
+ 2631 005c 04DB     		blt	.L230
+ 2632 005e 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 2633              	.L229:
+ 2634 0062 48B0     		add	sp, sp, #288
+ 2635              		@ sp needed
+ 2636 0064 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2637              	.L230:
+ 2638 0068 FF20     		movs	r0, #255
+ 2639 006a FAE7     		b	.L229
+ 2641              		.section	.text.aci_gatt_read_multiple_var_char_value,"ax",%progbits
+ 2642              		.align	1
+ 2643              		.global	aci_gatt_read_multiple_var_char_value
+ 2644              		.syntax unified
+ 2645              		.thumb
+ 2646              		.thumb_func
+ 2648              	aci_gatt_read_multiple_var_char_value:
+ 2649              		@ args = 0, pretend = 0, frame = 288
+ 2650              		@ frame_needed = 0, uses_anonymous_args = 0
+ 2651 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 2652 0004 C8B0     		sub	sp, sp, #288
+ 2653 0006 0C46     		mov	r4, r1
+ 2654 0008 1146     		mov	r1, r2
+ 2655 000a 0DF10708 		add	r8, sp, #7
+ 2656 000e 0025     		movs	r5, #0
+ 2657 0010 8DF80750 		strb	r5, [sp, #7]
+ 2658 0014 02AE     		add	r6, sp, #8
+ 2659 0016 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 2660 001a 8DF80A40 		strb	r4, [sp, #10]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 46
+
+
+ 2661 001e 6400     		lsls	r4, r4, #1
+ 2662 0020 2246     		mov	r2, r4
+ 2663 0022 0DF10B00 		add	r0, sp, #11
+ 2664 0026 FFF7FEFF 		bl	Osal_MemCpy
+ 2665 002a 0334     		adds	r4, r4, #3
+ 2666 002c 42AF     		add	r7, sp, #264
+ 2667 002e 1822     		movs	r2, #24
+ 2668 0030 2946     		mov	r1, r5
+ 2669 0032 3846     		mov	r0, r7
+ 2670 0034 FFF7FEFF 		bl	Osal_MemSet
+ 2671 0038 3F23     		movs	r3, #63
+ 2672 003a ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 2673 003e 4FF49973 		mov	r3, #306
+ 2674 0042 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 2675 0046 0F23     		movs	r3, #15
+ 2676 0048 4393     		str	r3, [sp, #268]
+ 2677 004a 4496     		str	r6, [sp, #272]
+ 2678 004c 4594     		str	r4, [sp, #276]
+ 2679 004e CDF81881 		str	r8, [sp, #280]
+ 2680 0052 0123     		movs	r3, #1
+ 2681 0054 4793     		str	r3, [sp, #284]
+ 2682 0056 2946     		mov	r1, r5
+ 2683 0058 3846     		mov	r0, r7
+ 2684 005a FFF7FEFF 		bl	hci_send_req
+ 2685 005e A842     		cmp	r0, r5
+ 2686 0060 04DB     		blt	.L234
+ 2687 0062 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 2688              	.L233:
+ 2689 0066 48B0     		add	sp, sp, #288
+ 2690              		@ sp needed
+ 2691 0068 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 2692              	.L234:
+ 2693 006c FF20     		movs	r0, #255
+ 2694 006e FAE7     		b	.L233
+ 2696              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 47
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ble_gatt_aci.c
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:18     .text.aci_gatt_init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:24     .text.aci_gatt_init:00000000 aci_gatt_init
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:59     .text.aci_gatt_add_service:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:65     .text.aci_gatt_add_service:00000000 aci_gatt_add_service
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:148    .text.aci_gatt_include_service:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:154    .text.aci_gatt_include_service:00000000 aci_gatt_include_service
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:219    .text.aci_gatt_add_char:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:225    .text.aci_gatt_add_char:00000000 aci_gatt_add_char
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:319    .text.aci_gatt_add_char_desc:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:325    .text.aci_gatt_add_char_desc:00000000 aci_gatt_add_char_desc
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:437    .text.aci_gatt_update_char_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:443    .text.aci_gatt_update_char_value:00000000 aci_gatt_update_char_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:491    .text.aci_gatt_del_char:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:497    .text.aci_gatt_del_char:00000000 aci_gatt_del_char
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:538    .text.aci_gatt_del_service:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:544    .text.aci_gatt_del_service:00000000 aci_gatt_del_service
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:584    .text.aci_gatt_del_include_service:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:590    .text.aci_gatt_del_include_service:00000000 aci_gatt_del_include_service
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:631    .text.aci_gatt_set_event_mask:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:637    .text.aci_gatt_set_event_mask:00000000 aci_gatt_set_event_mask
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:677    .text.aci_gatt_exchange_config:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:683    .text.aci_gatt_exchange_config:00000000 aci_gatt_exchange_config
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:725    .text.aci_att_find_info_req:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:731    .text.aci_att_find_info_req:00000000 aci_att_find_info_req
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:775    .text.aci_att_find_by_type_value_req:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:781    .text.aci_att_find_by_type_value_req:00000000 aci_att_find_by_type_value_req
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:832    .text.aci_att_read_by_type_req:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:838    .text.aci_att_read_by_type_req:00000000 aci_att_read_by_type_req
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:894    .text.aci_att_read_by_group_type_req:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:900    .text.aci_att_read_by_group_type_req:00000000 aci_att_read_by_group_type_req
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:956    .text.aci_att_prepare_write_req:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:962    .text.aci_att_prepare_write_req:00000000 aci_att_prepare_write_req
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1012   .text.aci_att_execute_write_req:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1018   .text.aci_att_execute_write_req:00000000 aci_att_execute_write_req
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1061   .text.aci_gatt_disc_all_primary_services:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1067   .text.aci_gatt_disc_all_primary_services:00000000 aci_gatt_disc_all_primary_services
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1109   .text.aci_gatt_disc_primary_service_by_uuid:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1115   .text.aci_gatt_disc_primary_service_by_uuid:00000000 aci_gatt_disc_primary_service_by_uuid
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1170   .text.aci_gatt_find_included_services:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1176   .text.aci_gatt_find_included_services:00000000 aci_gatt_find_included_services
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1220   .text.aci_gatt_disc_all_char_of_service:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1226   .text.aci_gatt_disc_all_char_of_service:00000000 aci_gatt_disc_all_char_of_service
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1270   .text.aci_gatt_disc_char_by_uuid:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1276   .text.aci_gatt_disc_char_by_uuid:00000000 aci_gatt_disc_char_by_uuid
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1332   .text.aci_gatt_disc_all_char_desc:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1338   .text.aci_gatt_disc_all_char_desc:00000000 aci_gatt_disc_all_char_desc
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1382   .text.aci_gatt_read_char_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1388   .text.aci_gatt_read_char_value:00000000 aci_gatt_read_char_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1431   .text.aci_gatt_read_using_char_uuid:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1437   .text.aci_gatt_read_using_char_uuid:00000000 aci_gatt_read_using_char_uuid
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1493   .text.aci_gatt_read_long_char_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1499   .text.aci_gatt_read_long_char_value:00000000 aci_gatt_read_long_char_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1543   .text.aci_gatt_read_multiple_char_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1549   .text.aci_gatt_read_multiple_char_value:00000000 aci_gatt_read_multiple_char_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1598   .text.aci_gatt_write_char_value:00000000 $t
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s 			page 48
+
+
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1604   .text.aci_gatt_write_char_value:00000000 aci_gatt_write_char_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1652   .text.aci_gatt_write_long_char_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1658   .text.aci_gatt_write_long_char_value:00000000 aci_gatt_write_long_char_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1708   .text.aci_gatt_write_char_reliable:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1714   .text.aci_gatt_write_char_reliable:00000000 aci_gatt_write_char_reliable
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1764   .text.aci_gatt_write_long_char_desc:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1770   .text.aci_gatt_write_long_char_desc:00000000 aci_gatt_write_long_char_desc
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1820   .text.aci_gatt_read_long_char_desc:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1826   .text.aci_gatt_read_long_char_desc:00000000 aci_gatt_read_long_char_desc
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1870   .text.aci_gatt_write_char_desc:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1876   .text.aci_gatt_write_char_desc:00000000 aci_gatt_write_char_desc
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1924   .text.aci_gatt_read_char_desc:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1930   .text.aci_gatt_read_char_desc:00000000 aci_gatt_read_char_desc
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1973   .text.aci_gatt_write_without_resp:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:1979   .text.aci_gatt_write_without_resp:00000000 aci_gatt_write_without_resp
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2025   .text.aci_gatt_signed_write_without_resp:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2031   .text.aci_gatt_signed_write_without_resp:00000000 aci_gatt_signed_write_without_resp
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2077   .text.aci_gatt_confirm_indication:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2083   .text.aci_gatt_confirm_indication:00000000 aci_gatt_confirm_indication
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2123   .text.aci_gatt_write_resp:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2129   .text.aci_gatt_write_resp:00000000 aci_gatt_write_resp
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2178   .text.aci_gatt_allow_read:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2184   .text.aci_gatt_allow_read:00000000 aci_gatt_allow_read
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2224   .text.aci_gatt_set_security_permission:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2230   .text.aci_gatt_set_security_permission:00000000 aci_gatt_set_security_permission
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2272   .text.aci_gatt_set_desc_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2278   .text.aci_gatt_set_desc_value:00000000 aci_gatt_set_desc_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2327   .text.aci_gatt_read_handle_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2333   .text.aci_gatt_read_handle_value:00000000 aci_gatt_read_handle_value
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2394   .text.aci_gatt_update_char_value_ext:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2400   .text.aci_gatt_update_char_value_ext:00000000 aci_gatt_update_char_value_ext
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2453   .text.aci_gatt_deny_read:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2459   .text.aci_gatt_deny_read:00000000 aci_gatt_deny_read
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2500   .text.aci_gatt_set_access_permission:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2506   .text.aci_gatt_set_access_permission:00000000 aci_gatt_set_access_permission
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2548   .text.aci_gatt_store_db:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2554   .text.aci_gatt_store_db:00000000 aci_gatt_store_db
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2589   .text.aci_gatt_send_mult_notification:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2595   .text.aci_gatt_send_mult_notification:00000000 aci_gatt_send_mult_notification
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2642   .text.aci_gatt_read_multiple_var_char_value:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cclvRG0F.s:2648   .text.aci_gatt_read_multiple_var_char_value:00000000 aci_gatt_read_multiple_var_char_value
+
+UNDEFINED SYMBOLS
+Osal_MemSet
+hci_send_req
+Osal_MemCpy

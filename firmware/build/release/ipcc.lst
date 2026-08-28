@@ -1,0 +1,157 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ipcc.c"
+  16              		.text
+  17              		.section	.text.MX_IPCC_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	MX_IPCC_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	MX_IPCC_Init:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 08B5     		push	{r3, lr}
+  28 0002 0548     		ldr	r0, .L5
+  29 0004 054B     		ldr	r3, .L5+4
+  30 0006 0360     		str	r3, [r0]
+  31 0008 FFF7FEFF 		bl	HAL_IPCC_Init
+  32 000c 00B9     		cbnz	r0, .L4
+  33              	.L1:
+  34 000e 08BD     		pop	{r3, pc}
+  35              	.L4:
+  36 0010 FFF7FEFF 		bl	Error_Handler
+  37 0014 FBE7     		b	.L1
+  38              	.L6:
+  39 0016 00BF     		.align	2
+  40              	.L5:
+  41 0018 00000000 		.word	hipcc
+  42 001c 000C0058 		.word	1476398080
+  44              		.section	.text.HAL_IPCC_MspInit,"ax",%progbits
+  45              		.align	1
+  46              		.global	HAL_IPCC_MspInit
+  47              		.syntax unified
+  48              		.thumb
+  49              		.thumb_func
+  51              	HAL_IPCC_MspInit:
+  52              		@ args = 0, pretend = 0, frame = 8
+  53              		@ frame_needed = 0, uses_anonymous_args = 0
+  54 0000 0268     		ldr	r2, [r0]
+  55 0002 114B     		ldr	r3, .L14
+  56 0004 9A42     		cmp	r2, r3
+  57 0006 00D0     		beq	.L13
+  58 0008 7047     		bx	lr
+  59              	.L13:
+  60 000a 00B5     		push	{lr}
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s 			page 2
+
+
+  61 000c 83B0     		sub	sp, sp, #12
+  62 000e 4FF0B043 		mov	r3, #1476395008
+  63 0012 1A6D     		ldr	r2, [r3, #80]
+  64 0014 42F48012 		orr	r2, r2, #1048576
+  65 0018 1A65     		str	r2, [r3, #80]
+  66 001a 1B6D     		ldr	r3, [r3, #80]
+  67 001c 03F48013 		and	r3, r3, #1048576
+  68 0020 0193     		str	r3, [sp, #4]
+  69 0022 019B     		ldr	r3, [sp, #4]
+  70 0024 0022     		movs	r2, #0
+  71 0026 1146     		mov	r1, r2
+  72 0028 2C20     		movs	r0, #44
+  73 002a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  74 002e 2C20     		movs	r0, #44
+  75 0030 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  76 0034 0022     		movs	r2, #0
+  77 0036 1146     		mov	r1, r2
+  78 0038 2D20     		movs	r0, #45
+  79 003a FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  80 003e 2D20     		movs	r0, #45
+  81 0040 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  82 0044 03B0     		add	sp, sp, #12
+  83              		@ sp needed
+  84 0046 00BD     		pop	{pc}
+  85              	.L15:
+  86              		.align	2
+  87              	.L14:
+  88 0048 000C0058 		.word	1476398080
+  90              		.section	.text.HAL_IPCC_MspDeInit,"ax",%progbits
+  91              		.align	1
+  92              		.global	HAL_IPCC_MspDeInit
+  93              		.syntax unified
+  94              		.thumb
+  95              		.thumb_func
+  97              	HAL_IPCC_MspDeInit:
+  98              		@ args = 0, pretend = 0, frame = 0
+  99              		@ frame_needed = 0, uses_anonymous_args = 0
+ 100 0000 08B5     		push	{r3, lr}
+ 101 0002 0268     		ldr	r2, [r0]
+ 102 0004 084B     		ldr	r3, .L20
+ 103 0006 9A42     		cmp	r2, r3
+ 104 0008 00D0     		beq	.L19
+ 105              	.L16:
+ 106 000a 08BD     		pop	{r3, pc}
+ 107              	.L19:
+ 108 000c 4FF0B042 		mov	r2, #1476395008
+ 109 0010 136D     		ldr	r3, [r2, #80]
+ 110 0012 23F48013 		bic	r3, r3, #1048576
+ 111 0016 1365     		str	r3, [r2, #80]
+ 112 0018 2C20     		movs	r0, #44
+ 113 001a FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 114 001e 2D20     		movs	r0, #45
+ 115 0020 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 116 0024 F1E7     		b	.L16
+ 117              	.L21:
+ 118 0026 00BF     		.align	2
+ 119              	.L20:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s 			page 3
+
+
+ 120 0028 000C0058 		.word	1476398080
+ 122              		.global	hipcc
+ 123              		.section	.bss.hipcc,"aw",%nobits
+ 124              		.align	2
+ 127              	hipcc:
+ 128 0000 00000000 		.space	60
+ 128      00000000 
+ 128      00000000 
+ 128      00000000 
+ 128      00000000 
+ 129              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ipcc.c
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:18     .text.MX_IPCC_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:24     .text.MX_IPCC_Init:00000000 MX_IPCC_Init
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:41     .text.MX_IPCC_Init:00000018 $d
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:127    .bss.hipcc:00000000 hipcc
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:45     .text.HAL_IPCC_MspInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:51     .text.HAL_IPCC_MspInit:00000000 HAL_IPCC_MspInit
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:88     .text.HAL_IPCC_MspInit:00000048 $d
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:91     .text.HAL_IPCC_MspDeInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:97     .text.HAL_IPCC_MspDeInit:00000000 HAL_IPCC_MspDeInit
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:120    .text.HAL_IPCC_MspDeInit:00000028 $d
+C:\Users\Nathan\AppData\Local\Temp\ccgKUwhj.s:124    .bss.hipcc:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_IPCC_Init
+Error_Handler
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ

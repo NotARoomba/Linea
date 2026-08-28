@@ -1,0 +1,98 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"custom_app.c"
+  16              		.text
+  17              		.section	.text.Custom_STM_App_Notification,"ax",%progbits
+  18              		.align	1
+  19              		.global	Custom_STM_App_Notification
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	Custom_STM_App_Notification:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 7047     		bx	lr
+  30              		.section	.text.Custom_APP_Notification,"ax",%progbits
+  31              		.align	1
+  32              		.global	Custom_APP_Notification
+  33              		.syntax unified
+  34              		.thumb
+  35              		.thumb_func
+  37              	Custom_APP_Notification:
+  38              		@ args = 0, pretend = 0, frame = 0
+  39              		@ frame_needed = 0, uses_anonymous_args = 0
+  40              		@ link register save eliminated.
+  41 0000 7047     		bx	lr
+  43              		.section	.text.Custom_APP_Init,"ax",%progbits
+  44              		.align	1
+  45              		.global	Custom_APP_Init
+  46              		.syntax unified
+  47              		.thumb
+  48              		.thumb_func
+  50              	Custom_APP_Init:
+  51              		@ args = 0, pretend = 0, frame = 0
+  52              		@ frame_needed = 0, uses_anonymous_args = 0
+  53              		@ link register save eliminated.
+  54 0000 7047     		bx	lr
+  56              		.global	Connection_Handle
+  57              		.section	.bss.Connection_Handle,"aw",%nobits
+  58              		.align	1
+  61              	Connection_Handle:
+  62 0000 0000     		.space	2
+  63              		.global	NotifyCharData
+  64              		.section	.bss.NotifyCharData,"aw",%nobits
+  65              		.align	2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s 			page 2
+
+
+  68              	NotifyCharData:
+  69 0000 00000000 		.space	512
+  69      00000000 
+  69      00000000 
+  69      00000000 
+  69      00000000 
+  70              		.global	UpdateCharData
+  71              		.section	.bss.UpdateCharData,"aw",%nobits
+  72              		.align	2
+  75              	UpdateCharData:
+  76 0000 00000000 		.space	512
+  76      00000000 
+  76      00000000 
+  76      00000000 
+  76      00000000 
+  77              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 custom_app.c
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:18     .text.Custom_STM_App_Notification:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:24     .text.Custom_STM_App_Notification:00000000 Custom_STM_App_Notification
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:31     .text.Custom_APP_Notification:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:37     .text.Custom_APP_Notification:00000000 Custom_APP_Notification
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:44     .text.Custom_APP_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:50     .text.Custom_APP_Init:00000000 Custom_APP_Init
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:61     .bss.Connection_Handle:00000000 Connection_Handle
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:58     .bss.Connection_Handle:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:68     .bss.NotifyCharData:00000000 NotifyCharData
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:65     .bss.NotifyCharData:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:75     .bss.UpdateCharData:00000000 UpdateCharData
+C:\Users\Nathan\AppData\Local\Temp\ccpTKf6R.s:72     .bss.UpdateCharData:00000000 $d
+
+NO UNDEFINED SYMBOLS

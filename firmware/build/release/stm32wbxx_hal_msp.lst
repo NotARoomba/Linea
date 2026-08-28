@@ -1,0 +1,59 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccIqKRsL.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32wbxx_hal_msp.c"
+  16              		.text
+  17              		.section	.text.HAL_MspInit,"ax",%progbits
+  18              		.align	1
+  19              		.global	HAL_MspInit
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	HAL_MspInit:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 00B5     		push	{lr}
+  28 0002 83B0     		sub	sp, sp, #12
+  29 0004 4FF0B043 		mov	r3, #1476395008
+  30 0008 1A6D     		ldr	r2, [r3, #80]
+  31 000a 42F40022 		orr	r2, r2, #524288
+  32 000e 1A65     		str	r2, [r3, #80]
+  33 0010 1B6D     		ldr	r3, [r3, #80]
+  34 0012 03F40023 		and	r3, r3, #524288
+  35 0016 0193     		str	r3, [sp, #4]
+  36 0018 019B     		ldr	r3, [sp, #4]
+  37 001a 0022     		movs	r2, #0
+  38 001c 1146     		mov	r1, r2
+  39 001e 2E20     		movs	r0, #46
+  40 0020 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  41 0024 2E20     		movs	r0, #46
+  42 0026 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  43 002a 03B0     		add	sp, sp, #12
+  44              		@ sp needed
+  45 002c 00BD     		pop	{pc}
+  47              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccIqKRsL.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32wbxx_hal_msp.c
+C:\Users\Nathan\AppData\Local\Temp\ccIqKRsL.s:18     .text.HAL_MspInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccIqKRsL.s:24     .text.HAL_MspInit:00000000 HAL_MspInit
+
+UNDEFINED SYMBOLS
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ

@@ -1,0 +1,883 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"patchouli_math.c"
+  16              		.text
+  17              		.section	.text.patchouli_linear_map,"ax",%progbits
+  18              		.align	1
+  19              		.global	patchouli_linear_map
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	patchouli_linear_map:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27              		@ link register save eliminated.
+  28 0000 71EEC11A 		vsub.f32	s3, s3, s2
+  29 0004 32EE402A 		vsub.f32	s4, s4, s0
+  30 0008 61EE821A 		vmul.f32	s3, s3, s4
+  31 000c 70EEC00A 		vsub.f32	s1, s1, s0
+  32 0010 81EEA00A 		vdiv.f32	s0, s3, s1
+  33 0014 30EE010A 		vadd.f32	s0, s0, s2
+  34 0018 7047     		bx	lr
+  36              		.section	.text.patchouli_median,"ax",%progbits
+  37              		.align	1
+  38              		.global	patchouli_median
+  39              		.syntax unified
+  40              		.thumb
+  41              		.thumb_func
+  43              	patchouli_median:
+  44              		@ args = 0, pretend = 0, frame = 0
+  45              		@ frame_needed = 0, uses_anonymous_args = 0
+  46 0000 10B5     		push	{r4, lr}
+  47 0002 4FF0000E 		mov	lr, #0
+  48 0006 0FE0     		b	.L3
+  49              	.L5:
+  50 0008 0133     		adds	r3, r3, #1
+  51 000a 9BB2     		uxth	r3, r3
+  52              	.L4:
+  53 000c 8B42     		cmp	r3, r1
+  54 000e 0AD2     		bcs	.L9
+  55 0010 30F813C0 		ldrh	ip, [r0, r3, lsl #1]
+  56 0014 30F81E20 		ldrh	r2, [r0, lr, lsl #1]
+  57 0018 9445     		cmp	ip, r2
+  58 001a F5D2     		bcs	.L5
+  59 001c 20F81EC0 		strh	ip, [r0, lr, lsl #1]	@ movhi
+  60 0020 20F81320 		strh	r2, [r0, r3, lsl #1]	@ movhi
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 2
+
+
+  61 0024 F0E7     		b	.L5
+  62              	.L9:
+  63 0026 A646     		mov	lr, r4
+  64              	.L3:
+  65 0028 8E45     		cmp	lr, r1
+  66 002a 04D2     		bcs	.L10
+  67 002c 0EF10104 		add	r4, lr, #1
+  68 0030 A4B2     		uxth	r4, r4
+  69 0032 2346     		mov	r3, r4
+  70 0034 EAE7     		b	.L4
+  71              	.L10:
+  72 0036 4908     		lsrs	r1, r1, #1
+  73 0038 30F81100 		ldrh	r0, [r0, r1, lsl #1]
+  74 003c 10BD     		pop	{r4, pc}
+  76              		.section	.text.patchouli_wavg_f32,"ax",%progbits
+  77              		.align	1
+  78              		.global	patchouli_wavg_f32
+  79              		.syntax unified
+  80              		.thumb
+  81              		.thumb_func
+  83              	patchouli_wavg_f32:
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  86              		@ link register save eliminated.
+  87 0000 0023     		movs	r3, #0
+  88 0002 DFED0C6A 		vldr.32	s13, .L14
+  89 0006 B0EE660A 		vmov.f32	s0, s13
+  90 000a 0EE0     		b	.L12
+  91              	.L13:
+  92 000c 00EB830C 		add	ip, r0, r3, lsl #2
+  93 0010 DCED007A 		vldr.32	s15, [ip]
+  94 0014 01EB830C 		add	ip, r1, r3, lsl #2
+  95 0018 9CED007A 		vldr.32	s14, [ip]
+  96 001c 67EE877A 		vmul.f32	s15, s15, s14
+  97 0020 30EE270A 		vadd.f32	s0, s0, s15
+  98 0024 76EE876A 		vadd.f32	s13, s13, s14
+  99 0028 0133     		adds	r3, r3, #1
+ 100              	.L12:
+ 101 002a 9342     		cmp	r3, r2
+ 102 002c EEDB     		blt	.L13
+ 103 002e 80EE260A 		vdiv.f32	s0, s0, s13
+ 104 0032 7047     		bx	lr
+ 105              	.L15:
+ 106              		.align	2
+ 107              	.L14:
+ 108 0034 00000000 		.word	0
+ 110              		.section	.text.patchouli_gauss_init_kernel,"ax",%progbits
+ 111              		.align	1
+ 112              		.global	patchouli_gauss_init_kernel
+ 113              		.syntax unified
+ 114              		.thumb
+ 115              		.thumb_func
+ 117              	patchouli_gauss_init_kernel:
+ 118              		@ args = 0, pretend = 0, frame = 224
+ 119              		@ frame_needed = 0, uses_anonymous_args = 0
+ 120 0000 70B5     		push	{r4, r5, r6, lr}
+ 121 0002 B8B0     		sub	sp, sp, #224
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 3
+
+
+ 122 0004 29AB     		add	r3, sp, #164
+ 123 0006 0322     		movs	r2, #3
+ 124 0008 0521     		movs	r1, #5
+ 125 000a 06A8     		add	r0, sp, #24
+ 126 000c FFF7FEFF 		bl	arm_mat_init_f32
+ 127 0010 1AAB     		add	r3, sp, #104
+ 128 0012 0522     		movs	r2, #5
+ 129 0014 0321     		movs	r1, #3
+ 130 0016 04A8     		add	r0, sp, #16
+ 131 0018 FFF7FEFF 		bl	arm_mat_init_f32
+ 132 001c 11AB     		add	r3, sp, #68
+ 133 001e 0322     		movs	r2, #3
+ 134 0020 1146     		mov	r1, r2
+ 135 0022 02A8     		add	r0, sp, #8
+ 136 0024 FFF7FEFF 		bl	arm_mat_init_f32
+ 137 0028 08AB     		add	r3, sp, #32
+ 138 002a 0322     		movs	r2, #3
+ 139 002c 1146     		mov	r1, r2
+ 140 002e 6846     		mov	r0, sp
+ 141 0030 FFF7FEFF 		bl	arm_mat_init_f32
+ 142 0034 254B     		ldr	r3, .L20
+ 143 0036 0522     		movs	r2, #5
+ 144 0038 0321     		movs	r1, #3
+ 145 003a 2548     		ldr	r0, .L20+4
+ 146 003c FFF7FEFF 		bl	arm_mat_init_f32
+ 147 0040 244B     		ldr	r3, .L20+8
+ 148 0042 0122     		movs	r2, #1
+ 149 0044 0521     		movs	r1, #5
+ 150 0046 2448     		ldr	r0, .L20+12
+ 151 0048 FFF7FEFF 		bl	arm_mat_init_f32
+ 152 004c 234B     		ldr	r3, .L20+16
+ 153 004e 0122     		movs	r2, #1
+ 154 0050 0321     		movs	r1, #3
+ 155 0052 2348     		ldr	r0, .L20+20
+ 156 0054 FFF7FEFF 		bl	arm_mat_init_f32
+ 157 0058 0023     		movs	r3, #0
+ 158 005a 1EE0     		b	.L17
+ 159              	.L18:
+ 160 005c 03EB4302 		add	r2, r3, r3, lsl #1
+ 161 0060 38A9     		add	r1, sp, #224
+ 162 0062 01EB8201 		add	r1, r1, r2, lsl #2
+ 163 0066 4FF07E50 		mov	r0, #1065353216
+ 164 006a 41F83C0C 		str	r0, [r1, #-60]	@ float
+ 165 006e 0133     		adds	r3, r3, #1
+ 166 0070 511C     		adds	r1, r2, #1
+ 167 0072 38A8     		add	r0, sp, #224
+ 168 0074 00EB8101 		add	r1, r0, r1, lsl #2
+ 169 0078 07EE903A 		vmov	s15, r3	@ int
+ 170 007c F8EEE77A 		vcvt.f32.s32	s15, s15
+ 171 0080 41ED0F7A 		vstr.32	s15, [r1, #-60]
+ 172 0084 03FB03F1 		mul	r1, r3, r3
+ 173 0088 07EE901A 		vmov	s15, r1	@ int
+ 174 008c 0232     		adds	r2, r2, #2
+ 175 008e 00EB8202 		add	r2, r0, r2, lsl #2
+ 176 0092 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 177 0096 42ED0F7A 		vstr.32	s15, [r2, #-60]
+ 178              	.L17:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 4
+
+
+ 179 009a 042B     		cmp	r3, #4
+ 180 009c DEDD     		ble	.L18
+ 181 009e 04AC     		add	r4, sp, #16
+ 182 00a0 06AD     		add	r5, sp, #24
+ 183 00a2 2146     		mov	r1, r4
+ 184 00a4 2846     		mov	r0, r5
+ 185 00a6 FFF7FEFF 		bl	arm_mat_trans_f32
+ 186 00aa 02AE     		add	r6, sp, #8
+ 187 00ac 3246     		mov	r2, r6
+ 188 00ae 2946     		mov	r1, r5
+ 189 00b0 2046     		mov	r0, r4
+ 190 00b2 FFF7FEFF 		bl	arm_mat_mult_f32
+ 191 00b6 6946     		mov	r1, sp
+ 192 00b8 3046     		mov	r0, r6
+ 193 00ba FFF7FEFF 		bl	arm_mat_inverse_f32
+ 194 00be 044A     		ldr	r2, .L20+4
+ 195 00c0 2146     		mov	r1, r4
+ 196 00c2 6846     		mov	r0, sp
+ 197 00c4 FFF7FEFF 		bl	arm_mat_mult_f32
+ 198 00c8 38B0     		add	sp, sp, #224
+ 199              		@ sp needed
+ 200 00ca 70BD     		pop	{r4, r5, r6, pc}
+ 201              	.L21:
+ 202              		.align	2
+ 203              	.L20:
+ 204 00cc 00000000 		.word	patchouli_kernel_f32
+ 205 00d0 00000000 		.word	patchouli_kernel_mat
+ 206 00d4 00000000 		.word	patchouli_b_f32
+ 207 00d8 00000000 		.word	patchouli_b_mat
+ 208 00dc 00000000 		.word	patchouli_c_f32
+ 209 00e0 00000000 		.word	patchouli_c_mat
+ 211              		.section	.text.patchouli_gauss_apply,"ax",%progbits
+ 212              		.align	1
+ 213              		.global	patchouli_gauss_apply
+ 214              		.syntax unified
+ 215              		.thumb
+ 216              		.thumb_func
+ 218              	patchouli_gauss_apply:
+ 219              		@ args = 0, pretend = 0, frame = 0
+ 220              		@ frame_needed = 0, uses_anonymous_args = 0
+ 221 0000 10B5     		push	{r4, lr}
+ 222 0002 0C46     		mov	r4, r1
+ 223 0004 0023     		movs	r3, #0
+ 224 0006 0BE0     		b	.L23
+ 225              	.L24:
+ 226 0008 30F91320 		ldrsh	r2, [r0, r3, lsl #1]
+ 227 000c 07EE902A 		vmov	s15, r2	@ int
+ 228 0010 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 229 0014 094A     		ldr	r2, .L26
+ 230 0016 02EB8302 		add	r2, r2, r3, lsl #2
+ 231 001a C2ED007A 		vstr.32	s15, [r2]
+ 232 001e 0133     		adds	r3, r3, #1
+ 233              	.L23:
+ 234 0020 042B     		cmp	r3, #4
+ 235 0022 F1DD     		ble	.L24
+ 236 0024 064A     		ldr	r2, .L26+4
+ 237 0026 0749     		ldr	r1, .L26+8
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 5
+
+
+ 238 0028 0748     		ldr	r0, .L26+12
+ 239 002a FFF7FEFF 		bl	arm_mat_mult_f32
+ 240 002e 074B     		ldr	r3, .L26+16
+ 241 0030 07CB     		ldmia	r3!, {r0, r1, r2}
+ 242 0032 2060     		str	r0, [r4]	@ unaligned
+ 243 0034 6160     		str	r1, [r4, #4]	@ unaligned
+ 244 0036 A260     		str	r2, [r4, #8]	@ unaligned
+ 245 0038 2046     		mov	r0, r4
+ 246 003a 10BD     		pop	{r4, pc}
+ 247              	.L27:
+ 248              		.align	2
+ 249              	.L26:
+ 250 003c 00000000 		.word	patchouli_b_f32
+ 251 0040 00000000 		.word	patchouli_c_mat
+ 252 0044 00000000 		.word	patchouli_b_mat
+ 253 0048 00000000 		.word	patchouli_kernel_mat
+ 254 004c 00000000 		.word	patchouli_c_f32
+ 256              		.section	.text.patchouli_gauss_calc_mean,"ax",%progbits
+ 257              		.align	1
+ 258              		.global	patchouli_gauss_calc_mean
+ 259              		.syntax unified
+ 260              		.thumb
+ 261              		.thumb_func
+ 263              	patchouli_gauss_calc_mean:
+ 264              		@ args = 0, pretend = 0, frame = 0
+ 265              		@ frame_needed = 0, uses_anonymous_args = 0
+ 266              		@ link register save eliminated.
+ 267 0000 054B     		ldr	r3, .L29
+ 268 0002 93ED010A 		vldr.32	s0, [r3, #4]
+ 269 0006 B1EE400A 		vneg.f32	s0, s0
+ 270 000a D3ED027A 		vldr.32	s15, [r3, #8]
+ 271 000e 77EEA77A 		vadd.f32	s15, s15, s15
+ 272 0012 80EE270A 		vdiv.f32	s0, s0, s15
+ 273 0016 7047     		bx	lr
+ 274              	.L30:
+ 275              		.align	2
+ 276              	.L29:
+ 277 0018 00000000 		.word	patchouli_c_f32
+ 279              		.section	.text.patchouli_gauss_calc_std,"ax",%progbits
+ 280              		.align	1
+ 281              		.global	patchouli_gauss_calc_std
+ 282              		.syntax unified
+ 283              		.thumb
+ 284              		.thumb_func
+ 286              	patchouli_gauss_calc_std:
+ 287              		@ args = 0, pretend = 0, frame = 0
+ 288              		@ frame_needed = 0, uses_anonymous_args = 0
+ 289 0000 08B5     		push	{r3, lr}
+ 290 0002 064B     		ldr	r3, .L33
+ 291 0004 93ED020A 		vldr.32	s0, [r3, #8]
+ 292 0008 30EE000A 		vadd.f32	s0, s0, s0
+ 293 000c F7EE007A 		vmov.f32	s15, #1.0e+0
+ 294 0010 87EE800A 		vdiv.f32	s0, s15, s0
+ 295 0014 FFF7FEFF 		bl	sqrtf
+ 296 0018 08BD     		pop	{r3, pc}
+ 297              	.L34:
+ 298 001a 00BF     		.align	2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 6
+
+
+ 299              	.L33:
+ 300 001c 00000000 		.word	patchouli_c_f32
+ 302              		.section	.text.patchouli_gauss_calc_amp,"ax",%progbits
+ 303              		.align	1
+ 304              		.global	patchouli_gauss_calc_amp
+ 305              		.syntax unified
+ 306              		.thumb
+ 307              		.thumb_func
+ 309              	patchouli_gauss_calc_amp:
+ 310              		@ args = 0, pretend = 0, frame = 0
+ 311              		@ frame_needed = 0, uses_anonymous_args = 0
+ 312              		@ link register save eliminated.
+ 313 0000 084B     		ldr	r3, .L36
+ 314 0002 93ED000A 		vldr.32	s0, [r3]
+ 315 0006 D3ED017A 		vldr.32	s15, [r3, #4]
+ 316 000a 67EEA77A 		vmul.f32	s15, s15, s15
+ 317 000e 93ED027A 		vldr.32	s14, [r3, #8]
+ 318 0012 F1EE006A 		vmov.f32	s13, #4.0e+0
+ 319 0016 27EE267A 		vmul.f32	s14, s14, s13
+ 320 001a C7EE876A 		vdiv.f32	s13, s15, s14
+ 321 001e 30EE660A 		vsub.f32	s0, s0, s13
+ 322 0022 7047     		bx	lr
+ 323              	.L37:
+ 324              		.align	2
+ 325              	.L36:
+ 326 0024 00000000 		.word	patchouli_c_f32
+ 328              		.section	.text.patchouli_mva_buffer_init,"ax",%progbits
+ 329              		.align	1
+ 330              		.global	patchouli_mva_buffer_init
+ 331              		.syntax unified
+ 332              		.thumb
+ 333              		.thumb_func
+ 335              	patchouli_mva_buffer_init:
+ 336              		@ args = 0, pretend = 0, frame = 0
+ 337              		@ frame_needed = 0, uses_anonymous_args = 0
+ 338 0000 38B5     		push	{r3, r4, r5, lr}
+ 339 0002 0446     		mov	r4, r0
+ 340 0004 0D46     		mov	r5, r1
+ 341 0006 8800     		lsls	r0, r1, #2
+ 342 0008 FFF7FEFF 		bl	malloc
+ 343 000c 2060     		str	r0, [r4]
+ 344 000e 6560     		str	r5, [r4, #4]
+ 345 0010 0023     		movs	r3, #0
+ 346 0012 A360     		str	r3, [r4, #8]
+ 347 0014 0022     		movs	r2, #0
+ 348 0016 E260     		str	r2, [r4, #12]	@ float
+ 349 0018 2261     		str	r2, [r4, #16]	@ float
+ 350 001a 07E0     		b	.L39
+ 351              	.L40:
+ 352 001c 2268     		ldr	r2, [r4]
+ 353 001e 02EB8302 		add	r2, r2, r3, lsl #2
+ 354 0022 4FF0000C 		mov	ip, #0
+ 355 0026 C2F800C0 		str	ip, [r2]	@ float
+ 356 002a 0133     		adds	r3, r3, #1
+ 357              	.L39:
+ 358 002c AB42     		cmp	r3, r5
+ 359 002e F5DB     		blt	.L40
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 7
+
+
+ 360 0030 38BD     		pop	{r3, r4, r5, pc}
+ 362              		.section	.text.patchouli_mva_buffer_free,"ax",%progbits
+ 363              		.align	1
+ 364              		.global	patchouli_mva_buffer_free
+ 365              		.syntax unified
+ 366              		.thumb
+ 367              		.thumb_func
+ 369              	patchouli_mva_buffer_free:
+ 370              		@ args = 0, pretend = 0, frame = 0
+ 371              		@ frame_needed = 0, uses_anonymous_args = 0
+ 372 0000 08B5     		push	{r3, lr}
+ 373 0002 0068     		ldr	r0, [r0]
+ 374 0004 FFF7FEFF 		bl	free
+ 375 0008 08BD     		pop	{r3, pc}
+ 377              		.section	.text.patchouli_mva_buffer_push,"ax",%progbits
+ 378              		.align	1
+ 379              		.global	patchouli_mva_buffer_push
+ 380              		.syntax unified
+ 381              		.thumb
+ 382              		.thumb_func
+ 384              	patchouli_mva_buffer_push:
+ 385              		@ args = 0, pretend = 0, frame = 0
+ 386              		@ frame_needed = 0, uses_anonymous_args = 0
+ 387              		@ link register save eliminated.
+ 388 0000 D0ED037A 		vldr.32	s15, [r0, #12]
+ 389 0004 0368     		ldr	r3, [r0]
+ 390 0006 8268     		ldr	r2, [r0, #8]
+ 391 0008 03EB8203 		add	r3, r3, r2, lsl #2
+ 392 000c 93ED007A 		vldr.32	s14, [r3]
+ 393 0010 77EEC77A 		vsub.f32	s15, s15, s14
+ 394 0014 C0ED037A 		vstr.32	s15, [r0, #12]
+ 395 0018 83ED000A 		vstr.32	s0, [r3]
+ 396 001c 90ED037A 		vldr.32	s14, [r0, #12]
+ 397 0020 37EE007A 		vadd.f32	s14, s14, s0
+ 398 0024 80ED037A 		vstr.32	s14, [r0, #12]
+ 399 0028 8368     		ldr	r3, [r0, #8]
+ 400 002a 0133     		adds	r3, r3, #1
+ 401 002c 4268     		ldr	r2, [r0, #4]
+ 402 002e 93FBF2F1 		sdiv	r1, r3, r2
+ 403 0032 02FB1133 		mls	r3, r2, r1, r3
+ 404 0036 8360     		str	r3, [r0, #8]
+ 405 0038 07EE902A 		vmov	s15, r2	@ int
+ 406 003c F8EEE77A 		vcvt.f32.s32	s15, s15
+ 407 0040 87EE270A 		vdiv.f32	s0, s14, s15
+ 408 0044 80ED040A 		vstr.32	s0, [r0, #16]
+ 409 0048 7047     		bx	lr
+ 411              		.section	.text.patchouli_kalman_init,"ax",%progbits
+ 412              		.align	1
+ 413              		.global	patchouli_kalman_init
+ 414              		.syntax unified
+ 415              		.thumb
+ 416              		.thumb_func
+ 418              	patchouli_kalman_init:
+ 419              		@ args = 0, pretend = 0, frame = 0
+ 420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 421              		@ link register save eliminated.
+ 422 0000 0023     		movs	r3, #0
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 8
+
+
+ 423 0002 0360     		str	r3, [r0]	@ float
+ 424 0004 4360     		str	r3, [r0, #4]	@ float
+ 425 0006 8360     		str	r3, [r0, #8]	@ float
+ 426 0008 C360     		str	r3, [r0, #12]	@ float
+ 427 000a 0361     		str	r3, [r0, #16]	@ float
+ 428 000c 4361     		str	r3, [r0, #20]	@ float
+ 429 000e 80ED060A 		vstr.32	s0, [r0, #24]
+ 430 0012 C361     		str	r3, [r0, #28]	@ float
+ 431 0014 0362     		str	r3, [r0, #32]	@ float
+ 432 0016 80ED090A 		vstr.32	s0, [r0, #36]
+ 433 001a C0ED0A0A 		vstr.32	s1, [r0, #40]
+ 434 001e 7047     		bx	lr
+ 436              		.section	.text.patchouli_kalman_update,"ax",%progbits
+ 437              		.align	1
+ 438              		.global	patchouli_kalman_update
+ 439              		.syntax unified
+ 440              		.thumb
+ 441              		.thumb_func
+ 443              	patchouli_kalman_update:
+ 444              		@ args = 0, pretend = 0, frame = 8
+ 445              		@ frame_needed = 0, uses_anonymous_args = 0
+ 446              		@ link register save eliminated.
+ 447 0000 82B0     		sub	sp, sp, #8
+ 448 0002 90ED005A 		vldr.32	s10, [r0]
+ 449 0006 30EE457A 		vsub.f32	s14, s0, s10
+ 450 000a D0ED027A 		vldr.32	s15, [r0, #8]
+ 451 000e D0ED0A4A 		vldr.32	s9, [r0, #40]
+ 452 0012 77EEA44A 		vadd.f32	s9, s15, s9
+ 453 0016 87EEA46A 		vdiv.f32	s12, s15, s9
+ 454 001a 8DED006A 		vstr.32	s12, [sp]
+ 455 001e D0ED046A 		vldr.32	s13, [r0, #16]
+ 456 0022 C6EEA45A 		vdiv.f32	s11, s13, s9
+ 457 0026 CDED015A 		vstr.32	s11, [sp, #4]
+ 458 002a 66EE074A 		vmul.f32	s9, s12, s14
+ 459 002e 35EE240A 		vadd.f32	s0, s10, s9
+ 460 0032 80ED000A 		vstr.32	s0, [r0]
+ 461 0036 90ED015A 		vldr.32	s10, [r0, #4]
+ 462 003a 25EE877A 		vmul.f32	s14, s11, s14
+ 463 003e 35EE077A 		vadd.f32	s14, s10, s14
+ 464 0042 80ED017A 		vstr.32	s14, [r0, #4]
+ 465 0046 27EE867A 		vmul.f32	s14, s15, s12
+ 466 004a 77EEC77A 		vsub.f32	s15, s15, s14
+ 467 004e C0ED027A 		vstr.32	s15, [r0, #8]
+ 468 0052 90ED037A 		vldr.32	s14, [r0, #12]
+ 469 0056 26EE076A 		vmul.f32	s12, s12, s14
+ 470 005a 37EE467A 		vsub.f32	s14, s14, s12
+ 471 005e 80ED037A 		vstr.32	s14, [r0, #12]
+ 472 0062 25EEA76A 		vmul.f32	s12, s11, s15
+ 473 0066 76EEC66A 		vsub.f32	s13, s13, s12
+ 474 006a C0ED046A 		vstr.32	s13, [r0, #16]
+ 475 006e 90ED056A 		vldr.32	s12, [r0, #20]
+ 476 0072 65EE875A 		vmul.f32	s11, s11, s14
+ 477 0076 36EE656A 		vsub.f32	s12, s12, s11
+ 478 007a 80ED056A 		vstr.32	s12, [r0, #20]
+ 479 007e D0ED065A 		vldr.32	s11, [r0, #24]
+ 480 0082 77EEA57A 		vadd.f32	s15, s15, s11
+ 481 0086 C0ED027A 		vstr.32	s15, [r0, #8]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 9
+
+
+ 482 008a D0ED077A 		vldr.32	s15, [r0, #28]
+ 483 008e 37EE277A 		vadd.f32	s14, s14, s15
+ 484 0092 80ED037A 		vstr.32	s14, [r0, #12]
+ 485 0096 D0ED087A 		vldr.32	s15, [r0, #32]
+ 486 009a 76EEA76A 		vadd.f32	s13, s13, s15
+ 487 009e C0ED046A 		vstr.32	s13, [r0, #16]
+ 488 00a2 D0ED097A 		vldr.32	s15, [r0, #36]
+ 489 00a6 36EE276A 		vadd.f32	s12, s12, s15
+ 490 00aa 80ED056A 		vstr.32	s12, [r0, #20]
+ 491 00ae 02B0     		add	sp, sp, #8
+ 492              		@ sp needed
+ 493 00b0 7047     		bx	lr
+ 495              		.section	.text.patchouli_fir_init,"ax",%progbits
+ 496              		.align	1
+ 497              		.global	patchouli_fir_init
+ 498              		.syntax unified
+ 499              		.thumb
+ 500              		.thumb_func
+ 502              	patchouli_fir_init:
+ 503              		@ args = 0, pretend = 0, frame = 0
+ 504              		@ frame_needed = 0, uses_anonymous_args = 0
+ 505 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 506 0002 2DED048B 		vpush.64	{d8, d9}
+ 507 0006 0646     		mov	r6, r0
+ 508 0008 0C46     		mov	r4, r1
+ 509 000a 1546     		mov	r5, r2
+ 510 000c F0EE409A 		vmov.f32	s19, s0
+ 511 0010 B0EE609A 		vmov.f32	s18, s1
+ 512 0014 C160     		str	r1, [r0, #12]
+ 513 0016 8F00     		lsls	r7, r1, #2
+ 514 0018 3846     		mov	r0, r7
+ 515 001a FFF7FEFF 		bl	malloc
+ 516 001e 3060     		str	r0, [r6]
+ 517 0020 3846     		mov	r0, r7
+ 518 0022 FFF7FEFF 		bl	malloc
+ 519 0026 7060     		str	r0, [r6, #4]
+ 520 0028 2DB3     		cbz	r5, .L49
+ 521 002a 012D     		cmp	r5, #1
+ 522 002c 25D1     		bne	.L48
+ 523 002e 0025     		movs	r5, #0
+ 524 0030 4AE0     		b	.L50
+ 525              	.L52:
+ 526 0032 79EE098A 		vadd.f32	s17, s18, s18
+ 527 0036 07EE904A 		vmov	s15, r4	@ int
+ 528 003a F8EEE77A 		vcvt.f32.s32	s15, s15
+ 529 003e B6EE007A 		vmov.f32	s14, #5.0e-1
+ 530 0042 67EE877A 		vmul.f32	s15, s15, s14
+ 531 0046 07EE105A 		vmov	s14, r5	@ int
+ 532 004a B8EEC78A 		vcvt.f32.s32	s16, s14
+ 533 004e 38EE678A 		vsub.f32	s16, s16, s15
+ 534 0052 DFED277A 		vldr.32	s15, .L59
+ 535 0056 28EE278A 		vmul.f32	s16, s16, s15
+ 536 005a 28EE290A 		vmul.f32	s0, s16, s19
+ 537 005e FFF7FEFF 		bl	sinf
+ 538 0062 68EE808A 		vmul.f32	s17, s17, s0
+ 539 0066 7368     		ldr	r3, [r6, #4]
+ 540 0068 03EB8503 		add	r3, r3, r5, lsl #2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 10
+
+
+ 541 006c C8EE887A 		vdiv.f32	s15, s17, s16
+ 542 0070 C3ED007A 		vstr.32	s15, [r3]
+ 543 0074 0135     		adds	r5, r5, #1
+ 544              	.L49:
+ 545 0076 A542     		cmp	r5, r4
+ 546 0078 DBDB     		blt	.L52
+ 547              	.L48:
+ 548 007a BDEC048B 		vldm	sp!, {d8-d9}
+ 549 007e F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 550              	.L53:
+ 551 0080 F8EE008A 		vmov.f32	s17, #-2.0e+0
+ 552 0084 69EE288A 		vmul.f32	s17, s18, s17
+ 553 0088 07EE904A 		vmov	s15, r4	@ int
+ 554 008c F8EEE77A 		vcvt.f32.s32	s15, s15
+ 555 0090 B6EE007A 		vmov.f32	s14, #5.0e-1
+ 556 0094 67EE877A 		vmul.f32	s15, s15, s14
+ 557 0098 07EE105A 		vmov	s14, r5	@ int
+ 558 009c B8EEC78A 		vcvt.f32.s32	s16, s14
+ 559 00a0 38EE678A 		vsub.f32	s16, s16, s15
+ 560 00a4 DFED127A 		vldr.32	s15, .L59
+ 561 00a8 28EE278A 		vmul.f32	s16, s16, s15
+ 562 00ac 28EE290A 		vmul.f32	s0, s16, s19
+ 563 00b0 FFF7FEFF 		bl	sinf
+ 564 00b4 68EE808A 		vmul.f32	s17, s17, s0
+ 565 00b8 7368     		ldr	r3, [r6, #4]
+ 566 00ba 03EB8503 		add	r3, r3, r5, lsl #2
+ 567 00be C8EE887A 		vdiv.f32	s15, s17, s16
+ 568 00c2 C3ED007A 		vstr.32	s15, [r3]
+ 569              	.L54:
+ 570 00c6 0135     		adds	r5, r5, #1
+ 571              	.L50:
+ 572 00c8 A542     		cmp	r5, r4
+ 573 00ca D6DA     		bge	.L48
+ 574 00cc 04EBD473 		add	r3, r4, r4, lsr #31
+ 575 00d0 B5EB630F 		cmp	r5, r3, asr #1
+ 576 00d4 D4D1     		bne	.L53
+ 577 00d6 39EE097A 		vadd.f32	s14, s18, s18
+ 578 00da 7368     		ldr	r3, [r6, #4]
+ 579 00dc 03EB8503 		add	r3, r3, r5, lsl #2
+ 580 00e0 F7EE007A 		vmov.f32	s15, #1.0e+0
+ 581 00e4 77EEC77A 		vsub.f32	s15, s15, s14
+ 582 00e8 C3ED007A 		vstr.32	s15, [r3]
+ 583 00ec EBE7     		b	.L54
+ 584              	.L60:
+ 585 00ee 00BF     		.align	2
+ 586              	.L59:
+ 587 00f0 DB0F4940 		.word	1078530011
+ 589              		.section	.text.patchouli_fir_free,"ax",%progbits
+ 590              		.align	1
+ 591              		.global	patchouli_fir_free
+ 592              		.syntax unified
+ 593              		.thumb
+ 594              		.thumb_func
+ 596              	patchouli_fir_free:
+ 597              		@ args = 0, pretend = 0, frame = 0
+ 598              		@ frame_needed = 0, uses_anonymous_args = 0
+ 599 0000 10B5     		push	{r4, lr}
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 11
+
+
+ 600 0002 0446     		mov	r4, r0
+ 601 0004 0068     		ldr	r0, [r0]
+ 602 0006 FFF7FEFF 		bl	free
+ 603 000a 6068     		ldr	r0, [r4, #4]
+ 604 000c FFF7FEFF 		bl	free
+ 605 0010 10BD     		pop	{r4, pc}
+ 607              		.section	.text.patchouli_fir_update,"ax",%progbits
+ 608              		.align	1
+ 609              		.global	patchouli_fir_update
+ 610              		.syntax unified
+ 611              		.thumb
+ 612              		.thumb_func
+ 614              	patchouli_fir_update:
+ 615              		@ args = 0, pretend = 0, frame = 0
+ 616              		@ frame_needed = 0, uses_anonymous_args = 0
+ 617              		@ link register save eliminated.
+ 618 0000 C368     		ldr	r3, [r0, #12]
+ 619 0002 013B     		subs	r3, r3, #1
+ 620 0004 0BE0     		b	.L64
+ 621              	.L65:
+ 622 0006 0268     		ldr	r2, [r0]
+ 623 0008 03F18041 		add	r1, r3, #1073741824
+ 624 000c 0139     		subs	r1, r1, #1
+ 625 000e 02EB830C 		add	ip, r2, r3, lsl #2
+ 626 0012 02EB8102 		add	r2, r2, r1, lsl #2
+ 627 0016 1268     		ldr	r2, [r2]	@ float
+ 628 0018 CCF80020 		str	r2, [ip]	@ float
+ 629 001c 013B     		subs	r3, r3, #1
+ 630              	.L64:
+ 631 001e 002B     		cmp	r3, #0
+ 632 0020 F1DC     		bgt	.L65
+ 633 0022 0368     		ldr	r3, [r0]
+ 634 0024 83ED000A 		vstr.32	s0, [r3]
+ 635 0028 0023     		movs	r3, #0
+ 636 002a 8360     		str	r3, [r0, #8]	@ float
+ 637 002c 0023     		movs	r3, #0
+ 638 002e 12E0     		b	.L66
+ 639              	.L67:
+ 640 0030 D0ED027A 		vldr.32	s15, [r0, #8]
+ 641 0034 0268     		ldr	r2, [r0]
+ 642 0036 02EB8302 		add	r2, r2, r3, lsl #2
+ 643 003a 92ED007A 		vldr.32	s14, [r2]
+ 644 003e 4268     		ldr	r2, [r0, #4]
+ 645 0040 02EB8302 		add	r2, r2, r3, lsl #2
+ 646 0044 D2ED006A 		vldr.32	s13, [r2]
+ 647 0048 27EE267A 		vmul.f32	s14, s14, s13
+ 648 004c 77EE877A 		vadd.f32	s15, s15, s14
+ 649 0050 C0ED027A 		vstr.32	s15, [r0, #8]
+ 650 0054 0133     		adds	r3, r3, #1
+ 651              	.L66:
+ 652 0056 C268     		ldr	r2, [r0, #12]
+ 653 0058 9A42     		cmp	r2, r3
+ 654 005a E9DC     		bgt	.L67
+ 655 005c 90ED020A 		vldr.32	s0, [r0, #8]
+ 656 0060 7047     		bx	lr
+ 658              		.section	.text.patchouli_quad_interp,"ax",%progbits
+ 659              		.align	1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 12
+
+
+ 660              		.global	patchouli_quad_interp
+ 661              		.syntax unified
+ 662              		.thumb
+ 663              		.thumb_func
+ 665              	patchouli_quad_interp:
+ 666              		@ args = 0, pretend = 0, frame = 0
+ 667              		@ frame_needed = 0, uses_anonymous_args = 0
+ 668 0000 10B5     		push	{r4, lr}
+ 669 0002 0178     		ldrb	r1, [r0]	@ zero_extendqisi2
+ 670 0004 0023     		movs	r3, #0
+ 671 0006 0361     		str	r3, [r0, #16]
+ 672 0008 9FED3B7A 		vldr.32	s14, .L82
+ 673 000c 00E0     		b	.L69
+ 674              	.L70:
+ 675 000e 0133     		adds	r3, r3, #1
+ 676              	.L69:
+ 677 0010 8B42     		cmp	r3, r1
+ 678 0012 0DDA     		bge	.L79
+ 679 0014 C268     		ldr	r2, [r0, #12]
+ 680 0016 02EB8302 		add	r2, r2, r3, lsl #2
+ 681 001a D2ED007A 		vldr.32	s15, [r2]
+ 682 001e F4EEC77A 		vcmpe.f32	s15, s14
+ 683 0022 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 684 0026 F2DD     		ble	.L70
+ 685 0028 0361     		str	r3, [r0, #16]
+ 686 002a B0EE677A 		vmov.f32	s14, s15
+ 687 002e EEE7     		b	.L70
+ 688              	.L79:
+ 689 0030 0269     		ldr	r2, [r0, #16]
+ 690 0032 002A     		cmp	r2, #0
+ 691 0034 4AD1     		bne	.L73
+ 692 0036 1346     		mov	r3, r2
+ 693 0038 0277     		strb	r2, [r0, #28]
+ 694 003a 4FF0010E 		mov	lr, #1
+ 695              	.L74:
+ 696 003e D0F80CC0 		ldr	ip, [r0, #12]
+ 697 0042 0CEB8304 		add	r4, ip, r3, lsl #2
+ 698 0046 D4ED006A 		vldr.32	s13, [r4]
+ 699 004a 0CEB8202 		add	r2, ip, r2, lsl #2
+ 700 004e 92ED006A 		vldr.32	s12, [r2]
+ 701 0052 0CEB8E0C 		add	ip, ip, lr, lsl #2
+ 702 0056 9CED005A 		vldr.32	s10, [ip]
+ 703 005a 07EE903A 		vmov	s15, r3	@ int
+ 704 005e B8EEE77A 		vcvt.f32.s32	s14, s15
+ 705 0062 F0EE087A 		vmov.f32	s15, #3.0e+0
+ 706 0066 66EEA77A 		vmul.f32	s15, s13, s15
+ 707 006a F1EE005A 		vmov.f32	s11, #4.0e+0
+ 708 006e 66EE255A 		vmul.f32	s11, s12, s11
+ 709 0072 77EEE57A 		vsub.f32	s15, s15, s11
+ 710 0076 77EE857A 		vadd.f32	s15, s15, s10
+ 711 007a F6EE005A 		vmov.f32	s11, #5.0e-1
+ 712 007e 67EEA57A 		vmul.f32	s15, s15, s11
+ 713 0082 36EE066A 		vadd.f32	s12, s12, s12
+ 714 0086 76EEC66A 		vsub.f32	s13, s13, s12
+ 715 008a 76EE856A 		vadd.f32	s13, s13, s10
+ 716 008e 87EEA66A 		vdiv.f32	s12, s15, s13
+ 717 0092 77EE067A 		vadd.f32	s15, s14, s12
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 13
+
+
+ 718 0096 C0ED057A 		vstr.32	s15, [r0, #20]
+ 719 009a 037F     		ldrb	r3, [r0, #28]	@ zero_extendqisi2
+ 720 009c 022B     		cmp	r3, #2
+ 721 009e 24D0     		beq	.L80
+ 722              	.L76:
+ 723 00a0 90ED010A 		vldr.32	s0, [r0, #4]
+ 724 00a4 90ED027A 		vldr.32	s14, [r0, #8]
+ 725 00a8 37EE407A 		vsub.f32	s14, s14, s0
+ 726 00ac D0ED057A 		vldr.32	s15, [r0, #20]
+ 727 00b0 27EE277A 		vmul.f32	s14, s14, s15
+ 728 00b4 0139     		subs	r1, r1, #1
+ 729 00b6 07EE901A 		vmov	s15, r1	@ int
+ 730 00ba F8EEE77A 		vcvt.f32.s32	s15, s15
+ 731 00be C7EE276A 		vdiv.f32	s13, s14, s15
+ 732 00c2 30EE260A 		vadd.f32	s0, s0, s13
+ 733 00c6 80ED060A 		vstr.32	s0, [r0, #24]
+ 734 00ca 10BD     		pop	{r4, pc}
+ 735              	.L73:
+ 736 00cc 01F1FF3E 		add	lr, r1, #-1
+ 737 00d0 7245     		cmp	r2, lr
+ 738 00d2 05D0     		beq	.L81
+ 739 00d4 0123     		movs	r3, #1
+ 740 00d6 0377     		strb	r3, [r0, #28]
+ 741 00d8 531E     		subs	r3, r2, #1
+ 742 00da 02F1010E 		add	lr, r2, #1
+ 743 00de AEE7     		b	.L74
+ 744              	.L81:
+ 745 00e0 0223     		movs	r3, #2
+ 746 00e2 0377     		strb	r3, [r0, #28]
+ 747 00e4 8B1E     		subs	r3, r1, #2
+ 748 00e6 7246     		mov	r2, lr
+ 749 00e8 A9E7     		b	.L74
+ 750              	.L80:
+ 751 00ea B7EE007A 		vmov.f32	s14, #1.0e+0
+ 752 00ee 77EEC77A 		vsub.f32	s15, s15, s14
+ 753 00f2 C0ED057A 		vstr.32	s15, [r0, #20]
+ 754 00f6 D3E7     		b	.L76
+ 755              	.L83:
+ 756              		.align	2
+ 757              	.L82:
+ 758 00f8 0000C8C2 		.word	-1027080192
+ 760              		.global	patchouli_b_mat
+ 761              		.section	.bss.patchouli_b_mat,"aw",%nobits
+ 762              		.align	2
+ 765              	patchouli_b_mat:
+ 766 0000 00000000 		.space	8
+ 766      00000000 
+ 767              		.global	patchouli_b_f32
+ 768              		.section	.bss.patchouli_b_f32,"aw",%nobits
+ 769              		.align	2
+ 772              	patchouli_b_f32:
+ 773 0000 00000000 		.space	20
+ 773      00000000 
+ 773      00000000 
+ 773      00000000 
+ 773      00000000 
+ 774              		.global	patchouli_c_mat
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 14
+
+
+ 775              		.section	.bss.patchouli_c_mat,"aw",%nobits
+ 776              		.align	2
+ 779              	patchouli_c_mat:
+ 780 0000 00000000 		.space	8
+ 780      00000000 
+ 781              		.global	patchouli_c_f32
+ 782              		.section	.bss.patchouli_c_f32,"aw",%nobits
+ 783              		.align	2
+ 786              	patchouli_c_f32:
+ 787 0000 00000000 		.space	12
+ 787      00000000 
+ 787      00000000 
+ 788              		.global	patchouli_kernel_mat
+ 789              		.section	.bss.patchouli_kernel_mat,"aw",%nobits
+ 790              		.align	2
+ 793              	patchouli_kernel_mat:
+ 794 0000 00000000 		.space	8
+ 794      00000000 
+ 795              		.global	patchouli_kernel_f32
+ 796              		.section	.bss.patchouli_kernel_f32,"aw",%nobits
+ 797              		.align	2
+ 800              	patchouli_kernel_f32:
+ 801 0000 00000000 		.space	60
+ 801      00000000 
+ 801      00000000 
+ 801      00000000 
+ 801      00000000 
+ 802              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 patchouli_math.c
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:18     .text.patchouli_linear_map:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:24     .text.patchouli_linear_map:00000000 patchouli_linear_map
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:37     .text.patchouli_median:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:43     .text.patchouli_median:00000000 patchouli_median
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:77     .text.patchouli_wavg_f32:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:83     .text.patchouli_wavg_f32:00000000 patchouli_wavg_f32
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:108    .text.patchouli_wavg_f32:00000034 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:111    .text.patchouli_gauss_init_kernel:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:117    .text.patchouli_gauss_init_kernel:00000000 patchouli_gauss_init_kernel
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:204    .text.patchouli_gauss_init_kernel:000000cc $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:800    .bss.patchouli_kernel_f32:00000000 patchouli_kernel_f32
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:793    .bss.patchouli_kernel_mat:00000000 patchouli_kernel_mat
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:772    .bss.patchouli_b_f32:00000000 patchouli_b_f32
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:765    .bss.patchouli_b_mat:00000000 patchouli_b_mat
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:786    .bss.patchouli_c_f32:00000000 patchouli_c_f32
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:779    .bss.patchouli_c_mat:00000000 patchouli_c_mat
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:212    .text.patchouli_gauss_apply:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:218    .text.patchouli_gauss_apply:00000000 patchouli_gauss_apply
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:250    .text.patchouli_gauss_apply:0000003c $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:257    .text.patchouli_gauss_calc_mean:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:263    .text.patchouli_gauss_calc_mean:00000000 patchouli_gauss_calc_mean
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:277    .text.patchouli_gauss_calc_mean:00000018 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:280    .text.patchouli_gauss_calc_std:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:286    .text.patchouli_gauss_calc_std:00000000 patchouli_gauss_calc_std
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:300    .text.patchouli_gauss_calc_std:0000001c $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:303    .text.patchouli_gauss_calc_amp:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:309    .text.patchouli_gauss_calc_amp:00000000 patchouli_gauss_calc_amp
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:326    .text.patchouli_gauss_calc_amp:00000024 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:329    .text.patchouli_mva_buffer_init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:335    .text.patchouli_mva_buffer_init:00000000 patchouli_mva_buffer_init
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:363    .text.patchouli_mva_buffer_free:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:369    .text.patchouli_mva_buffer_free:00000000 patchouli_mva_buffer_free
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:378    .text.patchouli_mva_buffer_push:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:384    .text.patchouli_mva_buffer_push:00000000 patchouli_mva_buffer_push
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:412    .text.patchouli_kalman_init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:418    .text.patchouli_kalman_init:00000000 patchouli_kalman_init
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:437    .text.patchouli_kalman_update:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:443    .text.patchouli_kalman_update:00000000 patchouli_kalman_update
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:496    .text.patchouli_fir_init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:502    .text.patchouli_fir_init:00000000 patchouli_fir_init
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:587    .text.patchouli_fir_init:000000f0 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:590    .text.patchouli_fir_free:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:596    .text.patchouli_fir_free:00000000 patchouli_fir_free
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:608    .text.patchouli_fir_update:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:614    .text.patchouli_fir_update:00000000 patchouli_fir_update
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:659    .text.patchouli_quad_interp:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:665    .text.patchouli_quad_interp:00000000 patchouli_quad_interp
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:758    .text.patchouli_quad_interp:000000f8 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:762    .bss.patchouli_b_mat:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:769    .bss.patchouli_b_f32:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:776    .bss.patchouli_c_mat:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:783    .bss.patchouli_c_f32:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:790    .bss.patchouli_kernel_mat:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s:797    .bss.patchouli_kernel_f32:00000000 $d
+
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccs6RsiP.s 			page 16
+
+
+UNDEFINED SYMBOLS
+arm_mat_init_f32
+arm_mat_trans_f32
+arm_mat_mult_f32
+arm_mat_inverse_f32
+sqrtf
+malloc
+free
+sinf

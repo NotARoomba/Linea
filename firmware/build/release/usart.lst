@@ -1,0 +1,248 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"usart.c"
+  16              		.text
+  17              		.section	.text.MX_USART1_UART_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	MX_USART1_UART_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	MX_USART1_UART_Init:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 08B5     		push	{r3, lr}
+  28 0002 1748     		ldr	r0, .L11
+  29 0004 174B     		ldr	r3, .L11+4
+  30 0006 0360     		str	r3, [r0]
+  31 0008 4FF4E133 		mov	r3, #115200
+  32 000c 4360     		str	r3, [r0, #4]
+  33 000e 0023     		movs	r3, #0
+  34 0010 8360     		str	r3, [r0, #8]
+  35 0012 C360     		str	r3, [r0, #12]
+  36 0014 0361     		str	r3, [r0, #16]
+  37 0016 0C22     		movs	r2, #12
+  38 0018 4261     		str	r2, [r0, #20]
+  39 001a 8361     		str	r3, [r0, #24]
+  40 001c C361     		str	r3, [r0, #28]
+  41 001e 0362     		str	r3, [r0, #32]
+  42 0020 4362     		str	r3, [r0, #36]
+  43 0022 8362     		str	r3, [r0, #40]
+  44 0024 FFF7FEFF 		bl	HAL_UART_Init
+  45 0028 70B9     		cbnz	r0, .L7
+  46              	.L2:
+  47 002a 0021     		movs	r1, #0
+  48 002c 0C48     		ldr	r0, .L11
+  49 002e FFF7FEFF 		bl	HAL_UARTEx_SetTxFifoThreshold
+  50 0032 60B9     		cbnz	r0, .L8
+  51              	.L3:
+  52 0034 0021     		movs	r1, #0
+  53 0036 0A48     		ldr	r0, .L11
+  54 0038 FFF7FEFF 		bl	HAL_UARTEx_SetRxFifoThreshold
+  55 003c 50B9     		cbnz	r0, .L9
+  56              	.L4:
+  57 003e 0848     		ldr	r0, .L11
+  58 0040 FFF7FEFF 		bl	HAL_UARTEx_DisableFifoMode
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s 			page 2
+
+
+  59 0044 48B9     		cbnz	r0, .L10
+  60              	.L1:
+  61 0046 08BD     		pop	{r3, pc}
+  62              	.L7:
+  63 0048 FFF7FEFF 		bl	Error_Handler
+  64 004c EDE7     		b	.L2
+  65              	.L8:
+  66 004e FFF7FEFF 		bl	Error_Handler
+  67 0052 EFE7     		b	.L3
+  68              	.L9:
+  69 0054 FFF7FEFF 		bl	Error_Handler
+  70 0058 F1E7     		b	.L4
+  71              	.L10:
+  72 005a FFF7FEFF 		bl	Error_Handler
+  73 005e F2E7     		b	.L1
+  74              	.L12:
+  75              		.align	2
+  76              	.L11:
+  77 0060 00000000 		.word	huart1
+  78 0064 00380140 		.word	1073821696
+  80              		.section	.text.HAL_UART_MspInit,"ax",%progbits
+  81              		.align	1
+  82              		.global	HAL_UART_MspInit
+  83              		.syntax unified
+  84              		.thumb
+  85              		.thumb_func
+  87              	HAL_UART_MspInit:
+  88              		@ args = 0, pretend = 0, frame = 112
+  89              		@ frame_needed = 0, uses_anonymous_args = 0
+  90 0000 70B5     		push	{r4, r5, r6, lr}
+  91 0002 9CB0     		sub	sp, sp, #112
+  92 0004 0446     		mov	r4, r0
+  93 0006 0021     		movs	r1, #0
+  94 0008 1791     		str	r1, [sp, #92]
+  95 000a 1891     		str	r1, [sp, #96]
+  96 000c 1991     		str	r1, [sp, #100]
+  97 000e 1A91     		str	r1, [sp, #104]
+  98 0010 1B91     		str	r1, [sp, #108]
+  99 0012 5022     		movs	r2, #80
+ 100 0014 03A8     		add	r0, sp, #12
+ 101 0016 FFF7FEFF 		bl	memset
+ 102 001a 2268     		ldr	r2, [r4]
+ 103 001c 224B     		ldr	r3, .L19
+ 104 001e 9A42     		cmp	r2, r3
+ 105 0020 01D0     		beq	.L17
+ 106              	.L13:
+ 107 0022 1CB0     		add	sp, sp, #112
+ 108              		@ sp needed
+ 109 0024 70BD     		pop	{r4, r5, r6, pc}
+ 110              	.L17:
+ 111 0026 0123     		movs	r3, #1
+ 112 0028 0393     		str	r3, [sp, #12]
+ 113 002a 03A8     		add	r0, sp, #12
+ 114 002c FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 115 0030 0028     		cmp	r0, #0
+ 116 0032 36D1     		bne	.L18
+ 117              	.L15:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s 			page 3
+
+
+ 118 0034 4FF0B043 		mov	r3, #1476395008
+ 119 0038 1A6E     		ldr	r2, [r3, #96]
+ 120 003a 42F48042 		orr	r2, r2, #16384
+ 121 003e 1A66     		str	r2, [r3, #96]
+ 122 0040 1A6E     		ldr	r2, [r3, #96]
+ 123 0042 02F48042 		and	r2, r2, #16384
+ 124 0046 0292     		str	r2, [sp, #8]
+ 125 0048 029A     		ldr	r2, [sp, #8]
+ 126 004a DA6C     		ldr	r2, [r3, #76]
+ 127 004c 42F00102 		orr	r2, r2, #1
+ 128 0050 DA64     		str	r2, [r3, #76]
+ 129 0052 DA6C     		ldr	r2, [r3, #76]
+ 130 0054 02F00102 		and	r2, r2, #1
+ 131 0058 0192     		str	r2, [sp, #4]
+ 132 005a 019A     		ldr	r2, [sp, #4]
+ 133 005c DA6C     		ldr	r2, [r3, #76]
+ 134 005e 42F00202 		orr	r2, r2, #2
+ 135 0062 DA64     		str	r2, [r3, #76]
+ 136 0064 DB6C     		ldr	r3, [r3, #76]
+ 137 0066 03F00203 		and	r3, r3, #2
+ 138 006a 0093     		str	r3, [sp]
+ 139 006c 009B     		ldr	r3, [sp]
+ 140 006e 4FF40073 		mov	r3, #512
+ 141 0072 1793     		str	r3, [sp, #92]
+ 142 0074 0225     		movs	r5, #2
+ 143 0076 1895     		str	r5, [sp, #96]
+ 144 0078 0024     		movs	r4, #0
+ 145 007a 1994     		str	r4, [sp, #100]
+ 146 007c 1A94     		str	r4, [sp, #104]
+ 147 007e 0726     		movs	r6, #7
+ 148 0080 1B96     		str	r6, [sp, #108]
+ 149 0082 17A9     		add	r1, sp, #92
+ 150 0084 4FF09040 		mov	r0, #1207959552
+ 151 0088 FFF7FEFF 		bl	HAL_GPIO_Init
+ 152 008c 8023     		movs	r3, #128
+ 153 008e 1793     		str	r3, [sp, #92]
+ 154 0090 1895     		str	r5, [sp, #96]
+ 155 0092 1994     		str	r4, [sp, #100]
+ 156 0094 1A94     		str	r4, [sp, #104]
+ 157 0096 1B96     		str	r6, [sp, #108]
+ 158 0098 17A9     		add	r1, sp, #92
+ 159 009a 0448     		ldr	r0, .L19+4
+ 160 009c FFF7FEFF 		bl	HAL_GPIO_Init
+ 161 00a0 BFE7     		b	.L13
+ 162              	.L18:
+ 163 00a2 FFF7FEFF 		bl	Error_Handler
+ 164 00a6 C5E7     		b	.L15
+ 165              	.L20:
+ 166              		.align	2
+ 167              	.L19:
+ 168 00a8 00380140 		.word	1073821696
+ 169 00ac 00040048 		.word	1207960576
+ 171              		.section	.text.HAL_UART_MspDeInit,"ax",%progbits
+ 172              		.align	1
+ 173              		.global	HAL_UART_MspDeInit
+ 174              		.syntax unified
+ 175              		.thumb
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s 			page 4
+
+
+ 176              		.thumb_func
+ 178              	HAL_UART_MspDeInit:
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181 0000 08B5     		push	{r3, lr}
+ 182 0002 0268     		ldr	r2, [r0]
+ 183 0004 0A4B     		ldr	r3, .L25
+ 184 0006 9A42     		cmp	r2, r3
+ 185 0008 00D0     		beq	.L24
+ 186              	.L21:
+ 187 000a 08BD     		pop	{r3, pc}
+ 188              	.L24:
+ 189 000c 4FF0B042 		mov	r2, #1476395008
+ 190 0010 136E     		ldr	r3, [r2, #96]
+ 191 0012 23F48043 		bic	r3, r3, #16384
+ 192 0016 1366     		str	r3, [r2, #96]
+ 193 0018 4FF40071 		mov	r1, #512
+ 194 001c 4FF09040 		mov	r0, #1207959552
+ 195 0020 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 196 0024 8021     		movs	r1, #128
+ 197 0026 0348     		ldr	r0, .L25+4
+ 198 0028 FFF7FEFF 		bl	HAL_GPIO_DeInit
+ 199 002c EDE7     		b	.L21
+ 200              	.L26:
+ 201 002e 00BF     		.align	2
+ 202              	.L25:
+ 203 0030 00380140 		.word	1073821696
+ 204 0034 00040048 		.word	1207960576
+ 206              		.global	huart1
+ 207              		.section	.bss.huart1,"aw",%nobits
+ 208              		.align	2
+ 211              	huart1:
+ 212 0000 00000000 		.space	204
+ 212      00000000 
+ 212      00000000 
+ 212      00000000 
+ 212      00000000 
+ 213              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 usart.c
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:18     .text.MX_USART1_UART_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:24     .text.MX_USART1_UART_Init:00000000 MX_USART1_UART_Init
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:77     .text.MX_USART1_UART_Init:00000060 $d
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:211    .bss.huart1:00000000 huart1
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:81     .text.HAL_UART_MspInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:87     .text.HAL_UART_MspInit:00000000 HAL_UART_MspInit
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:168    .text.HAL_UART_MspInit:000000a8 $d
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:172    .text.HAL_UART_MspDeInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:178    .text.HAL_UART_MspDeInit:00000000 HAL_UART_MspDeInit
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:203    .text.HAL_UART_MspDeInit:00000030 $d
+C:\Users\Nathan\AppData\Local\Temp\cc91kMW5.s:208    .bss.huart1:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_UART_Init
+HAL_UARTEx_SetTxFifoThreshold
+HAL_UARTEx_SetRxFifoThreshold
+HAL_UARTEx_DisableFifoMode
+Error_Handler
+memset
+HAL_RCCEx_PeriphCLKConfig
+HAL_GPIO_Init
+HAL_GPIO_DeInit

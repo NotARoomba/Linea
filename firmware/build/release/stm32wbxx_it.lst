@@ -1,0 +1,379 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"stm32wbxx_it.c"
+  16              		.text
+  17              		.section	.text.NMI_Handler,"ax",%progbits
+  18              		.align	1
+  19              		.global	NMI_Handler
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	NMI_Handler:
+  25              		@ Volatile: function does not return.
+  26              		@ args = 0, pretend = 0, frame = 0
+  27              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		@ link register save eliminated.
+  29              	.L2:
+  30 0000 FEE7     		b	.L2
+  32              		.section	.text.HardFault_Handler,"ax",%progbits
+  33              		.align	1
+  34              		.global	HardFault_Handler
+  35              		.syntax unified
+  36              		.thumb
+  37              		.thumb_func
+  39              	HardFault_Handler:
+  40              		@ Volatile: function does not return.
+  41              		@ args = 0, pretend = 0, frame = 0
+  42              		@ frame_needed = 0, uses_anonymous_args = 0
+  43              		@ link register save eliminated.
+  44              	.L4:
+  45 0000 FEE7     		b	.L4
+  47              		.section	.text.MemManage_Handler,"ax",%progbits
+  48              		.align	1
+  49              		.global	MemManage_Handler
+  50              		.syntax unified
+  51              		.thumb
+  52              		.thumb_func
+  54              	MemManage_Handler:
+  55              		@ Volatile: function does not return.
+  56              		@ args = 0, pretend = 0, frame = 0
+  57              		@ frame_needed = 0, uses_anonymous_args = 0
+  58              		@ link register save eliminated.
+  59              	.L6:
+  60 0000 FEE7     		b	.L6
+  62              		.section	.text.BusFault_Handler,"ax",%progbits
+  63              		.align	1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 2
+
+
+  64              		.global	BusFault_Handler
+  65              		.syntax unified
+  66              		.thumb
+  67              		.thumb_func
+  69              	BusFault_Handler:
+  70              		@ Volatile: function does not return.
+  71              		@ args = 0, pretend = 0, frame = 0
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73              		@ link register save eliminated.
+  74              	.L8:
+  75 0000 FEE7     		b	.L8
+  77              		.section	.text.UsageFault_Handler,"ax",%progbits
+  78              		.align	1
+  79              		.global	UsageFault_Handler
+  80              		.syntax unified
+  81              		.thumb
+  82              		.thumb_func
+  84              	UsageFault_Handler:
+  85              		@ Volatile: function does not return.
+  86              		@ args = 0, pretend = 0, frame = 0
+  87              		@ frame_needed = 0, uses_anonymous_args = 0
+  88              		@ link register save eliminated.
+  89              	.L10:
+  90 0000 FEE7     		b	.L10
+  92              		.section	.text.SVC_Handler,"ax",%progbits
+  93              		.align	1
+  94              		.global	SVC_Handler
+  95              		.syntax unified
+  96              		.thumb
+  97              		.thumb_func
+  99              	SVC_Handler:
+ 100              		@ args = 0, pretend = 0, frame = 0
+ 101              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102              		@ link register save eliminated.
+ 103 0000 7047     		bx	lr
+ 105              		.section	.text.DebugMon_Handler,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	DebugMon_Handler
+ 108              		.syntax unified
+ 109              		.thumb
+ 110              		.thumb_func
+ 112              	DebugMon_Handler:
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115              		@ link register save eliminated.
+ 116 0000 7047     		bx	lr
+ 118              		.section	.text.PendSV_Handler,"ax",%progbits
+ 119              		.align	1
+ 120              		.global	PendSV_Handler
+ 121              		.syntax unified
+ 122              		.thumb
+ 123              		.thumb_func
+ 125              	PendSV_Handler:
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 0, uses_anonymous_args = 0
+ 128              		@ link register save eliminated.
+ 129 0000 7047     		bx	lr
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 3
+
+
+ 131              		.section	.text.SysTick_Handler,"ax",%progbits
+ 132              		.align	1
+ 133              		.global	SysTick_Handler
+ 134              		.syntax unified
+ 135              		.thumb
+ 136              		.thumb_func
+ 138              	SysTick_Handler:
+ 139              		@ args = 0, pretend = 0, frame = 0
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141 0000 08B5     		push	{r3, lr}
+ 142 0002 FFF7FEFF 		bl	HAL_IncTick
+ 143 0006 08BD     		pop	{r3, pc}
+ 145              		.section	.text.RTC_WKUP_IRQHandler,"ax",%progbits
+ 146              		.align	1
+ 147              		.global	RTC_WKUP_IRQHandler
+ 148              		.syntax unified
+ 149              		.thumb
+ 150              		.thumb_func
+ 152              	RTC_WKUP_IRQHandler:
+ 153              		@ args = 0, pretend = 0, frame = 0
+ 154              		@ frame_needed = 0, uses_anonymous_args = 0
+ 155 0000 08B5     		push	{r3, lr}
+ 156 0002 FFF7FEFF 		bl	HW_TS_RTC_Wakeup_Handler
+ 157 0006 08BD     		pop	{r3, pc}
+ 159              		.section	.text.USB_HP_IRQHandler,"ax",%progbits
+ 160              		.align	1
+ 161              		.global	USB_HP_IRQHandler
+ 162              		.syntax unified
+ 163              		.thumb
+ 164              		.thumb_func
+ 166              	USB_HP_IRQHandler:
+ 167              		@ args = 0, pretend = 0, frame = 0
+ 168              		@ frame_needed = 0, uses_anonymous_args = 0
+ 169 0000 08B5     		push	{r3, lr}
+ 170 0002 0248     		ldr	r0, .L20
+ 171 0004 FFF7FEFF 		bl	HAL_PCD_IRQHandler
+ 172 0008 08BD     		pop	{r3, pc}
+ 173              	.L21:
+ 174 000a 00BF     		.align	2
+ 175              	.L20:
+ 176 000c 00000000 		.word	hpcd_USB_FS
+ 178              		.section	.text.USB_LP_IRQHandler,"ax",%progbits
+ 179              		.align	1
+ 180              		.global	USB_LP_IRQHandler
+ 181              		.syntax unified
+ 182              		.thumb
+ 183              		.thumb_func
+ 185              	USB_LP_IRQHandler:
+ 186              		@ args = 0, pretend = 0, frame = 0
+ 187              		@ frame_needed = 0, uses_anonymous_args = 0
+ 188 0000 08B5     		push	{r3, lr}
+ 189 0002 0248     		ldr	r0, .L24
+ 190 0004 FFF7FEFF 		bl	HAL_PCD_IRQHandler
+ 191 0008 08BD     		pop	{r3, pc}
+ 192              	.L25:
+ 193 000a 00BF     		.align	2
+ 194              	.L24:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 4
+
+
+ 195 000c 00000000 		.word	hpcd_USB_FS
+ 197              		.section	.text.TIM1_UP_TIM16_IRQHandler,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	TIM1_UP_TIM16_IRQHandler
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 204              	TIM1_UP_TIM16_IRQHandler:
+ 205              		@ args = 0, pretend = 0, frame = 0
+ 206              		@ frame_needed = 0, uses_anonymous_args = 0
+ 207 0000 08B5     		push	{r3, lr}
+ 208 0002 0348     		ldr	r0, .L28
+ 209 0004 FFF7FEFF 		bl	HAL_TIM_IRQHandler
+ 210 0008 0248     		ldr	r0, .L28+4
+ 211 000a FFF7FEFF 		bl	HAL_TIM_IRQHandler
+ 212 000e 08BD     		pop	{r3, pc}
+ 213              	.L29:
+ 214              		.align	2
+ 215              	.L28:
+ 216 0010 00000000 		.word	htim1
+ 217 0014 00000000 		.word	htim16
+ 219              		.section	.text.IPCC_C1_RX_IRQHandler,"ax",%progbits
+ 220              		.align	1
+ 221              		.global	IPCC_C1_RX_IRQHandler
+ 222              		.syntax unified
+ 223              		.thumb
+ 224              		.thumb_func
+ 226              	IPCC_C1_RX_IRQHandler:
+ 227              		@ args = 0, pretend = 0, frame = 0
+ 228              		@ frame_needed = 0, uses_anonymous_args = 0
+ 229 0000 08B5     		push	{r3, lr}
+ 230 0002 FFF7FEFF 		bl	HW_IPCC_Rx_Handler
+ 231 0006 08BD     		pop	{r3, pc}
+ 233              		.section	.text.IPCC_C1_TX_IRQHandler,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	IPCC_C1_TX_IRQHandler
+ 236              		.syntax unified
+ 237              		.thumb
+ 238              		.thumb_func
+ 240              	IPCC_C1_TX_IRQHandler:
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 0, uses_anonymous_args = 0
+ 243 0000 08B5     		push	{r3, lr}
+ 244 0002 FFF7FEFF 		bl	HW_IPCC_Tx_Handler
+ 245 0006 08BD     		pop	{r3, pc}
+ 247              		.section	.text.HSEM_IRQHandler,"ax",%progbits
+ 248              		.align	1
+ 249              		.global	HSEM_IRQHandler
+ 250              		.syntax unified
+ 251              		.thumb
+ 252              		.thumb_func
+ 254              	HSEM_IRQHandler:
+ 255              		@ args = 0, pretend = 0, frame = 0
+ 256              		@ frame_needed = 0, uses_anonymous_args = 0
+ 257 0000 08B5     		push	{r3, lr}
+ 258 0002 FFF7FEFF 		bl	HAL_HSEM_IRQHandler
+ 259 0006 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 5
+
+
+ 261              		.section	.text.USB_LP_CAN_RX0_IRQHandler,"ax",%progbits
+ 262              		.align	1
+ 263              		.global	USB_LP_CAN_RX0_IRQHandler
+ 264              		.syntax unified
+ 265              		.thumb
+ 266              		.thumb_func
+ 268              	USB_LP_CAN_RX0_IRQHandler:
+ 269              		@ args = 0, pretend = 0, frame = 0
+ 270              		@ frame_needed = 0, uses_anonymous_args = 0
+ 271 0000 08B5     		push	{r3, lr}
+ 272 0002 0248     		ldr	r0, .L38
+ 273 0004 FFF7FEFF 		bl	HAL_PCD_IRQHandler
+ 274 0008 08BD     		pop	{r3, pc}
+ 275              	.L39:
+ 276 000a 00BF     		.align	2
+ 277              	.L38:
+ 278 000c 00000000 		.word	hpcd_USB_FS
+ 280              		.section	.text.HAL_UART_RxCpltCallback,"ax",%progbits
+ 281              		.align	1
+ 282              		.global	HAL_UART_RxCpltCallback
+ 283              		.syntax unified
+ 284              		.thumb
+ 285              		.thumb_func
+ 287              	HAL_UART_RxCpltCallback:
+ 288              		@ args = 0, pretend = 0, frame = 0
+ 289              		@ frame_needed = 0, uses_anonymous_args = 0
+ 290 0000 08B5     		push	{r3, lr}
+ 291 0002 0268     		ldr	r2, [r0]
+ 292 0004 074B     		ldr	r3, .L44
+ 293 0006 9A42     		cmp	r2, r3
+ 294 0008 00D0     		beq	.L43
+ 295              	.L40:
+ 296 000a 08BD     		pop	{r3, pc}
+ 297              	.L43:
+ 298 000c 6423     		movs	r3, #100
+ 299 000e 0122     		movs	r2, #1
+ 300 0010 0549     		ldr	r1, .L44+4
+ 301 0012 0648     		ldr	r0, .L44+8
+ 302 0014 FFF7FEFF 		bl	HAL_UART_Transmit
+ 303 0018 0122     		movs	r2, #1
+ 304 001a 0349     		ldr	r1, .L44+4
+ 305 001c 0348     		ldr	r0, .L44+8
+ 306 001e FFF7FEFF 		bl	HAL_UART_Receive_IT
+ 307 0022 F2E7     		b	.L40
+ 308              	.L45:
+ 309              		.align	2
+ 310              	.L44:
+ 311 0024 00380140 		.word	1073821696
+ 312 0028 00000000 		.word	huart1_rxbuffer
+ 313 002c 00000000 		.word	huart1
+ 315              		.global	huart1_rxbuffer
+ 316              		.section	.bss.huart1_rxbuffer,"aw",%nobits
+ 317              		.align	2
+ 320              	huart1_rxbuffer:
+ 321 0000 00000000 		.space	256
+ 321      00000000 
+ 321      00000000 
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 6
+
+
+ 321      00000000 
+ 321      00000000 
+ 322              		.global	gfreq
+ 323              		.section	.bss.gfreq,"aw",%nobits
+ 324              		.align	2
+ 327              	gfreq:
+ 328 0000 00000000 		.space	4
+ 329              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32wbxx_it.c
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:18     .text.NMI_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:24     .text.NMI_Handler:00000000 NMI_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:33     .text.HardFault_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:39     .text.HardFault_Handler:00000000 HardFault_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:48     .text.MemManage_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:54     .text.MemManage_Handler:00000000 MemManage_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:63     .text.BusFault_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:69     .text.BusFault_Handler:00000000 BusFault_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:78     .text.UsageFault_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:84     .text.UsageFault_Handler:00000000 UsageFault_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:93     .text.SVC_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:99     .text.SVC_Handler:00000000 SVC_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:106    .text.DebugMon_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:112    .text.DebugMon_Handler:00000000 DebugMon_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:119    .text.PendSV_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:125    .text.PendSV_Handler:00000000 PendSV_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:132    .text.SysTick_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:138    .text.SysTick_Handler:00000000 SysTick_Handler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:146    .text.RTC_WKUP_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:152    .text.RTC_WKUP_IRQHandler:00000000 RTC_WKUP_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:160    .text.USB_HP_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:166    .text.USB_HP_IRQHandler:00000000 USB_HP_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:176    .text.USB_HP_IRQHandler:0000000c $d
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:179    .text.USB_LP_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:185    .text.USB_LP_IRQHandler:00000000 USB_LP_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:195    .text.USB_LP_IRQHandler:0000000c $d
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:198    .text.TIM1_UP_TIM16_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:204    .text.TIM1_UP_TIM16_IRQHandler:00000000 TIM1_UP_TIM16_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:216    .text.TIM1_UP_TIM16_IRQHandler:00000010 $d
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:220    .text.IPCC_C1_RX_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:226    .text.IPCC_C1_RX_IRQHandler:00000000 IPCC_C1_RX_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:234    .text.IPCC_C1_TX_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:240    .text.IPCC_C1_TX_IRQHandler:00000000 IPCC_C1_TX_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:248    .text.HSEM_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:254    .text.HSEM_IRQHandler:00000000 HSEM_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:262    .text.USB_LP_CAN_RX0_IRQHandler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:268    .text.USB_LP_CAN_RX0_IRQHandler:00000000 USB_LP_CAN_RX0_IRQHandler
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:278    .text.USB_LP_CAN_RX0_IRQHandler:0000000c $d
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:281    .text.HAL_UART_RxCpltCallback:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:287    .text.HAL_UART_RxCpltCallback:00000000 HAL_UART_RxCpltCallback
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:311    .text.HAL_UART_RxCpltCallback:00000024 $d
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:320    .bss.huart1_rxbuffer:00000000 huart1_rxbuffer
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:317    .bss.huart1_rxbuffer:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:327    .bss.gfreq:00000000 gfreq
+C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s:324    .bss.gfreq:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_IncTick
+HW_TS_RTC_Wakeup_Handler
+HAL_PCD_IRQHandler
+hpcd_USB_FS
+HAL_TIM_IRQHandler
+htim1
+htim16
+HW_IPCC_Rx_Handler
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccD5MBZr.s 			page 8
+
+
+HW_IPCC_Tx_Handler
+HAL_HSEM_IRQHandler
+HAL_UART_Transmit
+HAL_UART_Receive_IT
+huart1

@@ -1,0 +1,64 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccrAP9at.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"arm_mat_trans_f32.c"
+  16              		.text
+  17              		.section	.text.arm_mat_trans_f32,"ax",%progbits
+  18              		.align	1
+  19              		.global	arm_mat_trans_f32
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	arm_mat_trans_f32:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 70B5     		push	{r4, r5, r6, lr}
+  28 0002 4368     		ldr	r3, [r0, #4]
+  29 0004 4E68     		ldr	r6, [r1, #4]
+  30 0006 B0F800C0 		ldrh	ip, [r0]
+  31 000a 4588     		ldrh	r5, [r0, #2]
+  32 000c 6446     		mov	r4, ip
+  33 000e 4FF0000E 		mov	lr, #0
+  34 0012 0BE0     		b	.L4
+  35              	.L3:
+  36 0014 53F8040B 		ldr	r0, [r3], #4	@ float
+  37 0018 0860     		str	r0, [r1]	@ float
+  38 001a 01EB8C01 		add	r1, r1, ip, lsl #2
+  39 001e 013A     		subs	r2, r2, #1
+  40              	.L2:
+  41 0020 002A     		cmp	r2, #0
+  42 0022 F7D1     		bne	.L3
+  43 0024 0EF1010E 		add	lr, lr, #1
+  44 0028 013C     		subs	r4, r4, #1
+  45 002a 03D0     		beq	.L6
+  46              	.L4:
+  47 002c 06EB8E01 		add	r1, r6, lr, lsl #2
+  48 0030 2A46     		mov	r2, r5
+  49 0032 F5E7     		b	.L2
+  50              	.L6:
+  51 0034 1046     		mov	r0, r2
+  52 0036 70BD     		pop	{r4, r5, r6, pc}
+  54              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccrAP9at.s 			page 2
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_mat_trans_f32.c
+C:\Users\Nathan\AppData\Local\Temp\ccrAP9at.s:18     .text.arm_mat_trans_f32:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccrAP9at.s:24     .text.arm_mat_trans_f32:00000000 arm_mat_trans_f32
+
+NO UNDEFINED SYMBOLS

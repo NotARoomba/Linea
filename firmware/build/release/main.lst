@@ -1,0 +1,413 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"main.c"
+  16              		.text
+  17              		.section	.text.Error_Handler,"ax",%progbits
+  18              		.align	1
+  19              		.global	Error_Handler
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	Error_Handler:
+  25              		@ Volatile: function does not return.
+  26              		@ args = 0, pretend = 0, frame = 0
+  27              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		@ link register save eliminated.
+  29              		.syntax unified
+  30              	@ 209 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+  31 0000 72B6     		cpsid i
+  32              	@ 0 "" 2
+  33              		.thumb
+  34              		.syntax unified
+  35              	.L2:
+  36 0002 FEE7     		b	.L2
+  38              		.section	.text.SystemClock_Config,"ax",%progbits
+  39              		.align	1
+  40              		.global	SystemClock_Config
+  41              		.syntax unified
+  42              		.thumb
+  43              		.thumb_func
+  45              	SystemClock_Config:
+  46              		@ args = 0, pretend = 0, frame = 104
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48 0000 30B5     		push	{r4, r5, lr}
+  49 0002 9BB0     		sub	sp, sp, #108
+  50 0004 08AD     		add	r5, sp, #32
+  51 0006 4822     		movs	r2, #72
+  52 0008 0021     		movs	r1, #0
+  53 000a 2846     		mov	r0, r5
+  54 000c FFF7FEFF 		bl	memset
+  55 0010 0024     		movs	r4, #0
+  56 0012 0194     		str	r4, [sp, #4]
+  57 0014 0294     		str	r4, [sp, #8]
+  58 0016 0394     		str	r4, [sp, #12]
+  59 0018 0494     		str	r4, [sp, #16]
+  60 001a 0594     		str	r4, [sp, #20]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s 			page 2
+
+
+  61 001c 0694     		str	r4, [sp, #24]
+  62 001e 0794     		str	r4, [sp, #28]
+  63 0020 FFF7FEFF 		bl	HAL_PWR_EnableBkUpAccess
+  64 0024 4FF0B042 		mov	r2, #1476395008
+  65 0028 D2F89030 		ldr	r3, [r2, #144]
+  66 002c 23F01803 		bic	r3, r3, #24
+  67 0030 43F01003 		orr	r3, r3, #16
+  68 0034 C2F89030 		str	r3, [r2, #144]
+  69 0038 02F58062 		add	r2, r2, #1024
+  70 003c 1368     		ldr	r3, [r2]
+  71 003e 23F4C063 		bic	r3, r3, #1536
+  72 0042 43F40073 		orr	r3, r3, #512
+  73 0046 1360     		str	r3, [r2]
+  74 0048 1368     		ldr	r3, [r2]
+  75 004a 03F4C063 		and	r3, r3, #1536
+  76 004e 0093     		str	r3, [sp]
+  77 0050 009B     		ldr	r3, [sp]
+  78 0052 2F23     		movs	r3, #47
+  79 0054 0893     		str	r3, [sp, #32]
+  80 0056 4FF48033 		mov	r3, #65536
+  81 005a 0993     		str	r3, [sp, #36]
+  82 005c 0123     		movs	r3, #1
+  83 005e 0A93     		str	r3, [sp, #40]
+  84 0060 4FF48072 		mov	r2, #256
+  85 0064 0B92     		str	r2, [sp, #44]
+  86 0066 0F93     		str	r3, [sp, #60]
+  87 0068 4022     		movs	r2, #64
+  88 006a 0C92     		str	r2, [sp, #48]
+  89 006c 1094     		str	r4, [sp, #64]
+  90 006e 6022     		movs	r2, #96
+  91 0070 1192     		str	r2, [sp, #68]
+  92 0072 0522     		movs	r2, #5
+  93 0074 0D92     		str	r2, [sp, #52]
+  94 0076 0222     		movs	r2, #2
+  95 0078 1392     		str	r2, [sp, #76]
+  96 007a 1493     		str	r3, [sp, #80]
+  97 007c 1594     		str	r4, [sp, #84]
+  98 007e 2023     		movs	r3, #32
+  99 0080 1693     		str	r3, [sp, #88]
+ 100 0082 4FF40033 		mov	r3, #131072
+ 101 0086 1793     		str	r3, [sp, #92]
+ 102 0088 4FF00053 		mov	r3, #536870912
+ 103 008c 1993     		str	r3, [sp, #100]
+ 104 008e 4FF00073 		mov	r3, #33554432
+ 105 0092 1893     		str	r3, [sp, #96]
+ 106 0094 2846     		mov	r0, r5
+ 107 0096 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 108 009a 88B9     		cbnz	r0, .L7
+ 109 009c 6F23     		movs	r3, #111
+ 110 009e 0193     		str	r3, [sp, #4]
+ 111 00a0 0321     		movs	r1, #3
+ 112 00a2 0291     		str	r1, [sp, #8]
+ 113 00a4 0390     		str	r0, [sp, #12]
+ 114 00a6 0490     		str	r0, [sp, #16]
+ 115 00a8 0590     		str	r0, [sp, #20]
+ 116 00aa 8022     		movs	r2, #128
+ 117 00ac 0692     		str	r2, [sp, #24]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s 			page 3
+
+
+ 118 00ae 0790     		str	r0, [sp, #28]
+ 119 00b0 01A8     		add	r0, sp, #4
+ 120 00b2 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 121 00b6 28B9     		cbnz	r0, .L8
+ 122 00b8 FFF7FEFF 		bl	HAL_RCCEx_EnableMSIPLLMode
+ 123 00bc 1BB0     		add	sp, sp, #108
+ 124              		@ sp needed
+ 125 00be 30BD     		pop	{r4, r5, pc}
+ 126              	.L7:
+ 127 00c0 FFF7FEFF 		bl	Error_Handler
+ 128              	.L8:
+ 129 00c4 FFF7FEFF 		bl	Error_Handler
+ 131              		.section	.text.PeriphCommonClock_Config,"ax",%progbits
+ 132              		.align	1
+ 133              		.global	PeriphCommonClock_Config
+ 134              		.syntax unified
+ 135              		.thumb
+ 136              		.thumb_func
+ 138              	PeriphCommonClock_Config:
+ 139              		@ args = 0, pretend = 0, frame = 80
+ 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 141 0000 10B5     		push	{r4, lr}
+ 142 0002 94B0     		sub	sp, sp, #80
+ 143 0004 5022     		movs	r2, #80
+ 144 0006 0021     		movs	r1, #0
+ 145 0008 6846     		mov	r0, sp
+ 146 000a FFF7FEFF 		bl	memset
+ 147 000e 4FF45453 		mov	r3, #13568
+ 148 0012 0093     		str	r3, [sp]
+ 149 0014 1823     		movs	r3, #24
+ 150 0016 0193     		str	r3, [sp, #4]
+ 151 0018 4FF40033 		mov	r3, #131072
+ 152 001c 0293     		str	r3, [sp, #8]
+ 153 001e 4FF00073 		mov	r3, #33554432
+ 154 0022 0393     		str	r3, [sp, #12]
+ 155 0024 4FF00053 		mov	r3, #536870912
+ 156 0028 0493     		str	r3, [sp, #16]
+ 157 002a 4FF08853 		mov	r3, #285212672
+ 158 002e 0593     		str	r3, [sp, #20]
+ 159 0030 4FF08063 		mov	r3, #67108864
+ 160 0034 0D93     		str	r3, [sp, #52]
+ 161 0036 4FF08053 		mov	r3, #268435456
+ 162 003a 0F93     		str	r3, [sp, #60]
+ 163 003c 4FF44043 		mov	r3, #49152
+ 164 0040 1193     		str	r3, [sp, #68]
+ 165 0042 1023     		movs	r3, #16
+ 166 0044 1393     		str	r3, [sp, #76]
+ 167 0046 6846     		mov	r0, sp
+ 168 0048 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 169 004c 20B9     		cbnz	r0, .L12
+ 170 004e 034B     		ldr	r3, .L13
+ 171 0050 D3F89430 		ldr	r3, [r3, #148]
+ 172 0054 14B0     		add	sp, sp, #80
+ 173              		@ sp needed
+ 174 0056 10BD     		pop	{r4, pc}
+ 175              	.L12:
+ 176 0058 FFF7FEFF 		bl	Error_Handler
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s 			page 4
+
+
+ 177              	.L14:
+ 178              		.align	2
+ 179              	.L13:
+ 180 005c 00140058 		.word	1476400128
+ 182              		.section	.rodata.main.str1.4,"aMS",%progbits,1
+ 183              		.align	2
+ 184              	.LC0:
+ 185 0000 48656C6C 		.ascii	"Hello World\012\000"
+ 185      6F20576F 
+ 185      726C640A 
+ 185      00
+ 186 000d 000000   		.align	2
+ 187              	.LC1:
+ 188 0010 48656C6C 		.ascii	"Hello Worldaa\012\000"
+ 188      6F20576F 
+ 188      726C6461 
+ 188      610A00
+ 189 001f 00       		.align	2
+ 190              	.LC2:
+ 191 0020 476C6964 		.ascii	"Glider Addon Build2\012\000"
+ 191      65722041 
+ 191      64646F6E 
+ 191      20427569 
+ 191      6C64320A 
+ 192 0035 000000   		.align	2
+ 193              	.LC3:
+ 194 0038 476C6964 		.ascii	"Glider Addon Build3\012\000"
+ 194      65722041 
+ 194      64646F6E 
+ 194      20427569 
+ 194      6C64330A 
+ 195 004d 000000   		.align	2
+ 196              	.LC4:
+ 197 0050 56524546 		.ascii	"VREF: %u  CH3: %u\012\000"
+ 197      3A202575 
+ 197      20204348 
+ 197      333A2025 
+ 197      750A00
+ 198              		.section	.text.main,"ax",%progbits
+ 199              		.align	1
+ 200              		.global	main
+ 201              		.syntax unified
+ 202              		.thumb
+ 203              		.thumb_func
+ 205              	main:
+ 206              		@ args = 0, pretend = 0, frame = 88
+ 207              		@ frame_needed = 0, uses_anonymous_args = 0
+ 208 0000 70B5     		push	{r4, r5, r6, lr}
+ 209 0002 96B0     		sub	sp, sp, #88
+ 210 0004 FFF7FEFF 		bl	HAL_Init
+ 211 0008 FFF7FEFF 		bl	MX_APPE_Config
+ 212 000c FFF7FEFF 		bl	SystemClock_Config
+ 213 0010 FFF7FEFF 		bl	PeriphCommonClock_Config
+ 214 0014 FFF7FEFF 		bl	MX_IPCC_Init
+ 215 0018 FFF7FEFF 		bl	MX_GPIO_Init
+ 216 001c FFF7FEFF 		bl	MX_ADC1_Init
+ 217 0020 414C     		ldr	r4, .L18
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s 			page 5
+
+
+ 218 0022 7F21     		movs	r1, #127
+ 219 0024 2046     		mov	r0, r4
+ 220 0026 FFF7FEFF 		bl	HAL_ADCEx_Calibration_Start
+ 221 002a FFF7FEFF 		bl	MX_I2C1_Init
+ 222 002e FFF7FEFF 		bl	MX_TIM1_Init
+ 223 0032 FFF7FEFF 		bl	MX_TIM16_Init
+ 224 0036 FFF7FEFF 		bl	MX_USART1_UART_Init
+ 225 003a FFF7FEFF 		bl	MX_RTC_Init
+ 226 003e FFF7FEFF 		bl	MX_USB_Device_Init
+ 227 0042 FFF7FEFF 		bl	MX_RF_Init
+ 228 0046 FFF7FEFF 		bl	MX_USB_Device_Init
+ 229 004a 4FF47A70 		mov	r0, #1000
+ 230 004e FFF7FEFF 		bl	HAL_Delay
+ 231 0052 0D21     		movs	r1, #13
+ 232 0054 3548     		ldr	r0, .L18+4
+ 233 0056 FFF7FEFF 		bl	CDC_Transmit_FS
+ 234 005a 0F21     		movs	r1, #15
+ 235 005c 3448     		ldr	r0, .L18+8
+ 236 005e FFF7FEFF 		bl	CDC_Transmit_FS
+ 237 0062 FFF7FEFF 		bl	patchouli_init
+ 238 0066 0020     		movs	r0, #0
+ 239 0068 FFF7FEFF 		bl	patchouli_set_mode
+ 240 006c 4FF47A70 		mov	r0, #1000
+ 241 0070 FFF7FEFF 		bl	HAL_Delay
+ 242 0074 2F4B     		ldr	r3, .L18+12
+ 243 0076 1B68     		ldr	r3, [r3]
+ 244 0078 3222     		movs	r2, #50
+ 245 007a 1A63     		str	r2, [r3, #48]
+ 246 007c 1421     		movs	r1, #20
+ 247 007e 2E48     		ldr	r0, .L18+16
+ 248 0080 FFF7FEFF 		bl	CDC_Transmit_FS
+ 249 0084 4FF47A70 		mov	r0, #1000
+ 250 0088 FFF7FEFF 		bl	HAL_Delay
+ 251 008c 1421     		movs	r1, #20
+ 252 008e 2B48     		ldr	r0, .L18+20
+ 253 0090 FFF7FEFF 		bl	CDC_Transmit_FS
+ 254 0094 0023     		movs	r3, #0
+ 255 0096 0093     		str	r3, [sp]
+ 256 0098 0193     		str	r3, [sp, #4]
+ 257 009a 0293     		str	r3, [sp, #8]
+ 258 009c 0393     		str	r3, [sp, #12]
+ 259 009e 0493     		str	r3, [sp, #16]
+ 260 00a0 0593     		str	r3, [sp, #20]
+ 261 00a2 274B     		ldr	r3, .L18+24
+ 262 00a4 0093     		str	r3, [sp]
+ 263 00a6 0623     		movs	r3, #6
+ 264 00a8 0193     		str	r3, [sp, #4]
+ 265 00aa 0293     		str	r3, [sp, #8]
+ 266 00ac 7F23     		movs	r3, #127
+ 267 00ae 0393     		str	r3, [sp, #12]
+ 268 00b0 0423     		movs	r3, #4
+ 269 00b2 0493     		str	r3, [sp, #16]
+ 270 00b4 6946     		mov	r1, sp
+ 271 00b6 2046     		mov	r0, r4
+ 272 00b8 FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 273 00bc 2046     		mov	r0, r4
+ 274 00be FFF7FEFF 		bl	HAL_ADC_Start
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s 			page 6
+
+
+ 275 00c2 4FF0FF31 		mov	r1, #-1
+ 276 00c6 2046     		mov	r0, r4
+ 277 00c8 FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 278 00cc 2046     		mov	r0, r4
+ 279 00ce FFF7FEFF 		bl	HAL_ADC_GetValue
+ 280 00d2 0646     		mov	r6, r0
+ 281 00d4 1B4B     		ldr	r3, .L18+28
+ 282 00d6 0093     		str	r3, [sp]
+ 283 00d8 6946     		mov	r1, sp
+ 284 00da 2046     		mov	r0, r4
+ 285 00dc FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 286 00e0 2046     		mov	r0, r4
+ 287 00e2 FFF7FEFF 		bl	HAL_ADC_Start
+ 288 00e6 4FF0FF31 		mov	r1, #-1
+ 289 00ea 2046     		mov	r0, r4
+ 290 00ec FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 291 00f0 2046     		mov	r0, r4
+ 292 00f2 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 293 00f6 06AC     		add	r4, sp, #24
+ 294 00f8 83B2     		uxth	r3, r0
+ 295 00fa B2B2     		uxth	r2, r6
+ 296 00fc 1249     		ldr	r1, .L18+32
+ 297 00fe 2046     		mov	r0, r4
+ 298 0100 FFF7FEFF 		bl	sprintf
+ 299 0104 2046     		mov	r0, r4
+ 300 0106 FFF7FEFF 		bl	strlen
+ 301 010a 81B2     		uxth	r1, r0
+ 302 010c 2046     		mov	r0, r4
+ 303 010e FFF7FEFF 		bl	CDC_Transmit_FS
+ 304 0112 4FF4FA70 		mov	r0, #500
+ 305 0116 FFF7FEFF 		bl	HAL_Delay
+ 306 011a FFF7FEFF 		bl	MX_APPE_Init
+ 307              	.L16:
+ 308 011e FFF7FEFF 		bl	MX_APPE_Process
+ 309 0122 FFF7FEFF 		bl	patchouli_cycle
+ 310 0126 FAE7     		b	.L16
+ 311              	.L19:
+ 312              		.align	2
+ 313              	.L18:
+ 314 0128 00000000 		.word	hadc1
+ 315 012c 00000000 		.word	.LC0
+ 316 0130 10000000 		.word	.LC1
+ 317 0134 00000000 		.word	htim16
+ 318 0138 20000000 		.word	.LC2
+ 319 013c 38000000 		.word	.LC3
+ 320 0140 01000080 		.word	-2147483647
+ 321 0144 0800900C 		.word	210763784
+ 322 0148 50000000 		.word	.LC4
+ 324              		.global	usbhid_txbuf
+ 325              		.section	.bss.usbhid_txbuf,"aw",%nobits
+ 326              		.align	2
+ 329              	usbhid_txbuf:
+ 330 0000 00000000 		.space	12
+ 330      00000000 
+ 330      00000000 
+ 331              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 main.c
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:18     .text.Error_Handler:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:24     .text.Error_Handler:00000000 Error_Handler
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:39     .text.SystemClock_Config:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:45     .text.SystemClock_Config:00000000 SystemClock_Config
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:132    .text.PeriphCommonClock_Config:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:138    .text.PeriphCommonClock_Config:00000000 PeriphCommonClock_Config
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:180    .text.PeriphCommonClock_Config:0000005c $d
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:183    .rodata.main.str1.4:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:199    .text.main:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:205    .text.main:00000000 main
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:314    .text.main:00000128 $d
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:329    .bss.usbhid_txbuf:00000000 usbhid_txbuf
+C:\Users\Nathan\AppData\Local\Temp\cck8oUky.s:326    .bss.usbhid_txbuf:00000000 $d
+
+UNDEFINED SYMBOLS
+memset
+HAL_PWR_EnableBkUpAccess
+HAL_RCC_OscConfig
+HAL_RCC_ClockConfig
+HAL_RCCEx_EnableMSIPLLMode
+HAL_RCCEx_PeriphCLKConfig
+HAL_Init
+MX_APPE_Config
+MX_IPCC_Init
+MX_GPIO_Init
+MX_ADC1_Init
+HAL_ADCEx_Calibration_Start
+MX_I2C1_Init
+MX_TIM1_Init
+MX_TIM16_Init
+MX_USART1_UART_Init
+MX_RTC_Init
+MX_USB_Device_Init
+MX_RF_Init
+HAL_Delay
+CDC_Transmit_FS
+patchouli_init
+patchouli_set_mode
+HAL_ADC_ConfigChannel
+HAL_ADC_Start
+HAL_ADC_PollForConversion
+HAL_ADC_GetValue
+sprintf
+strlen
+MX_APPE_Init
+MX_APPE_Process
+patchouli_cycle
+hadc1
+htim16

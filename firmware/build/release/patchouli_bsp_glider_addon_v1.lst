@@ -1,0 +1,1061 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"patchouli_bsp_glider_addon_v1.c"
+  16              		.text
+  17              		.section	.text.patchouli_coil_select,"ax",%progbits
+  18              		.align	1
+  19              		.global	patchouli_coil_select
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	patchouli_coil_select:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 10B5     		push	{r4, lr}
+  28 0002 82B0     		sub	sp, sp, #8
+  29 0004 0023     		movs	r3, #0
+  30 0006 06E0     		b	.L2
+  31              	.L3:
+  32 0008 03F10802 		add	r2, r3, #8
+  33 000c 6A44     		add	r2, sp, r2
+  34 000e 0124     		movs	r4, #1
+  35 0010 02F8084C 		strb	r4, [r2, #-8]
+  36 0014 2344     		add	r3, r3, r4
+  37              	.L2:
+  38 0016 052B     		cmp	r3, #5
+  39 0018 F6D9     		bls	.L3
+  40 001a 0029     		cmp	r1, #0
+  41 001c 00F0D580 		beq	.L4
+  42 0020 1B28     		cmp	r0, #27
+  43 0022 00F28081 		bhi	.L1
+  44 0026 0E28     		cmp	r0, #14
+  45 0028 00F09E80 		beq	.L6
+  46 002c 36DC     		bgt	.L7
+  47 002e 0728     		cmp	r0, #7
+  48 0030 00F08280 		beq	.L8
+  49 0034 19DC     		bgt	.L9
+  50 0036 0328     		cmp	r0, #3
+  51 0038 6FD0     		beq	.L10
+  52 003a 0ADC     		bgt	.L11
+  53 003c 0128     		cmp	r0, #1
+  54 003e 62D0     		beq	.L12
+  55 0040 0228     		cmp	r0, #2
+  56 0042 65D0     		beq	.L13
+  57 0044 0028     		cmp	r0, #0
+  58 0046 40F06E81 		bne	.L1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 2
+
+
+  59 004a 8DF80000 		strb	r0, [sp]
+  60 004e 0124     		movs	r4, #1
+  61 0050 11E1     		b	.L41
+  62              	.L11:
+  63 0052 0528     		cmp	r0, #5
+  64 0054 66D0     		beq	.L15
+  65 0056 0628     		cmp	r0, #6
+  66 0058 69D0     		beq	.L16
+  67 005a 0428     		cmp	r0, #4
+  68 005c 40F06381 		bne	.L1
+  69 0060 0023     		movs	r3, #0
+  70 0062 8DF80030 		strb	r3, [sp]
+  71 0066 0724     		movs	r4, #7
+  72 0068 05E1     		b	.L41
+  73              	.L9:
+  74 006a 0B28     		cmp	r0, #11
+  75 006c 72D0     		beq	.L18
+  76 006e 0BDC     		bgt	.L19
+  77 0070 0928     		cmp	r0, #9
+  78 0072 65D0     		beq	.L20
+  79 0074 0A28     		cmp	r0, #10
+  80 0076 68D0     		beq	.L21
+  81 0078 0828     		cmp	r0, #8
+  82 007a 40F05481 		bne	.L1
+  83 007e 0023     		movs	r3, #0
+  84 0080 8DF80130 		strb	r3, [sp, #1]
+  85 0084 0124     		movs	r4, #1
+  86 0086 F6E0     		b	.L41
+  87              	.L19:
+  88 0088 0C28     		cmp	r0, #12
+  89 008a 68D0     		beq	.L23
+  90 008c 0D28     		cmp	r0, #13
+  91 008e 40F04A81 		bne	.L1
+  92 0092 0023     		movs	r3, #0
+  93 0094 8DF80130 		strb	r3, [sp, #1]
+  94 0098 0524     		movs	r4, #5
+  95 009a ECE0     		b	.L41
+  96              	.L7:
+  97 009c 1528     		cmp	r0, #21
+  98 009e 7CD0     		beq	.L25
+  99 00a0 0FDD     		ble	.L69
+ 100 00a2 1928     		cmp	r0, #25
+ 101 00a4 00F08780 		beq	.L34
+ 102 00a8 23DC     		bgt	.L35
+ 103 00aa 1728     		cmp	r0, #23
+ 104 00ac 7AD0     		beq	.L36
+ 105 00ae 1828     		cmp	r0, #24
+ 106 00b0 7CD0     		beq	.L37
+ 107 00b2 1628     		cmp	r0, #22
+ 108 00b4 40F03781 		bne	.L1
+ 109 00b8 0023     		movs	r3, #0
+ 110 00ba 8DF80330 		strb	r3, [sp, #3]
+ 111 00be 0324     		movs	r4, #3
+ 112 00c0 D9E0     		b	.L41
+ 113              	.L69:
+ 114 00c2 1228     		cmp	r0, #18
+ 115 00c4 5FD0     		beq	.L27
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 3
+
+
+ 116 00c6 0ADC     		bgt	.L28
+ 117 00c8 1028     		cmp	r0, #16
+ 118 00ca 52D0     		beq	.L29
+ 119 00cc 1128     		cmp	r0, #17
+ 120 00ce 55D0     		beq	.L30
+ 121 00d0 0F28     		cmp	r0, #15
+ 122 00d2 40F02881 		bne	.L1
+ 123 00d6 0024     		movs	r4, #0
+ 124 00d8 8DF80240 		strb	r4, [sp, #2]
+ 125 00dc CBE0     		b	.L41
+ 126              	.L28:
+ 127 00de 1328     		cmp	r0, #19
+ 128 00e0 56D0     		beq	.L32
+ 129 00e2 1428     		cmp	r0, #20
+ 130 00e4 40F01F81 		bne	.L1
+ 131 00e8 0023     		movs	r3, #0
+ 132 00ea 8DF80230 		strb	r3, [sp, #2]
+ 133 00ee 0724     		movs	r4, #7
+ 134 00f0 C1E0     		b	.L41
+ 135              	.L35:
+ 136 00f2 1A28     		cmp	r0, #26
+ 137 00f4 64D0     		beq	.L39
+ 138 00f6 1B28     		cmp	r0, #27
+ 139 00f8 40F01581 		bne	.L1
+ 140 00fc 0023     		movs	r3, #0
+ 141 00fe 8DF80330 		strb	r3, [sp, #3]
+ 142 0102 0624     		movs	r4, #6
+ 143 0104 B7E0     		b	.L41
+ 144              	.L12:
+ 145 0106 0023     		movs	r3, #0
+ 146 0108 8DF80030 		strb	r3, [sp]
+ 147 010c 0224     		movs	r4, #2
+ 148 010e B2E0     		b	.L41
+ 149              	.L13:
+ 150 0110 0023     		movs	r3, #0
+ 151 0112 8DF80030 		strb	r3, [sp]
+ 152 0116 0424     		movs	r4, #4
+ 153 0118 ADE0     		b	.L41
+ 154              	.L10:
+ 155 011a 0023     		movs	r3, #0
+ 156 011c 8DF80030 		strb	r3, [sp]
+ 157 0120 0624     		movs	r4, #6
+ 158 0122 A8E0     		b	.L41
+ 159              	.L15:
+ 160 0124 0023     		movs	r3, #0
+ 161 0126 8DF80030 		strb	r3, [sp]
+ 162 012a 0524     		movs	r4, #5
+ 163 012c A3E0     		b	.L41
+ 164              	.L16:
+ 165 012e 0023     		movs	r3, #0
+ 166 0130 8DF80130 		strb	r3, [sp, #1]
+ 167 0134 0324     		movs	r4, #3
+ 168 0136 9EE0     		b	.L41
+ 169              	.L8:
+ 170 0138 0024     		movs	r4, #0
+ 171 013a 8DF80140 		strb	r4, [sp, #1]
+ 172 013e 9AE0     		b	.L41
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 4
+
+
+ 173              	.L20:
+ 174 0140 0023     		movs	r3, #0
+ 175 0142 8DF80130 		strb	r3, [sp, #1]
+ 176 0146 0224     		movs	r4, #2
+ 177 0148 95E0     		b	.L41
+ 178              	.L21:
+ 179 014a 0023     		movs	r3, #0
+ 180 014c 8DF80130 		strb	r3, [sp, #1]
+ 181 0150 0424     		movs	r4, #4
+ 182 0152 90E0     		b	.L41
+ 183              	.L18:
+ 184 0154 0023     		movs	r3, #0
+ 185 0156 8DF80130 		strb	r3, [sp, #1]
+ 186 015a 0624     		movs	r4, #6
+ 187 015c 8BE0     		b	.L41
+ 188              	.L23:
+ 189 015e 0023     		movs	r3, #0
+ 190 0160 8DF80130 		strb	r3, [sp, #1]
+ 191 0164 0724     		movs	r4, #7
+ 192 0166 86E0     		b	.L41
+ 193              	.L6:
+ 194 0168 0023     		movs	r3, #0
+ 195 016a 8DF80230 		strb	r3, [sp, #2]
+ 196 016e 0324     		movs	r4, #3
+ 197 0170 81E0     		b	.L41
+ 198              	.L29:
+ 199 0172 0023     		movs	r3, #0
+ 200 0174 8DF80230 		strb	r3, [sp, #2]
+ 201 0178 0124     		movs	r4, #1
+ 202 017a 7CE0     		b	.L41
+ 203              	.L30:
+ 204 017c 0023     		movs	r3, #0
+ 205 017e 8DF80230 		strb	r3, [sp, #2]
+ 206 0182 0224     		movs	r4, #2
+ 207 0184 77E0     		b	.L41
+ 208              	.L27:
+ 209 0186 0023     		movs	r3, #0
+ 210 0188 8DF80230 		strb	r3, [sp, #2]
+ 211 018c 0424     		movs	r4, #4
+ 212 018e 72E0     		b	.L41
+ 213              	.L32:
+ 214 0190 0023     		movs	r3, #0
+ 215 0192 8DF80230 		strb	r3, [sp, #2]
+ 216 0196 0624     		movs	r4, #6
+ 217 0198 6DE0     		b	.L41
+ 218              	.L25:
+ 219 019a 0023     		movs	r3, #0
+ 220 019c 8DF80230 		strb	r3, [sp, #2]
+ 221 01a0 0524     		movs	r4, #5
+ 222 01a2 68E0     		b	.L41
+ 223              	.L36:
+ 224 01a4 0024     		movs	r4, #0
+ 225 01a6 8DF80340 		strb	r4, [sp, #3]
+ 226 01aa 64E0     		b	.L41
+ 227              	.L37:
+ 228 01ac 0023     		movs	r3, #0
+ 229 01ae 8DF80330 		strb	r3, [sp, #3]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 5
+
+
+ 230 01b2 0124     		movs	r4, #1
+ 231 01b4 5FE0     		b	.L41
+ 232              	.L34:
+ 233 01b6 0023     		movs	r3, #0
+ 234 01b8 8DF80330 		strb	r3, [sp, #3]
+ 235 01bc 0224     		movs	r4, #2
+ 236 01be 5AE0     		b	.L41
+ 237              	.L39:
+ 238 01c0 0023     		movs	r3, #0
+ 239 01c2 8DF80330 		strb	r3, [sp, #3]
+ 240 01c6 0424     		movs	r4, #4
+ 241 01c8 55E0     		b	.L41
+ 242              	.L4:
+ 243 01ca 1128     		cmp	r0, #17
+ 244 01cc 00F2AB80 		bhi	.L1
+ 245 01d0 0928     		cmp	r0, #9
+ 246 01d2 7CD0     		beq	.L42
+ 247 01d4 2BDC     		bgt	.L43
+ 248 01d6 0428     		cmp	r0, #4
+ 249 01d8 6AD0     		beq	.L44
+ 250 01da 13DC     		bgt	.L45
+ 251 01dc 0228     		cmp	r0, #2
+ 252 01de 62D0     		beq	.L46
+ 253 01e0 08DC     		bgt	.L47
+ 254 01e2 0028     		cmp	r0, #0
+ 255 01e4 44D0     		beq	.L48
+ 256 01e6 0128     		cmp	r0, #1
+ 257 01e8 40F09D80 		bne	.L1
+ 258 01ec 0024     		movs	r4, #0
+ 259 01ee 8DF80440 		strb	r4, [sp, #4]
+ 260 01f2 40E0     		b	.L41
+ 261              	.L47:
+ 262 01f4 0328     		cmp	r0, #3
+ 263 01f6 40F09680 		bne	.L1
+ 264 01fa 0023     		movs	r3, #0
+ 265 01fc 8DF80430 		strb	r3, [sp, #4]
+ 266 0200 0224     		movs	r4, #2
+ 267 0202 38E0     		b	.L41
+ 268              	.L45:
+ 269 0204 0728     		cmp	r0, #7
+ 270 0206 5DD0     		beq	.L51
+ 271 0208 09DC     		bgt	.L52
+ 272 020a 0528     		cmp	r0, #5
+ 273 020c 55D0     		beq	.L53
+ 274 020e 0628     		cmp	r0, #6
+ 275 0210 40F08980 		bne	.L1
+ 276 0214 0023     		movs	r3, #0
+ 277 0216 8DF80430 		strb	r3, [sp, #4]
+ 278 021a 0724     		movs	r4, #7
+ 279 021c 2BE0     		b	.L41
+ 280              	.L52:
+ 281 021e 0828     		cmp	r0, #8
+ 282 0220 40F08180 		bne	.L1
+ 283 0224 0023     		movs	r3, #0
+ 284 0226 8DF80530 		strb	r3, [sp, #5]
+ 285 022a 0324     		movs	r4, #3
+ 286 022c 23E0     		b	.L41
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 6
+
+
+ 287              	.L43:
+ 288 022e 0E28     		cmp	r0, #14
+ 289 0230 5BD0     		beq	.L56
+ 290 0232 12DC     		bgt	.L57
+ 291 0234 0C28     		cmp	r0, #12
+ 292 0236 53D0     		beq	.L58
+ 293 0238 08DC     		bgt	.L59
+ 294 023a 0A28     		cmp	r0, #10
+ 295 023c 4BD0     		beq	.L60
+ 296 023e 0B28     		cmp	r0, #11
+ 297 0240 71D1     		bne	.L1
+ 298 0242 0023     		movs	r3, #0
+ 299 0244 8DF80530 		strb	r3, [sp, #5]
+ 300 0248 0224     		movs	r4, #2
+ 301 024a 14E0     		b	.L41
+ 302              	.L59:
+ 303 024c 0D28     		cmp	r0, #13
+ 304 024e 6AD1     		bne	.L1
+ 305 0250 0023     		movs	r3, #0
+ 306 0252 8DF80530 		strb	r3, [sp, #5]
+ 307 0256 0624     		movs	r4, #6
+ 308 0258 0DE0     		b	.L41
+ 309              	.L57:
+ 310 025a 1028     		cmp	r0, #16
+ 311 025c 4AD0     		beq	.L63
+ 312 025e 1128     		cmp	r0, #17
+ 313 0260 4DD0     		beq	.L64
+ 314 0262 0F28     		cmp	r0, #15
+ 315 0264 5FD1     		bne	.L1
+ 316 0266 0023     		movs	r3, #0
+ 317 0268 8DF80530 		strb	r3, [sp, #5]
+ 318 026c 0524     		movs	r4, #5
+ 319 026e 02E0     		b	.L41
+ 320              	.L48:
+ 321 0270 8DF80400 		strb	r0, [sp, #4]
+ 322 0274 0324     		movs	r4, #3
+ 323              	.L41:
+ 324 0276 04F00102 		and	r2, r4, #1
+ 325 027a 4FF48061 		mov	r1, #1024
+ 326 027e 2B48     		ldr	r0, .L70
+ 327 0280 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 328 0284 C4F34002 		ubfx	r2, r4, #1, #1
+ 329 0288 4FF40041 		mov	r1, #32768
+ 330 028c 4FF09040 		mov	r0, #1207959552
+ 331 0290 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 332 0294 A208     		lsrs	r2, r4, #2
+ 333 0296 4FF48041 		mov	r1, #16384
+ 334 029a 4FF09040 		mov	r0, #1207959552
+ 335 029e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 336 02a2 0024     		movs	r4, #0
+ 337 02a4 3DE0     		b	.L66
+ 338              	.L46:
+ 339 02a6 0023     		movs	r3, #0
+ 340 02a8 8DF80430 		strb	r3, [sp, #4]
+ 341 02ac 0124     		movs	r4, #1
+ 342 02ae E2E7     		b	.L41
+ 343              	.L44:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 7
+
+
+ 344 02b0 0023     		movs	r3, #0
+ 345 02b2 8DF80430 		strb	r3, [sp, #4]
+ 346 02b6 0424     		movs	r4, #4
+ 347 02b8 DDE7     		b	.L41
+ 348              	.L53:
+ 349 02ba 0023     		movs	r3, #0
+ 350 02bc 8DF80430 		strb	r3, [sp, #4]
+ 351 02c0 0624     		movs	r4, #6
+ 352 02c2 D8E7     		b	.L41
+ 353              	.L51:
+ 354 02c4 0023     		movs	r3, #0
+ 355 02c6 8DF80430 		strb	r3, [sp, #4]
+ 356 02ca 0524     		movs	r4, #5
+ 357 02cc D3E7     		b	.L41
+ 358              	.L42:
+ 359 02ce 0024     		movs	r4, #0
+ 360 02d0 8DF80540 		strb	r4, [sp, #5]
+ 361 02d4 CFE7     		b	.L41
+ 362              	.L60:
+ 363 02d6 0023     		movs	r3, #0
+ 364 02d8 8DF80530 		strb	r3, [sp, #5]
+ 365 02dc 0124     		movs	r4, #1
+ 366 02de CAE7     		b	.L41
+ 367              	.L58:
+ 368 02e0 0023     		movs	r3, #0
+ 369 02e2 8DF80530 		strb	r3, [sp, #5]
+ 370 02e6 0424     		movs	r4, #4
+ 371 02e8 C5E7     		b	.L41
+ 372              	.L56:
+ 373 02ea 0023     		movs	r3, #0
+ 374 02ec 8DF80530 		strb	r3, [sp, #5]
+ 375 02f0 0724     		movs	r4, #7
+ 376 02f2 C0E7     		b	.L41
+ 377              	.L63:
+ 378 02f4 0023     		movs	r3, #0
+ 379 02f6 8DF80030 		strb	r3, [sp]
+ 380 02fa 0324     		movs	r4, #3
+ 381 02fc BBE7     		b	.L41
+ 382              	.L64:
+ 383 02fe 0024     		movs	r4, #0
+ 384 0300 8DF80040 		strb	r4, [sp]
+ 385 0304 B7E7     		b	.L41
+ 386              	.L67:
+ 387 0306 04F10803 		add	r3, r4, #8
+ 388 030a 6B44     		add	r3, sp, r3
+ 389 030c 13F8082C 		ldrb	r2, [r3, #-8]	@ zero_extendqisi2
+ 390 0310 074B     		ldr	r3, .L70+4
+ 391 0312 33F81410 		ldrh	r1, [r3, r4, lsl #1]
+ 392 0316 074B     		ldr	r3, .L70+8
+ 393 0318 53F82400 		ldr	r0, [r3, r4, lsl #2]
+ 394 031c FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 395 0320 0134     		adds	r4, r4, #1
+ 396              	.L66:
+ 397 0322 052C     		cmp	r4, #5
+ 398 0324 EFD9     		bls	.L67
+ 399              	.L1:
+ 400 0326 02B0     		add	sp, sp, #8
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 8
+
+
+ 401              		@ sp needed
+ 402 0328 10BD     		pop	{r4, pc}
+ 403              	.L71:
+ 404 032a 00BF     		.align	2
+ 405              	.L70:
+ 406 032c 00080048 		.word	1207961600
+ 407 0330 00000000 		.word	ExN_Pin
+ 408 0334 00000000 		.word	ExN_GPIO_Port
+ 410              		.section	.text.patchouli_TIM_init,"ax",%progbits
+ 411              		.align	1
+ 412              		.global	patchouli_TIM_init
+ 413              		.syntax unified
+ 414              		.thumb
+ 415              		.thumb_func
+ 417              	patchouli_TIM_init:
+ 418              		@ args = 0, pretend = 0, frame = 24
+ 419              		@ frame_needed = 0, uses_anonymous_args = 0
+ 420 0000 30B5     		push	{r4, r5, lr}
+ 421 0002 87B0     		sub	sp, sp, #28
+ 422 0004 01A9     		add	r1, sp, #4
+ 423 0006 0024     		movs	r4, #0
+ 424 0008 0194     		str	r4, [sp, #4]
+ 425 000a 4C60     		str	r4, [r1, #4]
+ 426 000c 8C60     		str	r4, [r1, #8]
+ 427 000e CC60     		str	r4, [r1, #12]
+ 428 0010 0C61     		str	r4, [r1, #16]
+ 429 0012 0625     		movs	r5, #6
+ 430 0014 0195     		str	r5, [sp, #4]
+ 431 0016 0123     		movs	r3, #1
+ 432 0018 0293     		str	r3, [sp, #8]
+ 433 001a 4FF09040 		mov	r0, #1207959552
+ 434 001e FFF7FEFF 		bl	HAL_GPIO_Init
+ 435 0022 2246     		mov	r2, r4
+ 436 0024 2946     		mov	r1, r5
+ 437 0026 4FF09040 		mov	r0, #1207959552
+ 438 002a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 439 002e 144D     		ldr	r5, .L74
+ 440 0030 2B68     		ldr	r3, [r5]
+ 441 0032 FF22     		movs	r2, #255
+ 442 0034 DA62     		str	r2, [r3, #44]
+ 443 0036 8022     		movs	r2, #128
+ 444 0038 5A63     		str	r2, [r3, #52]
+ 445 003a DA63     		str	r2, [r3, #60]
+ 446 003c 2146     		mov	r1, r4
+ 447 003e 2846     		mov	r0, r5
+ 448 0040 FFF7FEFF 		bl	HAL_TIM_PWM_Start
+ 449 0044 0821     		movs	r1, #8
+ 450 0046 2846     		mov	r0, r5
+ 451 0048 FFF7FEFF 		bl	HAL_TIM_PWM_Start
+ 452 004c 2146     		mov	r1, r4
+ 453 004e 2846     		mov	r0, r5
+ 454 0050 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Start
+ 455 0054 0821     		movs	r1, #8
+ 456 0056 2846     		mov	r0, r5
+ 457 0058 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Start
+ 458 005c 094D     		ldr	r5, .L74+4
+ 459 005e 2146     		mov	r1, r4
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 9
+
+
+ 460 0060 2846     		mov	r0, r5
+ 461 0062 FFF7FEFF 		bl	HAL_TIMEx_PWMN_Start
+ 462 0066 084B     		ldr	r3, .L74+8
+ 463 0068 084A     		ldr	r2, .L74+12
+ 464 006a 1A60     		str	r2, [r3]	@ float
+ 465 006c 2B68     		ldr	r3, [r5]
+ 466 006e 7C22     		movs	r2, #124
+ 467 0070 DA62     		str	r2, [r3, #44]
+ 468 0072 3E22     		movs	r2, #62
+ 469 0074 5A63     		str	r2, [r3, #52]
+ 470 0076 3C22     		movs	r2, #60
+ 471 0078 1A63     		str	r2, [r3, #48]
+ 472 007a 07B0     		add	sp, sp, #28
+ 473              		@ sp needed
+ 474 007c 30BD     		pop	{r4, r5, pc}
+ 475              	.L75:
+ 476 007e 00BF     		.align	2
+ 477              	.L74:
+ 478 0080 00000000 		.word	htim1
+ 479 0084 00000000 		.word	htim16
+ 480 0088 00000000 		.word	gfreq
+ 481 008c 0077FB48 		.word	1224439552
+ 483              		.section	.text.patchouli_TIM_trigger,"ax",%progbits
+ 484              		.align	1
+ 485              		.global	patchouli_TIM_trigger
+ 486              		.syntax unified
+ 487              		.thumb
+ 488              		.thumb_func
+ 490              	patchouli_TIM_trigger:
+ 491              		@ args = 0, pretend = 0, frame = 0
+ 492              		@ frame_needed = 0, uses_anonymous_args = 0
+ 493              		@ link register save eliminated.
+ 494 0000 034B     		ldr	r3, .L77
+ 495 0002 1A68     		ldr	r2, [r3]
+ 496 0004 1368     		ldr	r3, [r2]
+ 497 0006 43F00103 		orr	r3, r3, #1
+ 498 000a 1360     		str	r3, [r2]
+ 499 000c 7047     		bx	lr
+ 500              	.L78:
+ 501 000e 00BF     		.align	2
+ 502              	.L77:
+ 503 0010 00000000 		.word	htim16
+ 505              		.section	.rodata._patchouli_adc_multisample.str1.4,"aMS",%progbits,1
+ 506              		.align	2
+ 507              	.LC0:
+ 508 0000 25750A00 		.ascii	"%u\012\000"
+ 509              		.section	.text._patchouli_adc_multisample,"ax",%progbits
+ 510              		.align	1
+ 511              		.global	_patchouli_adc_multisample
+ 512              		.syntax unified
+ 513              		.thumb
+ 514              		.thumb_func
+ 516              	_patchouli_adc_multisample:
+ 517              		@ args = 0, pretend = 0, frame = 16
+ 518              		@ frame_needed = 0, uses_anonymous_args = 0
+ 519 0000 30B5     		push	{r4, r5, lr}
+ 520 0002 85B0     		sub	sp, sp, #20
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 10
+
+
+ 521 0004 0024     		movs	r4, #0
+ 522 0006 1DE0     		b	.L80
+ 523              	.L81:
+ 524 0008 124D     		ldr	r5, .L83
+ 525 000a 2846     		mov	r0, r5
+ 526 000c FFF7FEFF 		bl	HAL_ADC_Start
+ 527 0010 4FF0FF31 		mov	r1, #-1
+ 528 0014 2846     		mov	r0, r5
+ 529 0016 FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 530 001a 2846     		mov	r0, r5
+ 531 001c FFF7FEFF 		bl	HAL_ADC_GetValue
+ 532 0020 04AB     		add	r3, sp, #16
+ 533 0022 03EB4403 		add	r3, r3, r4, lsl #1
+ 534 0026 23F8080C 		strh	r0, [r3, #-8]	@ movhi
+ 535 002a 82B2     		uxth	r2, r0
+ 536 002c 0A49     		ldr	r1, .L83+4
+ 537 002e 6846     		mov	r0, sp
+ 538 0030 FFF7FEFF 		bl	sprintf
+ 539 0034 6846     		mov	r0, sp
+ 540 0036 FFF7FEFF 		bl	strlen
+ 541 003a 81B2     		uxth	r1, r0
+ 542 003c 6846     		mov	r0, sp
+ 543 003e FFF7FEFF 		bl	CDC_Transmit_FS
+ 544 0042 0134     		adds	r4, r4, #1
+ 545              	.L80:
+ 546 0044 022C     		cmp	r4, #2
+ 547 0046 DFD9     		bls	.L81
+ 548 0048 0321     		movs	r1, #3
+ 549 004a 02A8     		add	r0, sp, #8
+ 550 004c FFF7FEFF 		bl	patchouli_median
+ 551 0050 05B0     		add	sp, sp, #20
+ 552              		@ sp needed
+ 553 0052 30BD     		pop	{r4, r5, pc}
+ 554              	.L84:
+ 555              		.align	2
+ 556              	.L83:
+ 557 0054 00000000 		.word	hadc1
+ 558 0058 00000000 		.word	.LC0
+ 560              		.section	.text.patchouli_simple_take_sample,"ax",%progbits
+ 561              		.align	1
+ 562              		.global	patchouli_simple_take_sample
+ 563              		.syntax unified
+ 564              		.thumb
+ 565              		.thumb_func
+ 567              	patchouli_simple_take_sample:
+ 568              		@ args = 0, pretend = 0, frame = 0
+ 569              		@ frame_needed = 0, uses_anonymous_args = 0
+ 570 0000 38B5     		push	{r3, r4, r5, lr}
+ 571 0002 0446     		mov	r4, r0
+ 572              		.syntax unified
+ 573              	@ 209 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 574 0004 72B6     		cpsid i
+ 575              	@ 0 "" 2
+ 576              		.thumb
+ 577              		.syntax unified
+ 578 0006 304B     		ldr	r3, .L99
+ 579 0008 1B69     		ldr	r3, [r3, #16]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 11
+
+
+ 580 000a 53F82130 		ldr	r3, [r3, r1, lsl #2]
+ 581 000e 9847     		blx	r3
+ 582 0010 94B9     		cbnz	r4, .L97
+ 583 0012 2346     		mov	r3, r4
+ 584 0014 01E0     		b	.L87
+ 585              	.L88:
+ 586              		.syntax unified
+ 587              	@ 202 "patchouli/src/patchouli_bsp_glider_addon_v1.c" 1
+ 588 0016 00BF     		nop
+ 589              	@ 0 "" 2
+ 590              		.thumb
+ 591              		.syntax unified
+ 592 0018 0133     		adds	r3, r3, #1
+ 593              	.L87:
+ 594 001a B12B     		cmp	r3, #177
+ 595 001c FBDD     		ble	.L88
+ 596              	.L89:
+ 597 001e 0022     		movs	r2, #0
+ 598 0020 0121     		movs	r1, #1
+ 599 0022 4FF09040 		mov	r0, #1207959552
+ 600 0026 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 601 002a 0023     		movs	r3, #0
+ 602 002c 08E0     		b	.L91
+ 603              	.L90:
+ 604              		.syntax unified
+ 605              	@ 204 "patchouli/src/patchouli_bsp_glider_addon_v1.c" 1
+ 606 002e 00BF     		nop
+ 607              	@ 0 "" 2
+ 608              		.thumb
+ 609              		.syntax unified
+ 610 0030 0133     		adds	r3, r3, #1
+ 611              	.L86:
+ 612 0032 2B2B     		cmp	r3, #43
+ 613 0034 FBDD     		ble	.L90
+ 614 0036 F2E7     		b	.L89
+ 615              	.L97:
+ 616 0038 0023     		movs	r3, #0
+ 617 003a FAE7     		b	.L86
+ 618              	.L92:
+ 619              		.syntax unified
+ 620              	@ 207 "patchouli/src/patchouli_bsp_glider_addon_v1.c" 1
+ 621 003c 00BF     		nop
+ 622              	@ 0 "" 2
+ 623              		.thumb
+ 624              		.syntax unified
+ 625 003e 0133     		adds	r3, r3, #1
+ 626              	.L91:
+ 627 0040 40F6AD02 		movw	r2, #2221
+ 628 0044 9342     		cmp	r3, r2
+ 629 0046 F9DD     		ble	.L92
+ 630 0048 FFF7FEFF 		bl	_patchouli_adc_multisample
+ 631 004c 0546     		mov	r5, r0
+ 632 004e 0122     		movs	r2, #1
+ 633 0050 1146     		mov	r1, r2
+ 634 0052 4FF09040 		mov	r0, #1207959552
+ 635 0056 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 636 005a 0023     		movs	r3, #0
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 12
+
+
+ 637 005c 01E0     		b	.L93
+ 638              	.L94:
+ 639              		.syntax unified
+ 640              	@ 215 "patchouli/src/patchouli_bsp_glider_addon_v1.c" 1
+ 641 005e 00BF     		nop
+ 642              	@ 0 "" 2
+ 643              		.thumb
+ 644              		.syntax unified
+ 645 0060 0133     		adds	r3, r3, #1
+ 646              	.L93:
+ 647 0062 2B2B     		cmp	r3, #43
+ 648 0064 FBDD     		ble	.L94
+ 649 0066 0022     		movs	r2, #0
+ 650 0068 0121     		movs	r1, #1
+ 651 006a 4FF09040 		mov	r0, #1207959552
+ 652 006e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 653 0072 0023     		movs	r3, #0
+ 654 0074 01E0     		b	.L95
+ 655              	.L96:
+ 656              		.syntax unified
+ 657              	@ 218 "patchouli/src/patchouli_bsp_glider_addon_v1.c" 1
+ 658 0076 00BF     		nop
+ 659              	@ 0 "" 2
+ 660              		.thumb
+ 661              		.syntax unified
+ 662 0078 0133     		adds	r3, r3, #1
+ 663              	.L95:
+ 664 007a 582B     		cmp	r3, #88
+ 665 007c FBDD     		ble	.L96
+ 666 007e 134C     		ldr	r4, .L99+4
+ 667 0080 2046     		mov	r0, r4
+ 668 0082 FFF7FEFF 		bl	HAL_ADC_Start
+ 669 0086 4FF0FF31 		mov	r1, #-1
+ 670 008a 2046     		mov	r0, r4
+ 671 008c FFF7FEFF 		bl	HAL_ADC_PollForConversion
+ 672 0090 2046     		mov	r0, r4
+ 673 0092 FFF7FEFF 		bl	HAL_ADC_GetValue
+ 674 0096 0446     		mov	r4, r0
+ 675              		.syntax unified
+ 676              	@ 198 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 677 0098 62B6     		cpsie i
+ 678              	@ 0 "" 2
+ 679              		.thumb
+ 680              		.syntax unified
+ 681 009a 0122     		movs	r2, #1
+ 682 009c 1146     		mov	r1, r2
+ 683 009e 4FF09040 		mov	r0, #1207959552
+ 684 00a2 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 685 00a6 A3B2     		uxth	r3, r4
+ 686 00a8 EB1A     		subs	r3, r5, r3
+ 687 00aa 07EE903A 		vmov	s15, r3	@ int
+ 688 00ae F8EEE77A 		vcvt.f32.s32	s15, s15
+ 689 00b2 9FED077A 		vldr.32	s14, .L99+8
+ 690 00b6 77EE877A 		vadd.f32	s15, s15, s14
+ 691 00ba FCEEE77A 		vcvt.u32.f32	s15, s15
+ 692 00be 17EE903A 		vmov	r3, s15	@ int
+ 693 00c2 98B2     		uxth	r0, r3
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 13
+
+
+ 694 00c4 38BD     		pop	{r3, r4, r5, pc}
+ 695              	.L100:
+ 696 00c6 00BF     		.align	2
+ 697              	.L99:
+ 698 00c8 00000000 		.word	patchouli_pen_pw100
+ 699 00cc 00000000 		.word	hadc1
+ 700 00d0 0000C842 		.word	1120403456
+ 702              		.section	.text.patchouli_set_freq,"ax",%progbits
+ 703              		.align	1
+ 704              		.global	patchouli_set_freq
+ 705              		.syntax unified
+ 706              		.thumb
+ 707              		.thumb_func
+ 709              	patchouli_set_freq:
+ 710              		@ args = 0, pretend = 0, frame = 0
+ 711              		@ frame_needed = 0, uses_anonymous_args = 0
+ 712 0000 08B5     		push	{r3, lr}
+ 713 0002 DFED0B7A 		vldr.32	s15, .L103
+ 714 0006 C7EE807A 		vdiv.f32	s15, s15, s0
+ 715 000a 17EE900A 		vmov	r0, s15
+ 716 000e FFF7FEFF 		bl	__aeabi_f2d
+ 717 0012 41EC100B 		vmov	d0, r0, r1
+ 718 0016 FFF7FEFF 		bl	round
+ 719 001a 51EC100B 		vmov	r0, r1, d0
+ 720 001e FFF7FEFF 		bl	__aeabi_d2uiz
+ 721 0022 80B2     		uxth	r0, r0
+ 722 0024 034B     		ldr	r3, .L103+4
+ 723 0026 1B68     		ldr	r3, [r3]
+ 724 0028 D862     		str	r0, [r3, #44]
+ 725 002a 4008     		lsrs	r0, r0, #1
+ 726 002c 5863     		str	r0, [r3, #52]
+ 727 002e 08BD     		pop	{r3, pc}
+ 728              	.L104:
+ 729              		.align	2
+ 730              	.L103:
+ 731 0030 0024744C 		.word	1282679808
+ 732 0034 00000000 		.word	htim16
+ 734              		.section	.rodata.patchouli_freq_test.str1.4,"aMS",%progbits,1
+ 735              		.align	2
+ 736              	.LC1:
+ 737 0000 54617267 		.ascii	"Target\011Achieved\015\000"
+ 737      65740941 
+ 737      63686965 
+ 737      7665640D 
+ 737      00
+ 738 0011 000000   		.align	2
+ 739              	.LC2:
+ 740 0014 25660925 		.ascii	"%f\011%f\015\012\000"
+ 740      660D0A00 
+ 741              		.section	.text.patchouli_freq_test,"ax",%progbits
+ 742              		.align	1
+ 743              		.global	patchouli_freq_test
+ 744              		.syntax unified
+ 745              		.thumb
+ 746              		.thumb_func
+ 748              	patchouli_freq_test:
+ 749              		@ args = 0, pretend = 0, frame = 72
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 14
+
+
+ 750              		@ frame_needed = 0, uses_anonymous_args = 0
+ 751 0000 2DE9D043 		push	{r4, r6, r7, r8, r9, lr}
+ 752 0004 2DED028B 		vpush.64	{d8}
+ 753 0008 94B0     		sub	sp, sp, #80
+ 754 000a 2D48     		ldr	r0, .L109+16
+ 755 000c FFF7FEFF 		bl	puts
+ 756 0010 0024     		movs	r4, #0
+ 757 0012 46E0     		b	.L106
+ 758              	.L107:
+ 759 0014 2046     		mov	r0, r4
+ 760 0016 FFF7FEFF 		bl	__aeabi_i2d
+ 761 001a 25A3     		adr	r3, .L109
+ 762 001c D3E90023 		ldrd	r2, [r3]
+ 763 0020 FFF7FEFF 		bl	__aeabi_dmul
+ 764 0024 24A3     		adr	r3, .L109+8
+ 765 0026 D3E90023 		ldrd	r2, [r3]
+ 766 002a FFF7FEFF 		bl	__aeabi_dadd
+ 767 002e FFF7FEFF 		bl	__aeabi_d2f
+ 768 0032 07EE100A 		vmov	s14, r0
+ 769 0036 14AB     		add	r3, sp, #80
+ 770 0038 03EB8403 		add	r3, r3, r4, lsl #2
+ 771 003c 43F8480C 		str	r0, [r3, #-72]	@ float
+ 772 0040 DFED206A 		vldr.32	s13, .L109+20
+ 773 0044 C6EE877A 		vdiv.f32	s15, s13, s14
+ 774 0048 FCEEE77A 		vcvt.u32.f32	s15, s15
+ 775 004c 17EE902A 		vmov	r2, s15	@ int
+ 776 0050 92B2     		uxth	r2, r2
+ 777 0052 07EE902A 		vmov	s15, r2	@ int
+ 778 0056 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 779 005a 86EEA78A 		vdiv.f32	s16, s13, s15
+ 780 005e 03ED098A 		vstr.32	s16, [r3, #-36]
+ 781 0062 FFF7FEFF 		bl	__aeabi_f2d
+ 782 0066 0646     		mov	r6, r0
+ 783 0068 0F46     		mov	r7, r1
+ 784 006a 18EE100A 		vmov	r0, s16
+ 785 006e FFF7FEFF 		bl	__aeabi_f2d
+ 786 0072 8046     		mov	r8, r0
+ 787 0074 8946     		mov	r9, r1
+ 788 0076 0022     		movs	r2, #0
+ 789 0078 134B     		ldr	r3, .L109+24
+ 790 007a 3046     		mov	r0, r6
+ 791 007c 3946     		mov	r1, r7
+ 792 007e FFF7FEFF 		bl	__aeabi_ddiv
+ 793 0082 0646     		mov	r6, r0
+ 794 0084 0F46     		mov	r7, r1
+ 795 0086 0022     		movs	r2, #0
+ 796 0088 0F4B     		ldr	r3, .L109+24
+ 797 008a 4046     		mov	r0, r8
+ 798 008c 4946     		mov	r1, r9
+ 799 008e FFF7FEFF 		bl	__aeabi_ddiv
+ 800 0092 CDE90001 		strd	r0, [sp]
+ 801 0096 3246     		mov	r2, r6
+ 802 0098 3B46     		mov	r3, r7
+ 803 009a 0C48     		ldr	r0, .L109+28
+ 804 009c FFF7FEFF 		bl	printf
+ 805 00a0 0134     		adds	r4, r4, #1
+ 806              	.L106:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 15
+
+
+ 807 00a2 082C     		cmp	r4, #8
+ 808 00a4 B6DD     		ble	.L107
+ 809 00a6 14B0     		add	sp, sp, #80
+ 810              		@ sp needed
+ 811 00a8 BDEC028B 		vldm	sp!, {d8}
+ 812 00ac BDE8D083 		pop	{r4, r6, r7, r8, r9, pc}
+ 813              	.L110:
+ 814              		.align	3
+ 815              	.L109:
+ 816 00b0 00000000 		.word	0
+ 817 00b4 0088C340 		.word	1086556160
+ 818 00b8 00000000 		.word	0
+ 819 00bc E0FD1C41 		.word	1092419040
+ 820 00c0 00000000 		.word	.LC1
+ 821 00c4 0024744C 		.word	1282679808
+ 822 00c8 00408F40 		.word	1083129856
+ 823 00cc 14000000 		.word	.LC2
+ 825              		.section	.text.patchouli_led_on,"ax",%progbits
+ 826              		.align	1
+ 827              		.global	patchouli_led_on
+ 828              		.syntax unified
+ 829              		.thumb
+ 830              		.thumb_func
+ 832              	patchouli_led_on:
+ 833              		@ args = 0, pretend = 0, frame = 0
+ 834              		@ frame_needed = 0, uses_anonymous_args = 0
+ 835              		@ link register save eliminated.
+ 836 0000 7047     		bx	lr
+ 838              		.section	.text.patchouli_led_off,"ax",%progbits
+ 839              		.align	1
+ 840              		.global	patchouli_led_off
+ 841              		.syntax unified
+ 842              		.thumb
+ 843              		.thumb_func
+ 845              	patchouli_led_off:
+ 846              		@ args = 0, pretend = 0, frame = 0
+ 847              		@ frame_needed = 0, uses_anonymous_args = 0
+ 848              		@ link register save eliminated.
+ 849 0000 7047     		bx	lr
+ 851              		.section	.text.patchouli_comms_init,"ax",%progbits
+ 852              		.align	1
+ 853              		.global	patchouli_comms_init
+ 854              		.syntax unified
+ 855              		.thumb
+ 856              		.thumb_func
+ 858              	patchouli_comms_init:
+ 859              		@ args = 0, pretend = 0, frame = 0
+ 860              		@ frame_needed = 0, uses_anonymous_args = 0
+ 861 0000 08B5     		push	{r3, lr}
+ 862 0002 0122     		movs	r2, #1
+ 863 0004 0249     		ldr	r1, .L115
+ 864 0006 0348     		ldr	r0, .L115+4
+ 865 0008 FFF7FEFF 		bl	HAL_UART_Receive_IT
+ 866 000c 08BD     		pop	{r3, pc}
+ 867              	.L116:
+ 868 000e 00BF     		.align	2
+ 869              	.L115:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 16
+
+
+ 870 0010 00000000 		.word	huart1_rxbuffer
+ 871 0014 00000000 		.word	huart1
+ 873              		.section	.rodata.patchouli_transmit.str1.4,"aMS",%progbits,1
+ 874              		.align	2
+ 875              	.LC3:
+ 876 0000 5472616E 		.ascii	"Transmit\012\000"
+ 876      736D6974 
+ 876      0A00
+ 877 000a 0000     		.align	2
+ 878              	.LC4:
+ 879 000c 25640925 		.ascii	"%d\011%d\011%d\012\000"
+ 879      64092564 
+ 879      0A00
+ 880              		.section	.text.patchouli_transmit,"ax",%progbits
+ 881              		.align	1
+ 882              		.global	patchouli_transmit
+ 883              		.syntax unified
+ 884              		.thumb
+ 885              		.thumb_func
+ 887              	patchouli_transmit:
+ 888              		@ args = 0, pretend = 0, frame = 32
+ 889              		@ frame_needed = 0, uses_anonymous_args = 0
+ 890 0000 30B5     		push	{r4, r5, lr}
+ 891 0002 8BB0     		sub	sp, sp, #44
+ 892 0004 0446     		mov	r4, r0
+ 893 0006 0921     		movs	r1, #9
+ 894 0008 0C48     		ldr	r0, .L119
+ 895 000a FFF7FEFF 		bl	CDC_Transmit_FS
+ 896 000e B4F90A30 		ldrsh	r3, [r4, #10]
+ 897 0012 02AD     		add	r5, sp, #8
+ 898 0014 0093     		str	r3, [sp]
+ 899 0016 B4F90230 		ldrsh	r3, [r4, #2]
+ 900 001a B4F90020 		ldrsh	r2, [r4]
+ 901 001e 0849     		ldr	r1, .L119+4
+ 902 0020 2846     		mov	r0, r5
+ 903 0022 FFF7FEFF 		bl	sprintf
+ 904 0026 2846     		mov	r0, r5
+ 905 0028 FFF7FEFF 		bl	strlen
+ 906 002c 81B2     		uxth	r1, r0
+ 907 002e 2846     		mov	r0, r5
+ 908 0030 FFF7FEFF 		bl	CDC_Transmit_FS
+ 909 0034 0120     		movs	r0, #1
+ 910 0036 0BB0     		add	sp, sp, #44
+ 911              		@ sp needed
+ 912 0038 30BD     		pop	{r4, r5, pc}
+ 913              	.L120:
+ 914 003a 00BF     		.align	2
+ 915              	.L119:
+ 916 003c 00000000 		.word	.LC3
+ 917 0040 0C000000 		.word	.LC4
+ 919              		.global	ExN_Pin
+ 920              		.section	.data.ExN_Pin,"aw"
+ 921              		.align	2
+ 924              	ExN_Pin:
+ 925 0000 2000     		.short	32
+ 926 0002 1000     		.short	16
+ 927 0004 0800     		.short	8
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 17
+
+
+ 928 0006 0200     		.short	2
+ 929 0008 0100     		.short	1
+ 930 000a 0010     		.short	4096
+ 931              		.global	ExN_GPIO_Port
+ 932              		.section	.data.ExN_GPIO_Port,"aw"
+ 933              		.align	2
+ 936              	ExN_GPIO_Port:
+ 937 0000 00040048 		.word	1207960576
+ 938 0004 00040048 		.word	1207960576
+ 939 0008 00040048 		.word	1207960576
+ 940 000c 000C0048 		.word	1207962624
+ 941 0010 000C0048 		.word	1207962624
+ 942 0014 00080048 		.word	1207961600
+ 943              		.global	__aeabi_ddiv
+ 944              		.global	__aeabi_d2f
+ 945              		.global	__aeabi_dadd
+ 946              		.global	__aeabi_dmul
+ 947              		.global	__aeabi_i2d
+ 948              		.global	__aeabi_d2uiz
+ 949              		.global	__aeabi_f2d
+ 950              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 18
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 patchouli_bsp_glider_addon_v1.c
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:18     .text.patchouli_coil_select:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:24     .text.patchouli_coil_select:00000000 patchouli_coil_select
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:406    .text.patchouli_coil_select:0000032c $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:924    .data.ExN_Pin:00000000 ExN_Pin
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:936    .data.ExN_GPIO_Port:00000000 ExN_GPIO_Port
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:411    .text.patchouli_TIM_init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:417    .text.patchouli_TIM_init:00000000 patchouli_TIM_init
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:478    .text.patchouli_TIM_init:00000080 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:484    .text.patchouli_TIM_trigger:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:490    .text.patchouli_TIM_trigger:00000000 patchouli_TIM_trigger
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:503    .text.patchouli_TIM_trigger:00000010 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:506    .rodata._patchouli_adc_multisample.str1.4:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:510    .text._patchouli_adc_multisample:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:516    .text._patchouli_adc_multisample:00000000 _patchouli_adc_multisample
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:557    .text._patchouli_adc_multisample:00000054 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:561    .text.patchouli_simple_take_sample:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:567    .text.patchouli_simple_take_sample:00000000 patchouli_simple_take_sample
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:698    .text.patchouli_simple_take_sample:000000c8 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:703    .text.patchouli_set_freq:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:709    .text.patchouli_set_freq:00000000 patchouli_set_freq
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:731    .text.patchouli_set_freq:00000030 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:735    .rodata.patchouli_freq_test.str1.4:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:742    .text.patchouli_freq_test:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:748    .text.patchouli_freq_test:00000000 patchouli_freq_test
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:816    .text.patchouli_freq_test:000000b0 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:826    .text.patchouli_led_on:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:832    .text.patchouli_led_on:00000000 patchouli_led_on
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:839    .text.patchouli_led_off:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:845    .text.patchouli_led_off:00000000 patchouli_led_off
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:852    .text.patchouli_comms_init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:858    .text.patchouli_comms_init:00000000 patchouli_comms_init
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:870    .text.patchouli_comms_init:00000010 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:874    .rodata.patchouli_transmit.str1.4:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:881    .text.patchouli_transmit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:887    .text.patchouli_transmit:00000000 patchouli_transmit
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:916    .text.patchouli_transmit:0000003c $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:921    .data.ExN_Pin:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s:933    .data.ExN_GPIO_Port:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_GPIO_WritePin
+HAL_GPIO_Init
+HAL_TIM_PWM_Start
+HAL_TIMEx_PWMN_Start
+htim1
+htim16
+gfreq
+HAL_ADC_Start
+HAL_ADC_PollForConversion
+HAL_ADC_GetValue
+sprintf
+strlen
+CDC_Transmit_FS
+patchouli_median
+hadc1
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cca7j3PJ.s 			page 19
+
+
+patchouli_pen_pw100
+__aeabi_f2d
+round
+__aeabi_d2uiz
+puts
+__aeabi_i2d
+__aeabi_dmul
+__aeabi_dadd
+__aeabi_d2f
+__aeabi_ddiv
+printf
+HAL_UART_Receive_IT
+huart1_rxbuffer
+huart1

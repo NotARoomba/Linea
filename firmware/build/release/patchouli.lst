@@ -1,0 +1,682 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"patchouli.c"
+  16              		.text
+  17              		.section	.text.patchouli_get_position,"ax",%progbits
+  18              		.align	1
+  19              		.global	patchouli_get_position
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	patchouli_get_position:
+  25              		@ args = 0, pretend = 0, frame = 56
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  28 0004 8EB0     		sub	sp, sp, #56
+  29 0006 8046     		mov	r8, r0
+  30 0008 0F46     		mov	r7, r1
+  31 000a 1546     		mov	r5, r2
+  32 000c 1E46     		mov	r6, r3
+  33 000e 3BB1     		cbz	r3, .L6
+  34 0010 1C23     		movs	r3, #28
+  35              	.L2:
+  36 0012 012D     		cmp	r5, #1
+  37 0014 06DD     		ble	.L7
+  38 0016 9A1E     		subs	r2, r3, #2
+  39 0018 AA42     		cmp	r2, r5
+  40 001a 04DC     		bgt	.L3
+  41 001c DD1E     		subs	r5, r3, #3
+  42 001e 02E0     		b	.L3
+  43              	.L6:
+  44 0020 1223     		movs	r3, #18
+  45 0022 F6E7     		b	.L2
+  46              	.L7:
+  47 0024 0225     		movs	r5, #2
+  48              	.L3:
+  49 0026 0024     		movs	r4, #0
+  50 0028 17E0     		b	.L4
+  51              	.L5:
+  52 002a A81E     		subs	r0, r5, #2
+  53 002c 3146     		mov	r1, r6
+  54 002e 2044     		add	r0, r0, r4
+  55 0030 FFF7FEFF 		bl	patchouli_coil_select
+  56 0034 3946     		mov	r1, r7
+  57 0036 86F00100 		eor	r0, r6, #1
+  58 003a FFF7FEFF 		bl	patchouli_simple_take_sample
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 2
+
+
+  59 003e 07EE900A 		vmov	s15, r0	@ int
+  60 0042 F8EE677A 		vcvt.f32.u32	s15, s15
+  61 0046 9FED1A7A 		vldr.32	s14, .L9
+  62 004a 77EEC77A 		vsub.f32	s15, s15, s14
+  63 004e 0EAB     		add	r3, sp, #56
+  64 0050 03EB8403 		add	r3, r3, r4, lsl #2
+  65 0054 43ED057A 		vstr.32	s15, [r3, #-20]
+  66 0058 0134     		adds	r4, r4, #1
+  67              	.L4:
+  68 005a 042C     		cmp	r4, #4
+  69 005c E5DD     		ble	.L5
+  70 005e 01AC     		add	r4, sp, #4
+  71 0060 2022     		movs	r2, #32
+  72 0062 0021     		movs	r1, #0
+  73 0064 2046     		mov	r0, r4
+  74 0066 FFF7FEFF 		bl	memset
+  75 006a 0523     		movs	r3, #5
+  76 006c 8DF80430 		strb	r3, [sp, #4]
+  77 0070 4FF08143 		mov	r3, #1082130432
+  78 0074 0393     		str	r3, [sp, #12]	@ float
+  79 0076 09AB     		add	r3, sp, #36
+  80 0078 0493     		str	r3, [sp, #16]
+  81 007a 2046     		mov	r0, r4
+  82 007c FFF7FEFF 		bl	patchouli_quad_interp
+  83 0080 07EE905A 		vmov	s15, r5	@ int
+  84 0084 F8EEE77A 		vcvt.f32.s32	s15, s15
+  85 0088 77EE807A 		vadd.f32	s15, s15, s0
+  86 008c B0EE007A 		vmov.f32	s14, #2.0e+0
+  87 0090 77EEC77A 		vsub.f32	s15, s15, s14
+  88 0094 059B     		ldr	r3, [sp, #20]
+  89 0096 2B44     		add	r3, r3, r5
+  90 0098 023B     		subs	r3, r3, #2
+  91 009a C8F80030 		str	r3, [r8]
+  92 009e C8ED017A 		vstr.32	s15, [r8, #4]
+  93 00a2 88F80860 		strb	r6, [r8, #8]
+  94 00a6 4046     		mov	r0, r8
+  95 00a8 0EB0     		add	sp, sp, #56
+  96              		@ sp needed
+  97 00aa BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+  98              	.L10:
+  99 00ae 00BF     		.align	2
+ 100              	.L9:
+ 101 00b0 0000C842 		.word	1120403456
+ 103              		.section	.text.patchouli_init,"ax",%progbits
+ 104              		.align	1
+ 105              		.global	patchouli_init
+ 106              		.syntax unified
+ 107              		.thumb
+ 108              		.thumb_func
+ 110              	patchouli_init:
+ 111              		@ args = 0, pretend = 0, frame = 0
+ 112              		@ frame_needed = 0, uses_anonymous_args = 0
+ 113 0000 08B5     		push	{r3, lr}
+ 114 0002 0121     		movs	r1, #1
+ 115 0004 0020     		movs	r0, #0
+ 116 0006 FFF7FEFF 		bl	patchouli_coil_select
+ 117 000a FFF7FEFF 		bl	patchouli_TIM_init
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 3
+
+
+ 118 000e FFF7FEFF 		bl	patchouli_gauss_init_kernel
+ 119 0012 0321     		movs	r1, #3
+ 120 0014 0148     		ldr	r0, .L13
+ 121 0016 FFF7FEFF 		bl	patchouli_mva_buffer_init
+ 122 001a 08BD     		pop	{r3, pc}
+ 123              	.L14:
+ 124              		.align	2
+ 125              	.L13:
+ 126 001c 00000000 		.word	mva_p
+ 128              		.section	.rodata._patchouli_cycle_default.str1.4,"aMS",%progbits,1
+ 129              		.align	2
+ 130              	.LC0:
+ 131 0000 47617573 		.ascii	"Gauss Fit PDET\012\000"
+ 131      73204669 
+ 131      74205044 
+ 131      45540A00 
+ 132              		.section	.text._patchouli_cycle_default,"ax",%progbits
+ 133              		.align	1
+ 134              		.global	_patchouli_cycle_default
+ 135              		.syntax unified
+ 136              		.thumb
+ 137              		.thumb_func
+ 139              	_patchouli_cycle_default:
+ 140              		@ args = 0, pretend = 0, frame = 48
+ 141              		@ frame_needed = 0, uses_anonymous_args = 0
+ 142 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 143 0002 2DED028B 		vpush.64	{d8}
+ 144 0006 8DB0     		sub	sp, sp, #52
+ 145 0008 734E     		ldr	r6, .L30
+ 146 000a 744F     		ldr	r7, .L30+4
+ 147 000c 0123     		movs	r3, #1
+ 148 000e 3268     		ldr	r2, [r6]
+ 149 0010 3978     		ldrb	r1, [r7]	@ zero_extendqisi2
+ 150 0012 6846     		mov	r0, sp
+ 151 0014 FFF7FEFF 		bl	patchouli_get_position
+ 152 0018 9DE80700 		ldm	sp, {r0, r1, r2}
+ 153 001c 86E80700 		stm	r6, {r0, r1, r2}
+ 154 0020 6F4D     		ldr	r5, .L30+8
+ 155 0022 0023     		movs	r3, #0
+ 156 0024 2A68     		ldr	r2, [r5]
+ 157 0026 3978     		ldrb	r1, [r7]	@ zero_extendqisi2
+ 158 0028 6846     		mov	r0, sp
+ 159 002a FFF7FEFF 		bl	patchouli_get_position
+ 160 002e 9DE80700 		ldm	sp, {r0, r1, r2}
+ 161 0032 85E80700 		stm	r5, {r0, r1, r2}
+ 162 0036 D6ED017A 		vldr.32	s15, [r6, #4]
+ 163 003a B0EE678A 		vmov.f32	s16, s15
+ 164 003e D5ED017A 		vldr.32	s15, [r5, #4]
+ 165 0042 F0EE678A 		vmov.f32	s17, s15
+ 166 0046 0024     		movs	r4, #0
+ 167 0048 2546     		mov	r5, r4
+ 168 004a 00E0     		b	.L16
+ 169              	.L17:
+ 170 004c 0134     		adds	r4, r4, #1
+ 171              	.L16:
+ 172 004e 072C     		cmp	r4, #7
+ 173 0050 11DC     		bgt	.L28
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 4
+
+
+ 174 0052 0121     		movs	r1, #1
+ 175 0054 604B     		ldr	r3, .L30
+ 176 0056 1868     		ldr	r0, [r3]
+ 177 0058 FFF7FEFF 		bl	patchouli_coil_select
+ 178 005c E1B2     		uxtb	r1, r4
+ 179 005e 0020     		movs	r0, #0
+ 180 0060 FFF7FEFF 		bl	patchouli_simple_take_sample
+ 181 0064 5F4B     		ldr	r3, .L30+12
+ 182 0066 23F81400 		strh	r0, [r3, r4, lsl #1]	@ movhi
+ 183 006a A842     		cmp	r0, r5
+ 184 006c EED9     		bls	.L17
+ 185 006e 5B4B     		ldr	r3, .L30+4
+ 186 0070 1C60     		str	r4, [r3]
+ 187 0072 0546     		mov	r5, r0
+ 188 0074 EAE7     		b	.L17
+ 189              	.L28:
+ 190 0076 962D     		cmp	r5, #150
+ 191 0078 40F2A780 		bls	.L19
+ 192 007c FFF7FEFF 		bl	patchouli_led_on
+ 193 0080 0F21     		movs	r1, #15
+ 194 0082 5948     		ldr	r0, .L30+16
+ 195 0084 FFF7FEFF 		bl	CDC_Transmit_FS
+ 196 0088 544C     		ldr	r4, .L30+4
+ 197 008a 2368     		ldr	r3, [r4]
+ 198 008c 03F10043 		add	r3, r3, #-2147483648
+ 199 0090 023B     		subs	r3, r3, #2
+ 200 0092 05A9     		add	r1, sp, #20
+ 201 0094 5348     		ldr	r0, .L30+12
+ 202 0096 00EB4300 		add	r0, r0, r3, lsl #1
+ 203 009a FFF7FEFF 		bl	patchouli_gauss_apply
+ 204 009e DDED077A 		vldr.32	s15, [sp, #28]
+ 205 00a2 77EEA77A 		vadd.f32	s15, s15, s15
+ 206 00a6 DDED066A 		vldr.32	s13, [sp, #24]
+ 207 00aa 86EEA77A 		vdiv.f32	s14, s13, s15
+ 208 00ae D4ED007A 		vldr.32	s15, [r4]	@ int
+ 209 00b2 F8EEE77A 		vcvt.f32.s32	s15, s15
+ 210 00b6 77EEC77A 		vsub.f32	s15, s15, s14
+ 211 00ba B2EE067A 		vmov.f32	s14, #1.1e+1
+ 212 00be 77EE677A 		vsub.f32	s15, s14, s15
+ 213 00c2 17EE900A 		vmov	r0, s15
+ 214 00c6 FFF7FEFF 		bl	__aeabi_f2d
+ 215 00ca 41EC100B 		vmov	d0, r0, r1
+ 216 00ce FFF7FEFF 		bl	exp
+ 217 00d2 51EC100B 		vmov	r0, r1, d0
+ 218 00d6 FFF7FEFF 		bl	__aeabi_d2f
+ 219 00da 00EE100A 		vmov	s0, r0
+ 220 00de DFED437A 		vldr.32	s15, .L30+20
+ 221 00e2 B4EEE70A 		vcmpe.f32	s0, s15
+ 222 00e6 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 223 00ea 67D4     		bmi	.L29
+ 224              	.L20:
+ 225 00ec 404B     		ldr	r3, .L30+24
+ 226 00ee 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 227 00f0 33B9     		cbnz	r3, .L22
+ 228 00f2 3F4B     		ldr	r3, .L30+24
+ 229 00f4 0122     		movs	r2, #1
+ 230 00f6 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 5
+
+
+ 231 00f8 3E4B     		ldr	r3, .L30+28
+ 232 00fa 1A68     		ldr	r2, [r3]	@ float
+ 233 00fc 3E4B     		ldr	r3, .L30+32
+ 234 00fe 1A60     		str	r2, [r3]	@ float
+ 235              	.L22:
+ 236 0100 B0EE482A 		vmov.f32	s4, s16
+ 237 0104 DFED3D1A 		vldr.32	s3, .L30+36
+ 238 0108 9FED3D1A 		vldr.32	s2, .L30+40
+ 239 010c F2EE050A 		vmov.f32	s1, #1.05e+1
+ 240 0110 B6EE000A 		vmov.f32	s0, #5.0e-1
+ 241 0114 FFF7FEFF 		bl	patchouli_linear_map
+ 242 0118 10EE100A 		vmov	r0, s0
+ 243 011c FFF7FEFF 		bl	__aeabi_f2d
+ 244 0120 41EC100B 		vmov	d0, r0, r1
+ 245 0124 FFF7FEFF 		bl	round
+ 246 0128 51EC100B 		vmov	r0, r1, d0
+ 247 012c FFF7FEFF 		bl	__aeabi_d2iz
+ 248 0130 0446     		mov	r4, r0
+ 249 0132 B0EE682A 		vmov.f32	s4, s17
+ 250 0136 DFED321A 		vldr.32	s3, .L30+40
+ 251 013a 9FED321A 		vldr.32	s2, .L30+44
+ 252 013e F1EE0E0A 		vmov.f32	s1, #7.5e+0
+ 253 0142 B6EE000A 		vmov.f32	s0, #5.0e-1
+ 254 0146 FFF7FEFF 		bl	patchouli_linear_map
+ 255 014a 10EE100A 		vmov	r0, s0
+ 256 014e FFF7FEFF 		bl	__aeabi_f2d
+ 257 0152 41EC100B 		vmov	d0, r0, r1
+ 258 0156 FFF7FEFF 		bl	round
+ 259 015a 51EC100B 		vmov	r0, r1, d0
+ 260 015e FFF7FEFF 		bl	__aeabi_d2iz
+ 261 0162 0146     		mov	r1, r0
+ 262 0164 234B     		ldr	r3, .L30+28
+ 263 0166 93ED007A 		vldr.32	s14, [r3]
+ 264 016a 234B     		ldr	r3, .L30+32
+ 265 016c D3ED007A 		vldr.32	s15, [r3]
+ 266 0170 37EE677A 		vsub.f32	s14, s14, s15
+ 267 0174 DFED246A 		vldr.32	s13, .L30+48
+ 268 0178 C7EE267A 		vdiv.f32	s15, s14, s13
+ 269 017c 67EEA77A 		vmul.f32	s15, s15, s15
+ 270 0180 B0EE677A 		vmov.f32	s14, s15
+ 271 0184 BEEECA7A 		vcvt.s32.f32	s14, s14, #12
+ 272 0188 17EE103A 		vmov	r3, s14	@ int
+ 273 018c B3F5805F 		cmp	r3, #4096
+ 274 0190 01DB     		blt	.L23
+ 275 0192 40F6FF73 		movw	r3, #4095
+ 276              	.L23:
+ 277 0196 08A8     		add	r0, sp, #32
+ 278 0198 0022     		movs	r2, #0
+ 279 019a 0892     		str	r2, [sp, #32]
+ 280 019c 4260     		str	r2, [r0, #4]
+ 281 019e 8260     		str	r2, [r0, #8]
+ 282 01a0 C260     		str	r2, [r0, #12]
+ 283 01a2 ADF82040 		strh	r4, [sp, #32]	@ movhi
+ 284 01a6 ADF82210 		strh	r1, [sp, #34]	@ movhi
+ 285 01aa 9B00     		lsls	r3, r3, #2
+ 286 01ac ADF82A30 		strh	r3, [sp, #42]	@ movhi
+ 287 01b0 FFF7FEFF 		bl	patchouli_transmit
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 6
+
+
+ 288              	.L15:
+ 289 01b4 0DB0     		add	sp, sp, #52
+ 290              		@ sp needed
+ 291 01b6 BDEC028B 		vldm	sp!, {d8}
+ 292 01ba F0BD     		pop	{r4, r5, r6, r7, pc}
+ 293              	.L29:
+ 294 01bc 1348     		ldr	r0, .L30+52
+ 295 01be FFF7FEFF 		bl	patchouli_mva_buffer_push
+ 296 01c2 0C4B     		ldr	r3, .L30+28
+ 297 01c4 83ED000A 		vstr.32	s0, [r3]
+ 298 01c8 90E7     		b	.L20
+ 299              	.L19:
+ 300 01ca 094B     		ldr	r3, .L30+24
+ 301 01cc 0022     		movs	r2, #0
+ 302 01ce 1A70     		strb	r2, [r3]
+ 303 01d0 FFF7FEFF 		bl	patchouli_led_off
+ 304 01d4 EEE7     		b	.L15
+ 305              	.L31:
+ 306 01d6 00BF     		.align	2
+ 307              	.L30:
+ 308 01d8 00000000 		.word	xpos
+ 309 01dc 00000000 		.word	maxpptr
+ 310 01e0 00000000 		.word	ypos
+ 311 01e4 00000000 		.word	psamples
+ 312 01e8 00000000 		.word	.LC0
+ 313 01ec 0000FA44 		.word	1157234688
+ 314 01f0 00000000 		.word	pen_present
+ 315 01f4 00000000 		.word	pavg
+ 316 01f8 00000000 		.word	pen_zero_pressure
+ 317 01fc 0000FA46 		.word	1190789120
+ 318 0200 00000000 		.word	0
+ 319 0204 00409C46 		.word	1184645120
+ 320 0208 CD4C6BC4 		.word	-999600947
+ 321 020c 00000000 		.word	mva_p
+ 323              		.section	.text._patchouli_cycle_xscan,"ax",%progbits
+ 324              		.align	1
+ 325              		.global	_patchouli_cycle_xscan
+ 326              		.syntax unified
+ 327              		.thumb
+ 328              		.thumb_func
+ 330              	_patchouli_cycle_xscan:
+ 331              		@ args = 0, pretend = 0, frame = 0
+ 332              		@ frame_needed = 0, uses_anonymous_args = 0
+ 333 0000 10B5     		push	{r4, lr}
+ 334 0002 0024     		movs	r4, #0
+ 335 0004 08E0     		b	.L33
+ 336              	.L34:
+ 337 0006 0121     		movs	r1, #1
+ 338 0008 2046     		mov	r0, r4
+ 339 000a FFF7FEFF 		bl	patchouli_coil_select
+ 340 000e 0021     		movs	r1, #0
+ 341 0010 0846     		mov	r0, r1
+ 342 0012 FFF7FEFF 		bl	patchouli_simple_take_sample
+ 343 0016 0134     		adds	r4, r4, #1
+ 344              	.L33:
+ 345 0018 1B2C     		cmp	r4, #27
+ 346 001a F4D9     		bls	.L34
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 7
+
+
+ 347 001c 0023     		movs	r3, #0
+ 348 001e 01E0     		b	.L35
+ 349              	.L36:
+ 350              		.syntax unified
+ 351              	@ 189 "patchouli/src/patchouli.c" 1
+ 352 0020 00BF     		nop
+ 353              	@ 0 "" 2
+ 354              		.thumb
+ 355              		.syntax unified
+ 356 0022 0133     		adds	r3, r3, #1
+ 357              	.L35:
+ 358 0024 4CF24F32 		movw	r2, #49999
+ 359 0028 9342     		cmp	r3, r2
+ 360 002a F9DD     		ble	.L36
+ 361 002c 10BD     		pop	{r4, pc}
+ 363              		.section	.text._patchouli_cycle_yscan,"ax",%progbits
+ 364              		.align	1
+ 365              		.global	_patchouli_cycle_yscan
+ 366              		.syntax unified
+ 367              		.thumb
+ 368              		.thumb_func
+ 370              	_patchouli_cycle_yscan:
+ 371              		@ args = 0, pretend = 0, frame = 0
+ 372              		@ frame_needed = 0, uses_anonymous_args = 0
+ 373 0000 10B5     		push	{r4, lr}
+ 374 0002 0024     		movs	r4, #0
+ 375 0004 08E0     		b	.L39
+ 376              	.L40:
+ 377 0006 0021     		movs	r1, #0
+ 378 0008 2046     		mov	r0, r4
+ 379 000a FFF7FEFF 		bl	patchouli_coil_select
+ 380 000e 0021     		movs	r1, #0
+ 381 0010 0120     		movs	r0, #1
+ 382 0012 FFF7FEFF 		bl	patchouli_simple_take_sample
+ 383 0016 0134     		adds	r4, r4, #1
+ 384              	.L39:
+ 385 0018 112C     		cmp	r4, #17
+ 386 001a F4D9     		bls	.L40
+ 387 001c 0023     		movs	r3, #0
+ 388 001e 01E0     		b	.L41
+ 389              	.L42:
+ 390              		.syntax unified
+ 391              	@ 202 "patchouli/src/patchouli.c" 1
+ 392 0020 00BF     		nop
+ 393              	@ 0 "" 2
+ 394              		.thumb
+ 395              		.syntax unified
+ 396 0022 0133     		adds	r3, r3, #1
+ 397              	.L41:
+ 398 0024 4CF24F32 		movw	r2, #49999
+ 399 0028 9342     		cmp	r3, r2
+ 400 002a F9DD     		ble	.L42
+ 401 002c 10BD     		pop	{r4, pc}
+ 403              		.section	.text.patchouli_set_mode,"ax",%progbits
+ 404              		.align	1
+ 405              		.global	patchouli_set_mode
+ 406              		.syntax unified
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 8
+
+
+ 407              		.thumb
+ 408              		.thumb_func
+ 410              	patchouli_set_mode:
+ 411              		@ args = 0, pretend = 0, frame = 0
+ 412              		@ frame_needed = 0, uses_anonymous_args = 0
+ 413              		@ link register save eliminated.
+ 414 0000 014B     		ldr	r3, .L45
+ 415 0002 1870     		strb	r0, [r3]
+ 416 0004 7047     		bx	lr
+ 417              	.L46:
+ 418 0006 00BF     		.align	2
+ 419              	.L45:
+ 420 0008 00000000 		.word	debug_state
+ 422              		.section	.text.patchouli_cycle,"ax",%progbits
+ 423              		.align	1
+ 424              		.global	patchouli_cycle
+ 425              		.syntax unified
+ 426              		.thumb
+ 427              		.thumb_func
+ 429              	patchouli_cycle:
+ 430              		@ args = 0, pretend = 0, frame = 0
+ 431              		@ frame_needed = 0, uses_anonymous_args = 0
+ 432 0000 08B5     		push	{r3, lr}
+ 433 0002 084B     		ldr	r3, .L52
+ 434 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 435 0006 012B     		cmp	r3, #1
+ 436 0008 05D0     		beq	.L48
+ 437 000a 022B     		cmp	r3, #2
+ 438 000c 06D0     		beq	.L49
+ 439 000e 0BB9     		cbnz	r3, .L47
+ 440 0010 FFF7FEFF 		bl	_patchouli_cycle_default
+ 441              	.L47:
+ 442 0014 08BD     		pop	{r3, pc}
+ 443              	.L48:
+ 444 0016 FFF7FEFF 		bl	_patchouli_cycle_xscan
+ 445 001a FBE7     		b	.L47
+ 446              	.L49:
+ 447 001c FFF7FEFF 		bl	_patchouli_cycle_yscan
+ 448 0020 F8E7     		b	.L47
+ 449              	.L53:
+ 450 0022 00BF     		.align	2
+ 451              	.L52:
+ 452 0024 00000000 		.word	debug_state
+ 454              		.section	.rodata.patchouli_debug_output.str1.4,"aMS",%progbits,1
+ 455              		.align	2
+ 456              	.LC1:
+ 457 0000 257300   		.ascii	"%s\000"
+ 458 0003 00       		.align	2
+ 459              	.LC2:
+ 460 0004 0A00     		.ascii	"\012\000"
+ 461              		.section	.text.patchouli_debug_output,"ax",%progbits
+ 462              		.align	1
+ 463              		.global	patchouli_debug_output
+ 464              		.syntax unified
+ 465              		.thumb
+ 466              		.thumb_func
+ 468              	patchouli_debug_output:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 9
+
+
+ 469              		@ args = 4, pretend = 12, frame = 264
+ 470              		@ frame_needed = 0, uses_anonymous_args = 1
+ 471 0000 0EB4     		push	{r1, r2, r3}
+ 472 0002 F0B5     		push	{r4, r5, r6, r7, lr}
+ 473 0004 C2B0     		sub	sp, sp, #264
+ 474 0006 0346     		mov	r3, r0
+ 475 0008 47AA     		add	r2, sp, #284
+ 476 000a 52F8047B 		ldr	r7, [r2], #4
+ 477 000e 0192     		str	r2, [sp, #4]
+ 478 0010 02AD     		add	r5, sp, #8
+ 479 0012 0F4A     		ldr	r2, .L56
+ 480 0014 4FF48071 		mov	r1, #256
+ 481 0018 2846     		mov	r0, r5
+ 482 001a FFF7FEFF 		bl	snprintf
+ 483 001e 0446     		mov	r4, r0
+ 484 0020 019B     		ldr	r3, [sp, #4]
+ 485 0022 3A46     		mov	r2, r7
+ 486 0024 C0F58071 		rsb	r1, r0, #256
+ 487 0028 2818     		adds	r0, r5, r0
+ 488 002a FFF7FEFF 		bl	vsnprintf
+ 489 002e 0444     		add	r4, r4, r0
+ 490 0030 084A     		ldr	r2, .L56+4
+ 491 0032 C4F58071 		rsb	r1, r4, #256
+ 492 0036 2819     		adds	r0, r5, r4
+ 493 0038 FFF7FEFF 		bl	snprintf
+ 494 003c 2118     		adds	r1, r4, r0
+ 495 003e 89B2     		uxth	r1, r1
+ 496 0040 2846     		mov	r0, r5
+ 497 0042 FFF7FEFF 		bl	CDC_Transmit_FS
+ 498 0046 42B0     		add	sp, sp, #264
+ 499              		@ sp needed
+ 500 0048 BDE8F040 		pop	{r4, r5, r6, r7, lr}
+ 501 004c 03B0     		add	sp, sp, #12
+ 502 004e 7047     		bx	lr
+ 503              	.L57:
+ 504              		.align	2
+ 505              	.L56:
+ 506 0050 00000000 		.word	.LC1
+ 507 0054 04000000 		.word	.LC2
+ 509              		.global	ypos
+ 510              		.section	.bss.ypos,"aw",%nobits
+ 511              		.align	2
+ 514              	ypos:
+ 515 0000 00000000 		.space	12
+ 515      00000000 
+ 515      00000000 
+ 516              		.global	xpos
+ 517              		.section	.bss.xpos,"aw",%nobits
+ 518              		.align	2
+ 521              	xpos:
+ 522 0000 00000000 		.space	12
+ 522      00000000 
+ 522      00000000 
+ 523              		.global	pen_zero_pressure
+ 524              		.section	.bss.pen_zero_pressure,"aw",%nobits
+ 525              		.align	2
+ 528              	pen_zero_pressure:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 10
+
+
+ 529 0000 00000000 		.space	4
+ 530              		.global	pen_present
+ 531              		.section	.bss.pen_present,"aw",%nobits
+ 534              	pen_present:
+ 535 0000 00       		.space	1
+ 536              		.global	psamples
+ 537              		.section	.bss.psamples,"aw",%nobits
+ 538              		.align	2
+ 541              	psamples:
+ 542 0000 00000000 		.space	18
+ 542      00000000 
+ 542      00000000 
+ 542      00000000 
+ 542      0000
+ 543              		.global	maxpptr
+ 544              		.section	.data.maxpptr,"aw"
+ 545              		.align	2
+ 548              	maxpptr:
+ 549 0000 07000000 		.word	7
+ 550              		.global	pavg
+ 551              		.section	.bss.pavg,"aw",%nobits
+ 552              		.align	2
+ 555              	pavg:
+ 556 0000 00000000 		.space	4
+ 557              		.global	debug_state
+ 558              		.section	.bss.debug_state,"aw",%nobits
+ 561              	debug_state:
+ 562 0000 00       		.space	1
+ 563              		.global	mva_p
+ 564              		.section	.bss.mva_p,"aw",%nobits
+ 565              		.align	2
+ 568              	mva_p:
+ 569 0000 00000000 		.space	20
+ 569      00000000 
+ 569      00000000 
+ 569      00000000 
+ 569      00000000 
+ 570              		.global	mva_ypos
+ 571              		.section	.bss.mva_ypos,"aw",%nobits
+ 572              		.align	2
+ 575              	mva_ypos:
+ 576 0000 00000000 		.space	20
+ 576      00000000 
+ 576      00000000 
+ 576      00000000 
+ 576      00000000 
+ 577              		.global	mva_xpos
+ 578              		.section	.bss.mva_xpos,"aw",%nobits
+ 579              		.align	2
+ 582              	mva_xpos:
+ 583 0000 00000000 		.space	20
+ 583      00000000 
+ 583      00000000 
+ 583      00000000 
+ 583      00000000 
+ 584              		.global	__aeabi_d2iz
+ 585              		.global	__aeabi_d2f
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 11
+
+
+ 586              		.global	__aeabi_f2d
+ 587              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 patchouli.c
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:18     .text.patchouli_get_position:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:24     .text.patchouli_get_position:00000000 patchouli_get_position
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:101    .text.patchouli_get_position:000000b0 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:104    .text.patchouli_init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:110    .text.patchouli_init:00000000 patchouli_init
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:126    .text.patchouli_init:0000001c $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:568    .bss.mva_p:00000000 mva_p
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:129    .rodata._patchouli_cycle_default.str1.4:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:133    .text._patchouli_cycle_default:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:139    .text._patchouli_cycle_default:00000000 _patchouli_cycle_default
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:308    .text._patchouli_cycle_default:000001d8 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:521    .bss.xpos:00000000 xpos
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:548    .data.maxpptr:00000000 maxpptr
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:514    .bss.ypos:00000000 ypos
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:541    .bss.psamples:00000000 psamples
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:534    .bss.pen_present:00000000 pen_present
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:555    .bss.pavg:00000000 pavg
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:528    .bss.pen_zero_pressure:00000000 pen_zero_pressure
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:324    .text._patchouli_cycle_xscan:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:330    .text._patchouli_cycle_xscan:00000000 _patchouli_cycle_xscan
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:364    .text._patchouli_cycle_yscan:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:370    .text._patchouli_cycle_yscan:00000000 _patchouli_cycle_yscan
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:404    .text.patchouli_set_mode:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:410    .text.patchouli_set_mode:00000000 patchouli_set_mode
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:420    .text.patchouli_set_mode:00000008 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:561    .bss.debug_state:00000000 debug_state
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:423    .text.patchouli_cycle:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:429    .text.patchouli_cycle:00000000 patchouli_cycle
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:452    .text.patchouli_cycle:00000024 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:455    .rodata.patchouli_debug_output.str1.4:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:462    .text.patchouli_debug_output:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:468    .text.patchouli_debug_output:00000000 patchouli_debug_output
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:506    .text.patchouli_debug_output:00000050 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:511    .bss.ypos:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:518    .bss.xpos:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:525    .bss.pen_zero_pressure:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:535    .bss.pen_present:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:538    .bss.psamples:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:545    .data.maxpptr:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:552    .bss.pavg:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:562    .bss.debug_state:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:565    .bss.mva_p:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:575    .bss.mva_ypos:00000000 mva_ypos
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:572    .bss.mva_ypos:00000000 $d
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:582    .bss.mva_xpos:00000000 mva_xpos
+C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s:579    .bss.mva_xpos:00000000 $d
+
+UNDEFINED SYMBOLS
+patchouli_coil_select
+patchouli_simple_take_sample
+memset
+patchouli_quad_interp
+patchouli_TIM_init
+patchouli_gauss_init_kernel
+patchouli_mva_buffer_init
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccUijNRC.s 			page 13
+
+
+patchouli_led_on
+CDC_Transmit_FS
+patchouli_gauss_apply
+__aeabi_f2d
+exp
+__aeabi_d2f
+patchouli_linear_map
+round
+__aeabi_d2iz
+patchouli_transmit
+patchouli_mva_buffer_push
+patchouli_led_off
+snprintf
+vsnprintf

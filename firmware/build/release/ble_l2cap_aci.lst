@@ -1,0 +1,531 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"ble_l2cap_aci.c"
+  16              		.text
+  17              		.section	.text.aci_l2cap_connection_parameter_update_req,"ax",%progbits
+  18              		.align	1
+  19              		.global	aci_l2cap_connection_parameter_update_req
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	aci_l2cap_connection_parameter_update_req:
+  25              		@ args = 4, pretend = 0, frame = 288
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  28 0002 C9B0     		sub	sp, sp, #292
+  29 0004 0DF10707 		add	r7, sp, #7
+  30 0008 0025     		movs	r5, #0
+  31 000a 8DF80750 		strb	r5, [sp, #7]
+  32 000e 02AC     		add	r4, sp, #8
+  33 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+  34 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+  35 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+  36 001c ADF80E30 		strh	r3, [sp, #14]	@ movhi
+  37 0020 BDF83831 		ldrh	r3, [sp, #312]
+  38 0024 ADF81030 		strh	r3, [sp, #16]	@ movhi
+  39 0028 42AE     		add	r6, sp, #264
+  40 002a 1822     		movs	r2, #24
+  41 002c 2946     		mov	r1, r5
+  42 002e 3046     		mov	r0, r6
+  43 0030 FFF7FEFF 		bl	Osal_MemSet
+  44 0034 3F23     		movs	r3, #63
+  45 0036 ADF80831 		strh	r3, [sp, #264]	@ movhi
+  46 003a 40F28113 		movw	r3, #385
+  47 003e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+  48 0042 0F23     		movs	r3, #15
+  49 0044 4393     		str	r3, [sp, #268]
+  50 0046 4494     		str	r4, [sp, #272]
+  51 0048 0A23     		movs	r3, #10
+  52 004a 4593     		str	r3, [sp, #276]
+  53 004c 4697     		str	r7, [sp, #280]
+  54 004e 0123     		movs	r3, #1
+  55 0050 4793     		str	r3, [sp, #284]
+  56 0052 2946     		mov	r1, r5
+  57 0054 3046     		mov	r0, r6
+  58 0056 FFF7FEFF 		bl	hci_send_req
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 2
+
+
+  59 005a A842     		cmp	r0, r5
+  60 005c 02DB     		blt	.L3
+  61 005e 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+  62              	.L2:
+  63 0060 49B0     		add	sp, sp, #292
+  64              		@ sp needed
+  65 0062 F0BD     		pop	{r4, r5, r6, r7, pc}
+  66              	.L3:
+  67 0064 FF20     		movs	r0, #255
+  68 0066 FBE7     		b	.L2
+  70              		.section	.text.aci_l2cap_connection_parameter_update_resp,"ax",%progbits
+  71              		.align	1
+  72              		.global	aci_l2cap_connection_parameter_update_resp
+  73              		.syntax unified
+  74              		.thumb
+  75              		.thumb_func
+  77              	aci_l2cap_connection_parameter_update_resp:
+  78              		@ args = 20, pretend = 0, frame = 288
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  81 0002 C9B0     		sub	sp, sp, #292
+  82 0004 0DF10707 		add	r7, sp, #7
+  83 0008 0025     		movs	r5, #0
+  84 000a 8DF80750 		strb	r5, [sp, #7]
+  85 000e 02AC     		add	r4, sp, #8
+  86 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+  87 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+  88 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+  89 001c ADF80E30 		strh	r3, [sp, #14]	@ movhi
+  90 0020 BDF83831 		ldrh	r3, [sp, #312]
+  91 0024 ADF81030 		strh	r3, [sp, #16]	@ movhi
+  92 0028 BDF83C31 		ldrh	r3, [sp, #316]
+  93 002c ADF81230 		strh	r3, [sp, #18]	@ movhi
+  94 0030 BDF84031 		ldrh	r3, [sp, #320]
+  95 0034 ADF81430 		strh	r3, [sp, #20]	@ movhi
+  96 0038 9DF84431 		ldrb	r3, [sp, #324]	@ zero_extendqisi2
+  97 003c 8DF81630 		strb	r3, [sp, #22]
+  98 0040 9DF84831 		ldrb	r3, [sp, #328]	@ zero_extendqisi2
+  99 0044 8DF81730 		strb	r3, [sp, #23]
+ 100 0048 42AE     		add	r6, sp, #264
+ 101 004a 1822     		movs	r2, #24
+ 102 004c 2946     		mov	r1, r5
+ 103 004e 3046     		mov	r0, r6
+ 104 0050 FFF7FEFF 		bl	Osal_MemSet
+ 105 0054 3F23     		movs	r3, #63
+ 106 0056 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 107 005a 4FF4C173 		mov	r3, #386
+ 108 005e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 109 0062 4494     		str	r4, [sp, #272]
+ 110 0064 1023     		movs	r3, #16
+ 111 0066 4593     		str	r3, [sp, #276]
+ 112 0068 4697     		str	r7, [sp, #280]
+ 113 006a 0123     		movs	r3, #1
+ 114 006c 4793     		str	r3, [sp, #284]
+ 115 006e 2946     		mov	r1, r5
+ 116 0070 3046     		mov	r0, r6
+ 117 0072 FFF7FEFF 		bl	hci_send_req
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 3
+
+
+ 118 0076 A842     		cmp	r0, r5
+ 119 0078 02DB     		blt	.L7
+ 120 007a 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 121              	.L6:
+ 122 007c 49B0     		add	sp, sp, #292
+ 123              		@ sp needed
+ 124 007e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 125              	.L7:
+ 126 0080 FF20     		movs	r0, #255
+ 127 0082 FBE7     		b	.L6
+ 129              		.section	.text.aci_l2cap_coc_connect,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	aci_l2cap_coc_connect
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 136              	aci_l2cap_coc_connect:
+ 137              		@ args = 8, pretend = 0, frame = 288
+ 138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 140 0002 C9B0     		sub	sp, sp, #292
+ 141 0004 0DF10707 		add	r7, sp, #7
+ 142 0008 0025     		movs	r5, #0
+ 143 000a 8DF80750 		strb	r5, [sp, #7]
+ 144 000e 02AC     		add	r4, sp, #8
+ 145 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 146 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 147 0018 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 148 001c ADF80E30 		strh	r3, [sp, #14]	@ movhi
+ 149 0020 BDF83831 		ldrh	r3, [sp, #312]
+ 150 0024 ADF81030 		strh	r3, [sp, #16]	@ movhi
+ 151 0028 9DF83C31 		ldrb	r3, [sp, #316]	@ zero_extendqisi2
+ 152 002c 8DF81230 		strb	r3, [sp, #18]
+ 153 0030 42AE     		add	r6, sp, #264
+ 154 0032 1822     		movs	r2, #24
+ 155 0034 2946     		mov	r1, r5
+ 156 0036 3046     		mov	r0, r6
+ 157 0038 FFF7FEFF 		bl	Osal_MemSet
+ 158 003c 3F23     		movs	r3, #63
+ 159 003e ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 160 0042 4FF4C473 		mov	r3, #392
+ 161 0046 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 162 004a 4494     		str	r4, [sp, #272]
+ 163 004c 0B23     		movs	r3, #11
+ 164 004e 4593     		str	r3, [sp, #276]
+ 165 0050 4697     		str	r7, [sp, #280]
+ 166 0052 0123     		movs	r3, #1
+ 167 0054 4793     		str	r3, [sp, #284]
+ 168 0056 2946     		mov	r1, r5
+ 169 0058 3046     		mov	r0, r6
+ 170 005a FFF7FEFF 		bl	hci_send_req
+ 171 005e A842     		cmp	r0, r5
+ 172 0060 02DB     		blt	.L11
+ 173 0062 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 174              	.L10:
+ 175 0064 49B0     		add	sp, sp, #292
+ 176              		@ sp needed
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 4
+
+
+ 177 0066 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 178              	.L11:
+ 179 0068 FF20     		movs	r0, #255
+ 180 006a FBE7     		b	.L10
+ 182              		.section	.text.aci_l2cap_coc_connect_confirm,"ax",%progbits
+ 183              		.align	1
+ 184              		.global	aci_l2cap_coc_connect_confirm
+ 185              		.syntax unified
+ 186              		.thumb
+ 187              		.thumb_func
+ 189              	aci_l2cap_coc_connect_confirm:
+ 190              		@ args = 12, pretend = 0, frame = 536
+ 191              		@ frame_needed = 0, uses_anonymous_args = 0
+ 192 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 193 0004 ADF5077D 		sub	sp, sp, #540
+ 194 0008 8146     		mov	r9, r0
+ 195 000a 8846     		mov	r8, r1
+ 196 000c 1746     		mov	r7, r2
+ 197 000e 1D46     		mov	r5, r3
+ 198 0010 01AE     		add	r6, sp, #4
+ 199 0012 FC22     		movs	r2, #252
+ 200 0014 0021     		movs	r1, #0
+ 201 0016 3046     		mov	r0, r6
+ 202 0018 FFF7FEFF 		bl	Osal_MemSet
+ 203 001c 40AC     		add	r4, sp, #256
+ 204 001e ADF80091 		strh	r9, [sp, #256]	@ movhi
+ 205 0022 ADF80281 		strh	r8, [sp, #258]	@ movhi
+ 206 0026 ADF80471 		strh	r7, [sp, #260]	@ movhi
+ 207 002a ADF80651 		strh	r5, [sp, #262]	@ movhi
+ 208 002e BDF83832 		ldrh	r3, [sp, #568]
+ 209 0032 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 210 0036 80AD     		add	r5, sp, #512
+ 211 0038 1822     		movs	r2, #24
+ 212 003a 0021     		movs	r1, #0
+ 213 003c 2846     		mov	r0, r5
+ 214 003e FFF7FEFF 		bl	Osal_MemSet
+ 215 0042 3F23     		movs	r3, #63
+ 216 0044 ADF80032 		strh	r3, [sp, #512]	@ movhi
+ 217 0048 40F28913 		movw	r3, #393
+ 218 004c ADF80232 		strh	r3, [sp, #514]	@ movhi
+ 219 0050 8294     		str	r4, [sp, #520]
+ 220 0052 0A23     		movs	r3, #10
+ 221 0054 8393     		str	r3, [sp, #524]
+ 222 0056 8496     		str	r6, [sp, #528]
+ 223 0058 FC23     		movs	r3, #252
+ 224 005a 8593     		str	r3, [sp, #532]
+ 225 005c 0021     		movs	r1, #0
+ 226 005e 2846     		mov	r0, r5
+ 227 0060 FFF7FEFF 		bl	hci_send_req
+ 228 0064 0028     		cmp	r0, #0
+ 229 0066 0FDB     		blt	.L15
+ 230 0068 3478     		ldrb	r4, [r6]	@ zero_extendqisi2
+ 231 006a 24B1     		cbz	r4, .L17
+ 232              	.L14:
+ 233 006c 2046     		mov	r0, r4
+ 234 006e 0DF5077D 		add	sp, sp, #540
+ 235              		@ sp needed
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 5
+
+
+ 236 0072 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 237              	.L17:
+ 238 0076 7278     		ldrb	r2, [r6, #1]	@ zero_extendqisi2
+ 239 0078 8F9B     		ldr	r3, [sp, #572]
+ 240 007a 1A70     		strb	r2, [r3]
+ 241 007c 0DF10601 		add	r1, sp, #6
+ 242 0080 9098     		ldr	r0, [sp, #576]
+ 243 0082 FFF7FEFF 		bl	Osal_MemCpy
+ 244 0086 F1E7     		b	.L14
+ 245              	.L15:
+ 246 0088 FF24     		movs	r4, #255
+ 247 008a EFE7     		b	.L14
+ 249              		.section	.text.aci_l2cap_coc_reconf,"ax",%progbits
+ 250              		.align	1
+ 251              		.global	aci_l2cap_coc_reconf
+ 252              		.syntax unified
+ 253              		.thumb
+ 254              		.thumb_func
+ 256              	aci_l2cap_coc_reconf:
+ 257              		@ args = 4, pretend = 0, frame = 288
+ 258              		@ frame_needed = 0, uses_anonymous_args = 0
+ 259 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 260 0004 C8B0     		sub	sp, sp, #288
+ 261 0006 1C46     		mov	r4, r3
+ 262 0008 0DF10708 		add	r8, sp, #7
+ 263 000c 0026     		movs	r6, #0
+ 264 000e 8DF80760 		strb	r6, [sp, #7]
+ 265 0012 02AD     		add	r5, sp, #8
+ 266 0014 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 267 0018 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 268 001c ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 269 0020 8DF80E30 		strb	r3, [sp, #14]
+ 270 0024 1A46     		mov	r2, r3
+ 271 0026 4E99     		ldr	r1, [sp, #312]
+ 272 0028 0DF10F00 		add	r0, sp, #15
+ 273 002c FFF7FEFF 		bl	Osal_MemCpy
+ 274 0030 0734     		adds	r4, r4, #7
+ 275 0032 42AF     		add	r7, sp, #264
+ 276 0034 1822     		movs	r2, #24
+ 277 0036 3146     		mov	r1, r6
+ 278 0038 3846     		mov	r0, r7
+ 279 003a FFF7FEFF 		bl	Osal_MemSet
+ 280 003e 3F23     		movs	r3, #63
+ 281 0040 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 282 0044 4FF4C573 		mov	r3, #394
+ 283 0048 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 284 004c 4495     		str	r5, [sp, #272]
+ 285 004e 4594     		str	r4, [sp, #276]
+ 286 0050 CDF81881 		str	r8, [sp, #280]
+ 287 0054 0123     		movs	r3, #1
+ 288 0056 4793     		str	r3, [sp, #284]
+ 289 0058 3146     		mov	r1, r6
+ 290 005a 3846     		mov	r0, r7
+ 291 005c FFF7FEFF 		bl	hci_send_req
+ 292 0060 B042     		cmp	r0, r6
+ 293 0062 04DB     		blt	.L20
+ 294 0064 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 6
+
+
+ 295              	.L19:
+ 296 0068 48B0     		add	sp, sp, #288
+ 297              		@ sp needed
+ 298 006a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 299              	.L20:
+ 300 006e FF20     		movs	r0, #255
+ 301 0070 FAE7     		b	.L19
+ 303              		.section	.text.aci_l2cap_coc_reconf_confirm,"ax",%progbits
+ 304              		.align	1
+ 305              		.global	aci_l2cap_coc_reconf_confirm
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 310              	aci_l2cap_coc_reconf_confirm:
+ 311              		@ args = 0, pretend = 0, frame = 288
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 313 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 314 0002 C9B0     		sub	sp, sp, #292
+ 315 0004 0DF10707 		add	r7, sp, #7
+ 316 0008 0024     		movs	r4, #0
+ 317 000a 8DF80740 		strb	r4, [sp, #7]
+ 318 000e 02AD     		add	r5, sp, #8
+ 319 0010 ADF80800 		strh	r0, [sp, #8]	@ movhi
+ 320 0014 ADF80A10 		strh	r1, [sp, #10]	@ movhi
+ 321 0018 42AE     		add	r6, sp, #264
+ 322 001a 1822     		movs	r2, #24
+ 323 001c 2146     		mov	r1, r4
+ 324 001e 3046     		mov	r0, r6
+ 325 0020 FFF7FEFF 		bl	Osal_MemSet
+ 326 0024 3F23     		movs	r3, #63
+ 327 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 328 002a 40F28B13 		movw	r3, #395
+ 329 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 330 0032 4495     		str	r5, [sp, #272]
+ 331 0034 0423     		movs	r3, #4
+ 332 0036 4593     		str	r3, [sp, #276]
+ 333 0038 4697     		str	r7, [sp, #280]
+ 334 003a 0123     		movs	r3, #1
+ 335 003c 4793     		str	r3, [sp, #284]
+ 336 003e 2146     		mov	r1, r4
+ 337 0040 3046     		mov	r0, r6
+ 338 0042 FFF7FEFF 		bl	hci_send_req
+ 339 0046 A042     		cmp	r0, r4
+ 340 0048 02DB     		blt	.L24
+ 341 004a 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 342              	.L23:
+ 343 004c 49B0     		add	sp, sp, #292
+ 344              		@ sp needed
+ 345 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 346              	.L24:
+ 347 0050 FF20     		movs	r0, #255
+ 348 0052 FBE7     		b	.L23
+ 350              		.section	.text.aci_l2cap_coc_disconnect,"ax",%progbits
+ 351              		.align	1
+ 352              		.global	aci_l2cap_coc_disconnect
+ 353              		.syntax unified
+ 354              		.thumb
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 7
+
+
+ 355              		.thumb_func
+ 357              	aci_l2cap_coc_disconnect:
+ 358              		@ args = 0, pretend = 0, frame = 288
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 361 0002 C9B0     		sub	sp, sp, #292
+ 362 0004 0DF10706 		add	r6, sp, #7
+ 363 0008 0024     		movs	r4, #0
+ 364 000a 8DF80740 		strb	r4, [sp, #7]
+ 365 000e 02AF     		add	r7, sp, #8
+ 366 0010 8DF80800 		strb	r0, [sp, #8]
+ 367 0014 42AD     		add	r5, sp, #264
+ 368 0016 1822     		movs	r2, #24
+ 369 0018 2146     		mov	r1, r4
+ 370 001a 2846     		mov	r0, r5
+ 371 001c FFF7FEFF 		bl	Osal_MemSet
+ 372 0020 3F23     		movs	r3, #63
+ 373 0022 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 374 0026 4FF4C673 		mov	r3, #396
+ 375 002a ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 376 002e 4497     		str	r7, [sp, #272]
+ 377 0030 0123     		movs	r3, #1
+ 378 0032 4593     		str	r3, [sp, #276]
+ 379 0034 4696     		str	r6, [sp, #280]
+ 380 0036 4793     		str	r3, [sp, #284]
+ 381 0038 2146     		mov	r1, r4
+ 382 003a 2846     		mov	r0, r5
+ 383 003c FFF7FEFF 		bl	hci_send_req
+ 384 0040 A042     		cmp	r0, r4
+ 385 0042 02DB     		blt	.L28
+ 386 0044 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 387              	.L27:
+ 388 0046 49B0     		add	sp, sp, #292
+ 389              		@ sp needed
+ 390 0048 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 391              	.L28:
+ 392 004a FF20     		movs	r0, #255
+ 393 004c FBE7     		b	.L27
+ 395              		.section	.text.aci_l2cap_coc_flow_control,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	aci_l2cap_coc_flow_control
+ 398              		.syntax unified
+ 399              		.thumb
+ 400              		.thumb_func
+ 402              	aci_l2cap_coc_flow_control:
+ 403              		@ args = 0, pretend = 0, frame = 288
+ 404              		@ frame_needed = 0, uses_anonymous_args = 0
+ 405 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 406 0002 C9B0     		sub	sp, sp, #292
+ 407 0004 0DF10707 		add	r7, sp, #7
+ 408 0008 0024     		movs	r4, #0
+ 409 000a 8DF80740 		strb	r4, [sp, #7]
+ 410 000e 02AD     		add	r5, sp, #8
+ 411 0010 8DF80800 		strb	r0, [sp, #8]
+ 412 0014 ADF80910 		strh	r1, [sp, #9]	@ unaligned
+ 413 0018 42AE     		add	r6, sp, #264
+ 414 001a 1822     		movs	r2, #24
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 8
+
+
+ 415 001c 2146     		mov	r1, r4
+ 416 001e 3046     		mov	r0, r6
+ 417 0020 FFF7FEFF 		bl	Osal_MemSet
+ 418 0024 3F23     		movs	r3, #63
+ 419 0026 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 420 002a 40F28D13 		movw	r3, #397
+ 421 002e ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 422 0032 4495     		str	r5, [sp, #272]
+ 423 0034 0323     		movs	r3, #3
+ 424 0036 4593     		str	r3, [sp, #276]
+ 425 0038 4697     		str	r7, [sp, #280]
+ 426 003a 0123     		movs	r3, #1
+ 427 003c 4793     		str	r3, [sp, #284]
+ 428 003e 2146     		mov	r1, r4
+ 429 0040 3046     		mov	r0, r6
+ 430 0042 FFF7FEFF 		bl	hci_send_req
+ 431 0046 A042     		cmp	r0, r4
+ 432 0048 02DB     		blt	.L32
+ 433 004a 3878     		ldrb	r0, [r7]	@ zero_extendqisi2
+ 434              	.L31:
+ 435 004c 49B0     		add	sp, sp, #292
+ 436              		@ sp needed
+ 437 004e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 438              	.L32:
+ 439 0050 FF20     		movs	r0, #255
+ 440 0052 FBE7     		b	.L31
+ 442              		.section	.text.aci_l2cap_coc_tx_data,"ax",%progbits
+ 443              		.align	1
+ 444              		.global	aci_l2cap_coc_tx_data
+ 445              		.syntax unified
+ 446              		.thumb
+ 447              		.thumb_func
+ 449              	aci_l2cap_coc_tx_data:
+ 450              		@ args = 0, pretend = 0, frame = 288
+ 451              		@ frame_needed = 0, uses_anonymous_args = 0
+ 452 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ 453 0004 C8B0     		sub	sp, sp, #288
+ 454 0006 0C46     		mov	r4, r1
+ 455 0008 1146     		mov	r1, r2
+ 456 000a 0DF10708 		add	r8, sp, #7
+ 457 000e 0025     		movs	r5, #0
+ 458 0010 8DF80750 		strb	r5, [sp, #7]
+ 459 0014 02AE     		add	r6, sp, #8
+ 460 0016 8DF80800 		strb	r0, [sp, #8]
+ 461 001a ADF80940 		strh	r4, [sp, #9]	@ unaligned
+ 462 001e 2246     		mov	r2, r4
+ 463 0020 0DF10B00 		add	r0, sp, #11
+ 464 0024 FFF7FEFF 		bl	Osal_MemCpy
+ 465 0028 0334     		adds	r4, r4, #3
+ 466 002a 42AF     		add	r7, sp, #264
+ 467 002c 1822     		movs	r2, #24
+ 468 002e 2946     		mov	r1, r5
+ 469 0030 3846     		mov	r0, r7
+ 470 0032 FFF7FEFF 		bl	Osal_MemSet
+ 471 0036 3F23     		movs	r3, #63
+ 472 0038 ADF80831 		strh	r3, [sp, #264]	@ movhi
+ 473 003c 4FF4C773 		mov	r3, #398
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 9
+
+
+ 474 0040 ADF80A31 		strh	r3, [sp, #266]	@ movhi
+ 475 0044 4496     		str	r6, [sp, #272]
+ 476 0046 4594     		str	r4, [sp, #276]
+ 477 0048 CDF81881 		str	r8, [sp, #280]
+ 478 004c 0123     		movs	r3, #1
+ 479 004e 4793     		str	r3, [sp, #284]
+ 480 0050 2946     		mov	r1, r5
+ 481 0052 3846     		mov	r0, r7
+ 482 0054 FFF7FEFF 		bl	hci_send_req
+ 483 0058 A842     		cmp	r0, r5
+ 484 005a 04DB     		blt	.L36
+ 485 005c 98F80000 		ldrb	r0, [r8]	@ zero_extendqisi2
+ 486              	.L35:
+ 487 0060 48B0     		add	sp, sp, #288
+ 488              		@ sp needed
+ 489 0062 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 490              	.L36:
+ 491 0066 FF20     		movs	r0, #255
+ 492 0068 FAE7     		b	.L35
+ 494              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 ble_l2cap_aci.c
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:18     .text.aci_l2cap_connection_parameter_update_req:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:24     .text.aci_l2cap_connection_parameter_update_req:00000000 aci_l2cap_connection_parameter_update_req
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:71     .text.aci_l2cap_connection_parameter_update_resp:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:77     .text.aci_l2cap_connection_parameter_update_resp:00000000 aci_l2cap_connection_parameter_update_resp
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:130    .text.aci_l2cap_coc_connect:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:136    .text.aci_l2cap_coc_connect:00000000 aci_l2cap_coc_connect
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:183    .text.aci_l2cap_coc_connect_confirm:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:189    .text.aci_l2cap_coc_connect_confirm:00000000 aci_l2cap_coc_connect_confirm
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:250    .text.aci_l2cap_coc_reconf:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:256    .text.aci_l2cap_coc_reconf:00000000 aci_l2cap_coc_reconf
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:304    .text.aci_l2cap_coc_reconf_confirm:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:310    .text.aci_l2cap_coc_reconf_confirm:00000000 aci_l2cap_coc_reconf_confirm
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:351    .text.aci_l2cap_coc_disconnect:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:357    .text.aci_l2cap_coc_disconnect:00000000 aci_l2cap_coc_disconnect
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:396    .text.aci_l2cap_coc_flow_control:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:402    .text.aci_l2cap_coc_flow_control:00000000 aci_l2cap_coc_flow_control
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:443    .text.aci_l2cap_coc_tx_data:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cctrTokQ.s:449    .text.aci_l2cap_coc_tx_data:00000000 aci_l2cap_coc_tx_data
+
+UNDEFINED SYMBOLS
+Osal_MemSet
+hci_send_req
+Osal_MemCpy

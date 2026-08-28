@@ -1,0 +1,196 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"rtc.c"
+  16              		.text
+  17              		.section	.text.MX_RTC_Init,"ax",%progbits
+  18              		.align	1
+  19              		.global	MX_RTC_Init
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	MX_RTC_Init:
+  25              		@ args = 0, pretend = 0, frame = 0
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 08B5     		push	{r3, lr}
+  28 0002 0F48     		ldr	r0, .L7
+  29 0004 0F4B     		ldr	r3, .L7+4
+  30 0006 0360     		str	r3, [r0]
+  31 0008 0023     		movs	r3, #0
+  32 000a 4360     		str	r3, [r0, #4]
+  33 000c 0F22     		movs	r2, #15
+  34 000e 8260     		str	r2, [r0, #8]
+  35 0010 47F6FF72 		movw	r2, #32767
+  36 0014 C260     		str	r2, [r0, #12]
+  37 0016 0361     		str	r3, [r0, #16]
+  38 0018 8361     		str	r3, [r0, #24]
+  39 001a C361     		str	r3, [r0, #28]
+  40 001c 4361     		str	r3, [r0, #20]
+  41 001e FFF7FEFF 		bl	HAL_RTC_Init
+  42 0022 30B9     		cbnz	r0, .L5
+  43              	.L2:
+  44 0024 0022     		movs	r2, #0
+  45 0026 1146     		mov	r1, r2
+  46 0028 0548     		ldr	r0, .L7
+  47 002a FFF7FEFF 		bl	HAL_RTCEx_SetWakeUpTimer_IT
+  48 002e 18B9     		cbnz	r0, .L6
+  49              	.L1:
+  50 0030 08BD     		pop	{r3, pc}
+  51              	.L5:
+  52 0032 FFF7FEFF 		bl	Error_Handler
+  53 0036 F5E7     		b	.L2
+  54              	.L6:
+  55 0038 FFF7FEFF 		bl	Error_Handler
+  56 003c F8E7     		b	.L1
+  57              	.L8:
+  58 003e 00BF     		.align	2
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s 			page 2
+
+
+  59              	.L7:
+  60 0040 00000000 		.word	hrtc
+  61 0044 00280040 		.word	1073752064
+  63              		.section	.text.HAL_RTC_MspInit,"ax",%progbits
+  64              		.align	1
+  65              		.global	HAL_RTC_MspInit
+  66              		.syntax unified
+  67              		.thumb
+  68              		.thumb_func
+  70              	HAL_RTC_MspInit:
+  71              		@ args = 0, pretend = 0, frame = 88
+  72              		@ frame_needed = 0, uses_anonymous_args = 0
+  73 0000 10B5     		push	{r4, lr}
+  74 0002 96B0     		sub	sp, sp, #88
+  75 0004 0446     		mov	r4, r0
+  76 0006 5022     		movs	r2, #80
+  77 0008 0021     		movs	r1, #0
+  78 000a 02A8     		add	r0, sp, #8
+  79 000c FFF7FEFF 		bl	memset
+  80 0010 2268     		ldr	r2, [r4]
+  81 0012 174B     		ldr	r3, .L15
+  82 0014 9A42     		cmp	r2, r3
+  83 0016 01D0     		beq	.L13
+  84              	.L9:
+  85 0018 16B0     		add	sp, sp, #88
+  86              		@ sp needed
+  87 001a 10BD     		pop	{r4, pc}
+  88              	.L13:
+  89 001c FFF7FEFF 		bl	HAL_PWR_EnableBkUpAccess
+  90 0020 4FF40063 		mov	r3, #2048
+  91 0024 0293     		str	r3, [sp, #8]
+  92 0026 4FF40073 		mov	r3, #512
+  93 002a 1293     		str	r3, [sp, #72]
+  94 002c 02A8     		add	r0, sp, #8
+  95 002e FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+  96 0032 C8B9     		cbnz	r0, .L14
+  97              	.L11:
+  98 0034 4FF0B043 		mov	r3, #1476395008
+  99 0038 D3F89020 		ldr	r2, [r3, #144]
+ 100 003c 42F40042 		orr	r2, r2, #32768
+ 101 0040 C3F89020 		str	r2, [r3, #144]
+ 102 0044 9A6D     		ldr	r2, [r3, #88]
+ 103 0046 42F48062 		orr	r2, r2, #1024
+ 104 004a 9A65     		str	r2, [r3, #88]
+ 105 004c 9B6D     		ldr	r3, [r3, #88]
+ 106 004e 03F48063 		and	r3, r3, #1024
+ 107 0052 0193     		str	r3, [sp, #4]
+ 108 0054 019B     		ldr	r3, [sp, #4]
+ 109 0056 0022     		movs	r2, #0
+ 110 0058 1146     		mov	r1, r2
+ 111 005a 0320     		movs	r0, #3
+ 112 005c FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 113 0060 0320     		movs	r0, #3
+ 114 0062 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 115 0066 D7E7     		b	.L9
+ 116              	.L14:
+ 117 0068 FFF7FEFF 		bl	Error_Handler
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s 			page 3
+
+
+ 118 006c E2E7     		b	.L11
+ 119              	.L16:
+ 120 006e 00BF     		.align	2
+ 121              	.L15:
+ 122 0070 00280040 		.word	1073752064
+ 124              		.section	.text.HAL_RTC_MspDeInit,"ax",%progbits
+ 125              		.align	1
+ 126              		.global	HAL_RTC_MspDeInit
+ 127              		.syntax unified
+ 128              		.thumb
+ 129              		.thumb_func
+ 131              	HAL_RTC_MspDeInit:
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 0, uses_anonymous_args = 0
+ 134 0000 08B5     		push	{r3, lr}
+ 135 0002 0268     		ldr	r2, [r0]
+ 136 0004 094B     		ldr	r3, .L21
+ 137 0006 9A42     		cmp	r2, r3
+ 138 0008 00D0     		beq	.L20
+ 139              	.L17:
+ 140 000a 08BD     		pop	{r3, pc}
+ 141              	.L20:
+ 142 000c 4FF0B043 		mov	r3, #1476395008
+ 143 0010 D3F89020 		ldr	r2, [r3, #144]
+ 144 0014 22F40042 		bic	r2, r2, #32768
+ 145 0018 C3F89020 		str	r2, [r3, #144]
+ 146 001c 9A6D     		ldr	r2, [r3, #88]
+ 147 001e 22F48062 		bic	r2, r2, #1024
+ 148 0022 9A65     		str	r2, [r3, #88]
+ 149 0024 0320     		movs	r0, #3
+ 150 0026 FFF7FEFF 		bl	HAL_NVIC_DisableIRQ
+ 151 002a EEE7     		b	.L17
+ 152              	.L22:
+ 153              		.align	2
+ 154              	.L21:
+ 155 002c 00280040 		.word	1073752064
+ 157              		.global	hrtc
+ 158              		.section	.bss.hrtc,"aw",%nobits
+ 159              		.align	2
+ 162              	hrtc:
+ 163 0000 00000000 		.space	36
+ 163      00000000 
+ 163      00000000 
+ 163      00000000 
+ 163      00000000 
+ 164              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtc.c
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:18     .text.MX_RTC_Init:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:24     .text.MX_RTC_Init:00000000 MX_RTC_Init
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:60     .text.MX_RTC_Init:00000040 $d
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:162    .bss.hrtc:00000000 hrtc
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:64     .text.HAL_RTC_MspInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:70     .text.HAL_RTC_MspInit:00000000 HAL_RTC_MspInit
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:122    .text.HAL_RTC_MspInit:00000070 $d
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:125    .text.HAL_RTC_MspDeInit:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:131    .text.HAL_RTC_MspDeInit:00000000 HAL_RTC_MspDeInit
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:155    .text.HAL_RTC_MspDeInit:0000002c $d
+C:\Users\Nathan\AppData\Local\Temp\ccOX1eA8.s:159    .bss.hrtc:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_RTC_Init
+HAL_RTCEx_SetWakeUpTimer_IT
+Error_Handler
+memset
+HAL_PWR_EnableBkUpAccess
+HAL_RCCEx_PeriphCLKConfig
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_NVIC_DisableIRQ

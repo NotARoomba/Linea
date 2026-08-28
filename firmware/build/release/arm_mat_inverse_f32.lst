@@ -1,0 +1,264 @@
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.arch armv7e-m
+   3              		.fpu fpv4-sp-d16
+   4              		.eabi_attribute 27, 1
+   5              		.eabi_attribute 28, 1
+   6              		.eabi_attribute 20, 1
+   7              		.eabi_attribute 21, 1
+   8              		.eabi_attribute 23, 3
+   9              		.eabi_attribute 24, 1
+  10              		.eabi_attribute 25, 1
+  11              		.eabi_attribute 26, 1
+  12              		.eabi_attribute 30, 1
+  13              		.eabi_attribute 34, 1
+  14              		.eabi_attribute 18, 4
+  15              		.file	"arm_mat_inverse_f32.c"
+  16              		.text
+  17              		.section	.text.arm_mat_inverse_f32,"ax",%progbits
+  18              		.align	1
+  19              		.global	arm_mat_inverse_f32
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	arm_mat_inverse_f32:
+  25              		@ args = 0, pretend = 0, frame = 8
+  26              		@ frame_needed = 0, uses_anonymous_args = 0
+  27 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  28 0004 83B0     		sub	sp, sp, #12
+  29 0006 D0F804A0 		ldr	r10, [r0, #4]
+  30 000a D1F804B0 		ldr	fp, [r1, #4]
+  31 000e B0F800E0 		ldrh	lr, [r0]
+  32 0012 B0F802C0 		ldrh	ip, [r0, #2]
+  33 0016 7446     		mov	r4, lr
+  34 0018 5B46     		mov	r3, fp
+  35 001a 12E0     		b	.L2
+  36              	.L4:
+  37 001c 0021     		movs	r1, #0
+  38 001e 43F8041B 		str	r1, [r3], #4	@ float
+  39 0022 013A     		subs	r2, r2, #1
+  40              	.L3:
+  41 0024 002A     		cmp	r2, #0
+  42 0026 F9D1     		bne	.L4
+  43 0028 4FF07E52 		mov	r2, #1065353216
+  44 002c 43F8042B 		str	r2, [r3], #4	@ float
+  45 0030 013C     		subs	r4, r4, #1
+  46 0032 2246     		mov	r2, r4
+  47 0034 03E0     		b	.L5
+  48              	.L6:
+  49 0036 0021     		movs	r1, #0
+  50 0038 43F8041B 		str	r1, [r3], #4	@ float
+  51 003c 013A     		subs	r2, r2, #1
+  52              	.L5:
+  53 003e 002A     		cmp	r2, #0
+  54 0040 F9D1     		bne	.L6
+  55              	.L2:
+  56 0042 14B1     		cbz	r4, .L45
+  57 0044 AEEB0402 		sub	r2, lr, r4
+  58 0048 ECE7     		b	.L3
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s 			page 2
+
+
+  59              	.L45:
+  60 004a E146     		mov	r9, ip
+  61 004c DFED686A 		vldr.32	s13, .L52
+  62 0050 D846     		mov	r8, fp
+  63 0052 0190     		str	r0, [sp, #4]
+  64 0054 93E0     		b	.L8
+  65              	.L43:
+  66 0056 F1EE677A 		vneg.f32	s15, s15
+  67 005a F4EEC77A 		vcmpe.f32	s15, s14
+  68 005e F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  69 0062 13DC     		bgt	.L36
+  70              	.L12:
+  71 0064 02EB8C02 		add	r2, r2, ip, lsl #2
+  72 0068 0133     		adds	r3, r3, #1
+  73              	.L9:
+  74 006a 7345     		cmp	r3, lr
+  75 006c 11D2     		bcs	.L46
+  76 006e D2ED007A 		vldr.32	s15, [r2]
+  77 0072 F5EEC07A 		vcmpe.f32	s15, #0
+  78 0076 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  79 007a ECDD     		ble	.L43
+  80 007c F4EEC77A 		vcmpe.f32	s15, s14
+  81 0080 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  82 0084 EEDD     		ble	.L12
+  83 0086 B0EE677A 		vmov.f32	s14, s15
+  84 008a EBE7     		b	.L12
+  85              	.L36:
+  86 008c B0EE677A 		vmov.f32	s14, s15
+  87 0090 E8E7     		b	.L12
+  88              	.L46:
+  89 0092 B5EE407A 		vcmp.f32	s14, #0
+  90 0096 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  91 009a 00F09B80 		beq	.L37
+  92 009e F5EEC06A 		vcmpe.f32	s13, #0
+  93 00a2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  94 00a6 13DD     		ble	.L47
+  95 00a8 F0EE667A 		vmov.f32	s15, s13
+  96              	.L15:
+  97 00ac B4EE677A 		vcmp.f32	s14, s15
+  98 00b0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+  99 00b4 0FD1     		bne	.L48
+ 100              	.L16:
+ 101 00b6 F5EE406A 		vcmp.f32	s13, #0
+ 102 00ba F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 103 00be 00F08E80 		beq	.L39
+ 104 00c2 009B     		ldr	r3, [sp]
+ 105 00c4 D3ED006A 		vldr.32	s13, [r3]
+ 106 00c8 ACEB0406 		sub	r6, ip, r4
+ 107 00cc 3246     		mov	r2, r6
+ 108 00ce 11E0     		b	.L19
+ 109              	.L47:
+ 110 00d0 F1EE667A 		vneg.f32	s15, s13
+ 111 00d4 EAE7     		b	.L15
+ 112              	.L48:
+ 113 00d6 AEEB0403 		sub	r3, lr, r4
+ 114 00da 013B     		subs	r3, r3, #1
+ 115 00dc 00E0     		b	.L17
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s 			page 3
+
+
+ 116              	.L18:
+ 117 00de 013B     		subs	r3, r3, #1
+ 118              	.L17:
+ 119 00e0 002B     		cmp	r3, #0
+ 120 00e2 FCD1     		bne	.L18
+ 121 00e4 E7E7     		b	.L16
+ 122              	.L20:
+ 123 00e6 93ED007A 		vldr.32	s14, [r3]
+ 124 00ea C7EE267A 		vdiv.f32	s15, s14, s13
+ 125 00ee E3EC017A 		vstmia.32	r3!, {s15}
+ 126 00f2 013A     		subs	r2, r2, #1
+ 127              	.L19:
+ 128 00f4 002A     		cmp	r2, #0
+ 129 00f6 F6D1     		bne	.L20
+ 130 00f8 6046     		mov	r0, ip
+ 131 00fa 5B46     		mov	r3, fp
+ 132 00fc 06E0     		b	.L21
+ 133              	.L22:
+ 134 00fe 93ED007A 		vldr.32	s14, [r3]
+ 135 0102 C7EE267A 		vdiv.f32	s15, s14, s13
+ 136 0106 E3EC017A 		vstmia.32	r3!, {s15}
+ 137 010a 0138     		subs	r0, r0, #1
+ 138              	.L21:
+ 139 010c 0028     		cmp	r0, #0
+ 140 010e F6D1     		bne	.L22
+ 141 0110 7546     		mov	r5, lr
+ 142 0112 4246     		mov	r2, r8
+ 143 0114 5346     		mov	r3, r10
+ 144 0116 25E0     		b	.L23
+ 145              	.L50:
+ 146 0118 03EB8603 		add	r3, r3, r6, lsl #2
+ 147 011c 02EB8C02 		add	r2, r2, ip, lsl #2
+ 148 0120 1CE0     		b	.L25
+ 149              	.L27:
+ 150 0122 D3ED007A 		vldr.32	s15, [r3]
+ 151 0126 B1EC017A 		vldmia.32	r1!, {s14}
+ 152 012a 27EE267A 		vmul.f32	s14, s14, s13
+ 153 012e 77EEC77A 		vsub.f32	s15, s15, s14
+ 154 0132 E3EC017A 		vstmia.32	r3!, {s15}
+ 155 0136 013F     		subs	r7, r7, #1
+ 156              	.L26:
+ 157 0138 002F     		cmp	r7, #0
+ 158 013a F2D1     		bne	.L27
+ 159 013c 6746     		mov	r7, ip
+ 160 013e 5946     		mov	r1, fp
+ 161 0140 0AE0     		b	.L28
+ 162              	.L29:
+ 163 0142 D2ED007A 		vldr.32	s15, [r2]
+ 164 0146 B1EC017A 		vldmia.32	r1!, {s14}
+ 165 014a 27EE267A 		vmul.f32	s14, s14, s13
+ 166 014e 77EEC77A 		vsub.f32	s15, s15, s14
+ 167 0152 E2EC017A 		vstmia.32	r2!, {s15}
+ 168 0156 013F     		subs	r7, r7, #1
+ 169              	.L28:
+ 170 0158 002F     		cmp	r7, #0
+ 171 015a F2D1     		bne	.L29
+ 172              	.L25:
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s 			page 4
+
+
+ 173 015c 03EB8403 		add	r3, r3, r4, lsl #2
+ 174 0160 013D     		subs	r5, r5, #1
+ 175 0162 0130     		adds	r0, r0, #1
+ 176              	.L23:
+ 177 0164 35B1     		cbz	r5, .L49
+ 178 0166 A042     		cmp	r0, r4
+ 179 0168 D6D0     		beq	.L50
+ 180 016a D3ED006A 		vldr.32	s13, [r3]
+ 181 016e 3746     		mov	r7, r6
+ 182 0170 0099     		ldr	r1, [sp]
+ 183 0172 E1E7     		b	.L26
+ 184              	.L49:
+ 185 0174 0AF1040A 		add	r10, r10, #4
+ 186 0178 09F1FF39 		add	r9, r9, #-1
+ 187 017c 0134     		adds	r4, r4, #1
+ 188              	.L8:
+ 189 017e B9F1000F 		cmp	r9, #0
+ 190 0182 0CD0     		beq	.L51
+ 191 0184 0CFB04F3 		mul	r3, ip, r4
+ 192 0188 0AEB8302 		add	r2, r10, r3, lsl #2
+ 193 018c 0092     		str	r2, [sp]
+ 194 018e 08EB830B 		add	fp, r8, r3, lsl #2
+ 195 0192 D2ED006A 		vldr.32	s13, [r2]
+ 196 0196 2346     		mov	r3, r4
+ 197 0198 9FED157A 		vldr.32	s14, .L52
+ 198 019c 65E7     		b	.L9
+ 199              	.L51:
+ 200 019e 0198     		ldr	r0, [sp, #4]
+ 201 01a0 F5EE406A 		vcmp.f32	s13, #0
+ 202 01a4 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 203 01a8 1CD1     		bne	.L40
+ 204 01aa 4168     		ldr	r1, [r0, #4]
+ 205              	.L32:
+ 206 01ac 0CFB0EF3 		mul	r3, ip, lr
+ 207 01b0 4B45     		cmp	r3, r9
+ 208 01b2 0BD9     		bls	.L33
+ 209 01b4 01EB8902 		add	r2, r1, r9, lsl #2
+ 210 01b8 D2ED007A 		vldr.32	s15, [r2]
+ 211 01bc F5EE407A 		vcmp.f32	s15, #0
+ 212 01c0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 213 01c4 02D1     		bne	.L33
+ 214 01c6 09F10109 		add	r9, r9, #1
+ 215 01ca EFE7     		b	.L32
+ 216              	.L33:
+ 217 01cc 4B45     		cmp	r3, r9
+ 218 01ce 0BD0     		beq	.L41
+ 219 01d0 0020     		movs	r0, #0
+ 220 01d2 01E0     		b	.L14
+ 221              	.L37:
+ 222 01d4 6FF00400 		mvn	r0, #4
+ 223              	.L14:
+ 224 01d8 03B0     		add	sp, sp, #12
+ 225              		@ sp needed
+ 226 01da BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 227              	.L39:
+ 228 01de 6FF00400 		mvn	r0, #4
+ 229 01e2 F9E7     		b	.L14
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s 			page 5
+
+
+ 230              	.L40:
+ 231 01e4 0020     		movs	r0, #0
+ 232 01e6 F7E7     		b	.L14
+ 233              	.L41:
+ 234 01e8 6FF00400 		mvn	r0, #4
+ 235 01ec F4E7     		b	.L14
+ 236              	.L53:
+ 237 01ee 00BF     		.align	2
+ 238              	.L52:
+ 239 01f0 00000000 		.word	0
+ 241              		.ident	"GCC: (xPack GNU Arm Embedded GCC x86_64) 15.2.1 20251203"
+ARM GAS  C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_mat_inverse_f32.c
+C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s:18     .text.arm_mat_inverse_f32:00000000 $t
+C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s:24     .text.arm_mat_inverse_f32:00000000 arm_mat_inverse_f32
+C:\Users\Nathan\AppData\Local\Temp\cc7P0Acm.s:239    .text.arm_mat_inverse_f32:000001f0 $d
+
+NO UNDEFINED SYMBOLS
